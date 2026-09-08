@@ -1,0 +1,124 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --farm-green-deep: #122419;
+    --farm-green-primary: #1A3826;
+    --farm-green-light: #2D583F;
+    --farm-green-surface: #F0F5F1;
+    --farm-terracotta: #C65A3D;
+    --farm-terracotta-dark: #9F4229;
+    --farm-terracotta-light: #EBB6A4;
+    --farm-sand-bg: #FAF7F2;
+    --farm-sand-card: #F4EFE7;
+    --farm-sand-border: #E5DACB;
+    --farm-gold: #C9A043;
+    --farm-gold-light: #DFBF73;
+    --farm-gold-glow: rgba(201, 160, 67, 0.18);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    background-color: var(--farm-sand-bg);
+    color: #212922;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background-color: #FAF7F2;
+    color: #1A241E;
+    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    overflow-x: hidden;
+  }
+}
+
+/* Typography Helpers */
+.font-serif-luxury {
+  font-family: 'Playfair Display', Georgia, serif;
+}
+
+.font-arabic {
+  font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+.font-arabic-calligraphy {
+  font-family: 'Amiri', 'Traditional Arabic', serif;
+}
+
+/* Subtle Arabesque Pattern Backgrounds */
+.bg-arabesque-subtle {
+  background-image: radial-gradient(circle at center, rgba(201, 160, 67, 0.08) 1px, transparent 1px),
+                    radial-gradient(circle at center, rgba(26, 56, 38, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+  background-position: 0 0, 16px 16px;
+}
+
+.bg-arabesque-star {
+  background-color: #FAF7F2;
+  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C9A043' fill-opacity='0.06' fill-rule='evenodd'%3E%3Cpath d='M30 0l3.82 9.22 9.22-3.82-3.82 9.22 9.22 3.82-9.22 3.82 3.82 9.22-9.22-3.82L30 38.89l-3.82-9.22-9.22 3.82 3.82-9.22-9.22-3.82 9.22-3.82-3.82-9.22 9.22 3.82L30 0z'/%3E%3C/g%3E%3C/svg%3E");
+}
+
+.bg-arabesque-oasis {
+  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0l5 15 15 5-15 5-5 15-5-15-15-5 15-5z' fill='%231A3826' fill-opacity='0.035' fill-rule='evenodd'/%3E%3C/svg%3E");
+}
+
+/* Custom Scrollbar for mobile/desktop */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAF7F2;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #D4AF37;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #B28D28;
+}
+
+/* Glassmorphism Cards */
+.glass-gold-card {
+  background: rgba(244, 239, 231, 0.88);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(201, 160, 67, 0.22);
+}
+
+.glass-dark-card {
+  background: rgba(18, 36, 25, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(201, 160, 67, 0.25);
+}
+
+/* Micro-animations */
+@keyframes pulseGlow {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(201, 160, 67, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 12px rgba(201, 160, 67, 0);
+  }
+}
+
+.animate-pulse-glow {
+  animation: pulseGlow 3s infinite ease-in-out;
+}
+
+@keyframes floatSlow {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
+}
+
+.animate-float-slow {
+  animation: floatSlow 5s ease-in-out infinite;
+}
