@@ -58,9 +58,9 @@ export default function ProductDetailsView({
           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
       <header className="sticky top-0 z-40 bg-[#FAF7F2]/90 backdrop-blur-md border-b border-[#E8DFD1]/80 py-3.5 px-4 sm:px-8">
         <div className="max-w-6xl mx-auto flex items-center justify-between">
-          {/* Back to Harvest Link */}
+          {/* Back to Harvest Link (Takes user directly to this variety's card in the harvest section) */}
           <Link
-            href="/#tomatoes"
+            href={`/#variety-${tomato.id}`}
             className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#1B3B2B] hover:text-[#C85A32] transition-colors group"
           >
             {isRTL ? (
@@ -122,7 +122,7 @@ export default function ProductDetailsView({
             {language === 'ar' ? 'الرئيسية' : 'Home'}
           </Link>
           <span>/</span>
-          <Link href="/#tomatoes" className="hover:text-[#1B3B2B] transition-colors">
+          <Link href={`/#variety-${tomato.id}`} className="hover:text-[#1B3B2B] transition-colors">
             {language === 'ar' ? 'المحاصيل المتوارثة' : 'Heirloom Harvest'}
           </Link>
           <span>/</span>

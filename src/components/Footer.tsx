@@ -72,9 +72,19 @@ export default function Footer({ content }: FooterProps) {
         {/* Minimal Bottom */}
         <div className="reveal-child pt-8 border-t border-white/10 text-xs text-[#8A9B8F] font-arabic">
           <p>{t(content.footer.rights)}</p>
-          <div className="mt-3 flex items-center justify-center gap-2">
-            <span>🇸🇦</span>
-            <span>{t(content.brand.locationShort)}</span>
+          <div className="mt-3 flex items-center justify-center gap-4 flex-wrap">
+            <div className="flex items-center gap-2">
+              <span>🇸🇦</span>
+              <span>{t(content.brand.locationShort)}</span>
+            </div>
+            <span className="text-white/20">•</span>
+            <a
+              href="/products"
+              className="inline-flex items-center gap-1 text-[#C5A059] hover:text-[#E2C78A] hover:underline font-semibold transition-colors"
+            >
+              <span>🌿</span>
+              <span>{language === 'ar' ? 'كتالوج المحاصيل الكامل' : 'Full Harvest Catalogue'}</span>
+            </a>
           </div>
         </div>
       </div>

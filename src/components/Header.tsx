@@ -24,6 +24,7 @@ export default function Header({ content }: HeaderProps) {
 
   const navLinks = [
     { href: '/#story', label: content.navigation.story },
+    { href: '/products', label: { en: 'All Harvest', ar: 'جميع المحاصيل' } },
     { href: '/#tomatoes', label: content.navigation.tomatoes },
     { href: '/#videos', label: content.navigation.videos },
     { href: '/#visit', label: content.navigation.visit },
