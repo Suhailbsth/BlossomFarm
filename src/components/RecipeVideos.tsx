@@ -41,7 +41,7 @@ export default function RecipeVideos({ content }: RecipeVideosProps) {
           {content.recipeVideosSection.items.map((recipe) => (
             <div
               key={recipe.id}
-              className="reveal-child group relative rounded-3xl overflow-hidden aspect-[9/14] bg-[#122419] border border-white/10 hover:border-[#C9A043]/50 shadow-xl cursor-pointer card-premium"
+              className="reveal-child group relative rounded-3xl overflow-hidden aspect-[9/14] bg-[#122419] border border-white/10 hover:border-[#C9A043]/60 shadow-xl cursor-pointer card-premium card-sheen"
             >
               {/* Thumbnail */}
               <Image
@@ -62,10 +62,14 @@ export default function RecipeVideos({ content }: RecipeVideosProps) {
                 </span>
               </div>
 
-              {/* Center Play */}
-              <div className="absolute inset-0 flex items-center justify-center z-10 opacity-70 group-hover:opacity-100 transition-opacity">
-                <div className="w-14 h-14 rounded-full bg-white/90 group-hover:bg-[#C9A043] text-[#122419] flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 border border-white/50">
-                  <Play className="w-6 h-6 ms-0.5 fill-current" />
+              {/* Center Play Button with Ripples */}
+              <div className="absolute inset-0 flex items-center justify-center z-10">
+                <div className="relative flex items-center justify-center">
+                  <div className="absolute -inset-2.5 rounded-full border border-[#C9A043]/70 play-ripple-ring-1 pointer-events-none" />
+                  <div className="absolute -inset-5 rounded-full border border-[#C9A043]/40 play-ripple-ring-2 pointer-events-none" />
+                  <div className="w-13 h-13 sm:w-14 sm:h-14 rounded-full bg-white/90 group-hover:bg-[#C9A043] text-[#122419] flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 border border-white/60">
+                    <Play className="w-5 h-5 sm:w-6 sm:h-6 ms-0.5 fill-current" />
+                  </div>
                 </div>
               </div>
 

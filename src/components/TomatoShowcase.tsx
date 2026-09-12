@@ -40,12 +40,12 @@ export default function TomatoShowcase({ content }: TomatoShowcaseProps) {
           </p>
         </div>
 
-        {/* Tomato Cards Grid — Clean, Image-Forward */}
+        {/* Tomato Cards Grid — Clean, Image-Forward with Sheen and 3D Hover */}
         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 sm:gap-6">
           {tomatoes.map((item) => (
             <div
               key={item.id}
-              className="reveal-child card-premium rounded-3xl overflow-hidden bg-white border border-[#E5DACB] hover:border-[#C9A043] shadow-sm group"
+              className="reveal-child card-premium card-sheen rounded-3xl overflow-hidden bg-white border border-[#E5DACB] hover:border-[#C9A043] shadow-sm hover:shadow-xl group transition-all duration-500"
             >
               {/* Image */}
               <div className="relative aspect-square overflow-hidden bg-[#F4EFE7]">
@@ -57,13 +57,16 @@ export default function TomatoShowcase({ content }: TomatoShowcaseProps) {
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 20vw"
                 />
                 {/* Soft gradient at bottom */}
-                <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+                <div className="absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-black/55 to-transparent pointer-events-none" />
                 
                 {/* Season badge */}
                 {item.inSeason && (
-                  <div className="absolute top-3 end-3">
-                    <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-full bg-[#C65A3D] text-white text-[10px] font-bold shadow-md">
-                      <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" />
+                  <div className="absolute top-3 end-3 z-10">
+                    <span className="inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-[#C65A3D] text-white text-[10px] font-bold shadow-md tracking-wider">
+                      <span className="relative flex h-2 w-2">
+                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75" />
+                        <span className="relative inline-flex rounded-full h-2 w-2 bg-white" />
+                      </span>
                       {language === 'ar' ? 'متوفر' : 'In Season'}
                     </span>
                   </div>
@@ -71,8 +74,8 @@ export default function TomatoShowcase({ content }: TomatoShowcaseProps) {
               </div>
 
               {/* Name */}
-              <div className="p-4 text-center">
-                <h3 className="text-sm sm:text-base font-bold text-[#1A3826] font-arabic leading-snug">
+              <div className="p-4 text-center bg-white group-hover:bg-[#FAF7F2] transition-colors duration-300">
+                <h3 className="text-sm sm:text-base font-bold text-[#1A3826] font-arabic leading-snug group-hover:text-[#C65A3D] transition-colors">
                   {t(item.name)}
                 </h3>
                 <p className="mt-1 text-[11px] text-[#8A968E] font-medium font-serif-luxury italic">

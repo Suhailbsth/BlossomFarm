@@ -47,7 +47,7 @@ export default function VideoGallery({ content }: VideoGalleryProps) {
             <div
               key={video.id}
               onClick={() => setSelectedVideo(video)}
-              className="reveal-child group relative rounded-3xl overflow-hidden aspect-[9/16] bg-[#122419] border border-[#E5DACB] hover:border-[#C9A043] shadow-md cursor-pointer card-premium"
+              className="reveal-child group relative rounded-3xl overflow-hidden aspect-[9/16] bg-[#122419] border border-[#E5DACB] hover:border-[#C9A043] shadow-md hover:shadow-xl cursor-pointer card-premium card-sheen"
             >
               {/* Thumbnail */}
               <Image
@@ -68,10 +68,14 @@ export default function VideoGallery({ content }: VideoGalleryProps) {
                 </span>
               </div>
 
-              {/* Play Button */}
-              <div className="absolute inset-0 flex items-center justify-center z-10 opacity-70 group-hover:opacity-100 transition-opacity">
-                <div className="w-12 h-12 rounded-full bg-white/90 group-hover:bg-[#C9A043] text-[#122419] flex items-center justify-center shadow-xl transition-all duration-300 group-hover:scale-110">
-                  <Play className="w-5 h-5 ms-0.5 fill-current" />
+              {/* Play Button with Water-Ripple */}
+              <div className="absolute inset-0 flex items-center justify-center z-10">
+                <div className="relative flex items-center justify-center">
+                  <div className="absolute -inset-2.5 rounded-full border border-[#C9A043]/70 play-ripple-ring-1 pointer-events-none" />
+                  <div className="absolute -inset-5 rounded-full border border-[#C9A043]/40 play-ripple-ring-2 pointer-events-none" />
+                  <div className="w-12 h-12 rounded-full bg-white/95 group-hover:bg-[#C9A043] text-[#122419] flex items-center justify-center shadow-xl transition-all duration-300 group-hover:scale-110 border border-white/60">
+                    <Play className="w-5 h-5 ms-0.5 fill-current" />
+                  </div>
                 </div>
               </div>
 

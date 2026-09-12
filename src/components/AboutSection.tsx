@@ -99,11 +99,13 @@ export default function AboutSection({ content }: AboutSectionProps) {
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#122419]/80 via-[#122419]/30 to-[#122419]/20" />
               
-              {/* Play Button */}
+              {/* Play Button with Concentric Water-Ripple Animation */}
               <div className="absolute inset-0 flex items-center justify-center">
-                <div className="relative">
-                  <div className="absolute -inset-3 rounded-full bg-[#C9A043]/25 animate-gentle-ping" />
-                  <div className="w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-[#C9A043] group-hover:bg-[#DFBF73] text-[#122419] flex items-center justify-center shadow-2xl transition-all duration-300 group-hover:scale-110 border-2 border-white/40">
+                <div className="relative flex items-center justify-center">
+                  <div className="absolute -inset-3 rounded-full border border-[#C9A043]/60 play-ripple-ring-1 pointer-events-none" />
+                  <div className="absolute -inset-6 rounded-full border border-[#C9A043]/40 play-ripple-ring-2 pointer-events-none" />
+                  <div className="absolute -inset-9 rounded-full border border-[#C9A043]/20 play-ripple-ring-3 pointer-events-none" />
+                  <div className="relative w-16 h-16 sm:w-20 sm:h-20 rounded-full bg-gradient-to-tr from-[#C9A043] to-[#E2B755] group-hover:from-[#DFBF73] group-hover:to-[#C9A043] text-[#122419] flex items-center justify-center shadow-[0_0_30px_rgba(201,160,67,0.5)] transition-all duration-300 group-hover:scale-110 border-2 border-white/60">
                     <Play className="w-7 h-7 sm:w-8 sm:h-8 ms-1 fill-current" />
                   </div>
                 </div>

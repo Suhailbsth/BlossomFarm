@@ -57,7 +57,7 @@ export default function StorageTips({ content }: StorageTipsProps) {
           {content.storageTipsSection.items.map((tip) => (
             <div
               key={tip.id}
-              className="reveal-child card-premium p-5 sm:p-6 rounded-3xl bg-white border border-[#E5DACB] hover:border-[#C9A043] shadow-sm text-center flex flex-col items-center gap-3"
+              className="reveal-child card-premium card-sheen p-5 sm:p-6 rounded-3xl bg-white border border-[#E5DACB] hover:border-[#C9A043] shadow-sm text-center flex flex-col items-center gap-3"
             >
               {/* Icon Circle */}
               <div className="w-14 h-14 rounded-2xl bg-[#FAF7F2] border border-[#E5DACB] flex items-center justify-center">

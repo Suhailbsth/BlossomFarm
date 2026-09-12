@@ -1,6 +1,8 @@
 import { getSiteContent } from '@/lib/content';
 import Header from '@/components/Header';
+import ScrollProgress from '@/components/ScrollProgress';
 import Hero from '@/components/Hero';
+import MarqueeTicker from '@/components/MarqueeTicker';
 import AboutSection from '@/components/AboutSection';
 import TomatoShowcase from '@/components/TomatoShowcase';
 import StorageTips from '@/components/StorageTips';
@@ -15,11 +17,17 @@ export default async function Home() {
 
   return (
     <main className="min-h-screen flex flex-col">
+      {/* Delicate Gold Thread Scroll Progress Indicator */}
+      <ScrollProgress />
+
       {/* Fixed Navigation Header with Bilingual Switcher */}
       <Header content={content} />
 
       {/* Hero — Full-viewport cinematic greeting */}
       <Hero content={content} />
+
+      {/* Boutique Infinite Marquee Ticker — Transition to Story */}
+      <MarqueeTicker />
 
       {/* Wadi Nawar — Farm photo + quote + promo video */}
       <AboutSection content={content} />
