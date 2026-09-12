@@ -23,10 +23,10 @@ export default function Header({ content }: HeaderProps) {
   }, []);
 
   const navLinks = [
-    { href: '#story', label: content.navigation.story },
-    { href: '#tomatoes', label: content.navigation.tomatoes },
-    { href: '#videos', label: content.navigation.videos },
-    { href: '#visit', label: content.navigation.visit },
+    { href: '/#story', label: content.navigation.story },
+    { href: '/#tomatoes', label: content.navigation.tomatoes },
+    { href: '/#videos', label: content.navigation.videos },
+    { href: '/#visit', label: content.navigation.visit },
   ];
 
   return (
@@ -40,7 +40,7 @@ export default function Header({ content }: HeaderProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between">
         {/* Brand Emblem & Dual Typography */}
         <a
-          href="#"
+          href="/"
           className="flex items-center gap-3 group focus:outline-none"
           aria-label="The Blossom's Farm - مزرعة النوار"
         >

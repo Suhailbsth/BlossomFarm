@@ -53,3 +53,13 @@ const fallbackContent: SiteContent = staticContent as SiteContent;
 export async function getSiteContent(): Promise<SiteContent> {
   return fallbackContent;
 }
+
+export async function getTomatoBySlug(slug: string) {
+  const content = await getSiteContent();
+  return content.tomatoesSection.items.find((item) => item.id === slug) || null;
+}
+
+export async function getAllTomatoSlugs(): Promise<string[]> {
+  const content = await getSiteContent();
+  return content.tomatoesSection.items.map((item) => item.id);
+}

@@ -178,6 +178,10 @@
           "en": "Glistening ruby clusters brimming with rich, honey-like sweetness and a delightful burst on the palate. Our signature variety.",
           "ar": "عناقيد ياقوتية متلألئة تنفجر بنكهة سكرية غنية وقوام مقرمش نضر. درة تاج محصولنا والأكثر طلباً."
         },
+        "story": {
+          "en": "Nurtured under the golden morning light of Al-Ammariyah, our Crimson Pearls are harvested by hand only when each cluster attains deep wine-red translucency and peak Brix sugar concentration.",
+          "ar": "تزهر تحت خيوط شمس العمارية الصباحية الرقيقة، ولا تُقطف يدوياً إلا عندما يبلغ العنقود لونه الياقوتي الشفاف وتصل نسبة السكريات الطبيعية إلى ذروتها المطلقة."
+        },
         "tasteNotes": [
           { "en": "Wild Honey", "ar": "عسل جبلي" },
           { "en": "Sun-ripened Berry", "ar": "توت صيفي" },
@@ -186,11 +190,35 @@
         "sweetness": 5,
         "acidity": 2,
         "umami": 4,
+        "firmness": 4,
         "inSeason": true,
         "image": "/images/tomato-crimson.jpg",
+        "gallery": ["/images/tomato-crimson.jpg", "/images/video-harvest.jpg", "/images/video-dew.jpg"],
         "bestPairedWith": {
           "en": "Artisanal Burrata, cold-pressed olive oil & fresh basil",
           "ar": "جبنة بوراتا طازجة، زيت زيتون بكر ممتاز وريحان جبلي"
+        },
+        "culinaryUses": [
+          {
+            "title": { "en": "Classic Oasis Burrata Salad", "ar": "سلطة بوراتا الواحة الكلاسيكية" },
+            "prepTime": "10 min",
+            "description": {
+              "en": "Halved raw Crimson Pearls served atop creamy whole burrata, drizzled with single-estate Al-Jouf extra virgin olive oil and Maldon flakes.",
+              "ar": "أنصاف حبات لؤلؤة الياقوت الطازجة فوق جبنة بوراتا دسمة، مع قطرات زيت زيتون الجوف البكر الفاخر ورقائق الملح البحري."
+            }
+          },
+          {
+            "title": { "en": "Pan-Seared Vine Skillet", "ar": "تشويح سريع بالعنقود وزيت الزيتون" },
+            "prepTime": "8 min",
+            "description": {
+              "en": "Blistered whole clusters in a scorching cast iron pan with garlic cloves, thyme, and balsamic reduction.",
+              "ar": "تشويح العناقيد كاملة في مقلاة حديدية ساخنة مع فصوص الثوم والزعتر البري حتى تتشقق القشرة وتكثف الحلاوة."
+            }
+          }
+        ],
+        "storageSpecific": {
+          "en": "Keep on the vine cluster in a shallow wooden or ceramic bowl at room temperature (20–23°C). Never refrigerate to preserve sugar complexity.",
+          "ar": "احفظها متصلة بعنقودها داخل وعاء خشبي أو فخاري في درجة حرارة الغرفة (٢٠–٢٣ مئوية). تجنب الثلاجة تماماً للحفاظ على توازن السكر الطبيعي."
         }
       },
       {
@@ -202,6 +230,10 @@
           "en": "Luminous golden spheres infused with bright tropical citrus notes and silky thin skins. Adds breathtaking radiance to salads.",
           "ar": "كرات ذهبية مضيئة تعبق بنفحات حمضية منعشة وقشرة رقيقة مخملية. تضفي إشراقة ساحرة ونضارة للمائدة."
         },
+        "story": {
+          "en": "Grown from rare heritage yellow seeds, this variety absorbs intense sunshine to develop aromatic beta-carotene pigments and a sparkling, low-acid nectar sweetness.",
+          "ar": "تنحدر من سلالة تراثية نادرة تتغذى على أشعة الشمس لتبني صبغة البيتا-كاروتين الذهبية التي تمنحها نكهة رحيقية فوارة ومنعشة نادرة الوجود."
+        },
         "tasteNotes": [
           { "en": "Tropical Citrus", "ar": "حمضيات منعشة" },
           { "en": "Floral Nectar", "ar": "رحيق زهري" },
@@ -210,11 +242,35 @@
         "sweetness": 4,
         "acidity": 3,
         "umami": 3,
+        "firmness": 3,
         "inSeason": true,
         "image": "/images/tomato-golden.jpg",
+        "gallery": ["/images/tomato-golden.jpg", "/images/video-dew.jpg", "/images/video-grading.jpg"],
         "bestPairedWith": {
           "en": "Goat cheese toasts, flaky sea salt & pomegranate drizzle",
           "ar": "توست جبن الماعز، رقائق الملح البحري ولمسة دبس رمان"
+        },
+        "culinaryUses": [
+          {
+            "title": { "en": "Sunshine Golden Gazpacho", "ar": "جازباتشو واحة الذهب البارد" },
+            "prepTime": "15 min",
+            "description": {
+              "en": "Blended fresh with yellow bell pepper, English cucumber, garlic, and sherry vinegar for an invigorating cold summer soup.",
+              "ar": "مزيج بارد منعش مع الفلفل الأصفر الرومي والخيار وزيت الزيتون والخل المعتق، حساء صيفي فاخر لا يُنسى."
+            }
+          },
+          {
+            "title": { "en": "Whipped Labneh & Roasted Goldens", "ar": "لبنة بلدية مخفوقة مع شيري مشوي" },
+            "prepTime": "12 min",
+            "description": {
+              "en": "Slightly burst roasted golden tomatoes spooned warm over cold creamy labneh with za'atar and toasted pine nuts.",
+              "ar": "حبات ذهبية مشوية ومكرملة توضع دافئة فوق لبنة بلدية مخفوقة وباردة مع رشة زعتر بري وصنوبر محمص."
+            }
+          }
+        ],
+        "storageSpecific": {
+          "en": "Delicate thin skin requires gentle handling. Store stem-side down away from direct sunlight; consume within 3 days for peak crispness.",
+          "ar": "قشرتها الرقيقة تتطلب عناية فائقة؛ ضعها بالساق إلى الأسفل بعيداً عن الشمس المباشرة واستمتع بها خلال ٣ أيام من الاستلام."
         }
       },
       {
@@ -226,6 +282,10 @@
           "en": "Distinctive emerald and chartreuse tiger stripes concealing a tender, tangy flesh with an invigorating tart apple twist.",
           "ar": "خطوط نمرية ساحرة تدمج بين الزمردي والأخضر الليموني، تحتضن لباً طرياً حامضياً منعشاً بمذاق تفاحي فريد."
         },
+        "story": {
+          "en": "Originally developed through meticulous non-hybrid breeding, Green Zebra stays lime-emerald even when fully ripe, signaled only by subtle amber striping and a tender give to the touch.",
+          "ar": "صنف تراثي فريد يظل أخضر زمردياً حتى عند بلوغه كامل النضج؛ ويُعرف نضجه بتحول خطوطه إلى اللون الكهرماني الدافئ وليونة خفيفة عند اللمس."
+        },
         "tasteNotes": [
           { "en": "Green Apple", "ar": "تفاح أخضر" },
           { "en": "Zesty Lime", "ar": "ليمون أخضر" },
@@ -234,11 +294,35 @@
         "sweetness": 3,
         "acidity": 5,
         "umami": 4,
+        "firmness": 5,
         "inSeason": true,
         "image": "/images/tomato-green.jpg",
+        "gallery": ["/images/tomato-green.jpg", "/images/video-harvest.jpg", "/images/video-seedling.jpg"],
         "bestPairedWith": {
           "en": "Seared seafood, fresh ceviche & crushed coriander",
           "ar": "المأكولات البحرية المشوية، سيفيتشي طازج وكزبرة خضراء"
+        },
+        "culinaryUses": [
+          {
+            "title": { "en": "Kingfish Ceviche with Zebra Slivers", "ar": "سيفيتشي سمك الكنعد بطماطم الزيبرا" },
+            "prepTime": "20 min",
+            "description": {
+              "en": "Paper-thin slices folded into citrus-cured fresh Arabian Gulf kingfish with shallots, jalapeño, and fresh cilantro.",
+              "ar": "شرائح ناعمة تتمازج مع سمك الكنعد الخليجي المنقوع بالحمضيات مع الشالوت والكزبرة الطازجة."
+            }
+          },
+          {
+            "title": { "en": "Charred Green Tomato Carpaccio", "ar": "كارباتشيو الزيبرا المشوح بزيت الريحان" },
+            "prepTime": "10 min",
+            "description": {
+              "en": "Thick-cut slices briefly kissed with a kitchen torch, topped with capers, toasted pistachios, and peppery wild arugula.",
+              "ar": "شرائح سميكة تلامس اللهب برفق لتعزيز حموضتها اللذيذة، مزينة بالكبر والفستق المحمص وجرجير نجد البري."
+            }
+          }
+        ],
+        "storageSpecific": {
+          "en": "Its firm flesh affords higher durability. Keeps crisp and delightfully tart for up to 5 days at standard room temperature.",
+          "ar": "قوامها المتماسك يمنحها عمراً أطول؛ تحتفظ بحموضتها المنعشة وقرمشتها لمدة تصل إلى ٥ أيام في حرارة الغرفة الطبيعية."
         }
       },
       {
@@ -250,6 +334,10 @@
           "en": "Rare midnight-purple shoulders yielding to deep burgundy interior. Renowned for its rich, smoky, complex savory profile.",
           "ar": "أكتاف داكنة بلون سواد الليل ينحدر منها لب عنابي عميق. تتميز بطعم مدخن دافئ وأعلى نسبة مضادات أكسدة طبيعية."
         },
+        "story": {
+          "en": "Considered the pinnacle of heirloom cultivation, Black Beauty generates dense anthocyanin antioxidants in response to Riyadh's high UV sunshine, producing a rich umami flavor profile that resembles aged wine.",
+          "ar": "تُعتبر قمة المحاصيل المتوارثة؛ تكتسب لونها الأسود المائل لليل بفضل تفاعل مضادات الأكسدة مع شمس نجد الوفيرة، لتهدينا نكهة أومامي مدخنة تحاكي المذاقات المعتقة."
+        },
         "tasteNotes": [
           { "en": "Smoky Savory", "ar": "طعم مدخن غني" },
           { "en": "Dark Cherry", "ar": "كرز أسود" },
@@ -258,11 +346,35 @@
         "sweetness": 4,
         "acidity": 3,
         "umami": 5,
+        "firmness": 4,
         "inSeason": true,
         "image": "/images/tomato-black.jpg",
+        "gallery": ["/images/tomato-black.jpg", "/images/video-grading.jpg", "/images/video-featured.jpg"],
         "bestPairedWith": {
           "en": "Aged balsamic glaze, sourdough, smoked sea salt & olive oil",
           "ar": "خل بلسمي معتق، خبز ساوردو، وملح بحري مدخن"
+        },
+        "culinaryUses": [
+          {
+            "title": { "en": "Smoky Heirloom Tartine", "ar": "توست الساوردو بالطماطم الملكية" },
+            "prepTime": "10 min",
+            "description": {
+              "en": "Thick juicy wedges layered on grilled sourdough slathered with roasted garlic butter, aged balsamic vinegar, and smoked sea salt.",
+              "ar": "شرائح عنابية دسمة فوق خبز الساوردو المحمص بزبدة الثوم، مع قطرات البلسميك المعتق والملح المدخن."
+            }
+          },
+          {
+            "title": { "en": "Slow-Roasted Umami Confit", "ar": "كونفيه بلاك بيوتي البطيء" },
+            "prepTime": "45 min",
+            "description": {
+              "en": "Halved and roasted slowly at 130°C with olive oil and whole shallots, melting into an intensely savory culinary paste.",
+              "ar": "تُحمّص أنصافها ببطء على حرارة ١٣٠ مئوية مع زيت الزيتون والشالوت لتتحول إلى هريس أومامي فائق التركيز."
+            }
+          }
+        ],
+        "storageSpecific": {
+          "en": "Serve slightly cool (18–20°C) rather than warm to amplify the smoky notes and velvet interior mouthfeel.",
+          "ar": "يُفضل تناولها في جو معتدل يميل للبرودة الخفيفة (١٨–٢٠ مئوية) لتبرز نوتات الدخان المخملية الكامنة في لبها."
         }
       },
       {
@@ -274,6 +386,10 @@
           "en": "Elongated, dense, and naturally seedless with concentrated sweetness. Ideal for reduction, slow roasting, or eating fresh.",
           "ar": "شكل أسطواني كثيف مع قلة البذور وتركيز مدهش للسكريات الطبيعية. ممتازة للتحميص البطيء أو الاستمتاع بها طازجة."
         },
+        "story": {
+          "en": "Raised in our high-canopy greenhouse, this plum cultivar channels all water and nutrients into dense, fleshy walls rather than water cavities, creating the world's most sought-after culinary tomato.",
+          "ar": "تنمو على عروش مرتفعة في بيوتنا المحمية، حيث يوجّه النبات غذاءه لتكوين لب سميك صلب وخالٍ تقريباً من البذور والجيوب المائية، لتكون الخيار الأول لأشهر الطهاة."
+        },
         "tasteNotes": [
           { "en": "Rich Paste", "ar": "قوام كثيف ناعم" },
           { "en": "Sun-Dried Sweetness", "ar": "حلاوة مركزة" },
@@ -282,11 +398,35 @@
         "sweetness": 4,
         "acidity": 2,
         "umami": 5,
+        "firmness": 5,
         "inSeason": true,
         "image": "/images/tomato-sanmarzano.jpg",
+        "gallery": ["/images/tomato-sanmarzano.jpg", "/images/video-harvest.jpg", "/images/video-featured.jpg"],
         "bestPairedWith": {
           "en": "Slow confit with whole garlic cloves, thyme & warm flatbread",
           "ar": "كونفيه محمص ببطء مع فصوص الثوم والزعتر والخبز الساخن"
+        },
+        "culinaryUses": [
+          {
+            "title": { "en": "Artisanal Tomato & Basil Flatbread", "ar": "فطيرة الطماطم والريحان الحرفية" },
+            "prepTime": "15 min",
+            "description": {
+              "en": "Sliced lengthwise over fermented dough with buffalo mozzarella, roasted at high heat until caramelized.",
+              "ar": "شرائح طولية مكرملة فوق عجين مخمر مع جبنة الموزاريلا وأوراق الريحان الطازج."
+            }
+          },
+          {
+            "title": { "en": "Velvety Roasted Tomato Bisque", "ar": "شوربة سان مارزانو المخملية" },
+            "prepTime": "30 min",
+            "description": {
+              "en": "Roasted whole with leeks and olive oil, pureed into an intensely aromatic soup with a touch of heavy cream.",
+              "ar": "محمصة كاملة مع الكراث وزيت الزيتون ثم مهروسة في شوربة شتوية غنية المذاق لا تقاوم."
+            }
+          }
+        ],
+        "storageSpecific": {
+          "en": "Exceptionally sturdy due to dense flesh. Can rest comfortably at room temperature for up to 7 days without losing firm texture.",
+          "ar": "قوامها اللحمي الصلب يمنحها قدرة حفظ استثنائية تصل إلى ٧ أيام في حرارة الغرفة دون أن تفقد تماسكها."
         }
       }
     ]

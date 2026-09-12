@@ -5,19 +5,31 @@ export interface BilingualText {
   ar: string;
 }
 
+export interface CulinaryIdea {
+  title: BilingualText;
+  prepTime: string;
+  description: BilingualText;
+  servingSuggestion?: BilingualText;
+}
+
 export interface TomatoVariety {
   id: string;
   name: BilingualText;
   arabicSubtitle?: string;
   category: BilingualText;
   description: BilingualText;
+  story?: BilingualText;
   tasteNotes: BilingualText[];
   sweetness: number; // 1 to 5
   acidity: number; // 1 to 5
   umami: number; // 1 to 5
+  firmness?: number; // 1 to 5
   inSeason: boolean;
   image: string;
+  gallery?: string[];
   bestPairedWith: BilingualText;
+  culinaryUses?: CulinaryIdea[];
+  storageSpecific?: BilingualText;
 }
 
 export interface VideoItem {
