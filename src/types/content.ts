@@ -47,6 +47,20 @@ export interface FarmStat {
   sublabel: BilingualText;
 }
 
+export interface StorageTip {
+  id: string;
+  iconName: 'thermometer' | 'snowflake' | 'clock' | 'droplets' | 'hand' | 'sun';
+  title: BilingualText;
+  tip: BilingualText;
+}
+
+export interface RecipeVideo {
+  id: string;
+  dishName: BilingualText;
+  thumbnail: string;
+  duration: string;
+}
+
 export interface SiteContent {
   brand: {
     name: BilingualText;
@@ -101,6 +115,16 @@ export interface SiteContent {
     shortsLabel: BilingualText;
     playLabel: BilingualText;
     items: VideoItem[];
+  };
+  storageTipsSection: {
+    eyebrow: BilingualText;
+    title: BilingualText;
+    items: StorageTip[];
+  };
+  recipeVideosSection: {
+    eyebrow: BilingualText;
+    title: BilingualText;
+    items: RecipeVideo[];
   };
   footer: {
     badge: BilingualText;

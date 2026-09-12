@@ -3,6 +3,8 @@ import Header from '@/components/Header';
 import Hero from '@/components/Hero';
 import AboutSection from '@/components/AboutSection';
 import TomatoShowcase from '@/components/TomatoShowcase';
+import StorageTips from '@/components/StorageTips';
+import RecipeVideos from '@/components/RecipeVideos';
 import VideoGallery from '@/components/VideoGallery';
 import Footer from '@/components/Footer';
 import WhatsAppFAB from '@/components/WhatsAppFAB';
@@ -12,23 +14,29 @@ export default async function Home() {
   const content = await getSiteContent();
 
   return (
-    <main className="min-h-screen flex flex-col bg-[#FAF7F2] text-[#1A241E] selection:bg-[#C9A043] selection:text-[#122419]">
-      {/* Fixed/Floating Navigation Header with Bilingual Switcher */}
+    <main className="min-h-screen flex flex-col">
+      {/* Fixed Navigation Header with Bilingual Switcher */}
       <Header content={content} />
 
-      {/* Hero Section */}
+      {/* Hero — Full-viewport cinematic greeting */}
       <Hero content={content} />
 
-      {/* About the Garden & Story & Values */}
+      {/* Wadi Nawar — Farm photo + quote + promo video */}
       <AboutSection content={content} />
 
-      {/* Tomato Product Collection */}
+      {/* Tomato Varieties — Clean image + name cards */}
       <TomatoShowcase content={content} />
 
-      {/* Video Gallery: 1 Featured Documentary + 4 Short AI Reels */}
+      {/* How to Use & Store — Icon/card tips */}
+      <StorageTips content={content} />
+
+      {/* Recipe Videos — 4 AI-generated recipe placeholders */}
+      <RecipeVideos content={content} />
+
+      {/* Farm Vignettes — 4 short video cards */}
       <VideoGallery content={content} />
 
-      {/* Footer & Contact */}
+      {/* Footer — WhatsApp CTA + bilingual farm name */}
       <Footer content={content} />
 
       {/* Floating WhatsApp Action Button */}

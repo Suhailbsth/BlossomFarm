@@ -4,7 +4,7 @@ import React from 'react';
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 import { SiteContent } from '@/types/content';
-import { Sparkles, MessageCircle, ArrowDown, ShieldCheck, QrCode } from 'lucide-react';
+import { MessageCircle, ArrowDown } from 'lucide-react';
 import ArabesqueDivider from './ArabesqueDivider';
 
 interface HeroProps {
@@ -12,88 +12,64 @@ interface HeroProps {
 }
 
 export default function Hero({ content }: HeroProps) {
-  const { language, isRTL, t } = useLanguage();
+  const { language, t } = useLanguage();
 
   return (
-    <section className="relative min-h-[92vh] sm:min-h-screen flex items-center justify-center pt-24 pb-16 px-4 sm:px-6 lg:px-8 overflow-hidden">
-      {/* Background Hero Image with Warm Cinematic Overlay */}
+    <section className="relative min-h-[100svh] flex items-center justify-center px-5 sm:px-8 overflow-hidden">
+      {/* Full-Bleed Background */}
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/hero-garden.jpg"
           alt="The Blossom's Farm Greenhouse Garden"
           fill
           priority
-          className="object-cover object-center scale-105 transition-transform duration-1000"
+          className="object-cover object-center"
           sizes="100vw"
         />
-        {/* Layered luxury gradient scrims: top darkening for nav, warm amber vignette, bottom fade to sand */}
-        <div className="absolute inset-0 bg-gradient-to-b from-[#122419]/80 via-[#122419]/45 to-[#FAF7F2]" />
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_30%,rgba(18,36,25,0.7)_100%)]" />
+        {/* Cinematic gradient layers */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#122419]/75 via-[#122419]/40 to-[#122419]/80" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_40%,rgba(18,36,25,0.6)_100%)]" />
       </div>
 
-      {/* Decorative Arabesque Corner Flairs */}
-      <div className="hidden lg:block absolute top-28 left-8 z-10 opacity-30 text-[#C9A043] pointer-events-none">
-        <svg width="72" height="72" viewBox="0 0 100 100" fill="none">
-          <path d="M10 10 H60 M10 10 V60 M20 20 H50 M20 20 V50" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-          <circle cx="10" cy="10" r="4" fill="currentColor" />
-        </svg>
-      </div>
-      <div className="hidden lg:block absolute top-28 right-8 z-10 opacity-30 text-[#C9A043] pointer-events-none">
-        <svg width="72" height="72" viewBox="0 0 100 100" fill="none">
-          <path d="M90 10 H40 M90 10 V60 M80 20 H50 M80 20 V50" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-          <circle cx="90" cy="10" r="4" fill="currentColor" />
-        </svg>
-      </div>
-
-      {/* Content Container */}
-      <div className="relative z-10 max-w-4xl mx-auto text-center flex flex-col items-center">
-        {/* Welcome Tag & QR Verification Pill */}
-        <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#FAF7F2]/90 backdrop-blur-md border border-[#C9A043]/50 text-[#1A3826] text-xs sm:text-sm font-semibold shadow-md mb-6 animate-float-slow">
-          <Sparkles className="w-3.5 h-3.5 text-[#C9A043] animate-spin-slow" />
-          <span>{t(content.hero.welcomeBadge)}</span>
-          <span className="w-1.5 h-1.5 rounded-full bg-[#C65A3D]" />
-          <span className="text-[11px] font-normal text-[#6B5A4B] hidden sm:inline">
-            {t(content.brand.badge)}
+      {/* Content */}
+      <div className="relative z-10 max-w-3xl mx-auto text-center flex flex-col items-center py-24">
+        {/* Greeting Badge */}
+        <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 backdrop-blur-lg border border-white/20 text-white/90 text-xs sm:text-sm font-medium mb-8 animate-float-slow">
+          <span className="w-1.5 h-1.5 rounded-full bg-[#C9A043]" />
+          <span className="font-arabic">
+            {language === 'ar' ? 'السلام عليكم ورحمة الله' : 'Peace be upon you'}
           </span>
+          <span className="w-1.5 h-1.5 rounded-full bg-[#C9A043]" />
         </div>
 
-        {/* Dual Bilingual Title - The Star of the Hero */}
-        <div className="space-y-2 sm:space-y-4 mb-4 sm:mb-6">
-          {/* Majestic Arabic Title */}
-          <h1 className="text-4xl sm:text-6xl md:text-7xl font-extrabold tracking-tight font-arabic text-white drop-shadow-md leading-tight">
-            مزرعة النوار
-          </h1>
+        {/* Arabic Title */}
+        <h1 className="text-5xl sm:text-7xl md:text-8xl font-extrabold font-arabic text-white drop-shadow-lg leading-[1.1] tracking-tight">
+          مزرعة النوار
+        </h1>
 
-          {/* Elegant English Serif Title */}
-          <h2 className="text-2xl sm:text-4xl md:text-5xl font-serif-luxury tracking-wide text-[#FAF7F2] drop-shadow-sm italic">
-            The Blossom&apos;s Farm
-          </h2>
-        </div>
+        {/* English Serif Title */}
+        <h2 className="mt-3 text-2xl sm:text-4xl md:text-5xl font-serif-luxury text-[#E5DACB] italic tracking-wide">
+          The Blossom&apos;s Farm
+        </h2>
 
-        {/* Arabesque Divider Accent */}
-        <ArabesqueDivider variant="gold" size="lg" className="my-2 text-white/80" />
+        {/* Elegant Divider */}
+        <ArabesqueDivider variant="gold" size="lg" className="my-6 sm:my-8 text-white/80" />
 
-        {/* Soft Tagline & Bilingual Narrative */}
-        <p className="mt-3 text-lg sm:text-xl md:text-2xl font-medium text-[#F4EFE7] max-w-2xl mx-auto leading-relaxed drop-shadow-xs font-arabic">
+        {/* One-Line Tagline */}
+        <p className="text-base sm:text-lg md:text-xl text-white/85 font-medium font-arabic max-w-xl leading-relaxed">
           {t(content.brand.tagline)}
         </p>
 
-        <p className="mt-4 text-sm sm:text-base text-[#E5DACB] max-w-xl mx-auto leading-relaxed drop-shadow-xs">
-          {t(content.hero.subheading)}
-        </p>
-
-        {/* Call to Actions (Mobile Optimized) */}
-        <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-3.5 w-full sm:w-auto">
-          {/* Primary Harvest Button */}
+        {/* CTAs */}
+        <div className="mt-10 flex flex-col sm:flex-row items-center gap-4 w-full sm:w-auto">
           <a
             href="#tomatoes"
-            className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-[#1A3826] hover:bg-[#28573D] text-[#FAF7F2] font-semibold text-sm sm:text-base shadow-lg border border-[#C9A043]/40 transition-all hover:scale-103 flex items-center justify-center gap-2 group"
+            className="w-full sm:w-auto px-8 py-4 rounded-full bg-[#C9A043] hover:bg-[#DFBF73] text-[#122419] font-bold text-sm sm:text-base shadow-xl transition-all duration-300 hover:scale-[1.03] flex items-center justify-center gap-2.5"
           >
             <span>{t(content.hero.ctaHarvest)}</span>
-            <ArrowDown className="w-4 h-4 text-[#C9A043] transition-transform group-hover:translate-y-1" />
+            <ArrowDown className="w-4 h-4" />
           </a>
 
-          {/* WhatsApp Direct Concierge */}
           <a
             href={`https://wa.me/${content.footer.whatsAppNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
               language === 'ar'
@@ -102,29 +78,26 @@ export default function Hero({ content }: HeroProps) {
             )}`}
             target="_blank"
             rel="noopener noreferrer"
-            className="w-full sm:w-auto px-7 py-3.5 rounded-full bg-[#FAF7F2]/90 hover:bg-white text-[#1A3826] font-semibold text-sm sm:text-base shadow-lg border border-[#E5DACB] backdrop-blur-md transition-all hover:scale-103 flex items-center justify-center gap-2"
+            className="w-full sm:w-auto px-8 py-4 rounded-full bg-white/10 hover:bg-white/20 backdrop-blur-lg text-white font-semibold text-sm sm:text-base border border-white/25 transition-all duration-300 hover:scale-[1.03] flex items-center justify-center gap-2.5"
           >
             <MessageCircle className="w-4 h-4 text-[#25D366]" />
             <span>{t(content.hero.ctaWhatsApp)}</span>
           </a>
         </div>
 
-        {/* Mini Trust Highlights Strip */}
-        <div className="mt-10 pt-6 border-t border-white/20 flex flex-wrap items-center justify-center gap-4 sm:gap-8 text-xs sm:text-sm text-[#F4EFE7]/90">
-          <div className="flex items-center gap-1.5">
-            <ShieldCheck className="w-4 h-4 text-[#C9A043]" />
-            <span>{language === 'ar' ? 'عضوي معتمد ١٠٠٪' : '100% Certified Organic'}</span>
-          </div>
-          <span className="w-1 h-1 rounded-full bg-[#C9A043]" />
-          <div className="flex items-center gap-1.5">
-            <span className="text-base leading-none">🇸🇦</span>
-            <span>{language === 'ar' ? 'زُرعت في الرياض، العمارية' : 'Grown in Al-Ammariyah, Riyadh'}</span>
-          </div>
-          <span className="w-1 h-1 rounded-full bg-[#C9A043] hidden sm:block" />
-          <div className="hidden sm:flex items-center gap-1.5">
-            <QrCode className="w-4 h-4 text-[#C65A3D]" />
-            <span>{language === 'ar' ? 'دخول مباشر عبر رمز QR' : 'Instant QR Farm Pass'}</span>
-          </div>
+        {/* Minimal Trust */}
+        <div className="mt-12 flex items-center gap-3 text-xs text-white/50 font-medium">
+          <span>🇸🇦</span>
+          <span>{t(content.brand.locationShort)}</span>
+          <span className="w-1 h-1 rounded-full bg-[#C9A043]/60" />
+          <span>{language === 'ar' ? 'عضوي ١٠٠٪' : '100% Organic'}</span>
+        </div>
+      </div>
+
+      {/* Scroll indicator */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2 animate-float-slow">
+        <div className="w-6 h-10 rounded-full border-2 border-white/30 flex items-start justify-center p-1.5">
+          <div className="w-1 h-2.5 rounded-full bg-[#C9A043] animate-pulse" />
         </div>
       </div>
     </section>
