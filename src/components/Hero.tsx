@@ -23,7 +23,7 @@ export default function Hero({ content }: HeroProps) {
           alt="The Blossom's Farm Greenhouse Garden"
           fill
           priority
-          className="object-cover object-center"
+          className="object-cover object-center blur-[2px] scale-105"
           sizes="100vw"
         />
         {/* Crisp, clear image overlay — no blur or muddy dimming */}
