@@ -8,6 +8,7 @@ import TomatoShowcase from '@/components/TomatoShowcase';
 import StorageTips from '@/components/StorageTips';
 import RecipeVideos from '@/components/RecipeVideos';
 import VideoGallery from '@/components/VideoGallery';
+import VisitSection from '@/components/VisitSection';
 import Footer from '@/components/Footer';
 import WhatsAppFAB from '@/components/WhatsAppFAB';
 
@@ -43,6 +44,9 @@ export default async function Home() {
 
       {/* Farm Vignettes — 4 short video cards */}
       <VideoGallery content={content} />
+
+      {/* Visit Us — Location, Directions, and Visiting Hours */}
+      <VisitSection content={content} />
 
       {/* Footer — WhatsApp CTA + bilingual farm name */}
       <Footer content={content} />

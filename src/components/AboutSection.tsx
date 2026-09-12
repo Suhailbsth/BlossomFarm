@@ -1,11 +1,12 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
-import { SiteContent } from '@/types/content';
+import { SiteContent, VideoItem } from '@/types/content';
 import { Play } from 'lucide-react';
 import ArabesqueDivider from './ArabesqueDivider';
+import VideoModal from './VideoModal';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 interface AboutSectionProps {
@@ -14,7 +15,12 @@ interface AboutSectionProps {
 
 export default function AboutSection({ content }: AboutSectionProps) {
   const { language, t } = useLanguage();
+  const [selectedVideo, setSelectedVideo] = useState<VideoItem | null>(null);
   const { ref: sectionRef, isVisible } = useScrollReveal();
+
+  const featuredVideo =
+    content.videosSection.items.find((v) => v.type === 'featured') ||
+    content.videosSection.items[0];
 
   return (
     <section
@@ -88,8 +94,11 @@ export default function AboutSection({ content }: AboutSectionProps) {
               </footer>
             </blockquote>
 
-            {/* Promo Video Embed Placeholder */}
-            <div className="relative rounded-3xl overflow-hidden aspect-video bg-[#122419] shadow-xl border border-[#E5DACB] group cursor-pointer">
+            {/* Promo Video Embed with Interactive Modal Player */}
+            <div
+              onClick={() => setSelectedVideo(featuredVideo)}
+              className="relative rounded-3xl overflow-hidden aspect-video bg-[#122419] shadow-xl border border-[#E5DACB] group cursor-pointer"
+            >
               <Image
                 src="/images/video-featured.jpg"
                 alt="Farm promo video"
@@ -121,6 +130,12 @@ export default function AboutSection({ content }: AboutSectionProps) {
           </div>
         </div>
       </div>
+
+      {/* Video Modal Player */}
+      <VideoModal
+        video={selectedVideo}
+        onClose={() => setSelectedVideo(null)}
+      />
     </section>
   );
 }

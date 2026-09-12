@@ -1,11 +1,12 @@
 'use client';
 
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
-import { SiteContent } from '@/types/content';
+import { SiteContent, VideoItem } from '@/types/content';
 import { Play } from 'lucide-react';
 import ArabesqueDivider from './ArabesqueDivider';
+import VideoModal from './VideoModal';
 import { useScrollReveal } from '@/hooks/useScrollReveal';
 
 interface RecipeVideosProps {
@@ -14,6 +15,7 @@ interface RecipeVideosProps {
 
 export default function RecipeVideos({ content }: RecipeVideosProps) {
   const { language, t } = useLanguage();
+  const [selectedVideo, setSelectedVideo] = useState<VideoItem | null>(null);
   const { ref: sectionRef, isVisible } = useScrollReveal();
 
   return (
@@ -41,6 +43,27 @@ export default function RecipeVideos({ content }: RecipeVideosProps) {
           {content.recipeVideosSection.items.map((recipe) => (
             <div
               key={recipe.id}
+              onClick={() =>
+                setSelectedVideo({
+                  id: recipe.id,
+                  title: recipe.dishName,
+                  subtitle: {
+                    en: 'Farm-to-Table Culinary Inspiration',
+                    ar: 'إلهام طهي من المزرعة إلى المائدة',
+                  },
+                  duration: recipe.duration,
+                  tag: {
+                    en: 'AI Recipe Reel',
+                    ar: 'وصفة AI ملهمة',
+                  },
+                  thumbnail: recipe.thumbnail,
+                  type: 'short',
+                  description: {
+                    en: `Crafted with freshly harvested heirloom tomatoes from The Blossom's Farm in Al-Ammariyah.`,
+                    ar: `مُعدّة باستخدام طماطم متوارثة نضرة قُطفت مباشرة من بيوتنا المحمية في العمارية.`,
+                  },
+                })
+              }
               className="reveal-child group relative rounded-3xl overflow-hidden aspect-[9/14] bg-[#122419] border border-white/10 hover:border-[#C9A043]/60 shadow-xl cursor-pointer card-premium card-sheen"
             >
               {/* Thumbnail */}
@@ -93,6 +116,12 @@ export default function RecipeVideos({ content }: RecipeVideosProps) {
           ))}
         </div>
       </div>
+
+      {/* Video Modal Player */}
+      <VideoModal
+        video={selectedVideo}
+        onClose={() => setSelectedVideo(null)}
+      />
     </section>
   );
 }
