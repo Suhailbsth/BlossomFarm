@@ -47,7 +47,7 @@ export default function Header({ content }: HeaderProps) {
           <div
             className={`w-10 h-10 sm:w-11 sm:h-11 rounded-full flex items-center justify-center border transition-transform duration-300 group-hover:scale-105 ${
               scrolled
-                ? 'bg-[#1A3826] text-[#C9A043] border-[#C9A043]/40'
+                ? 'bg-[#1B3B2B] text-[#C5A059] border-[#C5A059]/40'
                 : 'bg-[#FAF7F2]/20 backdrop-blur-md text-[#F4EFE7] border-white/30'
             }`}
           >
@@ -61,21 +61,21 @@ export default function Header({ content }: HeaderProps) {
               <path d="M12 22C12 22 10 18 10 15C10 13.5 11 12 12 12C13 12 14 13.5 14 15C14 18 12 22 12 22Z" />
               <path d="M2 12C2 12 6 10 9 10C10.5 10 12 11 12 12C12 13 10.5 14 9 14C6 14 2 12 2 12Z" />
               <path d="M22 12C22 12 18 14 15 14C13.5 14 12 13 12 12C12 11 13.5 10 15 10C18 10 22 12 22 12Z" />
-              <circle cx="12" cy="12" r="2.5" className="fill-[#C9A043]" />
+              <circle cx="12" cy="12" r="2.5" className="fill-[#C5A059]" />
             </svg>
           </div>
 
           <div className="flex flex-col">
             <span
               className={`text-base sm:text-lg font-bold tracking-tight font-arabic leading-tight ${
-                scrolled ? 'text-[#1A3826]' : 'text-white drop-shadow-sm'
+                scrolled ? 'text-[#1B3B2B]' : 'text-white drop-shadow-sm'
               }`}
             >
               مزرعة النوار
             </span>
             <span
               className={`text-[10px] sm:text-xs tracking-wider uppercase font-medium ${
-                scrolled ? 'text-[#C65A3D]' : 'text-[#E5DACB]'
+                scrolled ? 'text-[#C85A32]' : 'text-[#E8DFD1]'
               }`}
             >
               The Blossom&apos;s Farm
@@ -89,7 +89,7 @@ export default function Header({ content }: HeaderProps) {
             <a
               key={link.href}
               href={link.href}
-              className={`text-sm font-medium transition-colors hover:text-[#C9A043] ${
+              className={`text-sm font-medium transition-colors hover:text-[#C85A32] ${
                 scrolled ? 'text-[#2D3B31]' : 'text-white/90 hover:text-white'
               }`}
             >
@@ -104,7 +104,7 @@ export default function Header({ content }: HeaderProps) {
           <div
             className={`flex items-center p-1 rounded-full border text-xs font-semibold transition-all ${
               scrolled
-                ? 'bg-[#F4EFE7] border-[#E5DACB] text-[#1A3826]'
+                ? 'bg-[#F5EFE6] border-[#E8DFD1] text-[#1B3B2B]'
                 : 'bg-black/30 backdrop-blur-md border-white/20 text-white'
             }`}
           >
@@ -113,8 +113,8 @@ export default function Header({ content }: HeaderProps) {
               onClick={() => setLanguage('en')}
               className={`px-2.5 py-1 rounded-full transition-all ${
                 language === 'en'
-                  ? 'bg-[#1A3826] text-white shadow-xs'
-                  : 'hover:text-[#C9A043]'
+                  ? 'bg-[#1B3B2B] text-white shadow-xs'
+                  : 'hover:text-[#C85A32]'
               }`}
               aria-label="Switch to English"
             >
@@ -125,8 +125,8 @@ export default function Header({ content }: HeaderProps) {
               onClick={() => setLanguage('ar')}
               className={`px-2.5 py-1 rounded-full transition-all font-arabic ${
                 language === 'ar'
-                  ? 'bg-[#1A3826] text-white shadow-xs'
-                  : 'hover:text-[#C9A043]'
+                  ? 'bg-[#1B3B2B] text-white shadow-xs'
+                  : 'hover:text-[#C85A32]'
               }`}
               aria-label="التبديل إلى العربية"
             >
@@ -145,8 +145,8 @@ export default function Header({ content }: HeaderProps) {
             rel="noopener noreferrer"
             className={`hidden sm:inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full text-xs font-semibold border transition-all hover:scale-102 ${
               scrolled
-                ? 'bg-[#1A3826] text-white border-[#1A3826] hover:bg-[#28573D]'
-                : 'bg-emerald-700/80 hover:bg-emerald-700 text-white border-emerald-400/30'
+                ? 'bg-[#1E5E3A] text-white border-emerald-500/30 hover:bg-[#174C2E]'
+                : 'bg-[#1E5E3A]/90 hover:bg-[#1E5E3A] text-white border-emerald-400/40'
             }`}
           >
             <MessageCircle className="w-3.5 h-3.5 text-emerald-300" />
@@ -158,7 +158,7 @@ export default function Header({ content }: HeaderProps) {
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className={`md:hidden p-2 rounded-lg transition-colors ${
-              scrolled ? 'text-[#1A3826] hover:bg-black/5' : 'text-white hover:bg-white/10'
+              scrolled ? 'text-[#1B3B2B] hover:bg-black/5' : 'text-white hover:bg-white/10'
             }`}
             aria-label="Toggle navigation menu"
           >
@@ -169,14 +169,14 @@ export default function Header({ content }: HeaderProps) {
 
       {/* Mobile Menu Slide-out Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-[#FAF7F2] border-b border-[#E5DACB] px-4 pt-3 pb-6 shadow-xl text-[#1A3826] animate-in slide-in-from-top duration-200">
+        <div className="md:hidden bg-[#FAF7F2] border-b border-[#E8DFD1] px-4 pt-3 pb-6 shadow-xl text-[#1B3B2B] animate-in slide-in-from-top duration-200">
           <div className="flex flex-col gap-3">
             {navLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
                 onClick={() => setMobileMenuOpen(false)}
-                className="py-2.5 px-3 rounded-lg text-base font-semibold hover:bg-[#F4EFE7] transition-colors border-b border-[#E5DACB]/40 last:border-b-0"
+                className="py-2.5 px-3 rounded-lg text-base font-semibold hover:bg-[#F5EFE6] transition-colors border-b border-[#E8DFD1]/40 last:border-b-0"
               >
                 {t(link.label)}
               </a>
@@ -189,9 +189,9 @@ export default function Header({ content }: HeaderProps) {
               <button
                 type="button"
                 onClick={toggleLanguage}
-                className="flex items-center gap-2 text-xs font-bold text-[#1A3826] bg-[#E5DACB]/50 px-3 py-1.5 rounded-full"
+                className="flex items-center gap-2 text-xs font-bold text-[#1B3B2B] bg-[#E8DFD1]/60 px-3 py-1.5 rounded-full"
               >
-                <Globe className="w-3.5 h-3.5 text-[#C65A3D]" />
+                <Globe className="w-3.5 h-3.5 text-[#C85A32]" />
                 {language === 'ar' ? 'English (EN)' : 'العربية (AR)'}
               </button>
             </div>
@@ -205,9 +205,9 @@ export default function Header({ content }: HeaderProps) {
               target="_blank"
               rel="noopener noreferrer"
               onClick={() => setMobileMenuOpen(false)}
-              className="mt-2 w-full py-3 bg-[#1A3826] text-white rounded-xl flex items-center justify-center gap-2 font-bold text-sm shadow-md"
+              className="mt-2 w-full py-3 bg-[#1E5E3A] hover:bg-[#174C2E] text-white rounded-xl flex items-center justify-center gap-2 font-bold text-sm shadow-md border border-emerald-400/30"
             >
-              <MessageCircle className="w-4 h-4 text-emerald-400" />
+              <MessageCircle className="w-4 h-4 text-emerald-300" />
               {t(content.hero.ctaWhatsApp)}
             </a>
           </div>

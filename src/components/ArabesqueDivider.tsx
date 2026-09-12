@@ -12,10 +12,10 @@ export default function ArabesqueDivider({
   size = 'md',
 }: ArabesqueDividerProps) {
   const colorMap = {
-    gold: '#C9A043',
-    green: '#1A3826',
-    terracotta: '#C65A3D',
-    subtle: '#E5DACB',
+    gold: '#C5A059',
+    green: '#1B3B2B',
+    terracotta: '#C85A32',
+    subtle: '#E8DFD1',
   };
 
   const stroke = colorMap[variant];

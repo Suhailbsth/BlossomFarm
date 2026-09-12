@@ -3,18 +3,21 @@
 @layer base {
   :root {
     --farm-green-deep: #122419;
-    --farm-green-primary: #1A3826;
-    --farm-green-light: #2D583F;
+    --farm-green-primary: #1B3B2B;
+    --farm-green-light: #25523B;
+    --farm-green-cta: #1E5E3A;
+    --farm-green-cta-hover: #174C2E;
     --farm-green-surface: #F0F5F1;
-    --farm-terracotta: #C65A3D;
-    --farm-terracotta-dark: #9F4229;
+    --farm-terracotta: #C85A32;
+    --farm-terracotta-hover: #B24E2A;
+    --farm-terracotta-dark: #9E3E1C;
     --farm-terracotta-light: #EBB6A4;
     --farm-sand-bg: #FAF7F2;
-    --farm-sand-card: #F4EFE7;
-    --farm-sand-border: #E5DACB;
-    --farm-gold: #C9A043;
-    --farm-gold-light: #DFBF73;
-    --farm-gold-glow: rgba(201, 160, 67, 0.18);
+    --farm-sand-card: #F5EFE6;
+    --farm-sand-border: #E8DFD1;
+    --farm-gold: #C5A059;
+    --farm-gold-light: #D8B878;
+    --farm-gold-glow: rgba(197, 160, 89, 0.18);
   }
 
   html {

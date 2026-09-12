@@ -6,7 +6,6 @@ import MarqueeTicker from '@/components/MarqueeTicker';
 import AboutSection from '@/components/AboutSection';
 import TomatoShowcase from '@/components/TomatoShowcase';
 import StorageTips from '@/components/StorageTips';
-import RecipeVideos from '@/components/RecipeVideos';
 import VideoGallery from '@/components/VideoGallery';
 import VisitSection from '@/components/VisitSection';
 import Footer from '@/components/Footer';
@@ -39,10 +38,7 @@ export default async function Home() {
       {/* How to Use & Store — Icon/card tips */}
       <StorageTips content={content} />
 
-      {/* Recipe Videos — 4 AI-generated recipe placeholders */}
-      <RecipeVideos content={content} />
-
-      {/* Farm Vignettes — 4 short video cards */}
+      {/* Garden & Kitchen Vignettes with Tab Switcher */}
       <VideoGallery content={content} />
 
       {/* Visit Us — Location, Directions, and Visiting Hours */}

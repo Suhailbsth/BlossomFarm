@@ -57,10 +57,10 @@ export default function WhatsAppFAB({ content }: WhatsAppFABProps) {
         href={whatsAppLink}
         target="_blank"
         rel="noopener noreferrer"
-        className="relative group p-4 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white shadow-2xl transition-all duration-300 hover:scale-110 flex items-center justify-center border-2 border-white/60 animate-pulse-glow"
+        className="relative group p-3.5 sm:p-4 rounded-full bg-[#1E5E3A] hover:bg-[#174C2E] text-white shadow-xl transition-all duration-300 hover:scale-105 flex items-center justify-center border-2 border-white/80"
         aria-label="Chat on WhatsApp"
       >
-        <MessageCircle className="w-6 h-6 fill-current" />
+        <MessageCircle className="w-6 h-6 fill-current text-emerald-200" />
         <span className="sr-only">WhatsApp</span>
       </a>
     </div>

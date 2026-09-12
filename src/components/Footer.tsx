@@ -56,15 +56,15 @@ export default function Footer({ content }: FooterProps) {
           {t(content.footer.tagline)}
         </p>
 
-        {/* WhatsApp CTA */}
+        {/* WhatsApp CTA in Brand Botanical Emerald */}
         <div className="reveal-child mb-12">
           <a
             href={whatsAppLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-10 py-4 rounded-full bg-[#25D366] hover:bg-[#20ba59] text-white font-bold text-base sm:text-lg shadow-2xl transition-all duration-300 hover:scale-[1.04] border border-[#25D366]/60"
+            className="inline-flex items-center gap-3 px-9 py-3.5 rounded-full bg-[#1E5E3A] hover:bg-[#174C2E] text-white font-bold text-base sm:text-lg shadow-xl transition-all duration-300 hover:scale-[1.02] border border-emerald-400/30"
           >
-            <MessageCircle className="w-5 h-5 fill-current" />
+            <MessageCircle className="w-5 h-5 fill-current text-emerald-300" />
             <span className="font-arabic">{t(content.footer.whatsAppBtn)}</span>
           </a>
         </div>

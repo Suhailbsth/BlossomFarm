@@ -34,43 +34,41 @@ export default function StorageTips({ content }: StorageTipsProps) {
   };
 
   return (
-    <section className="py-24 sm:py-32 px-5 sm:px-8 bg-[#FAF7F2] relative">
-      <div className="absolute inset-0 bg-arabesque-subtle pointer-events-none" />
-
+    <section className="py-20 sm:py-28 px-5 sm:px-8 bg-[#FAF7F2] relative">
       <div
         ref={sectionRef}
-        className={`max-w-5xl mx-auto relative z-10 ${isVisible ? 'reveal-visible' : 'reveal-hidden'}`}
+        className={`max-w-4xl mx-auto relative z-10 ${isVisible ? 'reveal-visible' : 'reveal-hidden'}`}
       >
         {/* Header */}
-        <div className="text-center max-w-xl mx-auto mb-14 sm:mb-16 reveal-child">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-[#1A3826]/8 text-[#1A3826] text-xs font-bold uppercase tracking-[0.15em] mb-4 font-arabic">
+        <div className="text-center max-w-xl mx-auto mb-12 sm:mb-14 reveal-child">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-[#1B3B2B]/8 text-[#1B3B2B] text-xs font-bold uppercase tracking-[0.15em] mb-3.5 font-arabic">
             {t(content.storageTipsSection.eyebrow)}
           </span>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#1A3826] font-arabic leading-[1.15]">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#1B3B2B] font-arabic leading-[1.15]">
             {t(content.storageTipsSection.title)}
           </h2>
-          <ArabesqueDivider variant="green" size="md" className="my-5" />
+          <ArabesqueDivider variant="green" size="md" className="my-4" />
         </div>
 
-        {/* Tips Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4 sm:gap-6">
-          {content.storageTipsSection.items.map((tip) => (
+        {/* Streamlined 3-Tip Essentials Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
+          {content.storageTipsSection.items.slice(0, 3).map((tip) => (
             <div
               key={tip.id}
-              className="reveal-child card-premium card-sheen p-5 sm:p-6 rounded-3xl bg-white border border-[#E5DACB] hover:border-[#C9A043] shadow-sm text-center flex flex-col items-center gap-3"
+              className="reveal-child p-6 rounded-2xl bg-white border border-[#E8DFD1] hover:border-[#C85A32] shadow-sm text-center flex flex-col items-center gap-3 transition-all duration-300 hover:-translate-y-1"
             >
               {/* Icon Circle */}
-              <div className="w-14 h-14 rounded-2xl bg-[#FAF7F2] border border-[#E5DACB] flex items-center justify-center">
+              <div className="w-13 h-13 rounded-xl bg-[#FAF7F2] border border-[#E8DFD1] flex items-center justify-center">
                 {getIcon(tip.iconName)}
               </div>
 
               {/* Title */}
-              <h3 className="text-sm sm:text-base font-bold text-[#1A3826] font-arabic leading-snug">
+              <h3 className="text-base font-bold text-[#1B3B2B] font-arabic leading-snug">
                 {t(tip.title)}
               </h3>
 
-              {/* One-line Tip */}
-              <p className="text-xs text-[#5C6E61] leading-relaxed font-arabic">
+              {/* Tip Description */}
+              <p className="text-xs sm:text-sm text-[#5C6E61] leading-relaxed font-arabic">
                 {t(tip.tip)}
               </p>
             </div>
