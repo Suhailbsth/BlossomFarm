@@ -1,54 +1,80 @@
-import { getSiteContent } from '@/lib/content';
 import Header from '@/components/Header';
-import ScrollProgress from '@/components/ScrollProgress';
 import Hero from '@/components/Hero';
-import MarqueeTicker from '@/components/MarqueeTicker';
 import AboutSection from '@/components/AboutSection';
-import TomatoShowcase from '@/components/TomatoShowcase';
+import ProductCategorySection from '@/components/ProductCategorySection';
 import StorageTips from '@/components/StorageTips';
-import VideoGallery from '@/components/VideoGallery';
-import VisitSection from '@/components/VisitSection';
+import HowToUseSection from '@/components/HowToUseSection';
 import Footer from '@/components/Footer';
 import WhatsAppFAB from '@/components/WhatsAppFAB';
+import { getSanitySiteSettings } from '@/lib/sanity';
+import { getSiteContent } from '@/lib/content';
+import type { Metadata } from 'next';
+
+export async function generateMetadata(): Promise<Metadata> {
+  const sanitySettings = await getSanitySiteSettings();
+
+  const title =
+    sanitySettings?.title || "The Blossom Valley | وادي النوار — من أرضنا… إلى مائدتكم";
+
+  const description =
+    sanitySettings?.metaDescription?.ar ||
+    sanitySettings?.metaDescription?.en ||
+    "Naturally vibrant products, grown with care in Wadi Al-Nawar, Shaqra. Khalas Dates, Naimi Sheep Meat, Crushed Hot Pepper, and Artisanal Dried Tomatoes.";
+
+  const shareImageUrl =
+    sanitySettings?.ogImageUrl ||
+    'https://cdn.sanity.io/images/tokh7kkd/production/3289afe6440bc9cfdf72314c627ba948ba325ea2-1600x1104.jpg';
+
+  return {
+    title,
+    description,
+    openGraph: {
+      title,
+      description,
+      images: [{ url: shareImageUrl }],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title,
+      description,
+      images: [shareImageUrl],
+    },
+  };
+}
 
 export default async function Home() {
-  // Fetch content via the CMS-ready data access layer
-  const content = await getSiteContent();
+  const [sanitySettings, content] = await Promise.all([
+    getSanitySiteSettings(),
+    getSiteContent(),
+  ]);
+
+  const whatsAppNumber = sanitySettings?.whatsAppNumber || content?.footer?.whatsAppNumber;
 
   return (
-    <main className="min-h-screen flex flex-col">
-      {/* Delicate Gold Thread Scroll Progress Indicator */}
-      <ScrollProgress />
+    <main className="min-h-screen bg-background text-foreground selection:bg-harvest-gold selection:text-ink">
+      {/* 1. Header with brand logo, quick navigation, and language switch */}
+      <Header content={content} whatsAppNumber={whatsAppNumber} />
 
-      {/* Fixed Navigation Header with Bilingual Switcher */}
-      <Header content={content} />
-
-      {/* Hero — Full-viewport cinematic greeting */}
+      {/* 2. Hero Section (#top) — Assalamu Alaikum · Wadi Al-Nawar */}
       <Hero content={content} />
 
-      {/* Boutique Infinite Marquee Ticker — Transition to Story */}
-      <MarqueeTicker />
-
-      {/* Wadi Nawar — Farm photo + quote + promo video */}
+      {/* 3. Section 1 — About (#farm) — Our home · 01 */}
       <AboutSection content={content} />
 
-      {/* Tomato Varieties — Clean image + name cards */}
-      <TomatoShowcase content={content} />
+      {/* 4. Section 2 — Products (#varieties) — Freshly picked · 02 */}
+      <ProductCategorySection content={content} />
 
-      {/* How to Use & Store — Icon/card tips */}
+      {/* 5. Section 4 — Best Storage Practice (#storage) — Field notes · 03 (Terracotta) */}
       <StorageTips content={content} />
 
-      {/* Garden & Kitchen Vignettes with Tab Switcher */}
-      <VideoGallery content={content} />
+      {/* 6. Section 3 — How to Use Dried Tomatoes (#recipes) — From our kitchen · 04 */}
+      <HowToUseSection content={content} />
 
-      {/* Visit Us — Location, Directions, and Visiting Hours */}
-      <VisitSection content={content} />
+      {/* 7. Footer — Closing Tagline and Harvest-Gold WhatsApp CTA */}
+      <Footer content={content} whatsAppNumber={whatsAppNumber} />
 
-      {/* Footer — WhatsApp CTA + bilingual farm name */}
-      <Footer content={content} />
-
-      {/* Floating WhatsApp Action Button */}
-      <WhatsAppFAB content={content} />
+      {/* 8. Floating Action Button for 1-Tap WhatsApp Ordering */}
+      <WhatsAppFAB content={content} whatsAppNumber={whatsAppNumber} />
     </main>
   );
 }

@@ -1,10 +1,11 @@
 import { notFound } from 'next/navigation';
-import { getSiteContent, getTomatoBySlug, getAllTomatoSlugs } from '@/lib/content';
+import { getSiteContent, getProductBySlug, getAllProductSlugs } from '@/lib/content';
+import { getSanitySiteSettings } from '@/lib/sanity';
 import ProductDetailsView from '@/components/ProductDetailsView';
 import type { Metadata } from 'next';
 
 export async function generateStaticParams() {
-  const slugs = await getAllTomatoSlugs();
+  const slugs = await getAllProductSlugs();
   return slugs.map((slug) => ({ slug }));
 }
 
@@ -14,21 +15,21 @@ export async function generateMetadata({
   params: Promise<{ slug: string }>;
 }): Promise<Metadata> {
   const { slug } = await params;
-  const tomato = await getTomatoBySlug(slug);
+  const product = await getProductBySlug(slug);
 
-  if (!tomato) {
+  if (!product) {
     return {
-      title: 'Product Not Found | The Blossom’s Farm',
+      title: 'Product Not Found | The Blossom Valley',
     };
   }
 
   return {
-    title: `${tomato.name.en} (${tomato.name.ar}) — The Blossom's Farm`,
-    description: tomato.description.en,
+    title: `${product.name.en} (${product.name.ar}) — The Blossom Valley`,
+    description: product.description.en,
     openGraph: {
-      title: `${tomato.name.en} | ${tomato.name.ar}`,
-      description: tomato.description.en,
-      images: [{ url: tomato.image }],
+      title: `${product.name.en} | ${product.name.ar}`,
+      description: product.description.en,
+      images: [{ url: product.image }],
     },
   };
 }
@@ -39,19 +40,23 @@ export default async function ProductPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const tomato = await getTomatoBySlug(slug);
+  const product = await getProductBySlug(slug);
 
-  if (!tomato) {
+  if (!product) {
     notFound();
   }
 
-  const content = await getSiteContent();
+  const [content, sanitySettings] = await Promise.all([
+    getSiteContent(),
+    getSanitySiteSettings(),
+  ]);
 
   return (
     <ProductDetailsView
-      tomato={tomato}
+      product={product}
       content={content}
-      allTomatoes={content.tomatoesSection.items}
+      allProducts={content.productsSection.allProducts}
+      whatsAppNumber={sanitySettings?.whatsAppNumber}
     />
   );
 }

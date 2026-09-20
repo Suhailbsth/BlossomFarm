@@ -15,17 +15,19 @@ interface LanguageContextType {
 const LanguageContext = createContext<LanguageContextType | undefined>(undefined);
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
-  // Default to Arabic or English based on user's browser or default
+  // Always initialize to 'ar' so server SSR and initial client hydration match identically
   const [language, setLanguageState] = useState<Language>('ar');
-  const [mounted, setMounted] = useState(false);
 
+  // Synchronize with user's saved preference on client mount after hydration
   useEffect(() => {
-    // Check localStorage or browser preference if available
-    const saved = localStorage.getItem('blossom_lang') as Language;
-    if (saved === 'en' || saved === 'ar') {
-      setLanguageState(saved);
+    try {
+      const saved = localStorage.getItem('blossom_lang') as Language;
+      if (saved === 'en' || saved === 'ar') {
+        setLanguageState(saved);
+      }
+    } catch {
+      // storage unavailable
     }
-    setMounted(true);
   }, []);
 
   const setLanguage = (lang: Language) => {

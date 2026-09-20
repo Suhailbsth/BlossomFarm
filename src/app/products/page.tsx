@@ -3,12 +3,12 @@ import ProductCatalogView from '@/components/ProductCatalogView';
 import type { Metadata } from 'next';
 
 export const metadata: Metadata = {
-  title: "Heirloom Harvest Catalogue | كتالوج محاصيل الطماطم — The Blossom's Farm",
-  description: "Browse our complete seasonal catalogue of rare organic heirloom tomatoes and botanicals grown in Al-Ammariyah Oasis, Riyadh.",
+  title: 'Products Catalogue | كتالوج منتجات وادي النوار — The Blossom Valley',
+  description: 'Explore our farm harvest from Shaqra: Maknooz Khalas Dates, Naimi Sheep Meat, Crushed Hot Pepper, and Artisanal Dried Tomatoes.',
   openGraph: {
-    title: "Heirloom Harvest Catalogue | مزرعة النوار",
-    description: "Full catalogue of rare heirloom tomatoes with tasting profiles and culinary pairings.",
-    images: [{ url: '/images/hero-garden.jpg' }],
+    title: 'Products Catalogue | وادي النوار',
+    description: 'Full catalogue of farm products from Shaqra: Khalas dates, Naimi sheep meat, crushed hot pepper, and dried tomatoes.',
+    images: [{ url: 'https://cdn.sanity.io/images/tokh7kkd/production/52419a85726510eeef6164cb4ab5a8f1af464a40-1376x768.jpg' }],
   },
 };
 

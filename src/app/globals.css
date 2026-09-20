@@ -1,448 +1,171 @@
 @import "tailwindcss";
 
-@layer base {
-  :root {
-    --farm-green-deep: #122419;
-    --farm-green-primary: #1B3B2B;
-    --farm-green-light: #25523B;
-    --farm-green-cta: #1E5E3A;
-    --farm-green-cta-hover: #174C2E;
-    --farm-green-surface: #F0F5F1;
-    --farm-terracotta: #C85A32;
-    --farm-terracotta-hover: #B24E2A;
-    --farm-terracotta-dark: #9E3E1C;
-    --farm-terracotta-light: #EBB6A4;
-    --farm-sand-bg: #FAF7F2;
-    --farm-sand-card: #F5EFE6;
-    --farm-sand-border: #E8DFD1;
-    --farm-gold: #C5A059;
-    --farm-gold-light: #D8B878;
-    --farm-gold-glow: rgba(197, 160, 89, 0.18);
-  }
+@theme {
+  --color-background: oklch(98.5% 0.009 78);
+  --color-foreground: oklch(25% 0.025 50);
+  --color-ink: oklch(19% 0.022 46);
+  --color-paper: oklch(94% 0.022 78);
+  --color-harvest-gold: oklch(78% 0.15 76);
+  --color-card: oklch(98.5% 0.009 78);
+  --color-card-foreground: oklch(25% 0.025 50);
+  --color-popover: oklch(98.5% 0.009 78);
+  --color-popover-foreground: oklch(25% 0.025 50);
+  --color-primary: oklch(39% 0.14 35);
+  --color-primary-foreground: oklch(98.5% 0.009 78);
+  --color-secondary: oklch(58% 0.15 44);
+  --color-secondary-foreground: oklch(98.5% 0.009 78);
+  --color-muted: oklch(94% 0.022 78);
+  --color-muted-foreground: oklch(47% 0.035 48);
+  --color-accent: oklch(71% 0.16 61);
+  --color-accent-foreground: oklch(19% 0.022 46);
+  --color-destructive: oklch(55% 0.2 27);
+  --color-destructive-foreground: oklch(98.5% 0.009 78);
+  --color-border: oklch(84% 0.035 72);
+  --color-input: oklch(84% 0.035 72);
+  --color-ring: oklch(39% 0.14 35);
 
+  --font-display: "Outfit", sans-serif;
+  --font-body: "Figtree", sans-serif;
+  --font-arabic: "Noto Kufi Arabic", sans-serif;
+}
+
+:root {
+  --radius: 0.25rem;
+  --background: oklch(98.5% 0.009 78);
+  --foreground: oklch(25% 0.025 50);
+  --ink: oklch(19% 0.022 46);
+  --paper: oklch(94% 0.022 78);
+  --harvest-gold: oklch(78% 0.15 76);
+  --card: oklch(98.5% 0.009 78);
+  --card-foreground: oklch(25% 0.025 50);
+  --popover: oklch(98.5% 0.009 78);
+  --popover-foreground: oklch(25% 0.025 50);
+  --primary: oklch(39% 0.14 35);
+  --primary-foreground: oklch(98.5% 0.009 78);
+  --secondary: oklch(58% 0.15 44);
+  --secondary-foreground: oklch(98.5% 0.009 78);
+  --muted: oklch(94% 0.022 78);
+  --muted-foreground: oklch(47% 0.035 48);
+  --accent: oklch(71% 0.16 61);
+  --accent-foreground: oklch(19% 0.022 46);
+  --destructive: oklch(55% 0.2 27);
+  --destructive-foreground: oklch(98.5% 0.009 78);
+  --border: oklch(84% 0.035 72);
+  --input: oklch(84% 0.035 72);
+  --ring: oklch(39% 0.14 35);
+
+  --font-display: "Outfit", sans-serif;
+  --font-body: "Figtree", sans-serif;
+  --font-arabic: "Noto Kufi Arabic", sans-serif;
+}
+
+@layer base {
   html {
     scroll-behavior: smooth;
-    background-color: var(--farm-sand-bg);
-    color: #212922;
     -webkit-tap-highlight-color: transparent;
   }
 
   body {
-    background-color: #FAF7F2;
-    color: #1A241E;
-    font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--background);
+    color: var(--foreground);
+    font-family: var(--font-body);
+    letter-spacing: 0;
+    margin: 0;
     overflow-x: hidden;
   }
-}
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   Typography & Script Refinements
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.font-serif-luxury {
-  font-family: 'Playfair Display', Georgia, serif;
-}
-
-.font-arabic {
-  font-family: 'Tajawal', -apple-system, BlinkMacSystemFont, sans-serif;
-}
-
-.font-arabic-calligraphy {
-  font-family: 'Amiri', 'Traditional Arabic', serif;
-}
-
-/* Arabic script MUST NEVER have letter-spacing (tracking) as it breaks cursive character ligatures */
-[dir="rtl"],
-.font-arabic,
-.font-arabic-calligraphy {
-  letter-spacing: 0 !important;
-  font-feature-settings: "liga" 1, "calt" 1;
-}
-
-/* Generous, relaxed reading line-height for Arabic script */
-[dir="rtl"] p,
-.font-arabic p {
-  line-height: 1.8;
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   Bespoke Soft Botanical Shadows (De-templatized)
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.shadow-organic-sm {
-  box-shadow: 0 2px 10px -1px rgba(27, 59, 43, 0.04),
-              0 1px 3px 0 rgba(27, 59, 43, 0.02);
-}
-
-.shadow-organic-md {
-  box-shadow: 0 10px 28px -4px rgba(27, 59, 43, 0.06),
-              0 3px 10px -2px rgba(197, 160, 89, 0.05);
-}
-
-.shadow-organic-lg {
-  box-shadow: 0 20px 44px -8px rgba(27, 59, 43, 0.09),
-              0 6px 18px -3px rgba(197, 160, 89, 0.08);
-}
-
-.shadow-organic-hover {
-  transition: box-shadow 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
-              border-color 0.25s ease;
-}
-
-.shadow-organic-hover:hover {
-  box-shadow: 0 20px 48px -10px rgba(27, 59, 43, 0.12),
-              0 8px 20px -4px rgba(200, 90, 50, 0.08);
-  transform: translateY(-4px);
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   Asymmetric Organic Border Utilities
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.rounded-organic-1 {
-  border-radius: 28px 18px 32px 20px;
-}
-
-.rounded-organic-2 {
-  border-radius: 20px 32px 22px 30px;
-}
-
-.rounded-organic-card {
-  border-radius: 24px 16px 28px 20px;
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   Organic Tactile Canvases & Gradients
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.bg-warm-canvas {
-  background: radial-gradient(circle at 10% 15%, rgba(245, 239, 230, 0.9) 0%, transparent 55%),
-              radial-gradient(circle at 90% 85%, rgba(238, 230, 218, 0.7) 0%, transparent 60%),
-              #FAF7F2;
-}
-
-.bg-organic-linen {
-  background-color: #FAF7F2;
-  background-image: radial-gradient(rgba(197, 160, 89, 0.06) 1px, transparent 1px);
-  background-size: 24px 24px;
-}
-
-.bg-arabesque-star {
-  background-color: #FAF7F2;
-  background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23C9A043' fill-opacity='0.06' fill-rule='evenodd'%3E%3Cpath d='M30 0l3.82 9.22 9.22-3.82-3.82 9.22 9.22 3.82-9.22 3.82 3.82 9.22-9.22-3.82L30 38.89l-3.82-9.22-9.22 3.82 3.82-9.22-9.22-3.82 9.22-3.82-3.82-9.22 9.22 3.82L30 0z'/%3E%3C/g%3E%3C/svg%3E");
-}
-
-.bg-arabesque-oasis {
-  background-image: url("data:image/svg+xml,%3Csvg width='40' height='40' viewBox='0 0 40 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 0l5 15 15 5-15 5-5 15-5-15-15-5 15-5z' fill='%231A3826' fill-opacity='0.035' fill-rule='evenodd'/%3E%3C/svg%3E");
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   Custom Scrollbar
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-::-webkit-scrollbar {
-  width: 5px;
-  height: 5px;
-}
-
-::-webkit-scrollbar-track {
-  background: #FAF7F2;
-}
-
-::-webkit-scrollbar-thumb {
-  background: #D4AF37;
-  border-radius: 9999px;
-}
-
-::-webkit-scrollbar-thumb:hover {
-  background: #B28D28;
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   Glassmorphism Cards
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.glass-gold-card {
-  background: rgba(244, 239, 231, 0.88);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(201, 160, 67, 0.22);
-}
-
-.glass-dark-card {
-  background: rgba(18, 36, 25, 0.88);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(201, 160, 67, 0.25);
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   Scroll-Triggered Reveal Animations
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(32px);
+  [dir="rtl"],
+  .font-arabic {
+    font-family: var(--font-arabic), sans-serif;
+    letter-spacing: 0 !important;
   }
-  to {
+}
+
+@layer utilities {
+  .font-display {
+    font-family: Outfit, sans-serif;
+  }
+  .font-body {
+    font-family: Figtree, sans-serif;
+  }
+  .font-arabic {
+    font-family: "Noto Kufi Arabic", sans-serif;
+  }
+
+  .editorial-kicker {
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--primary);
+    font-size: 0.68rem;
+    font-weight: 700;
+  }
+  [dir="rtl"] .editorial-kicker,
+  .font-arabic .editorial-kicker {
+    letter-spacing: 0 !important;
+  }
+
+  .editorial-title {
+    font-family: var(--font-display);
+    letter-spacing: 0;
+    margin-top: 0.8rem;
+    font-size: clamp(2.5rem, 7vw, 4.8rem);
+    font-weight: 600;
+    line-height: 1;
+  }
+  [dir="rtl"] .editorial-title,
+  .font-arabic .editorial-title {
+    font-family: var(--font-arabic), sans-serif;
+    line-height: 1.25;
+  }
+
+  .editorial-copy {
+    max-width: 31rem;
+    color: var(--muted-foreground);
+    margin-top: 1.25rem;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .editorial-frame {
+    border: 1px solid var(--border);
+  }
+
+  .h-18 {
+    height: 4.5rem;
+  }
+
+  .reveal {
+    opacity: 0;
+    transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    transform: translateY(22px);
+  }
+  .reveal.is-visible {
     opacity: 1;
     transform: translateY(0);
   }
-}
 
-@keyframes fadeInScale {
-  from {
-    opacity: 0;
-    transform: scale(0.96) translateY(16px);
-  }
-  to {
-    opacity: 1;
-    transform: scale(1) translateY(0);
-  }
-}
+  /* Color helpers */
+  .bg-background { background-color: var(--background); }
+  .bg-paper { background-color: var(--paper); }
+  .bg-ink { background-color: var(--ink); }
+  .bg-harvest-gold { background-color: var(--harvest-gold); }
+  .bg-primary { background-color: var(--primary); }
+  .bg-card { background-color: var(--card); }
+  .bg-muted { background-color: var(--muted); }
 
-@keyframes slideInFromLeft {
-  from {
-    opacity: 0;
-    transform: translateX(-40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
+  .text-foreground { color: var(--foreground); }
+  .text-ink { color: var(--ink); }
+  .text-primary { color: var(--primary); }
+  .text-primary-foreground { color: var(--primary-foreground); }
+  .text-harvest-gold { color: var(--harvest-gold); }
+  .text-muted-foreground { color: var(--muted-foreground); }
 
-@keyframes slideInFromRight {
-  from {
-    opacity: 0;
-    transform: translateX(40px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
+  .border-border { border-color: var(--border); }
+  .border-primary { border-color: var(--primary); }
+  .border-foreground { border-color: var(--foreground); }
 
-.reveal-hidden {
-  opacity: 0;
-  transform: translateY(32px);
-  transition: opacity 0.8s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.8s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.reveal-visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* Stagger children animations — descendant selector for grid-nested items */
-.reveal-visible .reveal-child:nth-child(1) { transition-delay: 0ms; }
-.reveal-visible .reveal-child:nth-child(2) { transition-delay: 80ms; }
-.reveal-visible .reveal-child:nth-child(3) { transition-delay: 160ms; }
-.reveal-visible .reveal-child:nth-child(4) { transition-delay: 240ms; }
-.reveal-visible .reveal-child:nth-child(5) { transition-delay: 320ms; }
-.reveal-visible .reveal-child:nth-child(6) { transition-delay: 400ms; }
-
-.reveal-child {
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s cubic-bezier(0.22, 1, 0.36, 1),
-              transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.reveal-visible .reveal-child {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   Micro-Animations
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-@keyframes pulseGlow {
-  0%, 100% {
-    box-shadow: 0 0 0 0 rgba(201, 160, 67, 0.4);
-  }
-  50% {
-    box-shadow: 0 0 0 12px rgba(201, 160, 67, 0);
-  }
-}
-
-.animate-pulse-glow {
-  animation: pulseGlow 3s infinite ease-in-out;
-}
-
-@keyframes floatSlow {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
-  }
-}
-
-.animate-float-slow {
-  animation: floatSlow 5s ease-in-out infinite;
-}
-
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
-}
-
-.animate-shimmer {
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(201, 160, 67, 0.12) 50%,
-    transparent 100%
-  );
-  background-size: 200% 100%;
-  animation: shimmer 3s ease-in-out infinite;
-}
-
-@keyframes gentlePing {
-  0% {
-    transform: scale(1);
-    opacity: 1;
-  }
-  75% {
-    transform: scale(1.8);
-    opacity: 0;
-  }
-  100% {
-    transform: scale(1.8);
-    opacity: 0;
-  }
-}
-
-.animate-gentle-ping {
-  animation: gentlePing 2s cubic-bezier(0, 0, 0.2, 1) infinite;
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   Premium Card Hover & Sheen Effects
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.card-premium {
-  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-              box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-              border-color 0.35s ease;
-  will-change: transform, box-shadow;
-}
-
-.card-premium:hover {
-  transform: translateY(-6px) scale(1.015);
-  box-shadow: 0 24px 44px -12px rgba(18, 36, 25, 0.14),
-              0 12px 20px -6px rgba(201, 160, 67, 0.1);
-}
-
-/* Specular Light Sheen sweep on cards */
-.card-sheen {
-  position: relative;
-  overflow: hidden;
-}
-
-.card-sheen::after {
-  content: '';
-  position: absolute;
-  top: -50%;
-  bottom: -50%;
-  left: -80%;
-  width: 50%;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    rgba(255, 255, 255, 0.03) 20%,
-    rgba(255, 255, 255, 0.35) 50%,
-    rgba(255, 255, 255, 0.03) 80%,
-    transparent 100%
-  );
-  transform: skewX(-25deg);
-  pointer-events: none;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.card-sheen:hover::after {
-  opacity: 1;
-  animation: sheenSweep 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards;
-}
-
-@keyframes sheenSweep {
-  0% {
-    left: -80%;
-  }
-  100% {
-    left: 140%;
-  }
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   Water-Ripple Video Play Button Animations
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-@keyframes waterRipple {
-  0% {
-    transform: scale(0.95);
-    opacity: 0.8;
-  }
-  50% {
-    opacity: 0.4;
-  }
-  100% {
-    transform: scale(1.9);
-    opacity: 0;
-  }
-}
-
-.play-ripple-ring-1 {
-  animation: waterRipple 2.6s cubic-bezier(0, 0.2, 0.8, 1) infinite;
-}
-
-.play-ripple-ring-2 {
-  animation: waterRipple 2.6s cubic-bezier(0, 0.2, 0.8, 1) infinite 0.85s;
-}
-
-.play-ripple-ring-3 {
-  animation: waterRipple 2.6s cubic-bezier(0, 0.2, 0.8, 1) infinite 1.7s;
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   Boutique Infinite Marquee Ticker
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-@keyframes marqueeScroll {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(-50%, 0, 0);
-  }
-}
-
-@keyframes marqueeScrollRTL {
-  0% {
-    transform: translate3d(0, 0, 0);
-  }
-  100% {
-    transform: translate3d(50%, 0, 0);
-  }
-}
-
-.animate-marquee {
-  display: flex;
-  width: max-content;
-  animation: marqueeScroll 32s linear infinite;
-  will-change: transform;
-}
-
-[dir="rtl"] .animate-marquee {
-  animation: marqueeScrollRTL 32s linear infinite;
-}
-
-.animate-marquee:hover {
-  animation-play-state: paused;
-}
-
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-   Section Divider Geometric Accent
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
-.section-border-gold {
-  border-image: linear-gradient(90deg, transparent, #C9A043, transparent) 1;
+  .swatch-1 { background-color: oklch(48% 0.2 29); }
+  .swatch-2 { background-color: var(--harvest-gold); }
+  .swatch-3 { background-color: oklch(30% 0.07 35); }
+  .swatch-4 { background-color: oklch(40% 0.16 145); }
 }

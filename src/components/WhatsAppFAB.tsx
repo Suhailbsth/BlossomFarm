@@ -3,65 +3,53 @@
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { SiteContent } from '@/types/content';
-import { MessageCircle, X } from 'lucide-react';
+import { MessageCircle } from 'lucide-react';
+import { buildWhatsAppLink } from '@/lib/whatsapp';
 
 interface WhatsAppFABProps {
-  content: SiteContent;
+  content?: SiteContent;
+  whatsAppNumber?: string;
 }
 
-export default function WhatsAppFAB({ content }: WhatsAppFABProps) {
-  const { language, isRTL, t } = useLanguage();
+export default function WhatsAppFAB({ content, whatsAppNumber }: WhatsAppFABProps) {
+  const { language, isRTL } = useLanguage();
   const [visible, setVisible] = useState(false);
-  const [showTooltip, setShowTooltip] = useState(true);
+  const isAr = language === 'ar';
 
   useEffect(() => {
     const handleScroll = () => {
-      // Show FAB after user has scrolled 150px
-      setVisible(window.scrollY > 150);
+      setVisible(window.scrollY > 300);
     };
-    window.addEventListener('scroll', handleScroll);
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
-  const whatsAppLink = `https://wa.me/${content.footer.whatsAppNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
-    language === 'ar' ? content.footer.whatsAppPrefillAr : content.footer.whatsAppPrefillEn
-  )}`;
+  const prefill = isAr
+    ? 'السلام عليكم وادي النوار، أود الاستفسار عن المنتجات وحجز طلب.'
+    : 'Hello The Blossom Valley, I would like to inquire about ordering.';
+
+  const activeNumber = whatsAppNumber || content?.footer?.whatsAppNumber;
+  const whatsAppLink = buildWhatsAppLink(prefill, activeNumber);
 
   if (!visible) return null;
 
   return (
     <div
-      className={`fixed bottom-6 ${
-        isRTL ? 'left-6' : 'right-6'
-      } z-40 flex items-center gap-3 animate-in fade-in slide-in-from-bottom-5 duration-300`}
+      className={`fixed bottom-5 sm:bottom-6 ${
+        isRTL ? 'left-5 sm:left-6' : 'right-5 sm:right-6'
+      } z-40 flex items-center gap-2.5 animate-in fade-in slide-in-from-bottom-4 duration-300`}
     >
-      {/* Tooltip speech bubble */}
-      {showTooltip && (
-        <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-2xl bg-[#1A3826] text-white text-xs font-semibold shadow-xl border border-[#C9A043]/40">
-          <span className="font-arabic">
-            {language === 'ar' ? 'تواصل معنا في المزرعة' : "Chat with The Blossom's Farm"}
-          </span>
-          <button
-            type="button"
-            onClick={() => setShowTooltip(false)}
-            className="text-white/60 hover:text-white"
-            aria-label="Dismiss tooltip"
-          >
-            <X className="w-3 h-3" />
-          </button>
-        </div>
-      )}
-
-      {/* Floating Button */}
       <a
         href={whatsAppLink}
         target="_blank"
         rel="noopener noreferrer"
-        className="relative group p-3.5 sm:p-4 rounded-full bg-[#1E5E3A] hover:bg-[#174C2E] text-white shadow-xl transition-all duration-300 hover:scale-105 flex items-center justify-center border-2 border-white/80"
-        aria-label="Chat on WhatsApp"
+        className="group flex items-center gap-2.5 h-12 px-4 sm:px-5 rounded-full bg-harvest-gold text-ink font-bold text-xs shadow-xl border border-ink/10 transition-all duration-200 hover:scale-105 active:scale-95"
+        aria-label={isAr ? 'تواصل عبر واتساب' : 'Chat via WhatsApp'}
       >
-        <MessageCircle className="w-6 h-6 fill-current text-emerald-200" />
-        <span className="sr-only">WhatsApp</span>
+        <MessageCircle size={18} className="fill-current text-ink shrink-0" />
+        <span className="hidden xs:inline sm:inline">
+          {isAr ? 'طلب سريع' : 'Quick Order'}
+        </span>
       </a>
     </div>
   );

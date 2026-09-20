@@ -26,7 +26,7 @@ export default function ArabesqueDivider({
     lg: { height: 32, iconSize: 24 },
   };
 
-  const { height, iconSize } = sizeMap[size];
+  const { iconSize } = sizeMap[size];
 
   return (
     <div

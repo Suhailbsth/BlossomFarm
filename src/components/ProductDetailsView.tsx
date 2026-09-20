@@ -4,439 +4,225 @@ import React, { useState } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
-import { SiteContent, TomatoVariety } from '@/types/content';
-import {
-  ArrowLeft,
-  ArrowRight,
-  MessageCircle,
-  Clock,
-  Sparkles,
-  Utensils,
-  ShieldCheck,
-  Thermometer,
-  ChevronRight,
-  Globe,
-} from 'lucide-react';
-import ArabesqueDivider from './ArabesqueDivider';
+import { SiteContent, ProductItem } from '@/types/content';
+import { ArrowLeft, ArrowRight, MessageCircle, Sprout, ArrowUpRight } from 'lucide-react';
+import { buildWhatsAppLink } from '@/lib/whatsapp';
 import Footer from './Footer';
-import WhatsAppFAB from './WhatsAppFAB';
 
 interface ProductDetailsViewProps {
-  tomato: TomatoVariety;
+  product: ProductItem;
   content: SiteContent;
-  allTomatoes: TomatoVariety[];
+  allProducts: ProductItem[];
+  whatsAppNumber?: string;
 }
 
 export default function ProductDetailsView({
-  tomato,
+  product,
   content,
-  allTomatoes,
+  allProducts,
+  whatsAppNumber,
 }: ProductDetailsViewProps) {
-  const { language, setLanguage, isRTL, t } = useLanguage();
-  const galleryImages = tomato.gallery && tomato.gallery.length > 0
-    ? tomato.gallery
-    : [tomato.image];
+  const { language, toggleLanguage, isRTL, t } = useLanguage();
+  const isAr = language === 'ar';
+
+  const galleryImages = product.gallery && product.gallery.length > 0
+    ? product.gallery
+    : [product.image];
 
   const [activeImage, setActiveImage] = useState(galleryImages[0]);
 
-  // Other varieties excluding current
-  const otherTomatoes = allTomatoes.filter((item) => item.id !== tomato.id);
+  // Other products excluding current
+  const otherProducts = allProducts.filter((item) => item.id !== product.id);
 
-  // WhatsApp prefilled message tailored to this specific variety
-  const whatsAppMessage = language === 'ar'
-    ? `مرحباً مزرعة النوار! أود الاستفسار عن توفر وحجز سلة من طماطم (${tomato.name.ar} - ${tomato.name.en}) اليوم.`
-    : `Hello The Blossom's Farm! I would like to inquire about reserving a fresh basket of (${tomato.name.en} / ${tomato.name.ar}) today.`;
+  // WhatsApp prefilled message tailored to this specific product
+  const whatsAppMessage = isAr
+    ? `مرحباً وادي النوار! أود الاستفسار عن توفر وحجز طلب (${product.name.ar} - ${product.name.en}).`
+    : `Hello The Blossom Valley! I would like to inquire about ordering (${product.name.en} / ${product.name.ar}).`;
 
-  const whatsAppLink = `https://wa.me/${content.footer.whatsAppNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
-    whatsAppMessage
-  )}`;
+  const activeNumber = whatsAppNumber || content?.footer?.whatsAppNumber;
+  const whatsAppLink = buildWhatsAppLink(whatsAppMessage, activeNumber);
 
   return (
-    <div className="min-h-screen flex flex-col bg-warm-canvas text-[#1A241E]">
+    <div className="min-h-screen flex flex-col bg-background text-foreground font-body">
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-          Top Navigation Bar
+          Header matching reference design
           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-      <header className="sticky top-0 z-40 bg-[#FAF7F2]/90 backdrop-blur-md border-b border-[#E8DFD1]/80 py-3.5 px-4 sm:px-8">
-        <div className="max-w-6xl mx-auto flex items-center justify-between">
-          {/* Back to Harvest Link (Takes user directly to this variety's card in the harvest section) */}
+      <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-md">
+        <div className="mx-auto flex h-18 max-w-[1440px] items-center justify-between px-6 sm:px-10 lg:px-16 2xl:px-20">
           <Link
-            href={`/#variety-${tomato.id}`}
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#1B3B2B] hover:text-[#C85A32] transition-colors group"
+            href="/#varieties"
+            className="inline-flex items-center gap-2 text-xs font-bold text-primary hover:opacity-80 transition-opacity"
           >
-            {isRTL ? (
-              <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
-            ) : (
-              <ArrowLeft className="w-4 h-4 transition-transform group-hover:-translate-x-1" />
-            )}
-            <span className="font-arabic">
-              {language === 'ar' ? 'العودة لمحاصيل المزرعة' : 'Back to Farm Harvest'}
+            {isRTL ? <ArrowRight size={16} /> : <ArrowLeft size={16} />}
+            <span>{isAr ? 'العودة للمنتجات' : 'Back to harvest'}</span>
+          </Link>
+
+          <Link
+            href="/"
+            className="flex items-center gap-2 font-display text-lg font-semibold text-primary sm:text-xl"
+          >
+            <Sprout size={18} strokeWidth={1.75} className="shrink-0 text-primary" />
+            <span className={isRTL ? 'font-arabic font-bold' : 'font-display'}>
+              {isRTL ? 'وادي النوار' : 'The Blossom Valley'}
             </span>
           </Link>
 
-          {/* Center Brand Link */}
-          <Link href="/" className="hidden sm:flex items-center gap-2.5">
-            <span className="text-sm font-bold font-arabic text-[#1B3B2B]">
-              مزرعة النوار
-            </span>
-            <span className="text-[11px] text-[#C5A059]">✦</span>
-            <span className="text-xs font-serif-luxury text-[#7A8A7E]">
-              The Blossom&apos;s Farm
-            </span>
-          </Link>
-
-          {/* Language Switcher */}
-          <div className="flex items-center p-1 rounded-full border border-[#E8DFD1] bg-white text-xs font-semibold">
-            <button
-              type="button"
-              onClick={() => setLanguage('en')}
-              className={`px-2.5 py-1 rounded-full transition-all ${
-                language === 'en'
-                  ? 'bg-[#1B3B2B] text-white shadow-xs'
-                  : 'text-[#5C6E61] hover:text-[#1B3B2B]'
-              }`}
-            >
-              EN
-            </button>
-            <button
-              type="button"
-              onClick={() => setLanguage('ar')}
-              className={`px-2.5 py-1 rounded-full transition-all font-arabic ${
-                language === 'ar'
-                  ? 'bg-[#1B3B2B] text-white shadow-xs'
-                  : 'text-[#5C6E61] hover:text-[#1B3B2B]'
-              }`}
-            >
-              العربية
-            </button>
-          </div>
+          <button
+            type="button"
+            onClick={toggleLanguage}
+            aria-label="Switch language"
+            className="rounded-full border border-foreground bg-transparent px-4 py-1.5 text-xs font-semibold shadow-none transition-colors hover:bg-muted cursor-pointer"
+          >
+            {isRTL ? 'EN' : 'عربي'}
+          </button>
         </div>
       </header>
 
       {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-          Main Product Editorial Hero
+          Product Details Section
           ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-      <main className="flex-1 max-w-6xl mx-auto w-full px-5 sm:px-8 py-10 sm:py-16">
-        {/* Breadcrumb path */}
-        <div className="flex items-center gap-2 text-xs text-[#7A8A7E] font-arabic mb-8">
-          <Link href="/" className="hover:text-[#1B3B2B] transition-colors">
-            {language === 'ar' ? 'الرئيسية' : 'Home'}
-          </Link>
-          <span>/</span>
-          <Link href={`/#variety-${tomato.id}`} className="hover:text-[#1B3B2B] transition-colors">
-            {language === 'ar' ? 'المحاصيل المتوارثة' : 'Heirloom Harvest'}
-          </Link>
-          <span>/</span>
-          <span className="text-[#C85A32] font-semibold">{t(tomato.name)}</span>
-        </div>
-
-        {/* Asymmetric Product Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
-          {/* Gallery Column (6 cols) */}
-          <div className="lg:col-span-6 space-y-4">
-            {/* Primary Large Image Frame with Organic Radius & Tilt */}
-            <div className="relative rounded-organic-1 overflow-hidden aspect-square sm:aspect-[4/3] bg-white border border-[#E8DFD1] shadow-organic-md">
+      <main className="flex-1 max-w-[1440px] mx-auto w-full px-6 sm:px-10 lg:px-16 2xl:px-20 py-12 sm:py-20">
+        <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-start">
+          {/* Image & Gallery Column */}
+          <div>
+            <div className="relative aspect-[4/3] w-full overflow-hidden bg-paper border border-border">
               <Image
                 src={activeImage}
-                alt={t(tomato.name)}
+                alt={t(product.name)}
                 fill
                 priority
-                quality={95}
-                className="object-cover object-center transition-all duration-500"
+                className="object-cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
               />
-
-              {/* Status Badge */}
-              <div className="absolute top-4 start-4 z-10">
-                <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#1B3B2B]/90 backdrop-blur-xs text-white text-xs font-bold font-arabic shadow-sm border border-[#C5A059]/40">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-                  {language === 'ar' ? 'قطاف يومي طازج' : 'Harvested Daily'}
+              {product.badge && (
+                <span className="absolute bottom-4 end-4 bg-background px-4 py-2 text-xs font-bold text-primary border border-border">
+                  {t(product.badge)}
                 </span>
-              </div>
-
-              {/* Category Pill */}
-              <div className="absolute bottom-4 end-4 z-10">
-                <span className="px-3 py-1 rounded-full bg-white/95 text-[#C85A32] text-xs font-bold shadow-sm font-arabic border border-[#E8DFD1]">
-                  {t(tomato.category)}
-                </span>
-              </div>
+              )}
             </div>
 
-            {/* Thumbnail Strip */}
+            {/* Gallery Thumbnails */}
             {galleryImages.length > 1 && (
-              <div className="flex items-center gap-3 pt-2">
+              <div className="mt-4 flex gap-3">
                 {galleryImages.map((img, idx) => (
                   <button
                     key={idx}
                     type="button"
                     onClick={() => setActiveImage(img)}
-                    className={`relative w-20 h-20 rounded-xl overflow-hidden border-2 transition-all ${
-                      activeImage === img
-                        ? 'border-[#C85A32] scale-105 shadow-sm'
-                        : 'border-[#E8DFD1] opacity-75 hover:opacity-100'
+                    className={`relative w-20 h-16 overflow-hidden border cursor-pointer transition-opacity ${
+                      activeImage === img ? 'border-primary opacity-100' : 'border-border opacity-60 hover:opacity-100'
                     }`}
                   >
-                    <Image
-                      src={img}
-                      alt={`Thumbnail ${idx + 1}`}
-                      fill
-                      className="object-cover object-center"
-                    />
+                    <Image src={img} alt={`Thumb ${idx}`} fill className="object-cover" />
                   </button>
                 ))}
               </div>
             )}
           </div>
 
-          {/* Details & Information Column (6 cols) */}
-          <div className="lg:col-span-6 space-y-7">
-            {/* Titles & Botanical Subtitle */}
-            <div>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-[#C85A32]/10 text-[#C85A32] text-xs font-bold font-arabic mb-3">
-                <Sparkles className="w-3.5 h-3.5" />
-                <span>{t(tomato.category)}</span>
-              </div>
+          {/* Details Column */}
+          <div>
+            <p className="editorial-kicker">{t(product.category)}</p>
+            <h1 className="editorial-title text-ink">{t(product.name)}</h1>
 
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-extrabold text-[#1B3B2B] font-arabic leading-tight mb-2">
-                {t(tomato.name)}
-              </h1>
-              <p className="text-sm sm:text-base text-[#7A8A7E] font-serif-luxury italic">
-                {language === 'ar' ? tomato.name.en : tomato.name.ar} • Solanum lycopersicum
+            {product.arabicSubtitle && (
+              <p className="mt-2 text-sm text-primary font-semibold">
+                {product.arabicSubtitle}
               </p>
-            </div>
+            )}
 
-            {/* Tasting Notes Chips */}
-            <div className="flex flex-wrap gap-2">
-              {tomato.tasteNotes.map((note, idx) => (
-                <span
-                  key={idx}
-                  className="px-3.5 py-1.5 rounded-full bg-white border border-[#E8DFD1] text-[#1B3B2B] text-xs font-semibold shadow-2xs font-arabic"
-                >
-                  ✦ {t(note)}
-                </span>
-              ))}
-            </div>
+            <p className="editorial-copy mt-4">{t(product.description)}</p>
 
-            {/* Story & Description */}
-            <div className="p-6 rounded-organic-card bg-[#F5EFE6] border-s-4 border-[#C85A32] text-sm text-[#4E5E52] leading-relaxed font-arabic space-y-3">
-              <p className="font-medium text-[#1B3B2B]">
-                {t(tomato.description)}
-              </p>
-              {tomato.story && (
-                <p className="text-xs sm:text-sm text-[#5C6E61]">
-                  {t(tomato.story)}
+            {/* Story / Cultivation notes */}
+            {product.story && (
+              <div className="mt-8 border-y border-border py-5 text-sm text-muted-foreground leading-relaxed">
+                <p className="font-semibold text-foreground mb-1">
+                  {isAr ? 'عن المحصول وطريقة الإنتاج:' : 'About the harvest & cultivation:'}
                 </p>
-              )}
-            </div>
-
-            {/* Sensory Matrix (Sweetness / Acidity / Umami / Firmness) */}
-            <div className="p-6 rounded-2xl bg-white border border-[#E8DFD1] shadow-organic-sm">
-              <h3 className="text-xs uppercase font-bold text-[#7A8A7E] tracking-wider mb-4 font-arabic">
-                {language === 'ar' ? 'مؤشرات النكهة والقوام الحسي' : 'Sensory Flavor & Texture Index'}
-              </h3>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <div>
-                  <span className="block text-xs font-bold text-[#1B3B2B] font-arabic mb-1">
-                    {language === 'ar' ? 'الحلاوة' : 'Sweetness'}
-                  </span>
-                  <div className="text-sm font-bold text-[#C85A32] tracking-widest">
-                    {'●'.repeat(tomato.sweetness)}{'○'.repeat(5 - tomato.sweetness)}
-                  </div>
-                  <span className="text-[10px] text-[#7A8A7E] font-arabic">{tomato.sweetness}/5</span>
-                </div>
-
-                <div>
-                  <span className="block text-xs font-bold text-[#1B3B2B] font-arabic mb-1">
-                    {language === 'ar' ? 'الحموضة' : 'Acidity'}
-                  </span>
-                  <div className="text-sm font-bold text-[#1B3B2B] tracking-widest">
-                    {'●'.repeat(tomato.acidity)}{'○'.repeat(5 - tomato.acidity)}
-                  </div>
-                  <span className="text-[10px] text-[#7A8A7E] font-arabic">{tomato.acidity}/5</span>
-                </div>
-
-                <div>
-                  <span className="block text-xs font-bold text-[#1B3B2B] font-arabic mb-1">
-                    {language === 'ar' ? 'الأومامي' : 'Umami'}
-                  </span>
-                  <div className="text-sm font-bold text-[#C5A059] tracking-widest">
-                    {'●'.repeat(tomato.umami)}{'○'.repeat(5 - tomato.umami)}
-                  </div>
-                  <span className="text-[10px] text-[#7A8A7E] font-arabic">{tomato.umami}/5</span>
-                </div>
-
-                <div>
-                  <span className="block text-xs font-bold text-[#1B3B2B] font-arabic mb-1">
-                    {language === 'ar' ? 'التماسك' : 'Firmness'}
-                  </span>
-                  <div className="text-sm font-bold text-emerald-700 tracking-widest">
-                    {'●'.repeat(tomato.firmness || 4)}{'○'.repeat(5 - (tomato.firmness || 4))}
-                  </div>
-                  <span className="text-[10px] text-[#7A8A7E] font-arabic">{(tomato.firmness || 4)}/5</span>
-                </div>
+                <p>{t(product.story)}</p>
               </div>
-            </div>
+            )}
 
-            {/* Direct WhatsApp Harvest Order CTA */}
-            <div className="pt-2">
+            {/* Key Specs */}
+            {product.specs && product.specs.length > 0 && (
+              <div className="mt-6 space-y-2 border-b border-border pb-6 text-xs">
+                {product.specs.map((spec, idx) => (
+                  <div key={idx} className="flex items-center justify-between py-1">
+                    <span className="text-muted-foreground">{t(spec.label)}:</span>
+                    <span className="font-bold text-foreground">{t(spec.value)}</span>
+                  </div>
+                ))}
+              </div>
+            )}
+
+            {/* Storage Advice */}
+            {product.storageSpecific && (
+              <div className="mt-6 p-4 bg-paper border border-border text-xs text-muted-foreground">
+                <span className="font-bold text-foreground block mb-1">
+                  {isAr ? 'إرشادات الحفظ:' : 'Storage Guidance:'}
+                </span>
+                <p>{t(product.storageSpecific)}</p>
+              </div>
+            )}
+
+            {/* Direct WhatsApp CTA Button matching harvest-gold footer button */}
+            <div className="mt-8">
               <a
                 href={whatsAppLink}
                 target="_blank"
-                rel="noopener noreferrer"
-                className="w-full py-4 px-8 rounded-full bg-[#1E5E3A] hover:bg-[#174C2E] text-white font-bold text-base shadow-organic-md transition-all duration-300 hover:scale-[1.015] flex items-center justify-center gap-3 border border-emerald-400/30"
+                rel="noreferrer"
+                className="h-12 w-full sm:w-auto rounded-full bg-harvest-gold px-8 text-ink shadow-none hover:bg-harvest-gold/90 font-bold inline-flex items-center justify-center gap-2.5 transition-transform hover:scale-[1.02]"
               >
-                <MessageCircle className="w-5 h-5 fill-current text-emerald-300" />
-                <span className="font-arabic">
-                  {language === 'ar'
-                    ? `طلب حجز (${t(tomato.name)}) عبر واتساب`
-                    : `Inquire about ${t(tomato.name)} on WhatsApp`}
-                </span>
+                <MessageCircle size={18} className="fill-current text-ink" />
+                <span>{isAr ? 'طلب المنتج مباشرة عبر واتساب' : 'Inquire & Order via WhatsApp'}</span>
               </a>
-              <p className="mt-2.5 text-center text-xs text-[#7A8A7E] font-arabic">
-                {language === 'ar'
-                  ? 'قطاف يومي طازج بحسب توفر بيوتنا المحمية في وادي العمارية'
-                  : 'Daily morning harvest subject to greenhouse yield in Al-Ammariyah'}
-              </p>
             </div>
           </div>
         </div>
 
-        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-            Culinary Ideas & Storage Guide Section
-            ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section className="mt-20 sm:mt-28 pt-12 border-t border-[#E8DFD1]">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-            {/* Culinary Inspirations (7 cols) */}
-            <div className="lg:col-span-7 space-y-6">
-              <div className="flex items-center gap-2 text-[#C85A32] font-bold text-xs uppercase tracking-wider font-arabic">
-                <Utensils className="w-4 h-4" />
-                <span>{language === 'ar' ? 'إلهام الطهي والتقديم' : 'Culinary & Serving Inspirations'}</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1B3B2B] font-arabic leading-snug">
-                {language === 'ar' ? 'أفضل طرق الاستمتاع بهذا المحصول' : 'How to Savor This Harvest'}
-              </h2>
-
-              {/* Culinary Cards */}
-              <div className="space-y-4">
-                {tomato.culinaryUses && tomato.culinaryUses.length > 0 ? (
-                  tomato.culinaryUses.map((use, idx) => (
-                    <div
-                      key={idx}
-                      className="p-5 sm:p-6 rounded-2xl bg-white border border-[#E8DFD1] shadow-2xs space-y-2"
-                    >
-                      <div className="flex items-center justify-between gap-4">
-                        <h4 className="text-base font-bold text-[#1B3B2B] font-arabic">
-                          {t(use.title)}
-                        </h4>
-                        <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-[#7A8A7E] bg-[#FAF7F2] px-2.5 py-0.5 rounded-full border border-[#E8DFD1]">
-                          <Clock className="w-3 h-3 text-[#C5A059]" />
-                          {use.prepTime}
-                        </span>
-                      </div>
-                      <p className="text-xs sm:text-sm text-[#5C6E61] leading-relaxed font-arabic">
-                        {t(use.description)}
-                      </p>
-                    </div>
-                  ))
-                ) : (
-                  <div className="p-5 rounded-2xl bg-white border border-[#E8DFD1]">
-                    <p className="text-sm text-[#5C6E61] font-arabic">
-                      {t(tomato.bestPairedWith)}
-                    </p>
-                  </div>
-                )}
-              </div>
-            </div>
-
-            {/* Storage & Care Guide (5 cols) */}
-            <div className="lg:col-span-5 space-y-6">
-              <div className="flex items-center gap-2 text-[#C5A059] font-bold text-xs uppercase tracking-wider font-arabic">
-                <ShieldCheck className="w-4 h-4" />
-                <span>{language === 'ar' ? 'نصيحة العناية والحفظ' : 'Specific Care & Storage'}</span>
-              </div>
-              <h2 className="text-2xl sm:text-3xl font-extrabold text-[#1B3B2B] font-arabic leading-snug">
-                {language === 'ar' ? 'حفظ النضارة والنكهة' : 'Preserving Peak Flavor'}
-              </h2>
-
-              <div className="p-6 sm:p-7 rounded-2xl bg-white border border-[#E8DFD1] shadow-2xs space-y-4">
-                <div className="w-11 h-11 rounded-xl bg-[#F5EFE6] border border-[#E8DFD1] flex items-center justify-center">
-                  <Thermometer className="w-5 h-5 text-[#C85A32]" />
-                </div>
-                <h4 className="text-base font-bold text-[#1B3B2B] font-arabic">
-                  {language === 'ar' ? 'درجة حرارة الغرفة (ممنوع التبريد)' : 'Room Temperature (No Chilling)'}
-                </h4>
-                <p className="text-xs sm:text-sm text-[#5C6E61] leading-relaxed font-arabic">
-                  {tomato.storageSpecific
-                    ? t(tomato.storageSpecific)
-                    : t(content.storageTipsSection.items[0].tip)}
-                </p>
-
-                <div className="pt-3 border-t border-[#E8DFD1] flex items-center gap-2 text-xs text-[#C85A32] font-semibold font-arabic">
-                  <span>✦</span>
-                  <span>{language === 'ar' ? 'يُقطف ناضجاً ويُفضل تناوله خلال ٣-٥ أيام' : 'Vine-ripened — best enjoyed within 3-5 days'}</span>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        {/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-            Explore Other Heirloom Varieties Carousel
-            ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */}
-        <section className="mt-20 sm:mt-28 pt-12 border-t border-[#E8DFD1]">
-          <div className="flex items-end justify-between gap-4 mb-8">
-            <div>
-              <span className="text-xs font-bold text-[#C5A059] uppercase tracking-wider font-arabic block mb-1">
-                {language === 'ar' ? 'محاصيل متوارثة أخرى' : 'More From Our Harvest'}
+        {/* Other Products Section */}
+        {otherProducts.length > 0 && (
+          <div className="mt-24 border-t border-border pt-12">
+            <div className="flex items-center justify-between mb-8">
+              <span className="editorial-kicker">
+                {isAr ? 'منتجات أخرى' : 'More Products'}
               </span>
-              <h3 className="text-2xl sm:text-3xl font-extrabold text-[#1B3B2B] font-arabic">
-                {language === 'ar' ? 'استكشف بقية أصناف المزرعة' : 'Explore Other Varieties'}
-              </h3>
-            </div>
-            <Link
-              href="/#tomatoes"
-              className="text-xs sm:text-sm font-bold text-[#C85A32] hover:underline flex items-center gap-1 font-arabic"
-            >
-              <span>{language === 'ar' ? 'عرض الكل' : 'View All'}</span>
-              <ChevronRight className={`w-4 h-4 ${isRTL ? 'rotate-180' : ''}`} />
-            </Link>
-          </div>
-
-          {/* Other Varieties Grid */}
-          <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 sm:gap-5">
-            {otherTomatoes.map((item) => (
-              <Link
-                key={item.id}
-                href={`/products/${item.id}`}
-                className="group block rounded-2xl bg-white border border-[#E8DFD1] hover:border-[#C85A32] overflow-hidden shadow-organic-sm shadow-organic-hover transition-all duration-300"
-              >
-                <div className="relative aspect-square overflow-hidden bg-[#FAF7F2]">
-                  <Image
-                    src={item.image}
-                    alt={t(item.name)}
-                    fill
-                    quality={85}
-                    className="object-cover object-center group-hover:scale-105 transition-transform duration-500"
-                    sizes="(max-width: 640px) 50vw, 25vw"
-                  />
-                  <div className="absolute inset-x-0 bottom-0 h-12 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
-                </div>
-                <div className="p-3.5 text-center">
-                  <h4 className="text-xs sm:text-sm font-bold text-[#1B3B2B] font-arabic group-hover:text-[#C85A32] transition-colors leading-snug">
-                    {t(item.name)}
-                  </h4>
-                  <p className="mt-0.5 text-[10px] text-[#7A8A7E] font-serif-luxury italic">
-                    {language === 'ar' ? item.name.en : item.name.ar}
-                  </p>
-                </div>
+              <Link href="/#varieties" className="text-xs font-bold text-primary hover:underline">
+                {isAr ? 'عرض جميع المنتجات' : 'View full harvest'}
               </Link>
-            ))}
+            </div>
+
+            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {otherProducts.slice(0, 3).map((item) => (
+                <Link
+                  key={item.id}
+                  href={`/products/${item.id}`}
+                  className="group block border border-border p-5 bg-paper/30 transition-colors hover:border-primary"
+                >
+                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-paper mb-4">
+                    <Image
+                      src={item.image}
+                      alt={t(item.name)}
+                      fill
+                      className="object-cover transition duration-500 group-hover:scale-105"
+                    />
+                  </div>
+                  <p className="text-[10px] font-bold text-primary uppercase">{t(item.category)}</p>
+                  <div className="flex items-center justify-between mt-1">
+                    <h4 className="font-display text-base font-semibold group-hover:text-primary transition-colors">
+                      {t(item.name)}
+                    </h4>
+                    <ArrowUpRight size={16} className="text-muted-foreground group-hover:text-primary transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
-        </section>
+        )}
       </main>
 
-      {/* Footer & FAB */}
-      <Footer content={content} />
-      <WhatsAppFAB content={content} />
+      {/* Footer */}
+      <Footer whatsAppNumber={activeNumber} />
     </div>
   );
 }

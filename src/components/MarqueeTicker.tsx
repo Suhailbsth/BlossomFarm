@@ -7,12 +7,12 @@ export default function MarqueeTicker() {
   const { language } = useLanguage();
 
   const items = [
-    { ar: 'طازج يومياً من بيوتنا المحمية', en: 'Fresh Daily From Our Greenhouses' },
-    { ar: 'وادي النوار — العمارية، الرياض', en: 'Wadi Nawar — Al-Ammariyah, Riyadh' },
-    { ar: 'قطاف الصباح الباكر', en: 'Harvested at Dawn' },
-    { ar: 'عضوي ١٠٠٪ ومروي بمياه عذبة نقية', en: '100% Organic & Pure Well Water' },
-    { ar: 'أصناف طماطم إرثية فاخرة', en: 'Artisanal Heirloom Varieties' },
-    { ar: 'طبيعة مستدامة وجودة استثنائية', en: 'Sustainable Farming & Peak Flavor' },
+    { ar: 'وادي النوار — محافظة شقراء', en: 'The Blossom Valley — Shaqra City' },
+    { ar: 'مكنوز تمر الخلاص الفاخر من نخيلنا', en: 'Maknooz Khalas Dates From Our Own Palms' },
+    { ar: 'ذبائح خرفان نعيمي بتغذية البرسيم الأخضر', en: 'Farm-Raised Naimi Sheep Fed on Green Alfalfa' },
+    { ar: 'فلفل حار مجروش — من مزرعتنا إلى طبقك', en: 'Crushed Hot Pepper — From Our Farm to Your Plate' },
+    { ar: 'طماطم مجففة بزيت الزيتون والبهارات الحصرية', en: 'Artisanal Dried Tomatoes in Olive Oil' },
+    { ar: 'من أرضنا… إلى مائدتكم', en: 'From Our Land… To Your Table' },
   ];
 
   // We render the sequence twice to guarantee an unbroken infinite loop

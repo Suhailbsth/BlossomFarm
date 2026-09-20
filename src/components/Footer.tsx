@@ -3,90 +3,165 @@
 import React from 'react';
 import { useLanguage } from '@/context/LanguageContext';
 import { SiteContent } from '@/types/content';
-import { MessageCircle } from 'lucide-react';
-import ArabesqueDivider from './ArabesqueDivider';
-import { useScrollReveal } from '@/hooks/useScrollReveal';
+import { MessageCircle, MapPin } from 'lucide-react';
+import { buildWhatsAppLink } from '@/lib/whatsapp';
 
 interface FooterProps {
-  content: SiteContent;
+  content?: SiteContent;
+  whatsAppNumber?: string;
 }
 
-export default function Footer({ content }: FooterProps) {
-  const { language, t } = useLanguage();
-  const { ref: sectionRef, isVisible } = useScrollReveal();
+// Custom crisp SVGs for all social platforms
+function SocialIcon({ platform }: { platform: string }) {
+  const p = platform.toLowerCase();
+  if (p === 'instagram') {
+    return (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
+        <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+        <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+      </svg>
+    );
+  }
+  if (p === 'youtube') {
+    return (
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" />
+      </svg>
+    );
+  }
+  if (p === 'x' || p === 'twitter') {
+    return (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+      </svg>
+    );
+  }
+  if (p === 'tiktok') {
+    return (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M19.59 6.69a4.83 4.83 0 0 1-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 0 1-5.2 1.74 2.89 2.89 0 0 1 2.31-4.64c.298-.002.595.042.88.13V9.4a6.33 6.33 0 0 0-1-.08A6.34 6.34 0 0 0 3 15.66a6.34 6.34 0 0 0 10.82 4.47 6.28 6.28 0 0 0 1.95-4.5V8.62a8.28 8.28 0 0 0 4.82 1.54V6.69z" />
+      </svg>
+    );
+  }
+  if (p === 'snapchat') {
+    return (
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12.003 2c-3.593 0-5.834 2.766-5.834 5.378 0 1.344.542 2.37 1.096 3.16.126.18.204.385.144.577-.076.242-.375.408-.85.492-.472.083-1.46.287-1.892.834-.33.418-.266.924-.13 1.25.325.782 1.405 1.066 2.067 1.2.342.07.502.268.498.487-.01.53-.787 1.638-2.31 1.777-.525.048-.795.344-.81.603-.027.464.492.765.864.93.948.423 2.188.46 3.324.238.653-.127 1.15-.028 1.488.156.495.27 1.08.798 2.355.798 1.272 0 1.865-.528 2.36-.798.337-.184.834-.283 1.487-.156 1.136.222 2.376.185 3.324-.238.372-.165.89-.466.864-.93-.015-.26-.285-.555-.81-.603-1.523-.14-2.3-1.247-2.31-1.777-.004-.22.156-.417.498-.487.662-.134 1.742-.418 2.067-1.2.136-.326.2-.832-.13-1.25-.432-.547-1.42-.75-1.892-.834-.475-.084-.774-.25-.85-.492-.06-.192.018-.397.144-.577.554-.79 1.096-1.816 1.096-3.16C17.837 4.766 15.596 2 12.003 2z" />
+      </svg>
+    );
+  }
+  return <MessageCircle size={18} />;
+}
 
-  const whatsAppLink = `https://wa.me/${content.footer.whatsAppNumber.replace(/[^0-9]/g, '')}?text=${encodeURIComponent(
-    language === 'ar' ? content.footer.whatsAppPrefillAr : content.footer.whatsAppPrefillEn
-  )}`;
+export default function Footer({ content, whatsAppNumber }: FooterProps) {
+  const { language, t } = useLanguage();
+  const isAr = language === 'ar';
+
+  const defaultMsg =
+    content?.footer?.whatsAppPrefillAr && isAr
+      ? content.footer.whatsAppPrefillAr
+      : content?.footer?.whatsAppPrefillEn && !isAr
+      ? content.footer.whatsAppPrefillEn
+      : isAr
+      ? 'مرحباً وادي النوار! أود الاستفسار عن حجز وطلب منتجات المزرعة.'
+      : 'Hello The Blossom Valley! I would like to inquire about ordering your farm harvest products.';
+
+  const activeNumber = whatsAppNumber || content?.footer?.whatsAppNumber;
+  const whatsAppLink = buildWhatsAppLink(defaultMsg, activeNumber);
+
+  const closingTagline = content?.footer?.closingTagline
+    ? t(content.footer.closingTagline)
+    : isAr
+    ? 'وادي النوار – بلوسوم فالي / من أرضنا… إلى مائدتكم'
+    : 'The Blossom Valley — From our land… to your table.';
+
+  const locationText = content?.footer?.locationAddress
+    ? t(content.footer.locationAddress)
+    : isAr
+    ? 'محافظة شقراء، المملكة العربية السعودية'
+    : 'Shaqra City, Saudi Arabia';
+
+  const copyrightText = content?.footer?.copyrightText
+    ? t(content.footer.copyrightText)
+    : isAr
+    ? 'جميع الحقوق محفوظة © 2026 مزارع وادي النوار'
+    : 'All rights reserved © 2026 The Blossom Valley Farms';
+
+  const socialLinks = content?.footer?.socialLinks || [];
 
   return (
-    <footer className="bg-[#122419] text-[#FAF7F2] relative overflow-hidden">
-      {/* Arabesque pattern */}
-      <div className="absolute inset-0 bg-arabesque-oasis opacity-8 pointer-events-none" />
+    <footer className="bg-ink px-6 sm:px-10 lg:px-16 2xl:px-20 py-16 text-white border-t border-white/10">
+      <div className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-10 sm:flex-row sm:items-end">
+        {/* Left Side: Brand Name & Closing Tagline */}
+        <div className="max-w-xl">
+          <p className="font-display text-3xl font-semibold text-white tracking-tight">
+            {isAr ? 'وادي النوار' : 'The Blossom Valley'}
+          </p>
+          <p className="mt-3 text-sm sm:text-base text-white/90 font-medium leading-relaxed">
+            {closingTagline}
+          </p>
 
-      <div
-        ref={sectionRef}
-        className={`relative z-10 max-w-4xl mx-auto px-5 sm:px-8 py-20 sm:py-28 text-center ${isVisible ? 'reveal-visible' : 'reveal-hidden'}`}
-      >
-        {/* Brand Emblem */}
-        <div className="reveal-child mb-6">
-          <div className="w-16 h-16 rounded-full bg-[#1A3826] border-2 border-[#C9A043]/50 mx-auto flex items-center justify-center mb-5">
-            <svg className="w-8 h-8 text-[#C9A043]" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2C12 2 14 6 14 9C14 10.5 13 12 12 12C11 12 10 10.5 10 9C10 6 12 2 12 2Z" />
-              <path d="M12 22C12 22 10 18 10 15C10 13.5 11 12 12 12C13 12 14 13.5 14 15C14 18 12 22 12 22Z" />
-              <path d="M2 12C2 12 6 10 9 10C10.5 10 12 11 12 12C12 13 10.5 14 9 14C6 14 2 12 2 12Z" />
-              <path d="M22 12C22 12 18 14 15 14C13.5 14 12 13 12 12C12 11 13.5 10 15 10C18 10 22 12 22 12Z" />
-              <circle cx="12" cy="12" r="2.5" className="fill-[#C9A043]" />
-            </svg>
+          {/* Location / Google Maps */}
+          <div className="mt-3 flex items-center gap-2 text-xs text-white/70">
+            <MapPin size={14} className="text-harvest-gold shrink-0" />
+            {content?.footer?.googleMapsUrl ? (
+              <a
+                href={content.footer.googleMapsUrl}
+                target="_blank"
+                rel="noreferrer"
+                className="hover:text-harvest-gold transition-colors underline-offset-2 hover:underline"
+              >
+                {locationText}
+              </a>
+            ) : (
+              <span>{locationText}</span>
+            )}
           </div>
 
-          {/* Bilingual Name */}
-          <h3 className="text-3xl sm:text-4xl font-extrabold font-arabic text-white">
-            مزرعة النوار
-          </h3>
-          <p className="mt-2 text-base sm:text-lg font-serif-luxury text-[#E5DACB] italic tracking-wide">
-            The Blossom&apos;s Farm
-          </p>
+          {/* Social Links */}
+          {socialLinks.length > 0 && (
+            <div className="mt-5 flex items-center gap-3">
+              {socialLinks.map((item, idx) => (
+                <a
+                  key={idx}
+                  href={item.url}
+                  target="_blank"
+                  rel="noreferrer"
+                  aria-label={item.platform}
+                  className="size-9 rounded-full bg-white/10 hover:bg-harvest-gold hover:text-ink flex items-center justify-center transition-all hover:scale-110"
+                >
+                  <SocialIcon platform={item.platform} />
+                </a>
+              ))}
+            </div>
+          )}
         </div>
 
-        <ArabesqueDivider variant="gold" size="md" className="my-6 reveal-child" />
-
-        {/* One-line prompt */}
-        <p className="text-sm sm:text-base text-[#E5DACB]/80 font-arabic mb-8 reveal-child">
-          {t(content.footer.tagline)}
-        </p>
-
-        {/* WhatsApp CTA in Brand Botanical Emerald */}
-        <div className="reveal-child mb-12">
+        {/* Right Side: Harvest-Gold Pill WhatsApp CTA matching reference */}
+        <div className="flex flex-col items-start sm:items-end gap-3 shrink-0">
           <a
             href={whatsAppLink}
             target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 px-9 py-3.5 rounded-full bg-[#1E5E3A] hover:bg-[#174C2E] text-white font-bold text-base sm:text-lg shadow-xl transition-all duration-300 hover:scale-[1.02] border border-emerald-400/30"
+            rel="noreferrer"
+            className="h-12 rounded-full bg-harvest-gold px-6 text-ink shadow-none hover:bg-harvest-gold/90 font-bold inline-flex items-center gap-2.5 transition-transform hover:scale-105 shrink-0"
           >
-            <MessageCircle className="w-5 h-5 fill-current text-emerald-300" />
-            <span className="font-arabic">{t(content.footer.whatsAppBtn)}</span>
+            <MessageCircle size={18} className="fill-current text-ink" />
+            <span>{isAr ? 'تواصل معنا' : 'Chat with us'}</span>
           </a>
         </div>
+      </div>
 
-        {/* Minimal Bottom */}
-        <div className="reveal-child pt-8 border-t border-white/10 text-xs text-[#8A9B8F] font-arabic">
-          <p>{t(content.footer.rights)}</p>
-          <div className="mt-3 flex items-center justify-center gap-4 flex-wrap">
-            <div className="flex items-center gap-2">
-              <span>🇸🇦</span>
-              <span>{t(content.brand.locationShort)}</span>
-            </div>
-            <span className="text-white/20">•</span>
-            <a
-              href="/products"
-              className="inline-flex items-center gap-1 text-[#C5A059] hover:text-[#E2C78A] hover:underline font-semibold transition-colors"
-            >
-              <span>🌿</span>
-              <span>{language === 'ar' ? 'كتالوج المحاصيل الكامل' : 'Full Harvest Catalogue'}</span>
-            </a>
-          </div>
-        </div>
+      {/* Bottom Bar: Copyright & Commercial License */}
+      <div className="mx-auto max-w-[1440px] mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/50">
+        <p>{copyrightText}</p>
+        {content?.footer?.commercialRegistration && (
+          <p className="font-mono">
+            {isAr
+              ? `سجل تجاري: ${content.footer.commercialRegistration}`
+              : `CR: ${content.footer.commercialRegistration}`}
+          </p>
+        )}
       </div>
     </footer>
   );

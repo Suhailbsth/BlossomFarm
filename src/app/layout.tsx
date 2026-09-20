@@ -7,33 +7,34 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   viewportFit: "cover",
-  themeColor: "#1A3826",
+  themeColor: "#8E2800",
 };
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://blossomfarm.sa"),
-  title: "The Blossom's Farm | مزرعة النوار — Artisanal Heirloom Harvest",
+  metadataBase: new URL("https://blossomvalley.sa"),
+  title: "The Blossom Valley | وادي النوار — من أرضنا… إلى مائدتكم",
   description:
-    "A boutique artisanal farm in Al-Ammariyah, Riyadh cultivating rare organic heirloom tomatoes and botanicals with living soil, pure aquifer water, and Saudi hospitality.",
+    "The Blossom Valley in Shaqra City: Maknooz Khalas Dates, Naimi Sheep Meat, Crushed Hot Pepper, and Artisanal Dried Tomatoes.",
   keywords: [
-    "The Blossom's Farm",
-    "مزرعة النوار",
-    "طماطم عضوية",
-    "Heirloom tomatoes Saudi Arabia",
-    "Boutique farm Riyadh",
-    "Al-Ammariyah farm",
-    "Organic farming Saudi",
-    "مزرعة العمارية",
+    "The Blossom Valley",
+    "وادي النوار",
+    "تمر خلاص مكنوز",
+    "خلاص شقراء",
+    "ذبائح نعيمي شقراء",
+    "فلفل حار مجروش",
+    "طماطم مجففة",
+    "Shaqra farm",
+    "Saudi artisanal food",
   ],
   openGraph: {
-    title: "The Blossom's Farm | مزرعة النوار",
-    description: "Boutique organic heirloom harvest from Al-Ammariyah Oasis, Riyadh.",
+    title: "The Blossom Valley | وادي النوار",
+    description: "The Blossom Valley — From our land… to your table. Maknooz Khalas Dates, Naimi Sheep Meat, Crushed Hot Pepper, and Artisanal Dried Tomatoes.",
     images: [
       {
-        url: "/images/hero-garden.jpg",
+        url: "https://cdn.sanity.io/images/tokh7kkd/production/52419a85726510eeef6164cb4ab5a8f1af464a40-1376x768.jpg",
         width: 1200,
         height: 675,
-        alt: "The Blossom's Farm Greenhouse Garden",
+        alt: "The Blossom Valley in Shaqra City",
       },
     ],
     locale: "ar_SA",
@@ -47,16 +48,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ar" dir="rtl" className="scroll-smooth">
+    <html lang="ar" dir="rtl" className="scroll-smooth" suppressHydrationWarning>
       <head>
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
         <link
-          href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400;1,700&family=Playfair+Display:ital,wght@0,400..800;1,400..800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Tajawal:wght@300;400;500;700;800;900&display=swap"
           rel="stylesheet"
+          href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Outfit:wght@500;600;700&family=Noto+Kufi+Arabic:wght@400;600;700&display=swap"
         />
       </head>
-      <body className="min-h-screen flex flex-col bg-[#FAF7F2] text-[#1A241E] selection:bg-[#C9A043] selection:text-[#122419]">
+      <body className="min-h-screen bg-background text-foreground font-body" suppressHydrationWarning>
         <LanguageProvider>
           {children}
         </LanguageProvider>

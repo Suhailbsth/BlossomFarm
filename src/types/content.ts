@@ -7,41 +7,46 @@ export interface BilingualText {
 
 export interface CulinaryIdea {
   title: BilingualText;
-  prepTime: string;
+  prepTime?: string;
   description: BilingualText;
   servingSuggestion?: BilingualText;
 }
 
-export interface TomatoVariety {
+export interface ProductVarietyItem {
   id: string;
   name: BilingualText;
   arabicSubtitle?: string;
-  category: BilingualText;
+  badge?: BilingualText;
   description: BilingualText;
-  story?: BilingualText;
-  tasteNotes: BilingualText[];
-  sweetness: number; // 1 to 5
-  acidity: number; // 1 to 5
-  umami: number; // 1 to 5
-  firmness?: number; // 1 to 5
-  inSeason: boolean;
-  image: string;
-  gallery?: string[];
-  bestPairedWith: BilingualText;
-  culinaryUses?: CulinaryIdea[];
-  storageSpecific?: BilingualText;
+  tasteNotes?: BilingualText[];
+  image?: string;
 }
 
-export interface VideoItem {
-  id: string;
-  title: BilingualText;
-  subtitle: BilingualText;
-  duration: string;
-  tag: BilingualText;
-  thumbnail: string;
-  videoSrc?: string; // Optional actual MP4 or ambient preview loop
-  type: 'featured' | 'short';
+export interface ProductItem {
+  id: string; // Dynamic slug used in /products/[slug]
+  categoryKey: 'dates' | 'meat' | 'pepper' | 'dried-tomatoes' | string;
+  name: BilingualText;
+  arabicSubtitle?: string;
+  category: BilingualText;
+  tagline?: BilingualText;
+  badge?: BilingualText;
+  icon?: string;
+  accentColor?: string;
   description: BilingualText;
+  story?: BilingualText;
+  image: string;
+  gallery?: string[];
+  inSeason: boolean;
+  highlights?: BilingualText[];
+  specs?: {
+    label: BilingualText;
+    value: BilingualText;
+  }[];
+  varieties?: ProductVarietyItem[];
+  seasonalFlavors?: BilingualText[];
+  bestPairedWith?: BilingualText;
+  culinaryUses?: CulinaryIdea[];
+  storageSpecific?: BilingualText;
 }
 
 export interface ValuePillar {
@@ -59,32 +64,74 @@ export interface FarmStat {
   sublabel: BilingualText;
 }
 
-export interface StorageTip {
+export interface HowToUseItem {
   id: string;
-  iconName: 'thermometer' | 'snowflake' | 'clock' | 'droplets' | 'hand' | 'sun';
-  title: BilingualText;
-  tip: BilingualText;
+  name: BilingualText;
+  category: 'classic' | 'saudi';
+  iconName: string;
+  description?: BilingualText;
 }
 
-export interface RecipeVideo {
+export interface RecipeItem {
   id: string;
-  dishName: BilingualText;
-  thumbnail: string;
-  duration: string;
+  number: string;
+  title: BilingualText;
+  subtitle: BilingualText;
+  image: string;
+  videoUrl?: string;
+  videoFileUrl?: string;
+  displayOrder?: number;
+}
+
+export interface RecipesSection {
+  eyebrow?: BilingualText;
+  title?: BilingualText;
+  videoInstruction?: BilingualText;
+  journalTag?: BilingualText;
+  items: RecipeItem[];
+}
+
+export interface StorageStep {
+  stepNumber: number;
+  title: BilingualText;
+  description: BilingualText;
+  iconName: 'snowflake' | 'droplets' | 'spoon' | 'shieldAlert' | 'clock';
+}
+
+export interface DynamicCategoryItem {
+  id: string;
+  slug: string;
+  title: BilingualText;
+  badge?: BilingualText;
+  description?: BilingualText;
+  image?: string;
+  showOnHome: boolean;
+  homeOrder?: number;
+  displayMode?: 'editorial' | 'swatches' | 'grid' | string;
+  gridColumns?: 'auto' | '1' | '2' | '3' | '4' | string;
+  homeLayoutStyle?: string;
+  featuredProducts?: ProductItem[];
+  allCategoryProducts?: ProductItem[];
+  seasonalFlavors?: BilingualText[];
 }
 
 export interface SiteContent {
   brand: {
     name: BilingualText;
     tagline: BilingualText;
+    closingTagline: BilingualText;
     badge: BilingualText;
     locationShort: BilingualText;
   };
   navigation: {
-    story: BilingualText;
-    tomatoes: BilingualText;
-    videos: BilingualText;
-    visit: BilingualText;
+    about: BilingualText;
+    products: BilingualText;
+    dates: BilingualText;
+    meat: BilingualText;
+    pepper: BilingualText;
+    driedTomatoes: BilingualText;
+    howToUse: BilingualText;
+    storage: BilingualText;
     contact: BilingualText;
   };
   hero: {
@@ -92,9 +139,10 @@ export interface SiteContent {
     heading: BilingualText;
     subheading: BilingualText;
     description: BilingualText;
-    ctaHarvest: BilingualText;
+    ctaProducts: BilingualText;
     ctaWhatsApp: BilingualText;
     statsPill: BilingualText;
+    heroImageUrl?: string;
   };
   about: {
     eyebrow: BilingualText;
@@ -102,56 +150,99 @@ export interface SiteContent {
     quote: BilingualText;
     quoteAuthor: BilingualText;
     storyParagraphs: BilingualText[];
+    imageUrl?: string;
+    videoPlaceholder: {
+      title: BilingualText;
+      subtitle: BilingualText;
+      poster: string;
+      tag: BilingualText;
+      note: BilingualText;
+    };
+    videoFileUrl?: string;
+    videoUrl?: string;
     pillarsTitle: BilingualText;
     pillars: ValuePillar[];
     stats: FarmStat[];
   };
-  tomatoesSection: {
+  productsSection: {
     eyebrow: BilingualText;
     title: BilingualText;
     description: BilingualText;
-    flavorProfileLabel: BilingualText;
-    sweetnessLabel: BilingualText;
-    acidityLabel: BilingualText;
-    umamiLabel: BilingualText;
-    pairingLabel: BilingualText;
-    inSeasonBadge: BilingualText;
-    limitedBadge: BilingualText;
-    items: TomatoVariety[];
+    catalogCta: BilingualText;
+    dynamicCategories?: DynamicCategoryItem[];
+    categories: {
+      dates: {
+        id: string;
+        title: BilingualText;
+        badge: BilingualText;
+        description: BilingualText;
+        image: string;
+        varieties: ProductVarietyItem[];
+      };
+      meat: {
+        id: string;
+        title: BilingualText;
+        badge: BilingualText;
+        description: BilingualText;
+        feedHighlight: BilingualText;
+        image: string;
+        points: BilingualText[];
+      };
+      pepper: {
+        id: string;
+        title: BilingualText;
+        tagline: BilingualText;
+        badge: BilingualText;
+        description: BilingualText;
+        image: string;
+        points: BilingualText[];
+      };
+      driedTomatoes: {
+        id: string;
+        title: BilingualText;
+        badge: BilingualText;
+        description: BilingualText;
+        image: string;
+        flavors: ProductVarietyItem[];
+        seasonalTitle: BilingualText;
+        seasonalSubtitle: BilingualText;
+        seasonalFlavors: BilingualText[];
+      };
+    };
+    allProducts: ProductItem[];
   };
-  videosSection: {
+  howToUseSection: {
     eyebrow: BilingualText;
     title: BilingualText;
     description: BilingualText;
-    featuredLabel: BilingualText;
-    shortsLabel: BilingualText;
-    playLabel: BilingualText;
-    items: VideoItem[];
+    classicSectionTitle: BilingualText;
+    saudiSectionTitle: BilingualText;
+    items: HowToUseItem[];
   };
-  storageTipsSection: {
+  recipesSection?: RecipesSection;
+  storagePracticeSection: {
     eyebrow: BilingualText;
     title: BilingualText;
-    items: StorageTip[];
-  };
-  recipeVideosSection: {
-    eyebrow: BilingualText;
-    title: BilingualText;
-    items: RecipeVideo[];
+    subtitle: BilingualText;
+    bannerNote: BilingualText;
+    items: StorageStep[];
   };
   footer: {
     badge: BilingualText;
-    tagline: BilingualText;
+    closingTagline: BilingualText;
+    closingTaglineMeaning: BilingualText;
     whatsAppPrompt: BilingualText;
     whatsAppBtn: BilingualText;
     whatsAppNumber: string;
     whatsAppPrefillEn: string;
     whatsAppPrefillAr: string;
-    visitingHoursTitle: BilingualText;
-    visitingHours: BilingualText;
     locationTitle: BilingualText;
     locationAddress: BilingualText;
     googleMapsUrl: string;
     sharePrompt: BilingualText;
     rights: BilingualText;
+    commercialRegistration?: string;
+    copyrightText?: BilingualText;
+    socialLinks?: { platform: string; url: string }[];
   };
 }
