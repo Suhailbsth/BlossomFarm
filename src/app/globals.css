@@ -3,31 +3,31 @@
 @theme {
   --color-background: oklch(98.5% 0.008 85);
   --color-foreground: oklch(25% 0.02 50);
-  --color-ink: oklch(18% 0.02 145);
-  --color-paper: oklch(95.5% 0.018 85);
-  --color-harvest-gold: #1B7A42;
+  --color-ink: #072622;
+  --color-paper: oklch(96% 0.016 85);
+  --color-harvest-gold: #0D5A52;
   --color-card: #FFFFFF;
-  --color-card-foreground: oklch(18% 0.02 145);
+  --color-card-foreground: #072622;
   --color-popover: #FFFFFF;
-  --color-popover-foreground: oklch(18% 0.02 145);
-  --color-primary: #1B7A42;
-  --color-primary-hover: #156336;
-  --color-primary-light: oklch(96% 0.035 145);
+  --color-popover-foreground: #072622;
+  --color-primary: #005A52;
+  --color-primary-hover: #00433D;
+  --color-primary-light: oklch(96% 0.025 175);
   --color-primary-foreground: #FFFFFF;
-  --color-dark-band: #0D2B1D;
-  --color-dark-band-foreground: #FFFFFF;
-  --color-footer-bg: #091E14;
-  --color-secondary: #2E5C41;
+  --color-dark-band: #08332E;
+  --color-dark-band-foreground: #F6EDE2;
+  --color-footer-bg: #05201C;
+  --color-secondary: #005A52;
   --color-secondary-foreground: #FFFFFF;
   --color-muted: oklch(95% 0.015 85);
   --color-muted-foreground: oklch(48% 0.02 55);
-  --color-accent: #1B7A42;
+  --color-accent: #005A52;
   --color-accent-foreground: #FFFFFF;
   --color-destructive: oklch(55% 0.2 27);
   --color-destructive-foreground: #FFFFFF;
   --color-border: oklch(88% 0.015 85);
   --color-input: oklch(88% 0.015 85);
-  --color-ring: #1B7A42;
+  --color-ring: #005A52;
 
   --font-display: var(--font-outfit), sans-serif;
   --font-body: var(--font-figtree), sans-serif;
@@ -38,31 +38,31 @@
   --radius: 1rem;
   --background: oklch(98.5% 0.008 85);
   --foreground: oklch(25% 0.02 50);
-  --ink: oklch(18% 0.02 145);
-  --paper: oklch(95.5% 0.018 85);
-  --harvest-gold: #1B7A42;
+  --ink: #072622;
+  --paper: oklch(96% 0.016 85);
+  --harvest-gold: #005A52;
   --card: #FFFFFF;
-  --card-foreground: oklch(18% 0.02 145);
+  --card-foreground: #072622;
   --popover: #FFFFFF;
-  --popover-foreground: oklch(18% 0.02 145);
-  --primary: #1B7A42;
-  --primary-hover: #156336;
-  --primary-light: oklch(96% 0.035 145);
+  --popover-foreground: #072622;
+  --primary: #005A52;
+  --primary-hover: #00433D;
+  --primary-light: oklch(96% 0.025 175);
   --primary-foreground: #FFFFFF;
-  --dark-band: #0D2B1D;
-  --dark-band-foreground: #FFFFFF;
-  --footer-bg: #091E14;
-  --secondary: #2E5C41;
+  --dark-band: #08332E;
+  --dark-band-foreground: #F6EDE2;
+  --footer-bg: #05201C;
+  --secondary: #005A52;
   --secondary-foreground: #FFFFFF;
   --muted: oklch(95% 0.015 85);
   --muted-foreground: oklch(48% 0.02 55);
-  --accent: #1B7A42;
+  --accent: #005A52;
   --accent-foreground: #FFFFFF;
   --destructive: oklch(55% 0.2 27);
   --destructive-foreground: #FFFFFF;
   --border: oklch(88% 0.015 85);
   --input: oklch(88% 0.015 85);
-  --ring: #1B7A42;
+  --ring: #005A52;
 
   --font-display: var(--font-outfit), sans-serif;
   --font-body: var(--font-figtree), sans-serif;
@@ -207,7 +207,7 @@
   }
   .card-standard:hover {
     border-color: var(--primary);
-    box-shadow: 0 8px 20px rgba(27, 122, 66, 0.08);
+    box-shadow: 0 8px 20px rgba(0, 74, 68, 0.08);
   }
 
   /* Color helpers */
@@ -235,22 +235,30 @@
   .border-primary { border-color: var(--primary); }
   .border-foreground { border-color: var(--foreground); }
 
-  .swatch-1 { background-color: #1B7A42; color: #ffffff; }
-  .swatch-2 { background-color: #2E5C41; color: #ffffff; }
-  .swatch-3 { background-color: #156336; color: #ffffff; }
-  .swatch-4 { background-color: #0D2B1D; color: #ffffff; }
+  .swatch-1 { background-color: #005A52; color: #F6EDE2; }
+  .swatch-2 { background-color: #00433D; color: #F6EDE2; }
+  .swatch-3 { background-color: #08332E; color: #F6EDE2; }
+  .swatch-4 { background-color: #05201C; color: #F6EDE2; }
 
   /* ── Cinematic Hero ──────────────────────────────────────────────── */
 
   /* Full-viewport height hero with a minimum floor */
   .hero-cinematic {
-    height: 88svh;          /* svh = small viewport height (safe-area aware) */
-    min-height: 520px;
+    min-height: 88svh;
+    height: 88svh;
     max-height: 1080px;
+  }
+
+  @media (max-width: 640px) {
+    .hero-cinematic {
+      height: auto;
+      min-height: calc(100svh - 4.5rem);
+    }
   }
 
   /* Inner flex column fills the full height */
   .hero-cinematic-inner {
+    min-height: 100%;
     height: 100%;
     display: flex;
     flex-direction: column;

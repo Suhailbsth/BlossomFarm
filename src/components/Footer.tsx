@@ -5,6 +5,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { SiteContent } from '@/types/content';
 import { MessageCircle, MapPin } from 'lucide-react';
 import { buildWhatsAppLink } from '@/lib/whatsapp';
+import { EmblemIcon } from './BrandLogo';
 
 interface FooterProps {
   content?: SiteContent;
@@ -91,14 +92,24 @@ export default function Footer({ content, whatsAppNumber }: FooterProps) {
   const socialLinks = content?.footer?.socialLinks || [];
 
   return (
-    <footer className="bg-footer-bg px-6 sm:px-10 lg:px-16 2xl:px-20 pt-16 pb-10 text-white border-t border-white/10">
+    <footer id="site-footer" className="bg-footer-bg px-6 sm:px-10 lg:px-16 2xl:px-20 pt-16 pb-10 text-white border-t border-white/10">
       {/* Main Footer Grid: Brand + Nav + CTA */}
       <div className="mx-auto grid max-w-[1440px] gap-12 sm:grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_auto] lg:items-start">
-        {/* Left: Brand Name & Closing Tagline */}
+        {/* Left: Brand Emblem Badge + Brand Name & Closing Tagline */}
         <div className="max-w-sm">
-          <p className="font-display text-2xl sm:text-3xl font-semibold text-white tracking-tight">
-            {isAr ? 'وادي النوار' : 'The Blossom Valley'}
-          </p>
+          <div className="flex items-center gap-3 mb-4">
+            <div className="size-12 rounded-2xl bg-[#005A52] p-2 grid place-items-center shadow-md border border-[#0A6860] shrink-0">
+              <EmblemIcon theme="cream" className="w-full h-full" />
+            </div>
+            <div>
+              <p className="font-arabic text-xl sm:text-2xl font-bold text-white tracking-tight leading-none">
+                وادي النوار
+              </p>
+              <p className="font-display text-xs font-semibold text-[#F8EBDB]/80 tracking-wide mt-1">
+                The Blossom&apos;s valley • Farm &amp; Resort
+              </p>
+            </div>
+          </div>
           <p className="mt-3 text-sm text-white/75 leading-relaxed">
             {closingTagline}
           </p>

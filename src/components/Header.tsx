@@ -6,6 +6,7 @@ import { useLanguage } from '@/context/LanguageContext';
 import { SiteContent } from '@/types/content';
 import { Sprout, Menu, X, MessageCircle } from 'lucide-react';
 import { buildWhatsAppLink } from '@/lib/whatsapp';
+import { EmblemIcon } from './BrandLogo';
 
 interface HeaderProps {
   content?: SiteContent;
@@ -17,7 +18,7 @@ export default function Header({ content, whatsAppNumber }: HeaderProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const isAr = language === 'ar';
 
-  // Close mobile menu on escape key or resize
+  // Close mobile menu on escape key, resize, and handle body scroll lock
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') setMobileMenuOpen(false);
@@ -33,6 +34,18 @@ export default function Header({ content, whatsAppNumber }: HeaderProps) {
     };
   }, []);
 
+  // Lock body scroll when mobile menu is active
+  useEffect(() => {
+    if (mobileMenuOpen) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
+    }
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [mobileMenuOpen]);
+
   const navLinks = [
     { href: '#livestock', labelAr: 'مواشي النعيمي', labelEn: 'Naimi Sheep' },
     { href: '#farm', labelAr: 'عن المزرعة', labelEn: 'Our farm' },
@@ -47,29 +60,36 @@ export default function Header({ content, whatsAppNumber }: HeaderProps) {
 
   return (
     <header className="sticky top-0 z-50 border-b border-border/50 bg-background/95 backdrop-blur-md">
-      <div className="mx-auto flex h-18 max-w-[1440px] items-center justify-between px-6 sm:px-10 lg:px-16 2xl:px-20">
-        {/* Brand Logo Link */}
+      <div className="mx-auto flex h-18 max-w-[1440px] items-center justify-between px-4 sm:px-8 lg:px-16 2xl:px-20 gap-3">
+        {/* Brand Logo Link with Official Emblem */}
         <Link
           href="#top"
-          className="flex items-center gap-2 font-display text-lg font-semibold text-primary sm:text-xl shrink-0"
+          className="flex items-center gap-2 sm:gap-2.5 min-w-0 group hover:opacity-90 transition-opacity"
+          aria-label={isAr ? 'وادي النوار - الصفحة الرئيسية' : "The Blossom's Valley Home"}
         >
-          <Sprout size={18} strokeWidth={1.75} className="shrink-0 text-primary" />
-          <span className={isRTL ? 'font-arabic font-bold' : 'font-display'}>
-            {isRTL ? 'وادي النوار' : 'The Blossom Valley'}
-          </span>
+          <div className="shrink-0 size-8 sm:size-10 rounded-xl bg-[#005A52] p-1 sm:p-1.5 grid place-items-center shadow-xs border border-[#0A6860]">
+            <EmblemIcon theme="cream" className="w-full h-full" />
+          </div>
+          <div className="flex flex-col min-w-0">
+            <span className="font-arabic font-bold text-sm sm:text-base lg:text-lg leading-tight text-primary truncate">
+              {isRTL ? 'وادي النوار' : "The Blossom's Valley"}
+            </span>
+            <span className="text-[8px] sm:text-[9px] tracking-wider uppercase text-muted-foreground font-semibold truncate">
+              {isAr ? 'مزرعة ومنتجع · شقراء' : 'Farm & Resort · Shaqra'}
+            </span>
+          </div>
         </Link>
 
         {/* Desktop Navigation Links (>= md) */}
-        <nav className="hidden items-center gap-7 text-xs font-semibold md:flex">
+        <nav className="hidden items-center gap-4 lg:gap-7 text-xs font-semibold md:flex">
           {navLinks.map((link, idx) => (
             <a
               key={link.href}
               href={link.href}
-              className={`transition-all py-1.5 hover:text-primary ${
-                idx === 0
+              className={`transition-all py-1.5 hover:text-primary ${idx === 0
                   ? 'text-primary font-bold border-b-2 border-primary'
                   : 'text-foreground/80 hover:text-primary'
-              }`}
+                }`}
             >
               {isAr ? link.labelAr : link.labelEn}
             </a>
@@ -77,13 +97,13 @@ export default function Header({ content, whatsAppNumber }: HeaderProps) {
         </nav>
 
         {/* Right Controls: Language Switcher & Mobile Menu Toggle */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 shrink-0">
           {/* Language Switcher Pill */}
           <button
             type="button"
             onClick={toggleLanguage}
             aria-label="Switch language"
-            className="rounded-full border border-foreground bg-transparent px-4 py-2 text-xs font-semibold shadow-none transition-colors hover:bg-muted cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
+            className="rounded-full border border-foreground/80 bg-transparent px-3 sm:px-4 py-1.5 text-xs font-semibold shadow-none transition-colors hover:bg-muted cursor-pointer min-h-[38px] sm:min-h-[44px] min-w-[38px] sm:min-w-[44px] flex items-center justify-center"
           >
             {isRTL ? 'EN' : 'عربي'}
           </button>
@@ -92,7 +112,7 @@ export default function Header({ content, whatsAppNumber }: HeaderProps) {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden grid size-11 place-items-center rounded-full border border-border text-foreground hover:bg-muted transition-colors cursor-pointer"
+            className="md:hidden grid size-10 sm:size-11 place-items-center rounded-full border border-border text-foreground hover:bg-muted transition-colors cursor-pointer"
             aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             aria-expanded={mobileMenuOpen}
           >
@@ -103,7 +123,7 @@ export default function Header({ content, whatsAppNumber }: HeaderProps) {
 
       {/* Mobile Expandable Navigation Panel */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-border bg-background/98 backdrop-blur-xl px-5 py-6 shadow-xl animate-in slide-in-from-top-2 duration-200">
+        <div className="md:hidden border-t border-border bg-background/98 backdrop-blur-xl px-4 sm:px-5 py-6 shadow-xl animate-in slide-in-from-top-2 duration-200 max-h-[calc(100vh-4.5rem)] overflow-y-auto">
           <nav className="flex flex-col space-y-1">
             {navLinks.map((link) => (
               <a
@@ -113,7 +133,7 @@ export default function Header({ content, whatsAppNumber }: HeaderProps) {
                 className="flex items-center justify-between py-3.5 px-3 rounded-lg text-sm font-semibold text-ink hover:bg-paper/70 transition-colors"
               >
                 <span>{isAr ? link.labelAr : link.labelEn}</span>
-                <span className="text-xs text-primary font-bold">→</span>
+                <span className="text-xs text-primary font-bold transition-transform rtl:rotate-180">→</span>
               </a>
             ))}
           </nav>

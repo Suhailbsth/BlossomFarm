@@ -29,7 +29,7 @@ export const viewport: Viewport = {
   initialScale: 1,
   maximumScale: 5,
   viewportFit: "cover",
-  themeColor: "#1B7A42",
+  themeColor: "#005A52",
 };
 
 export const metadata: Metadata = {
@@ -64,12 +64,12 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
-      { url: '/icon.svg', type: 'image/svg+xml' },
-      { url: '/icon.png', sizes: '32x32', type: 'image/png' },
-      { url: '/favicon.ico' },
+      { url: '/icon.svg?v=2', type: 'image/svg+xml' },
+      { url: '/icon.png?v=2', sizes: '32x32', type: 'image/png' },
+      { url: '/favicon.ico?v=2' },
     ],
     apple: [
-      { url: '/apple-icon.png', sizes: '180x180', type: 'image/png' },
+      { url: '/apple-icon.png?v=2', sizes: '180x180', type: 'image/png' },
     ],
   },
 };

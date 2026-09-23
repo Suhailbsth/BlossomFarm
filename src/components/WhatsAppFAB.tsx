@@ -13,15 +13,35 @@ interface WhatsAppFABProps {
 
 export default function WhatsAppFAB({ content, whatsAppNumber }: WhatsAppFABProps) {
   const { language, isRTL } = useLanguage();
-  const [visible, setVisible] = useState(false);
+  const [scrolledPastHero, setScrolledPastHero] = useState(false);
+  const [footerInView, setFooterInView] = useState(false);
   const isAr = language === 'ar';
 
   useEffect(() => {
     const handleScroll = () => {
-      setVisible(window.scrollY > 300);
+      setScrolledPastHero(window.scrollY > 300);
     };
     window.addEventListener('scroll', handleScroll, { passive: true });
-    return () => window.removeEventListener('scroll', handleScroll);
+    handleScroll();
+
+    // IntersectionObserver to detect when the footer enters the viewport
+    const footer = document.getElementById('site-footer') || document.querySelector('footer');
+    let observer: IntersectionObserver | null = null;
+
+    if (footer) {
+      observer = new IntersectionObserver(
+        ([entry]) => {
+          setFooterInView(entry.isIntersecting);
+        },
+        { threshold: 0, rootMargin: '0px 0px -10px 0px' }
+      );
+      observer.observe(footer);
+    }
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      if (observer) observer.disconnect();
+    };
   }, []);
 
   const prefill = isAr
@@ -31,19 +51,25 @@ export default function WhatsAppFAB({ content, whatsAppNumber }: WhatsAppFABProp
   const activeNumber = whatsAppNumber || content?.footer?.whatsAppNumber;
   const whatsAppLink = buildWhatsAppLink(prefill, activeNumber);
 
-  if (!visible) return null;
+  const isVisible = scrolledPastHero && !footerInView;
 
   return (
     <div
       className={`fixed bottom-5 sm:bottom-6 ${
         isRTL ? 'left-5 sm:left-6' : 'right-5 sm:right-6'
-      } z-40 flex items-center gap-2.5 animate-in fade-in slide-in-from-bottom-4 duration-300`}
+      } z-40 flex items-center gap-2.5 transition-all duration-300 ease-in-out ${
+        isVisible
+          ? 'opacity-100 translate-y-0 pointer-events-auto'
+          : 'opacity-0 translate-y-4 pointer-events-none'
+      }`}
+      aria-hidden={!isVisible}
     >
       <a
         href={whatsAppLink}
         target="_blank"
         rel="noopener noreferrer"
-        className="btn-primary group h-12 px-4 sm:px-5 font-bold text-xs shadow-xl border border-white/20 hover:scale-105 active:scale-95"
+        tabIndex={isVisible ? 0 : -1}
+        className="btn-primary group h-12 px-4 sm:px-5 font-bold text-xs shadow-xl border border-white/20 hover:scale-105 active:scale-95 cursor-pointer"
         aria-label={isAr ? 'تواصل عبر واتساب' : 'Chat via WhatsApp'}
       >
         <MessageCircle size={18} className="shrink-0" />

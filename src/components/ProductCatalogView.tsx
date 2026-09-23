@@ -15,6 +15,7 @@ import {
 import ArabesqueDivider from './ArabesqueDivider';
 import Footer from './Footer';
 import WhatsAppFAB from './WhatsAppFAB';
+import { EmblemIcon } from './BrandLogo';
 
 interface ProductCatalogViewProps {
   content: SiteContent;
@@ -77,7 +78,7 @@ export default function ProductCatalogView({ content }: ProductCatalogViewProps)
         <div className="max-w-6xl mx-auto flex items-center justify-between">
           <Link
             href="/"
-            className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-[#1B3B2B] hover:text-[#C85A32] transition-colors group"
+            className="inline-flex items-center gap-2 text-xs sm:text-sm font-bold text-primary hover:opacity-80 transition-colors group"
           >
             {isRTL ? (
               <ArrowRight className="w-4 h-4 transition-transform group-hover:translate-x-1" />
@@ -89,25 +90,33 @@ export default function ProductCatalogView({ content }: ProductCatalogViewProps)
             </span>
           </Link>
 
-          <Link href="/" className="flex items-center gap-2.5">
-            <span className="text-sm font-extrabold font-arabic text-[#1B3B2B]">
-              وادي النوار
-            </span>
-            <span className="text-[11px] text-[#C5A059]">✦</span>
-            <span className="text-xs font-serif-luxury text-[#7A8A7E]">
-              The Blossom Valley
-            </span>
+          <Link
+            href="/"
+            className="flex items-center gap-2.5 group hover:opacity-90 transition-opacity"
+            aria-label={language === 'ar' ? 'وادي النوار - الصفحة الرئيسية' : "The Blossom's Valley Home"}
+          >
+            <div className="shrink-0 size-8 rounded-xl bg-[#005A52] p-1.5 grid place-items-center shadow-xs border border-[#0A6860]">
+              <EmblemIcon theme="cream" className="w-full h-full" />
+            </div>
+            <div className="flex flex-col">
+              <span className="font-arabic font-bold text-sm sm:text-base leading-tight text-primary">
+                وادي النوار
+              </span>
+              <span className="text-[9px] tracking-wider uppercase text-muted-foreground font-semibold">
+                {language === 'ar' ? 'مزرعة ومنتجع · شقراء' : "The Blossom's Valley"}
+              </span>
+            </div>
           </Link>
 
           {/* Language Switcher */}
-          <div className="flex items-center p-1 rounded-full border border-[#E8DFD1] bg-white text-xs font-semibold">
+          <div className="flex items-center p-1 rounded-full border border-border bg-white text-xs font-semibold">
             <button
               type="button"
               onClick={() => setLanguage('en')}
               className={`px-2.5 py-1 rounded-full transition-all ${
                 language === 'en'
-                  ? 'bg-[#1B3B2B] text-white shadow-xs'
-                  : 'text-[#5C6E61] hover:text-[#1B3B2B]'
+                  ? 'bg-primary text-white shadow-xs'
+                  : 'text-muted-foreground hover:text-primary'
               }`}
             >
               EN
@@ -117,8 +126,8 @@ export default function ProductCatalogView({ content }: ProductCatalogViewProps)
               onClick={() => setLanguage('ar')}
               className={`px-2.5 py-1 rounded-full transition-all font-arabic ${
                 language === 'ar'
-                  ? 'bg-[#1B3B2B] text-white shadow-xs'
-                  : 'text-[#5C6E61] hover:text-[#1B3B2B]'
+                  ? 'bg-primary text-white shadow-xs'
+                  : 'text-muted-foreground hover:text-primary'
               }`}
             >
               العربية

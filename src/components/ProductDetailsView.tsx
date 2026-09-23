@@ -6,8 +6,9 @@ import Link from 'next/link';
 import ImageCarousel from './ImageCarousel';
 import { useLanguage } from '@/context/LanguageContext';
 import { SiteContent, ProductItem } from '@/types/content';
-import { ArrowLeft, ArrowRight, MessageCircle, Sprout, ArrowUpRight } from 'lucide-react';
+import { ArrowLeft, ArrowRight, MessageCircle, ArrowUpRight } from 'lucide-react';
 import { buildWhatsAppLink } from '@/lib/whatsapp';
+import { EmblemIcon } from './BrandLogo';
 import Footer from './Footer';
 
 interface ProductDetailsViewProps {
@@ -58,12 +59,20 @@ export default function ProductDetailsView({
 
           <Link
             href="/"
-            className="flex items-center gap-2 font-display text-lg font-semibold text-primary sm:text-xl"
+            className="flex items-center gap-2.5 group hover:opacity-90 transition-opacity"
+            aria-label={isAr ? 'وادي النوار - الصفحة الرئيسية' : "The Blossom's Valley Home"}
           >
-            <Sprout size={18} strokeWidth={1.75} className="shrink-0 text-primary" />
-            <span className={isRTL ? 'font-arabic font-bold' : 'font-display'}>
-              {isRTL ? 'وادي النوار' : 'The Blossom Valley'}
-            </span>
+            <div className="shrink-0 size-8 sm:size-9 rounded-xl bg-[#005A52] p-1.5 grid place-items-center shadow-xs border border-[#0A6860]">
+              <EmblemIcon theme="cream" className="w-full h-full" />
+            </div>
+            <div className="flex flex-col">
+              <span className="font-arabic font-bold text-base sm:text-lg leading-tight text-primary">
+                {isRTL ? 'وادي النوار' : "The Blossom's Valley"}
+              </span>
+              <span className="text-[9px] tracking-wider uppercase text-muted-foreground font-semibold">
+                {isAr ? 'مزرعة ومنتجع · شقراء' : 'Farm & Resort · Shaqra'}
+              </span>
+            </div>
           </Link>
 
           <button

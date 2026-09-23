@@ -5,13 +5,12 @@ import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 import { SiteContent } from '@/types/content';
 import {
-  Play,
-  Pause,
-  ChevronLeft,
-  ChevronRight,
+  ArrowLeft,
+  ArrowRight,
   ArrowDown,
   MessageCircle,
 } from 'lucide-react';
+import { EmblemIcon } from './BrandLogo';
 
 interface HeroProps {
   content?: SiteContent;
@@ -175,9 +174,8 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
           return (
             <div
               key={slide.src}
-              className={`absolute inset-0 h-full w-full transition-opacity duration-1000 ease-in-out ${
-                isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
-              }`}
+              className={`absolute inset-0 h-full w-full transition-opacity duration-1000 ease-in-out ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                }`}
               aria-hidden={!isActive}
             >
               <Image
@@ -187,9 +185,8 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
                 priority={index === 0}
                 quality={90}
                 sizes="100vw"
-                className={`object-cover object-center transition-transform duration-7000 ease-out ${
-                  isActive && isPlaying && !prefersReducedMotion ? 'scale-105' : 'scale-100'
-                }`}
+                className={`object-cover object-center transition-transform duration-7000 ease-out ${isActive && isPlaying && !prefersReducedMotion ? 'scale-105' : 'scale-100'
+                  }`}
               />
             </div>
           );
@@ -207,36 +204,37 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
       />
 
       {/* ── 3. CONTENT LAYER ────────────────────────────────────────── */}
-      <div className="hero-cinematic-inner relative z-20 flex flex-col justify-between px-6 sm:px-10 lg:px-16 2xl:px-20 py-10 sm:py-14 lg:py-16">
+      <div className="hero-cinematic-inner relative z-20 flex flex-col justify-between px-5 sm:px-10 lg:px-16 2xl:px-20 py-8 sm:py-12 lg:py-16">
 
         {/* Top content block: kicker + headline + description + CTA */}
         <div className={`max-w-2xl ${isRTL ? 'text-right' : 'text-left'}`}>
 
           {/* Kicker / eyebrow badge */}
           <div className="inline-flex items-center gap-2 rounded-full bg-black/40 backdrop-blur-md px-3.5 py-1 text-xs border border-white/15 mb-3">
-            <span className="size-1.5 rounded-full bg-primary animate-pulse" />
+            <span className="shrink-0 size-4 rounded-full bg-[#005A52] p-0.5 grid place-items-center border border-[#0A6860]">
+              <EmblemIcon theme="cream" className="w-full h-full" />
+            </span>
             <span className="font-semibold text-white/90">
               {content?.hero?.welcomeBadge
                 ? t(content.hero.welcomeBadge)
                 : isAr
-                ? 'واحة شقراء الزراعية • أرض الخير والنماء'
-                : 'Shaqra Desert Oasis · Agricultural Heritage'}
+                  ? 'واحة شقراء الزراعية • أرض الخير والنماء'
+                  : 'Shaqra Desert Oasis · Agricultural Heritage'}
             </span>
             <span className="text-white/40">·</span>
             <span className="text-emerald-400 font-bold">
               {content?.hero?.statsPill
                 ? t(content.hero.statsPill)
                 : isAr
-                ? 'موسم ٢٠٢٦'
-                : 'Harvest 2026'}
+                  ? 'موسم ٢٠٢٦'
+                  : 'Harvest 2026'}
             </span>
           </div>
 
           {/* H1 Headline */}
           <h1
-            className={`mt-2 leading-[0.97] text-white drop-shadow-sm ${
-              isRTL ? 'font-arabic' : 'font-display'
-            }`}
+            className={`mt-2 leading-[0.97] text-white drop-shadow-sm ${isRTL ? 'font-arabic' : 'font-display'
+              }`}
             style={{
               fontSize: 'clamp(2.6rem, 8vw, 6.5rem)',
               fontWeight: isRTL ? 800 : 700,
@@ -245,8 +243,8 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
             {content?.hero?.heading
               ? t(content.hero.heading)
               : isAr
-              ? 'وادي النوار'
-              : 'The Blossom Valley'}
+                ? 'وادي النوار'
+                : 'The Blossom Valley'}
           </h1>
 
           {/* Subheading / Tagline */}
@@ -254,8 +252,8 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
             {content?.hero?.subheading
               ? t(content.hero.subheading)
               : isAr
-              ? 'أرض سعودية طيبة، شمس كريمة، ومنتجات حُظيت بعناية فائقة في محافظة شقراء.'
-              : 'Saudi soil, warm sun, and authentic farm produce cultivated with mindful craftsmanship in Shaqra.'}
+                ? 'أرض سعودية طيبة، شمس كريمة، ومنتجات حُظيت بعناية فائقة في محافظة شقراء.'
+                : 'Saudi soil, warm sun, and authentic farm produce cultivated with mindful craftsmanship in Shaqra.'}
           </p>
 
           {/* Body Description */}
@@ -263,8 +261,8 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
             {content?.hero?.description
               ? t(content.hero.description)
               : isAr
-              ? 'من واحات النخيل ومراعي الماشية إلى خيرات المؤونة الحرفية، ندير كل مرحلة بشغف وإتقان متناهٍ.'
-              : 'From date palm groves and pristine livestock pastures to artisanal provisions, every stage is cared for with uncompromising dedication.'}
+                ? 'من واحات النخيل ومراعي الماشية إلى خيرات المؤونة الحرفية، ندير كل مرحلة بشغف وإتقان متناهٍ.'
+                : 'From date palm groves and pristine livestock pastures to artisanal provisions, every stage is cared for with uncompromising dedication.'}
           </p>
 
           {/* Action Buttons */}
@@ -281,8 +279,8 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
                 {content?.hero?.ctaWhatsApp
                   ? t(content.hero.ctaWhatsApp)
                   : isAr
-                  ? 'طلب وتواصل عبر واتساب'
-                  : 'Inquire & Order on WhatsApp'}
+                    ? 'طلب وتواصل عبر واتساب'
+                    : 'Inquire & Order on WhatsApp'}
               </span>
               <span className="text-sm font-bold transition-transform rtl:rotate-180">→</span>
             </a>
@@ -299,95 +297,76 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
         </div>
 
         {/* Spacer — fills the middle of the viewport */}
-        <div className="flex-1 min-h-[4rem]" aria-hidden="true" />
+        <div className="flex-1 min-h-[3rem]" aria-hidden="true" />
 
-        {/* Bottom bar: Active slide caption + Slideshow Controls */}
-        <div className="mt-auto flex flex-wrap items-end justify-between gap-4 pt-8 border-t border-white/10">
-          {/* Active slide caption & location */}
-          <div className="text-white drop-shadow-xs">
-            <p className="text-xs sm:text-sm font-semibold leading-snug text-white/95 flex items-center gap-2">
-              <span className="text-emerald-400 font-mono text-xs">
-                {String(currentSlide + 1).padStart(2, '0')} / {String(totalSlides).padStart(2, '0')}
+        {/* ── BOTTOM BAR: Editorial Caption & Architectural Controls ── */}
+        <div className="mt-auto flex flex-col sm:flex-row sm:items-end justify-between gap-4 pt-4 sm:pt-6">
+          {/* Left: Slide Index + Hairline Pagination + Caption */}
+          <div className="text-white drop-shadow-md max-w-xl">
+            {/* Minimalist Index & Hairline Segments */}
+            <div className="flex items-center gap-3 mb-2">
+              <span className="font-mono text-xs tracking-widest text-white/90 font-medium">
+                {String(currentSlide + 1).padStart(2, '0')}
+                <span className="text-white/40 mx-1">/</span>
+                {String(totalSlides).padStart(2, '0')}
               </span>
-              <span>{activeSlide.caption}</span>
+
+              {/* 2px architectural hairline dashes */}
+              <div className="flex items-center gap-1.5" role="tablist">
+                {heroSlides.map((_, idx) => (
+                  <button
+                    key={idx}
+                    type="button"
+                    role="tab"
+                    aria-selected={idx === currentSlide}
+                    aria-label={`Slide ${idx + 1}`}
+                    onClick={() => goToSlide(idx)}
+                    className="group py-2.5 cursor-pointer focus:outline-hidden"
+                  >
+                    <div
+                      className={`h-[2px] rounded-full transition-all duration-300 ${
+                        idx === currentSlide
+                          ? 'w-7 sm:w-9 bg-white'
+                          : 'w-2.5 sm:w-3 bg-white/30 group-hover:bg-white/60'
+                      }`}
+                    />
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Slide Title */}
+            <p className="text-sm sm:text-base font-medium leading-snug text-white/95 tracking-wide line-clamp-2 sm:line-clamp-none">
+              {activeSlide.caption}
             </p>
-            <p className="mt-0.5 text-[11px] text-white/60">
+            <p className="mt-0.5 text-xs text-white/60">
               {isAr
                 ? 'محافظة شقراء، المملكة العربية السعودية'
                 : 'Shaqra City, Riyadh Province, Saudi Arabia'}
             </p>
           </div>
 
-          {/* Slideshow Controls Bar */}
-          <div className="flex items-center gap-2 sm:gap-3 rounded-full border border-white/15 bg-black/45 px-3 py-1.5 backdrop-blur-md">
-            {/* Prev Button */}
+          {/* Right: Tactile Twin Navigation Buttons (Side-by-side in corner for effortless thumb reach) */}
+          <div className="flex items-center gap-2 self-end shrink-0">
             <button
               type="button"
               onClick={goToPrev}
               aria-label={isAr ? 'الصورة السابقة' : 'Previous slide'}
-              className="grid size-9 cursor-pointer place-items-center rounded-full text-white/80 hover:bg-white/15 hover:text-white transition-all"
+              className="size-11 sm:size-12 cursor-pointer flex items-center justify-center rounded-full bg-black/35 hover:bg-black/55 text-white/90 hover:text-white backdrop-blur-md border border-white/15 hover:border-white/35 active:scale-95 transition-all duration-200 shadow-lg"
             >
-              {isRTL ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
+              {isRTL ? <ArrowRight size={18} /> : <ArrowLeft size={18} />}
             </button>
-
-            {/* Slide indicator dots */}
-            <div className="flex items-center gap-1.5 px-1 py-1" role="tablist">
-              {heroSlides.map((_, idx) => (
-                <button
-                  key={idx}
-                  type="button"
-                  role="tab"
-                  aria-selected={idx === currentSlide}
-                  aria-label={`Slide ${idx + 1}`}
-                  onClick={() => goToSlide(idx)}
-                  className={`transition-all duration-300 rounded-full cursor-pointer ${
-                    idx === currentSlide
-                      ? 'w-6 h-1.5 bg-emerald-400 shadow-xs'
-                      : 'w-2 h-2 bg-white/40 hover:bg-white/80'
-                  }`}
-                />
-              ))}
-            </div>
-
-            {/* Next Button */}
             <button
               type="button"
               onClick={goToNext}
               aria-label={isAr ? 'الصورة التالية' : 'Next slide'}
-              className="grid size-9 cursor-pointer place-items-center rounded-full text-white/80 hover:bg-white/15 hover:text-white transition-all"
+              className="size-11 sm:size-12 cursor-pointer flex items-center justify-center rounded-full bg-black/35 hover:bg-black/55 text-white/90 hover:text-white backdrop-blur-md border border-white/15 hover:border-white/35 active:scale-95 transition-all duration-200 shadow-lg"
             >
-              {isRTL ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
-            </button>
-
-            {/* Pause / Play Toggle Button */}
-            <div className="h-4 w-px bg-white/20 mx-0.5" />
-            <button
-              type="button"
-              onClick={() => setIsPlaying((p) => !p)}
-              aria-label={
-                isPlaying
-                  ? isAr ? 'إيقاف العرض التلقائي' : 'Pause slideshow'
-                  : isAr ? 'تشغيل العرض التلقائي' : 'Play slideshow'
-              }
-              className="grid size-9 cursor-pointer place-items-center rounded-full text-white/80 hover:bg-white/15 hover:text-white transition-all"
-            >
-              {isPlaying ? <Pause size={14} /> : <Play size={14} className="translate-x-px" />}
+              {isRTL ? <ArrowLeft size={18} /> : <ArrowRight size={18} />}
             </button>
           </div>
         </div>
       </div>
-
-      {/* ── 4. Scroll-to-next arrow (decorative) ───────────────────── */}
-      <a
-        href="#livestock"
-        aria-label={isAr ? 'التمرير للأسفل' : 'Scroll to next section'}
-        className="hero-scroll-hint absolute bottom-5 left-1/2 z-20 -translate-x-1/2 hidden xl:flex flex-col items-center gap-1 text-white/40 hover:text-white/70 transition-colors"
-      >
-        <span className="text-[9px] uppercase tracking-widest font-semibold">
-          {isAr ? 'اكتشف' : 'Scroll'}
-        </span>
-        <ArrowDown size={14} className="hero-bounce" />
-      </a>
     </section>
   );
 }
