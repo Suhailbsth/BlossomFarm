@@ -28,9 +28,9 @@ export default function StorageTips({ content }: StorageTipsProps) {
   if (tips.length === 0) return null;
 
   return (
-    <section id="storage" className="scroll-mt-20 bg-primary px-6 sm:px-10 lg:px-16 2xl:px-20 py-20 sm:py-24 text-primary-foreground">
+    <section id="storage" className="scroll-mt-24 bg-dark-band px-6 sm:px-10 lg:px-16 2xl:px-20 py-16 sm:py-24 text-white">
       <Reveal className="mx-auto max-w-[1440px]">
-        <p className="editorial-kicker text-harvest-gold">
+        <p className="editorial-kicker text-emerald-400">
           {content?.storagePracticeSection?.eyebrow
             ? t(content.storagePracticeSection.eyebrow)
             : isAr
@@ -38,7 +38,7 @@ export default function StorageTips({ content }: StorageTipsProps) {
             : 'Field notes · 03'}
         </p>
 
-        <h2 className="editorial-title max-w-2xl text-primary-foreground">
+        <h2 className="editorial-title max-w-2xl text-white">
           {content?.storagePracticeSection?.title
             ? t(content.storagePracticeSection.title)
             : isAr
@@ -47,19 +47,19 @@ export default function StorageTips({ content }: StorageTipsProps) {
         </h2>
 
         {/* Numbered Storage List matching reference layout */}
-        <div className="mt-12 grid border-t border-primary-foreground/25 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="mt-10 grid border-t border-white/15 sm:grid-cols-2 lg:grid-cols-3">
           {tips.map((tip, idx) => (
             <article
               key={tip.num}
-              className={`border-b border-primary-foreground/25 py-7 sm:px-7 sm:first:ps-0 ${
-                (idx + 1) % 3 !== 0 ? 'lg:border-e' : ''
-              } ${(idx + 1) % 2 !== 0 ? 'sm:border-e lg:border-e-0' : ''}`}
+              className={`border-b border-white/15 py-8 sm:px-8 sm:first:ps-0 ${
+                (idx + 1) % 3 !== 0 ? 'lg:border-e lg:border-white/15' : ''
+              } ${(idx + 1) % 2 !== 0 ? 'sm:border-e sm:border-white/15 lg:border-e-0' : ''}`}
             >
-              <span className="text-xs font-bold text-harvest-gold">{tip.num}</span>
-              <h3 className="mt-6 font-display text-xl font-semibold leading-snug">
+              <span className="block font-display text-4xl sm:text-5xl font-bold text-emerald-400 leading-none tabular-nums">{tip.num}</span>
+              <h3 className="mt-5 font-display text-lg sm:text-xl font-semibold text-white leading-snug">
                 {tip.title}
               </h3>
-              <p className="mt-2 text-sm text-primary-foreground/75 leading-relaxed">
+              <p className="mt-2 text-sm text-white/75 leading-relaxed">
                 {tip.desc}
               </p>
             </article>

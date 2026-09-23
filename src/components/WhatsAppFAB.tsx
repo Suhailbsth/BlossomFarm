@@ -43,13 +43,14 @@ export default function WhatsAppFAB({ content, whatsAppNumber }: WhatsAppFABProp
         href={whatsAppLink}
         target="_blank"
         rel="noopener noreferrer"
-        className="group flex items-center gap-2.5 h-12 px-4 sm:px-5 rounded-full bg-harvest-gold text-ink font-bold text-xs shadow-xl border border-ink/10 transition-all duration-200 hover:scale-105 active:scale-95"
+        className="btn-primary group h-12 px-4 sm:px-5 font-bold text-xs shadow-xl border border-white/20 hover:scale-105 active:scale-95"
         aria-label={isAr ? 'تواصل عبر واتساب' : 'Chat via WhatsApp'}
       >
-        <MessageCircle size={18} className="fill-current text-ink shrink-0" />
+        <MessageCircle size={18} className="shrink-0" />
         <span className="hidden xs:inline sm:inline">
-          {isAr ? 'طلب سريع' : 'Quick Order'}
+          {isAr ? 'طلب واستفسار' : 'Quick Order'}
         </span>
+        <span className="text-xs font-bold transition-transform rtl:rotate-180">→</span>
       </a>
     </div>
   );

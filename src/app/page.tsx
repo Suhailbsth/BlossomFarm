@@ -1,5 +1,6 @@
 import Header from '@/components/Header';
 import Hero from '@/components/Hero';
+import NaimiSheepSection from '@/components/NaimiSheepSection';
 import AboutSection from '@/components/AboutSection';
 import ProductCategorySection from '@/components/ProductCategorySection';
 import StorageTips from '@/components/StorageTips';
@@ -23,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
   const shareImageUrl =
     sanitySettings?.ogImageUrl ||
-    'https://cdn.sanity.io/images/tokh7kkd/production/3289afe6440bc9cfdf72314c627ba948ba325ea2-1600x1104.jpg';
+    '/images/farm/farm-sand-dunes-wide.jpg';
 
   return {
     title,
@@ -51,14 +52,17 @@ export default async function Home() {
   const whatsAppNumber = sanitySettings?.whatsAppNumber || content?.footer?.whatsAppNumber;
 
   return (
-    <main className="min-h-screen bg-background text-foreground selection:bg-harvest-gold selection:text-ink">
+    <main className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-white">
       {/* 1. Header with brand logo, quick navigation, and language switch */}
       <Header content={content} whatsAppNumber={whatsAppNumber} />
 
       {/* 2. Hero Section (#top) — Assalamu Alaikum · Wadi Al-Nawar */}
-      <Hero content={content} />
+      <Hero content={content} whatsAppNumber={whatsAppNumber} />
 
-      {/* 3. Section 1 — About (#farm) — Our home · 01 */}
+      {/* 3. Section — Naimi Sheep Pastures (#livestock) — Directly after Hero */}
+      <NaimiSheepSection content={content} whatsAppNumber={whatsAppNumber} />
+
+      {/* 4. Section 1 — About (#farm) — Our home · 01 */}
       <AboutSection content={content} />
 
       {/* 4. Section 2 — Products (#varieties) — Freshly picked · 02 */}

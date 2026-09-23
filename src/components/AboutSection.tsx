@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect } from 'react';
 import Image from 'next/image';
+import ImageCarousel from './ImageCarousel';
 import { useLanguage } from '@/context/LanguageContext';
 import { SiteContent } from '@/types/content';
 import Reveal from './Reveal';
@@ -16,6 +17,17 @@ export default function AboutSection({ content }: AboutSectionProps) {
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const isAr = language === 'ar';
+
+  const aboutImages = (content?.about?.images && content.about.images.length > 0)
+    ? content.about.images
+    : [
+        content?.about?.imageUrl || '/images/IMG_9378.JPG.jpeg',
+        '/images/IMG_9370.JPG.jpeg',
+        '/images/IMG_9371.JPG.jpeg',
+        '/images/IMG_9372.JPG.jpeg',
+        '/images/IMG_9376.JPG.jpeg',
+        '/images/farm/farm-sand-dunes-wide.jpg',
+      ];
 
   const handleCloseModal = () => {
     if (videoRef.current) {
@@ -58,7 +70,7 @@ export default function AboutSection({ content }: AboutSectionProps) {
   ];
 
   return (
-    <section id="farm" className="scroll-mt-20 bg-paper px-6 sm:px-10 lg:px-16 2xl:px-20 py-20 sm:py-28 transition-colors">
+    <section id="farm" className="scroll-mt-24 bg-paper px-6 sm:px-10 lg:px-16 2xl:px-20 py-16 sm:py-24 transition-colors">
       <Reveal className="mx-auto grid max-w-[1440px] gap-10 lg:gap-14 md:grid-cols-[.85fr_1.15fr] md:items-center">
         {/* Left Column: Text, Narrative & Pillars */}
         <div>
@@ -91,7 +103,7 @@ export default function AboutSection({ content }: AboutSectionProps) {
           </p>
 
           {/* 3 Core Values / Pillars */}
-          <div className="mt-8 grid grid-cols-3 gap-3 sm:gap-4 border-t border-border pt-6">
+          <div className="mt-8 grid grid-cols-3 gap-3 sm:gap-4 border-t border-border/50 pt-6">
             {pillars.map((item, idx) => {
               const Icon = item.icon;
               return (
@@ -109,36 +121,32 @@ export default function AboutSection({ content }: AboutSectionProps) {
           </div>
         </div>
 
-        {/* Right Column: Clean, Sunlit Reference Farm Photo with Discreet Video Pill */}
-        <div className="relative aspect-[4/3] h-full w-full overflow-hidden bg-background group border border-border shadow-xs">
-          <Image
-            src={content?.about?.imageUrl || 'https://cdn.sanity.io/images/tokh7kkd/production/3289afe6440bc9cfdf72314c627ba948ba325ea2-1600x1104.jpg'}
-            alt={isAr ? 'وادي النوار بشقراء' : 'Wadi Nawar farm in Shaqra'}
-            fill
+        {/* Right Column: Clean, Sunlit Reference Farm Photo Carousel with Discreet Video Pill */}
+        <div className="relative w-full overflow-hidden bg-background rounded-2xl border border-border/50 shadow-xs">
+          <ImageCarousel
+            images={aboutImages}
+            variant="ambient"
+            autoPlayInterval={4500}
+            aspectRatioClass="aspect-[4/3]"
+            objectFit="cover"
             sizes="(max-width: 768px) 100vw, 55vw"
-            className="aspect-[4/3] h-full w-full object-cover transition duration-700 group-hover:scale-105"
             priority
-          />
-
-          {/* Discreet, elegant video trigger pill */}
-          {(content?.about?.videoFileUrl || content?.about?.videoUrl) && (
-            <button
-              type="button"
-              onClick={() => setIsVideoModalOpen(true)}
-              className="absolute bottom-4 start-4 inline-flex items-center gap-2.5 rounded-full bg-background/95 backdrop-blur-md px-4 py-2.5 text-xs font-bold text-primary shadow-md hover:bg-background transition-all hover:scale-105 cursor-pointer border border-border"
-              aria-label={isAr ? 'مشاهد من وادي النوار' : 'Watch farm film'}
-            >
-              <span className="grid size-5 place-items-center rounded-full bg-primary text-primary-foreground">
-                <Play size={10} className="fill-current translate-x-0.5" />
-              </span>
-              <span>{isAr ? 'مشاهد من الوادي' : 'Watch farm film'}</span>
-            </button>
-          )}
-
-          {/* Location badge in top corner */}
-          <span className="absolute top-4 end-4 bg-background/90 backdrop-blur-md px-3 py-1.5 text-[10px] font-bold uppercase tracking-wider text-primary border border-border">
-            {isAr ? 'محافظة شقراء' : 'Shaqra, KSA'}
-          </span>
+            ariaLabel={isAr ? 'معرض صور وادي النوار في شقراء' : 'Wadi Nawar farm landscape gallery'}
+          >
+            {/* Discreet, elegant video trigger pill */}
+            <div className="absolute bottom-4 start-4 z-30 pointer-events-auto">
+              <button
+                type="button"
+                onClick={() => setIsVideoModalOpen(true)}
+                className="btn-primary text-xs font-bold py-2.5 px-4 shadow-md cursor-pointer"
+                aria-label={isAr ? 'مشاهد من وادي النوار' : 'Watch farm film'}
+              >
+                <Play size={11} className="fill-current translate-x-0.5" />
+                <span>{isAr ? 'مشاهد من الوادي' : 'Watch farm film'}</span>
+                <span className="text-xs font-bold transition-transform rtl:rotate-180">→</span>
+              </button>
+            </div>
+          </ImageCarousel>
         </div>
       </Reveal>
 
@@ -149,7 +157,7 @@ export default function AboutSection({ content }: AboutSectionProps) {
           onClick={handleCloseModal}
         >
           <div
-            className="relative w-full max-w-3xl bg-background rounded-lg overflow-hidden shadow-2xl border border-border"
+            className="relative w-full max-w-3xl bg-background rounded-2xl overflow-hidden shadow-2xl border border-border"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Modal Header Bar */}
@@ -172,22 +180,43 @@ export default function AboutSection({ content }: AboutSectionProps) {
 
             {/* Video Player */}
             <div className="relative aspect-video w-full bg-black flex items-center justify-center overflow-hidden">
-              <video
-                ref={videoRef}
-                controls
-                autoPlay
-                playsInline
-                poster={content?.about?.imageUrl || 'https://cdn.sanity.io/images/tokh7kkd/production/3289afe6440bc9cfdf72314c627ba948ba325ea2-1600x1104.jpg'}
-                className="h-full w-full object-contain"
-              >
-                {content?.about?.videoFileUrl && (
-                  <source src={content.about.videoFileUrl} type="video/mp4" />
-                )}
-                {content?.about?.videoUrl && (
-                  <source src={content.about.videoUrl} />
-                )}
-                {isAr ? 'متصفحك لا يدعم تشغيل الفيديو.' : 'Your browser does not support HTML5 video.'}
-              </video>
+              {(content?.about?.videoFileUrl || content?.about?.videoUrl) ? (
+                <video
+                  ref={videoRef}
+                  controls
+                  autoPlay
+                  playsInline
+                  poster={content?.about?.imageUrl || '/images/farm/farm-sand-dunes-wide.jpg'}
+                  className="h-full w-full object-contain"
+                >
+                  {content?.about?.videoFileUrl && (
+                    <source src={content.about.videoFileUrl} type="video/mp4" />
+                  )}
+                  {content?.about?.videoUrl && (
+                    <source src={content.about.videoUrl} />
+                  )}
+                  {isAr ? 'متصفحك لا يدعم تشغيل الفيديو.' : 'Your browser does not support HTML5 video.'}
+                </video>
+              ) : (
+                <div className="relative h-full w-full">
+                  <Image
+                    src={content?.about?.imageUrl || '/images/farm/farm-sand-dunes-wide.jpg'}
+                    alt={isAr ? 'وادي النوار' : 'The Blossom Valley'}
+                    fill
+                    className="object-cover opacity-60"
+                  />
+                  <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-ink/40 backdrop-blur-[2px]">
+                    <span className="bg-background/95 px-4 py-2 text-xs font-bold text-primary rounded-full border border-border shadow-sm mb-2">
+                      {isAr ? 'فيلم المزرعة الترويجي قيد التحديث' : 'Farm Promotional Film Coming Soon'}
+                    </span>
+                    <p className="text-xs text-white/90 max-w-sm">
+                      {isAr
+                        ? 'يتم تجهيز النسخة عالية الدقة من فيلم المزرعة لرفعها قريباً.'
+                        : 'The high-definition brand video is being prepared and will be available soon.'}
+                    </p>
+                  </div>
+                </div>
+              )}
             </div>
 
             {/* Modal Footer Caption */}

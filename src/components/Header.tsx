@@ -34,6 +34,7 @@ export default function Header({ content, whatsAppNumber }: HeaderProps) {
   }, []);
 
   const navLinks = [
+    { href: '#livestock', labelAr: 'مواشي النعيمي', labelEn: 'Naimi Sheep' },
     { href: '#farm', labelAr: 'عن المزرعة', labelEn: 'Our farm' },
     { href: '#varieties', labelAr: 'المنتجات', labelEn: 'Products' },
     { href: '#storage', labelAr: 'إرشادات الحفظ', labelEn: 'Storage' },
@@ -45,7 +46,7 @@ export default function Header({ content, whatsAppNumber }: HeaderProps) {
   };
 
   return (
-    <header className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur-md">
+    <header className="sticky top-0 z-50 border-b border-border/50 bg-background/95 backdrop-blur-md">
       <div className="mx-auto flex h-18 max-w-[1440px] items-center justify-between px-6 sm:px-10 lg:px-16 2xl:px-20">
         {/* Brand Logo Link */}
         <Link
@@ -60,11 +61,15 @@ export default function Header({ content, whatsAppNumber }: HeaderProps) {
 
         {/* Desktop Navigation Links (>= md) */}
         <nav className="hidden items-center gap-7 text-xs font-semibold md:flex">
-          {navLinks.map((link) => (
+          {navLinks.map((link, idx) => (
             <a
               key={link.href}
               href={link.href}
-              className="transition-colors hover:text-primary py-2 text-foreground/85 hover:text-primary"
+              className={`transition-all py-1.5 hover:text-primary ${
+                idx === 0
+                  ? 'text-primary font-bold border-b-2 border-primary'
+                  : 'text-foreground/80 hover:text-primary'
+              }`}
             >
               {isAr ? link.labelAr : link.labelEn}
             </a>
@@ -114,7 +119,7 @@ export default function Header({ content, whatsAppNumber }: HeaderProps) {
           </nav>
 
           {/* Mobile WhatsApp Quick Action */}
-          <div className="mt-5 pt-4 border-t border-border">
+          <div className="mt-5 pt-4 border-t border-border/50">
             <a
               href={buildWhatsAppLink(
                 isAr
@@ -125,10 +130,11 @@ export default function Header({ content, whatsAppNumber }: HeaderProps) {
               target="_blank"
               rel="noreferrer"
               onClick={handleLinkClick}
-              className="flex items-center justify-center gap-2 w-full h-11 rounded-full bg-harvest-gold text-ink text-xs font-bold shadow-xs hover:bg-harvest-gold/90 transition-transform active:scale-[0.98]"
+              className="btn-primary w-full h-11 text-xs"
             >
-              <MessageCircle size={16} className="fill-current" />
+              <MessageCircle size={16} />
               <span>{isAr ? 'طلب واستفسار عبر واتساب' : 'Order via WhatsApp'}</span>
+              <span className="text-xs transition-transform rtl:rotate-180">→</span>
             </a>
           </div>
         </div>

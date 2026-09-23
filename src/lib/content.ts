@@ -15,8 +15,12 @@ const fallbackContent: SiteContent = staticContent as unknown as SiteContent;
  * Maps a Sanity product record into the standard ProductItem interface.
  */
 function mapSanityProduct(sp: SanityProduct, categoryTitle?: { ar: string; en: string }): ProductItem {
-  const imgUrl = sp.imageUrl || '';
-  const gallery = sp.galleryUrls && sp.galleryUrls.length > 0 ? sp.galleryUrls : (imgUrl ? [imgUrl] : []);
+  const fallbackProd = (fallbackContent.productsSection?.allProducts || []).find((p) => p.id === sp.slug);
+
+  const imgUrl = sp.imageUrl || fallbackProd?.image || '';
+  const gallery = sp.galleryUrls && sp.galleryUrls.length > 0
+    ? sp.galleryUrls
+    : (fallbackProd?.gallery && fallbackProd.gallery.length > 0 ? fallbackProd.gallery : (imgUrl ? [imgUrl] : []));
 
   return {
     id: sp.slug,
@@ -98,6 +102,25 @@ export async function getSiteContent(): Promise<SiteContent> {
       if (h.ctaDiscover) content.hero.ctaProducts = h.ctaDiscover;
       if (h.harvestBadge) content.hero.statsPill = h.harvestBadge;
       if (h.heroImageUrl) content.hero.heroImageUrl = h.heroImageUrl;
+      if (h.videoFileUrl) content.hero.videoFileUrl = h.videoFileUrl;
+      if (h.videoUrl) content.hero.videoUrl = h.videoUrl;
+      if (h.posterImageUrl) content.hero.posterImageUrl = h.posterImageUrl;
+    }
+
+    // 2.5 Naimi Sheep Pastures Section
+    if (sanityHome?.naimi) {
+      const n = sanityHome.naimi;
+      if (content.naimiSection) {
+        if (n.eyebrow) content.naimiSection.eyebrow = n.eyebrow;
+        if (n.title) content.naimiSection.title = n.title;
+        if (n.subtitle) content.naimiSection.subtitle = n.subtitle;
+        if (n.description) content.naimiSection.description = n.description;
+        if (n.badge) content.naimiSection.badge = n.badge;
+        if (n.imageUrl) content.naimiSection.imageUrl = n.imageUrl;
+        if (n.videoFileUrl) content.naimiSection.videoFileUrl = n.videoFileUrl;
+        if (n.videoUrl) content.naimiSection.videoUrl = n.videoUrl;
+        if (n.ctaWhatsApp) content.naimiSection.ctaWhatsApp = n.ctaWhatsApp;
+      }
     }
 
     // 3. About Section
@@ -158,21 +181,31 @@ export async function getSiteContent(): Promise<SiteContent> {
     // 6. Culinary Uses & Recipes
     if (sanityHome?.recipes && sanityHome.recipes.length > 0) {
       const rSec = sanityHome.recipesSection;
+      const defaultItems = content.recipesSection?.items || [];
       content.recipesSection = {
-        eyebrow: rSec?.eyebrow || { ar: 'من مطبخنا · ٠٤', en: 'From our kitchen · 04' },
-        title: rSec?.title || { ar: 'طرق الاستخدام والتقديم', en: 'Ways to savour' },
-        videoInstruction: rSec?.videoInstruction,
-        journalTag: rSec?.journalTag,
-        items: sanityHome.recipes.map((r, idx) => ({
-          id: r._id || `recipe-${idx + 1}`,
-          number: r.number || (idx + 1 < 10 ? `0${idx + 1}` : `${idx + 1}`),
-          title: r.title || { ar: '', en: '' },
-          subtitle: r.subtitle || { ar: '', en: '' },
-          image: r.imageUrl || '',
-          videoFileUrl: r.videoFileUrl,
-          videoUrl: r.videoUrl,
-          displayOrder: r.displayOrder || idx + 1,
-        })),
+        eyebrow: rSec?.eyebrow || content.recipesSection?.eyebrow || { ar: 'من مطبخنا · ٠٤', en: 'From our kitchen · 04' },
+        title: rSec?.title || content.recipesSection?.title || { ar: 'طرق الاستخدام والتقديم', en: 'Ways to savour' },
+        videoInstruction: rSec?.videoInstruction || content.recipesSection?.videoInstruction,
+        journalTag: rSec?.journalTag || content.recipesSection?.journalTag,
+        items: sanityHome.recipes.map((r, idx) => {
+          const fb = defaultItems.find((d) => d.id === r._id || d.number === r.number) || defaultItems[idx];
+          return {
+            id: r._id || fb?.id || `recipe-${idx + 1}`,
+            number: r.number || fb?.number || (idx + 1 < 10 ? `0${idx + 1}` : `${idx + 1}`),
+            title: r.title || fb?.title || { ar: '', en: '' },
+            subtitle: r.subtitle || fb?.subtitle || { ar: '', en: '' },
+            image: r.imageUrl || fb?.image || '',
+            videoFileUrl: r.videoFileUrl || fb?.videoFileUrl,
+            videoUrl: r.videoUrl || fb?.videoUrl,
+            displayOrder: r.displayOrder || idx + 1,
+            prepTime: r.prepTime || fb?.prepTime,
+            servings: r.servings || fb?.servings,
+            ingredients: r.ingredients && r.ingredients.length > 0 ? r.ingredients : fb?.ingredients,
+            steps: r.steps && r.steps.length > 0 ? r.steps : fb?.steps,
+            chefTip: r.chefTip || fb?.chefTip,
+            audioUrl: r.audioFileUrl || r.audioUrl || fb?.audioUrl,
+          };
+        }),
       };
     }
 
@@ -188,7 +221,7 @@ export async function getSiteContent(): Promise<SiteContent> {
           title: cat.title,
           badge: cat.badge,
           description: cat.description,
-          image: cat.imageUrl,
+          image: cat.imageUrl || (fallbackContent.productsSection?.categories as Record<string, { image?: string }>)?.[cat.slug]?.image,
           showOnHome: cat.showOnHome !== false,
           homeOrder: cat.homeOrder || 1,
           displayMode: cat.displayMode || (

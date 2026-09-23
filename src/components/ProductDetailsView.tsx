@@ -1,8 +1,9 @@
 'use client';
 
-import React, { useState } from 'react';
+import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
+import ImageCarousel from './ImageCarousel';
 import { useLanguage } from '@/context/LanguageContext';
 import { SiteContent, ProductItem } from '@/types/content';
 import { ArrowLeft, ArrowRight, MessageCircle, Sprout, ArrowUpRight } from 'lucide-react';
@@ -28,8 +29,6 @@ export default function ProductDetailsView({
   const galleryImages = product.gallery && product.gallery.length > 0
     ? product.gallery
     : [product.image];
-
-  const [activeImage, setActiveImage] = useState(galleryImages[0]);
 
   // Other products excluding current
   const otherProducts = allProducts.filter((item) => item.id !== product.id);
@@ -85,39 +84,28 @@ export default function ProductDetailsView({
         <div className="grid gap-12 lg:grid-cols-[1fr_1.1fr] lg:items-start">
           {/* Image & Gallery Column */}
           <div>
-            <div className="relative aspect-[4/3] w-full overflow-hidden bg-paper border border-border">
-              <Image
-                src={activeImage}
-                alt={t(product.name)}
-                fill
-                priority
-                className="object-cover"
+            <div className="rounded-2xl border border-border/60 bg-paper shadow-xs overflow-hidden p-2 sm:p-3">
+              <ImageCarousel
+                images={galleryImages}
+                variant="gallery"
+                aspectRatioClass="aspect-[4/5]"
+                objectFit="cover"
                 sizes="(max-width: 1024px) 100vw, 50vw"
-              />
-              {product.badge && (
-                <span className="absolute bottom-4 end-4 bg-background px-4 py-2 text-xs font-bold text-primary border border-border">
-                  {t(product.badge)}
-                </span>
-              )}
+                priority
+                showThumbnails={true}
+                showDots={true}
+                showArrows={true}
+                ariaLabel={t(product.name)}
+              >
+                {product.badge && (
+                  <div className="absolute bottom-4 end-4 z-30 pointer-events-none">
+                    <span className="bg-background/95 backdrop-blur-xs px-3.5 py-1.5 text-xs font-bold text-primary border border-border/60 rounded-full shadow-xs">
+                      {t(product.badge)}
+                    </span>
+                  </div>
+                )}
+              </ImageCarousel>
             </div>
-
-            {/* Gallery Thumbnails */}
-            {galleryImages.length > 1 && (
-              <div className="mt-4 flex gap-3">
-                {galleryImages.map((img, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    onClick={() => setActiveImage(img)}
-                    className={`relative w-20 h-16 overflow-hidden border cursor-pointer transition-opacity ${
-                      activeImage === img ? 'border-primary opacity-100' : 'border-border opacity-60 hover:opacity-100'
-                    }`}
-                  >
-                    <Image src={img} alt={`Thumb ${idx}`} fill className="object-cover" />
-                  </button>
-                ))}
-              </div>
-            )}
           </div>
 
           {/* Details Column */}
@@ -165,16 +153,17 @@ export default function ProductDetailsView({
               </div>
             )}
 
-            {/* Direct WhatsApp CTA Button matching harvest-gold footer button */}
+            {/* Direct WhatsApp CTA Button */}
             <div className="mt-8">
               <a
                 href={whatsAppLink}
                 target="_blank"
                 rel="noreferrer"
-                className="h-12 w-full sm:w-auto rounded-full bg-harvest-gold px-8 text-ink shadow-none hover:bg-harvest-gold/90 font-bold inline-flex items-center justify-center gap-2.5 transition-transform hover:scale-[1.02]"
+                className="btn-primary h-12 w-full sm:w-auto px-8 font-bold text-sm"
               >
-                <MessageCircle size={18} className="fill-current text-ink" />
+                <MessageCircle size={18} />
                 <span>{isAr ? 'طلب المنتج مباشرة عبر واتساب' : 'Inquire & Order via WhatsApp'}</span>
+                <span className="text-sm font-bold transition-transform rtl:rotate-180">→</span>
               </a>
             </div>
           </div>

@@ -22,31 +22,58 @@
     }
   },
   "navigation": {
-    "about": { "en": "About Us", "ar": "عن وادي النوار" },
-    "products": { "en": "Our Products", "ar": "منتجاتنا" },
-    "dates": { "en": "Khalas Dates", "ar": "تمر الخلاص" },
-    "meat": { "en": "Naimi Sheep", "ar": "الخرفان النعيمي" },
-    "pepper": { "en": "Hot Pepper", "ar": "فلفل مجروش" },
-    "driedTomatoes": { "en": "Dried Tomatoes", "ar": "الطماطم المجففة" },
-    "howToUse": { "en": "How to Use", "ar": "طرق الاستخدام" },
-    "storage": { "en": "Storage Guide", "ar": "إرشادات الحفظ" },
-    "contact": { "en": "Contact Us", "ar": "تواصل معنا" }
+    "about": {
+      "en": "About Us",
+      "ar": "عن وادي النوار"
+    },
+    "products": {
+      "en": "Our Products",
+      "ar": "منتجاتنا"
+    },
+    "dates": {
+      "en": "Khalas Dates",
+      "ar": "تمر الخلاص"
+    },
+    "meat": {
+      "en": "Naimi Sheep",
+      "ar": "الخرفان النعيمي"
+    },
+    "pepper": {
+      "en": "Hot Pepper",
+      "ar": "فلفل مجروش"
+    },
+    "driedTomatoes": {
+      "en": "Dried Tomatoes",
+      "ar": "الطماطم المجففة"
+    },
+    "howToUse": {
+      "en": "How to Use",
+      "ar": "طرق الاستخدام"
+    },
+    "storage": {
+      "en": "Storage Guide",
+      "ar": "إرشادات الحفظ"
+    },
+    "contact": {
+      "en": "Contact Us",
+      "ar": "تواصل معنا"
+    }
   },
   "hero": {
     "welcomeBadge": {
-      "en": "Peaceful Farm Environment • Shaqra City",
-      "ar": "بيئة زراعية هادئة • محافظة شقراء"
+      "en": "Shaqra Desert Oasis • Agricultural Heritage",
+      "ar": "واحة شقراء الزراعية • أرض الخير والنماء"
     },
     "heading": {
       "en": "The Blossom Valley",
       "ar": "وادي النوار"
     },
     "subheading": {
-      "en": "Saudi soil, generous sun, and products grown with thoughtful care in Shaqra.",
-      "ar": "أرض سعودية طيبة، شمس كريمة، ومنتجات حُظيت بعناية فائقة في شقراء."
+      "en": "Saudi soil, warm sun, and authentic farm produce cultivated with mindful craftsmanship in Shaqra.",
+      "ar": "أرض سعودية طيبة، شمس كريمة، ومنتجات حُظيت بعناية فائقة في محافظة شقراء."
     },
     "description": {
-      "en": "From date palms and livestock pastures to artisan pantry provisions, we manage every stage with love and precision.",
+      "en": "From date palm groves and pristine livestock pastures to artisanal sun-dried provisions, every stage is cared for with uncompromising dedication.",
       "ar": "من واحات النخيل ومراعي الماشية إلى خيرات المؤونة الحرفية، ندير كل مرحلة بشغف وإتقان متناهٍ."
     },
     "ctaProducts": {
@@ -58,9 +85,115 @@
       "ar": "تواصل عبر واتساب"
     },
     "statsPill": {
-      "en": "Carefully Managed • From Land to Table",
-      "ar": "عناية متكاملة • من أرضنا إلى مائدتكم"
-    }
+      "en": "Shaqra Desert Farmstead • Harvest 2026",
+      "ar": "مزرعة شقراء • إنتاج ٢٠٢٦"
+    },
+    "heroImageUrl": "/images/IMG_9378.JPG.jpeg",
+    "posterImageUrl": "/images/IMG_9378.JPG.jpeg",
+    "videoUrl": "",
+    "videoFileUrl": "",
+    "heroImages": [
+      "/images/IMG_9378.JPG.jpeg",
+      "/images/farm/farm-sand-dunes-wide.jpg",
+      "/images/IMG_9371.JPG.jpeg",
+      "/images/IMG_9370.JPG.jpeg"
+    ]
+  },
+  "naimiSection": {
+    "eyebrow": {
+      "en": "Livestock Pastures · 02",
+      "ar": "مراعي الماشية · ٠٢"
+    },
+    "title": {
+      "en": "Authentic Saudi Naimi Sheep",
+      "ar": "خرفان النعيمي الأصيلة"
+    },
+    "subtitle": {
+      "en": "Nourished exclusively on fresh, farm-grown green alfalfa in open, clean Shaqra pastures.",
+      "ar": "تربية هادئة في بيئة شقراء النقية، وتغذية يومية على البرسيم الأخضر الطازج المزروع في حقولنا."
+    },
+    "description": {
+      "en": "Our purebred Naimi sheep thrive in clean, open-air farm pens, fed exclusively on fresh green alfalfa cultivated right here in our Shaqra soil. With rigorous veterinary oversight and humane care, we ensure tender, sweet meat of supreme purity and unmatched cleanliness.",
+      "ar": "سلالة نعيمية سعودية أصيلة ترعى في حظائر نظيفة وفسيحة بمزرعتنا في شقراء، تتغذى يومياً وبشكل حصري على البرسيم الأخضر الطازج الذي نزرعه بأنفسنا في حقولنا. رعاية بيطرية وإنسانية شاملة تضمن لكم أطيب لحم وأعلاه طراوة ونقاء خالياً من أي زفرة."
+    },
+    "badge": {
+      "en": "100% Farm-Grown Green Alfalfa Fed",
+      "ar": "تغذية طبيعية ١٠٠٪ على برسيم المزرعة"
+    },
+    "imageUrl": "/images/IMG_9373.JPG.jpeg",
+    "videoUrl": "",
+    "videoFileUrl": "",
+    "highlights": [
+      {
+        "en": "Purebred Saudi Naimi sheep raised in open, clean pens in Shaqra",
+        "ar": "سلالة نعيمية أصيلة في حظائر فسيحة ونظيفة ببيئة شقراء الهادئة"
+      },
+      {
+        "en": "Daily diet of 100% fresh green alfalfa grown right on our farm",
+        "ar": "تغذية يومية على البرسيم الأخضر الطازج المزروع في أرض المزرعة"
+      },
+      {
+        "en": "Zero chemical hormones, antibiotics, or commercial fattening concentrates",
+        "ar": "خالية تماماً من الهرمونات والمسرعات الصناعية والأعلاف التجارية الضارة"
+      },
+      {
+        "en": "Butchered to order in certified hygienic facilities with cold-chain delivery",
+        "ar": "ذبح وتجهيز فوري وتغليف محكم مع توصيل مبرد حتى باب منزلك"
+      }
+    ],
+    "specs": [
+      {
+        "label": {
+          "en": "Origin & Pasture",
+          "ar": "المرعى والبيئة"
+        },
+        "value": {
+          "en": "Shaqra Desert Oasis, Riyadh Province",
+          "ar": "محافظة شقراء، منطقة الرياض"
+        }
+      },
+      {
+        "label": {
+          "en": "Nutrition",
+          "ar": "نوع الغذاء"
+        },
+        "value": {
+          "en": "100% Farm-Grown Fresh Alfalfa (برسيم)",
+          "ar": "برسيم أخضر طازج ١٠٠٪ من إنتاجنا"
+        }
+      },
+      {
+        "label": {
+          "en": "Preparation",
+          "ar": "التجهيز والذبح"
+        },
+        "value": {
+          "en": "Hygienic Halal Slaughter to Order",
+          "ar": "ذبح فوري وتفصيل حسب الرغبة"
+        }
+      },
+      {
+        "label": {
+          "en": "Cold Delivery",
+          "ar": "الشحن المبرد"
+        },
+        "value": {
+          "en": "Direct Refrigerated Fleet Delivery",
+          "ar": "توصيل سريع بسيارات مبردة مخصصة"
+        }
+      }
+    ],
+    "ctaWhatsApp": {
+      "en": "Inquire & Reserve Fresh Naimi Carcass",
+      "ar": "حجز وتفصيل ذبيحة نعيمي طازجة عبر واتساب"
+    },
+    "images": [
+      "/images/IMG_9373.JPG.jpeg",
+      "/images/IMG_9367.JPG.jpeg",
+      "/images/IMG_9369.JPG.jpeg",
+      "/images/IMG_9379.JPG.jpeg",
+      "/images/IMG_9368.JPG.jpeg"
+    ]
   },
   "about": {
     "eyebrow": {
@@ -89,6 +222,7 @@
         "ar": "من جني تمور نخيلنا الخاصة وتغذية خرافنا النعيمية على البرسيم المزروع بأرضنا، إلى التجفيف البطيء للطماطم المختارة وجرش الفلفل الحار الفوّاح — ينصب تركيزنا الدائم على الجودة والاهتمام الصادق بأدق التفاصيل."
       }
     ],
+    "imageUrl": "/images/IMG_9378.JPG.jpeg",
     "videoPlaceholder": {
       "title": {
         "en": "Moments from The Blossom Valley",
@@ -98,7 +232,7 @@
         "en": "Experience the calm rhythms of our Shaqra farmstead, orchards, and artisan preparation.",
         "ar": "عش هدوء الطبيعة وسحر واحة شقراء، وتعرّف على معملنا الحرفي عن قرب."
       },
-      "poster": "https://cdn.sanity.io/images/tokh7kkd/production/52419a85726510eeef6164cb4ab5a8f1af464a40-1376x768.jpg",
+      "poster": "/images/farm/farm-sand-dunes-wide.jpg",
       "tag": {
         "en": "Farm Video Feature",
         "ar": "جولة مصورة في المزرعة"
@@ -115,70 +249,126 @@
     "pillars": [
       {
         "id": "lifecycle",
-        "title": { "en": "End-to-End Care", "ar": "إشراف شامل متكامل" },
+        "title": {
+          "en": "End-to-End Care",
+          "ar": "إشراف شامل متكامل"
+        },
         "description": {
           "en": "From farming and raising animals to preparation and packaging, we manage every phase on site.",
           "ar": "من الزراعة وتربية المواشي وحتى التجهيز والتغليف، نشرف على كل خطوة بكل أمانة وإتقان."
         },
         "iconName": "shieldCheck",
-        "highlight": { "en": "100% Farm Managed", "ar": "إدارة كاملة بأيدينا" }
+        "highlight": {
+          "en": "100% Farm Managed",
+          "ar": "إدارة كاملة بأيدينا"
+        }
       },
       {
         "id": "shaqra-origin",
-        "title": { "en": "Shaqra Heritage Soil", "ar": "تربة شقراء العريقة" },
+        "title": {
+          "en": "Shaqra Heritage Soil",
+          "ar": "تربة شقراء العريقة"
+        },
         "description": {
           "en": "Deep desert wells and pure soil endow our crops and dates with unmatched richness and flavor.",
           "ar": "مياه جوفية عذبة وتربة خصبة تمنح تمورنا ومحاصيلنا نكهة أصيلة متفردة لا تُنسى."
         },
         "iconName": "sun",
-        "highlight": { "en": "Shaqra City", "ar": "محافظة شقراء" }
+        "highlight": {
+          "en": "Shaqra City",
+          "ar": "محافظة شقراء"
+        }
       },
       {
         "id": "natural-feed",
-        "title": { "en": "Farm-Grown Green Alfalfa", "ar": "تغذية طبيعية بالبرسيم" },
+        "title": {
+          "en": "Farm-Grown Green Alfalfa",
+          "ar": "تغذية طبيعية بالبرسيم"
+        },
         "description": {
           "en": "Our Naimi sheep feed exclusively on fresh alfalfa grown right in our own fields.",
           "ar": "تتغذى خرافنا النعيمية على البرسيم الأخضر الطازج المزروع في حقول مزرعتنا."
         },
         "iconName": "leaf",
-        "highlight": { "en": "Pure Natural Feed", "ar": "أعلاف طازجة من المزرعة" }
+        "highlight": {
+          "en": "Pure Natural Feed",
+          "ar": "أعلاف طازجة من المزرعة"
+        }
       },
       {
         "id": "details",
-        "title": { "en": "Attention to Small Details", "ar": "عناية بأدق التفاصيل" },
+        "title": {
+          "en": "Attention to Small Details",
+          "ar": "عناية بأدق التفاصيل"
+        },
         "description": {
           "en": "Meticulous sorting, slow dehydration, and airtight sealed preservation for long-lasting freshness.",
           "ar": "فرز يدوي حبة بحبة، تجفيف متأنٍ، وحفظ مُحكم يحافظ على النكهة والقوام لأطول فترة."
         },
         "iconName": "sparkles",
-        "highlight": { "en": "Artisanal Precision", "ar": "دقة واحترافية" }
+        "highlight": {
+          "en": "Artisanal Precision",
+          "ar": "دقة واحترافية"
+        }
       }
     ],
     "stats": [
       {
         "value": "100%",
         "suffix": "",
-        "label": { "en": "Shaqra Farmstead", "ar": "إنتاج مزرعتنا بشقراء" },
-        "sublabel": { "en": "Direct from Source", "ar": "مباشرة من المنبع" }
+        "label": {
+          "en": "Shaqra Farmstead",
+          "ar": "إنتاج مزرعتنا بشقراء"
+        },
+        "sublabel": {
+          "en": "Direct from Source",
+          "ar": "مباشرة من المنبع"
+        }
       },
       {
         "value": "4",
         "suffix": "",
-        "label": { "en": "Artisan Categories", "ar": "أقسام منتجات رئيسية" },
-        "sublabel": { "en": "Dates, Meat, Pepper, Tomatoes", "ar": "تمور، ذبائح، فلفل، طماطم مجففة" }
+        "label": {
+          "en": "Artisan Categories",
+          "ar": "أقسام منتجات رئيسية"
+        },
+        "sublabel": {
+          "en": "Dates, Meat, Pepper, Tomatoes",
+          "ar": "تمور، ذبائح، فلفل، طماطم مجففة"
+        }
       },
       {
         "value": "0",
         "suffix": "",
-        "label": { "en": "Harmful Additives", "ar": "إضافات صناعية" },
-        "sublabel": { "en": "Natural Preparation", "ar": "تحضير طبيعي وصحي" }
+        "label": {
+          "en": "Harmful Additives",
+          "ar": "إضافات صناعية"
+        },
+        "sublabel": {
+          "en": "Natural Preparation",
+          "ar": "تحضير طبيعي وصحي"
+        }
       },
       {
         "value": "24h",
         "suffix": "",
-        "label": { "en": "Farm to Table", "ar": "من أرضنا إلى مائدتكم" },
-        "sublabel": { "en": "Freshness & Purity Guarantee", "ar": "ضمان الطزاجة والنقاء" }
+        "label": {
+          "en": "Farm to Table",
+          "ar": "من أرضنا إلى مائدتكم"
+        },
+        "sublabel": {
+          "en": "Freshness & Purity Guarantee",
+          "ar": "ضمان الطزاجة والنقاء"
+        }
       }
+    ],
+    "images": [
+      "/images/IMG_9378.JPG.jpeg",
+      "/images/IMG_9370.JPG.jpeg",
+      "/images/IMG_9371.JPG.jpeg",
+      "/images/IMG_9372.JPG.jpeg",
+      "/images/IMG_9376.JPG.jpeg",
+      "/images/farm/farm-sand-dunes-wide.jpg"
     ]
   },
   "productsSection": {
@@ -213,56 +403,108 @@
           "en": "Khalas dates harvested from the farm's own palm trees in Shaqra, carefully harvested, sorted, and packed using natural farming methods with minimal pesticides.",
           "ar": "تمر خلاص فاخر من نخيل المزرعة بشقراء، مقطوف ومفروز ومكنوز بعناية تامة وبطرق زراعية طبيعية وبأقل قدر من المبيدات."
         },
-        "image": "https://cdn.sanity.io/images/tokh7kkd/production/fc7e87ce6ddca267d3e02f90fc92582846f4eb27-1024x1024.jpg",
+        "image": "/images/IMG_9374.JPG.jpeg",
         "varieties": [
           {
             "id": "royal-khalas",
-            "name": { "en": "Royal Khalas", "ar": "الخلاص الملكي" },
+            "name": {
+              "en": "Royal Khalas",
+              "ar": "الخلاص الملكي"
+            },
             "arabicSubtitle": "حبة فاخرة، حجم استثنائي ومذاق غني",
-            "badge": { "en": "Top Tier Size & Flavor", "ar": "حجم ونكهة استثنائية" },
+            "badge": {
+              "en": "Top Tier Size & Flavor",
+              "ar": "حجم ونكهة استثنائية"
+            },
             "description": {
               "en": "Premium top size, rich caramel nectar, and velvety golden texture. The crown jewel of our date harvest.",
               "ar": "الدرجة الأولى في الحجم واللون؛ حبات ممتلئة مكنوزة برحيقها الطبيعي لتمنحك مذاقاً ملكياً فاخراً."
             },
             "tasteNotes": [
-              { "en": "Caramel Nectar", "ar": "دبس كراميلي نقي" },
-              { "en": "Jumbo Size", "ar": "حبة كبيرة ممتلئة" },
-              { "en": "Melt-in-mouth", "ar": "قوام مخملي يذوب" }
+              {
+                "en": "Caramel Nectar",
+                "ar": "دبس كراميلي نقي"
+              },
+              {
+                "en": "Jumbo Size",
+                "ar": "حبة كبيرة ممتلئة"
+              },
+              {
+                "en": "Melt-in-mouth",
+                "ar": "قوام مخملي يذوب"
+              }
             ],
-            "image": "https://cdn.sanity.io/images/tokh7kkd/production/fc7e87ce6ddca267d3e02f90fc92582846f4eb27-1024x1024.jpg"
+            "image": "/images/IMG_9374.JPG.jpeg"
           },
           {
             "id": "premium-khalas",
-            "name": { "en": "Premium Khalas", "ar": "الخلاص الفاخر" },
+            "name": {
+              "en": "Premium Khalas",
+              "ar": "الخلاص الفاخر"
+            },
             "arabicSubtitle": "مختار بعناية فائقة ونكهة عميقة",
-            "badge": { "en": "Carefully Selected", "ar": "مفروز بعناية" },
+            "badge": {
+              "en": "Carefully Selected",
+              "ar": "مفروز بعناية"
+            },
             "description": {
               "en": "Hand-selected for uniform golden hue, dense sweetness, and traditional Shaqra character.",
               "ar": "مفروز حبة بحبة لضمان تجانس اللون الذهبي والحلاوة المعتدلة، وهو الخيار المفضل للإهداء والضيافة."
             },
             "tasteNotes": [
-              { "en": "Rich Amber", "ar": "لون عنبري متجانس" },
-              { "en": "Balanced Sweetness", "ar": "حلاوة موزونة" },
-              { "en": "Tender Texture", "ar": "طراوة محكمة" }
+              {
+                "en": "Rich Amber",
+                "ar": "لون عنبري متجانس"
+              },
+              {
+                "en": "Balanced Sweetness",
+                "ar": "حلاوة موزونة"
+              },
+              {
+                "en": "Tender Texture",
+                "ar": "طراوة محكمة"
+              }
             ],
-            "image": "https://cdn.sanity.io/images/tokh7kkd/production/fc7e87ce6ddca267d3e02f90fc92582846f4eb27-1024x1024.jpg"
+            "image": "/images/IMG_9383.JPG.jpeg"
           },
           {
             "id": "classic-khalas",
-            "name": { "en": "Khalas", "ar": "الخلاص" },
+            "name": {
+              "en": "Khalas",
+              "ar": "الخلاص"
+            },
             "arabicSubtitle": "المذاق الأصيل لكل يوم مع القهوة السعودية",
-            "badge": { "en": "Authentic Taste", "ar": "طعم أصيل يومي" },
+            "badge": {
+              "en": "Authentic Taste",
+              "ar": "طعم أصيل يومي"
+            },
             "description": {
               "en": "Everyday authentic taste for family gatherings, paired perfectly with Saudi coffee.",
               "ar": "طعم أصيل تراثي يعبّر عن خير نجد، الرفيق المثالي لدلة القهوة السعودية وجلسات العائلة اليومية."
             },
             "tasteNotes": [
-              { "en": "Traditional Taste", "ar": "نكهة الخلاص الأصيلة" },
-              { "en": "Natural Syrup", "ar": "دبس طبيعي" },
-              { "en": "Daily Table", "ar": "مثالي للمائدة اليومية" }
+              {
+                "en": "Traditional Taste",
+                "ar": "نكهة الخلاص الأصيلة"
+              },
+              {
+                "en": "Natural Syrup",
+                "ar": "دبس طبيعي"
+              },
+              {
+                "en": "Daily Table",
+                "ar": "مثالي للمائدة اليومية"
+              }
             ],
-            "image": "https://cdn.sanity.io/images/tokh7kkd/production/fc7e87ce6ddca267d3e02f90fc92582846f4eb27-1024x1024.jpg"
+            "image": "/images/IMG_9384.JPG.jpeg"
           }
+        ],
+        "gallery": [
+          "/images/IMG_9374.JPG.jpeg",
+          "/images/IMG_9383.JPG.jpeg",
+          "/images/IMG_9384.JPG.jpeg",
+          "/images/IMG_9371.JPG.jpeg",
+          "/images/IMG_9376.JPG.jpeg"
         ]
       },
       "meat": {
@@ -283,12 +525,31 @@
           "en": "Fed on farm-grown alfalfa (برسيم) with zero hormones or harmful concentrates.",
           "ar": "تغذية طبيعية ١٠٠٪ على برسيم المزرعة الأخضر، خالية تماماً من الهرمونات أو الأعلاف التجارية الضارة."
         },
-        "image": "https://cdn.sanity.io/images/tokh7kkd/production/04d0efdff1f874bc074f7ea4cb7cfc2a05cf52eb-1024x1024.jpg",
+        "image": "/images/IMG_9373.JPG.jpeg",
         "points": [
-          { "en": "Purebred Saudi Naimi sheep raised in open, clean pens", "ar": "سلالة نعيمية أصيلة في حظائر نظيفة وواسعة" },
-          { "en": "Diet of fresh farm-grown green alfalfa (برسيم)", "ar": "تغذية غنية على البرسيم الأخضر الطازج المزروع بالمزرعة" },
-          { "en": "Carefully managed health and humane livestock care", "ar": "متابعة بيطرية دقيقة ورعاية إنسانية لكامل القطيع" },
-          { "en": "Prepared, butchered, and delivered to your doorstep under strict sanitary standards", "ar": "ذبح وتجهيز وتبريد ونقل وفق أعلى المعايير الصحية حتى باب منزلك" }
+          {
+            "en": "Purebred Saudi Naimi sheep raised in open, clean pens",
+            "ar": "سلالة نعيمية أصيلة في حظائر نظيفة وواسعة"
+          },
+          {
+            "en": "Diet of fresh farm-grown green alfalfa (برسيم)",
+            "ar": "تغذية غنية على البرسيم الأخضر الطازج المزروع بالمزرعة"
+          },
+          {
+            "en": "Carefully managed health and humane livestock care",
+            "ar": "متابعة بيطرية دقيقة ورعاية إنسانية لكامل القطيع"
+          },
+          {
+            "en": "Prepared, butchered, and delivered to your doorstep under strict sanitary standards",
+            "ar": "ذبح وتجهيز وتبريد ونقل وفق أعلى المعايير الصحية حتى باب منزلك"
+          }
+        ],
+        "gallery": [
+          "/images/IMG_9373.JPG.jpeg",
+          "/images/IMG_9367.JPG.jpeg",
+          "/images/IMG_9369.JPG.jpeg",
+          "/images/IMG_9379.JPG.jpeg",
+          "/images/IMG_9368.JPG.jpeg"
         ]
       },
       "pepper": {
@@ -311,9 +572,18 @@
         },
         "image": "https://cdn.sanity.io/images/tokh7kkd/production/ff94dcf9c15858eb5b62b1bdfaa107bfa79f64c6-1024x1024.jpg",
         "points": [
-          { "en": "Pure Shaqra pepper with zero artificial coloring or preservatives", "ar": "فلفل حار نقي ١٠٠٪ دون أي ملونات أو مواد حافظة" },
-          { "en": "Balanced texture: coarse flakes and crushed seeds for optimal heat release", "ar": "قوام مجروش متوازن يجمع بين الرقائق الحريرية والبذور لإطلاق النكهة والحرارة" },
-          { "en": "The quintessential topping for soups, grilled meats, foul, and pizzas", "ar": "إضافة لا غنى عنها للشوربات، والمشاوي، والبيتزا، والفول، والأطباق الشعبية" }
+          {
+            "en": "Pure Shaqra pepper with zero artificial coloring or preservatives",
+            "ar": "فلفل حار نقي ١٠٠٪ دون أي ملونات أو مواد حافظة"
+          },
+          {
+            "en": "Balanced texture: coarse flakes and crushed seeds for optimal heat release",
+            "ar": "قوام مجروش متوازن يجمع بين الرقائق الحريرية والبذور لإطلاق النكهة والحرارة"
+          },
+          {
+            "en": "The quintessential topping for soups, grilled meats, foul, and pizzas",
+            "ar": "إضافة لا غنى عنها للشوربات، والمشاوي، والبيتزا، والفول، والأطباق الشعبية"
+          }
         ]
       },
       "driedTomatoes": {
@@ -334,49 +604,94 @@
         "flavors": [
           {
             "id": "dried-tomato-qatfa",
-            "name": { "en": "Qatfa", "ar": "قطفة" },
+            "name": {
+              "en": "Qatfa",
+              "ar": "قطفة"
+            },
             "arabicSubtitle": "شبت + إكليل الجبل (نكهة عشبية عطرية)",
-            "badge": { "en": "Dill + Rosemary", "ar": "شبت وإكليل الجبل" },
+            "badge": {
+              "en": "Dill + Rosemary",
+              "ar": "شبت وإكليل الجبل"
+            },
             "description": {
               "en": "Infused with fragrant garden dill and aromatic rosemary sprigs. Elegant, refreshing, and herbal.",
               "ar": "متبلة بأعشاب الشبت الفواحة وأوراق إكليل الجبل (الروزماري) البرية؛ توليفة عشبية راقية تضفي نضارة منعشة."
             },
             "tasteNotes": [
-              { "en": "Garden Dill", "ar": "شبت طازج فواح" },
-              { "en": "Wild Rosemary", "ar": "إكليل جبل بري" },
-              { "en": "Herbaceous Umami", "ar": "نكهة عشبية متوازنة" }
+              {
+                "en": "Garden Dill",
+                "ar": "شبت طازج فواح"
+              },
+              {
+                "en": "Wild Rosemary",
+                "ar": "إكليل جبل بري"
+              },
+              {
+                "en": "Herbaceous Umami",
+                "ar": "نكهة عشبية متوازنة"
+              }
             ],
             "image": "https://cdn.sanity.io/images/tokh7kkd/production/3a5f8e54412cb3e94197930d8a955cf68898fc46-1200x896.jpg"
           },
           {
             "id": "dried-tomato-signature",
-            "name": { "en": "Signature", "ar": "المميز" },
+            "name": {
+              "en": "Signature",
+              "ar": "المميز"
+            },
             "arabicSubtitle": "بهارات وادي النوار الخاصة",
-            "badge": { "en": "Blossom Valley Special Blend", "ar": "تتبيلة وادي النوار الحصرية" },
+            "badge": {
+              "en": "Blossom Valley Special Blend",
+              "ar": "تتبيلة وادي النوار الحصرية"
+            },
             "description": {
               "en": "Blossom Valley's proprietary blend of secret roasted spices, roasted garlic, and golden olive oil. Rich and deeply savory.",
               "ar": "خلطة وادي النوار الحصرية من التوابل المحمصة الخاصة والثوم الفاخر؛ غنية بالعمق واللذة التي لا تتكرر."
             },
             "tasteNotes": [
-              { "en": "Proprietary Spices", "ar": "توابل وادي النوار السرية" },
-              { "en": "Roasted Garlic", "ar": "ثوم مشوي ناعم" },
-              { "en": "Deep Umami", "ar": "غنى وعمق في المذاق" }
+              {
+                "en": "Proprietary Spices",
+                "ar": "توابل وادي النوار السرية"
+              },
+              {
+                "en": "Roasted Garlic",
+                "ar": "ثوم مشوي ناعم"
+              },
+              {
+                "en": "Deep Umami",
+                "ar": "غنى وعمق في المذاق"
+              }
             ],
             "image": "https://cdn.sanity.io/images/tokh7kkd/production/3a5f8e54412cb3e94197930d8a955cf68898fc46-1200x896.jpg"
           },
           {
             "id": "dried-tomato-lahab",
-            "name": { "en": "Lahab", "ar": "لهب" },
+            "name": {
+              "en": "Lahab",
+              "ar": "لهب"
+            },
             "arabicSubtitle": "طماطم مجففة + فلفل شقراء الحار (نكهة جريئة)",
-            "badge": { "en": "Shaqra Hot Pepper Kick", "ar": "بفلفل شقراء الحار" },
+            "badge": {
+              "en": "Shaqra Hot Pepper Kick",
+              "ar": "بفلفل شقراء الحار"
+            },
             "description": {
               "en": "Sun-dried tomatoes paired with authentic fiery Shaqra crushed pepper. Bold, spicy, and unforgettable.",
               "ar": "طماطم مجففة متبلة بفلفل شقراء الحار المجروش؛ توليفة جريئة تلهب الحواس وتمنح أطباقك لمسة حماسية أصيلة."
             },
             "tasteNotes": [
-              { "en": "Shaqra Chili", "ar": "فلفل شقراء الحار" },
-              { "en": "Bold Heat", "ar": "حرارة متوازنة ممتعة" },
-              { "en": "Sweet-Smoky Contrast", "ar": "تباين الحلاوة والحرارة" }
+              {
+                "en": "Shaqra Chili",
+                "ar": "فلفل شقراء الحار"
+              },
+              {
+                "en": "Bold Heat",
+                "ar": "حرارة متوازنة ممتعة"
+              },
+              {
+                "en": "Sweet-Smoky Contrast",
+                "ar": "تباين الحلاوة والحرارة"
+              }
             ],
             "image": "https://cdn.sanity.io/images/tokh7kkd/production/ff94dcf9c15858eb5b62b1bdfaa107bfa79f64c6-1024x1024.jpg"
           }
@@ -390,13 +705,34 @@
           "ar": "إصدارات خاصة ومبتكرة تُحضّر بكميات محدودة وبحسب مواسم المحاصيل:"
         },
         "seasonalFlavors": [
-          { "en": "Fig", "ar": "التين" },
-          { "en": "Pomegranate", "ar": "الرمان" },
-          { "en": "Persimmon", "ar": "الكاكا" },
-          { "en": "Black Lemon", "ar": "الليمون الأسود (اللومي)" },
-          { "en": "Abu Zahirah Lemon", "ar": "ليمون أبو زهيرة" },
-          { "en": "Fresh Basil", "ar": "الريحان" },
-          { "en": "Roasted Nuts", "ar": "المكسرات المحمصة" }
+          {
+            "en": "Fig",
+            "ar": "التين"
+          },
+          {
+            "en": "Pomegranate",
+            "ar": "الرمان"
+          },
+          {
+            "en": "Persimmon",
+            "ar": "الكاكا"
+          },
+          {
+            "en": "Black Lemon",
+            "ar": "الليمون الأسود (اللومي)"
+          },
+          {
+            "en": "Abu Zahirah Lemon",
+            "ar": "ليمون أبو زهيرة"
+          },
+          {
+            "en": "Fresh Basil",
+            "ar": "الريحان"
+          },
+          {
+            "en": "Roasted Nuts",
+            "ar": "المكسرات المحمصة"
+          }
         ]
       }
     },
@@ -404,11 +740,23 @@
       {
         "id": "royal-khalas",
         "categoryKey": "dates",
-        "name": { "en": "Royal Khalas", "ar": "الخلاص الملكي" },
+        "name": {
+          "en": "Royal Khalas",
+          "ar": "الخلاص الملكي"
+        },
         "arabicSubtitle": "تمر خلاص مكنوز درجة أولى فاخرة",
-        "category": { "en": "Maknooz Dates", "ar": "تمر خلاص مكنوز" },
-        "tagline": { "en": "Top size and majestic flavor from our own palms in Shaqra.", "ar": "أعلى درجات الحجم والمذاق من نخيل وادي النوار بشقراء." },
-        "badge": { "en": "Royal Reserve", "ar": "انتقاء ملكي خاص" },
+        "category": {
+          "en": "Maknooz Dates",
+          "ar": "تمر خلاص مكنوز"
+        },
+        "tagline": {
+          "en": "Top size and majestic flavor from our own palms in Shaqra.",
+          "ar": "أعلى درجات الحجم والمذاق من نخيل وادي النوار بشقراء."
+        },
+        "badge": {
+          "en": "Royal Reserve",
+          "ar": "انتقاء ملكي خاص"
+        },
         "description": {
           "en": "Our highest grade of Maknooz Khalas dates. Harvested only from our oldest, most generous palm trees in Shaqra, carefully hand-sorted to ensure every date is large, translucent with golden date syrup, and rich in delicate caramel notes.",
           "ar": "الدرجة الأولى الاستثنائية من تمر الخلاص المكنوز. تم جنيه من أفضل نخيل مزرعتنا في شقراء، وفُرز يدوياً لضمان حجم الحبة الكبير وامتلائها بالدبس الطبيعي الذهبي ومذاق الكراميل الفاخر."
@@ -417,28 +765,85 @@
           "en": "Nurtured by the deep aquifers of Shaqra and the golden desert sun, our dates ripen without chemical accelerators. Once picked at full maturity, they are cleaned, pressed naturally, and aged until the date honey glistens through every fruit.",
           "ar": "تغذت النخيل على مياه شقراء العذبة وشمس نجد الدافئة، ونضجت ببطء دون أي مسرعات كيميائية، ثم كُنزت بطريقة تقليدية نقية تحفظ رحيقها الطبيعي لأطول فترة."
         },
-        "image": "https://cdn.sanity.io/images/tokh7kkd/production/fc7e87ce6ddca267d3e02f90fc92582846f4eb27-1024x1024.jpg",
-        "gallery": ["https://cdn.sanity.io/images/tokh7kkd/production/fc7e87ce6ddca267d3e02f90fc92582846f4eb27-1024x1024.jpg", "https://cdn.sanity.io/images/tokh7kkd/production/52419a85726510eeef6164cb4ab5a8f1af464a40-1376x768.jpg"],
+        "image": "/images/IMG_9374.JPG.jpeg",
+        "gallery": [
+          "/images/IMG_9374.JPG.jpeg",
+          "/images/IMG_9383.JPG.jpeg",
+          "/images/IMG_9384.JPG.jpeg",
+          "/images/IMG_9371.JPG.jpeg",
+          "/images/IMG_9376.JPG.jpeg"
+        ],
         "inSeason": true,
         "highlights": [
-          { "en": "Handpicked from Shaqra farm palms", "ar": "قطاف يدوي من نخيل المزرعة بشقراء" },
-          { "en": "Zero glucose or artificial syrups added", "ar": "خالٍ تماماً من أي سكر أو عسل صناعي" },
-          { "en": "Natural vacuum packing keeps it fresh for months", "ar": "تغليف محكم يحفظ الطراوة والنكهة لأشهر" }
-        ],
-        "specs": [
-          { "label": { "en": "Origin", "ar": "المصدر" }, "value": { "en": "Shaqra City, Riyadh Province", "ar": "محافظة شقراء، منطقة الرياض" } },
-          { "label": { "en": "Cultivation", "ar": "طريقة الزراعة" }, "value": { "en": "Natural farming, minimal pesticides", "ar": "زراعة طبيعية بأقل قدر من المبيدات" } },
-          { "label": { "en": "Packaging", "ar": "التعبئة" }, "value": { "en": "Airtight sealed vacuum packs (1kg / 500g)", "ar": "أكياس مكنوزة مفرغة من الهواء (١ كجم / ٥٠٠ جم)" } }
-        ],
-        "bestPairedWith": { "en": "Hot Saudi coffee infused with cardamom and saffron", "ar": "القهوة السعودية الشقراء بالهيل والزعفران" },
-        "culinaryUses": [
           {
-            "title": { "en": "Traditional Saudi Hospitality", "ar": "ضيافة القهوة السعودية الفاخرة" },
-            "description": { "en": "Served at room temperature alongside freshly brewed Saudi gahwa with cardamom, cloves, and saffron.", "ar": "يُقدم بحرارة الغرفة مع دلة القهوة السعودية المتبلة بالهيل والمسمار والزعفران." }
+            "en": "Handpicked from Shaqra farm palms",
+            "ar": "قطاف يدوي من نخيل المزرعة بشقراء"
           },
           {
-            "title": { "en": "Tahini & Toasted Sesame Dip", "ar": "تغميسة الطحينة والسمسم المحمص" },
-            "description": { "en": "Dipped in stone-ground liquid tahini and sprinkled with toasted sesame or crushed pecans.", "ar": "يُغمس في الطحينة السائلة ويُرش بالسمسم المحمص أو البيكان لضيافة مبتكرة." }
+            "en": "Zero glucose or artificial syrups added",
+            "ar": "خالٍ تماماً من أي سكر أو عسل صناعي"
+          },
+          {
+            "en": "Natural vacuum packing keeps it fresh for months",
+            "ar": "تغليف محكم يحفظ الطراوة والنكهة لأشهر"
+          }
+        ],
+        "specs": [
+          {
+            "label": {
+              "en": "Origin",
+              "ar": "المصدر"
+            },
+            "value": {
+              "en": "Shaqra City, Riyadh Province",
+              "ar": "محافظة شقراء، منطقة الرياض"
+            }
+          },
+          {
+            "label": {
+              "en": "Cultivation",
+              "ar": "طريقة الزراعة"
+            },
+            "value": {
+              "en": "Natural farming, minimal pesticides",
+              "ar": "زراعة طبيعية بأقل قدر من المبيدات"
+            }
+          },
+          {
+            "label": {
+              "en": "Packaging",
+              "ar": "التعبئة"
+            },
+            "value": {
+              "en": "Airtight sealed vacuum packs (1kg / 500g)",
+              "ar": "أكياس مكنوزة مفرغة من الهواء (١ كجم / ٥٠٠ جم)"
+            }
+          }
+        ],
+        "bestPairedWith": {
+          "en": "Hot Saudi coffee infused with cardamom and saffron",
+          "ar": "القهوة السعودية الشقراء بالهيل والزعفران"
+        },
+        "culinaryUses": [
+          {
+            "title": {
+              "en": "Traditional Saudi Hospitality",
+              "ar": "ضيافة القهوة السعودية الفاخرة"
+            },
+            "description": {
+              "en": "Served at room temperature alongside freshly brewed Saudi gahwa with cardamom, cloves, and saffron.",
+              "ar": "يُقدم بحرارة الغرفة مع دلة القهوة السعودية المتبلة بالهيل والمسمار والزعفران."
+            }
+          },
+          {
+            "title": {
+              "en": "Tahini & Toasted Sesame Dip",
+              "ar": "تغميسة الطحينة والسمسم المحمص"
+            },
+            "description": {
+              "en": "Dipped in stone-ground liquid tahini and sprinkled with toasted sesame or crushed pecans.",
+              "ar": "يُغمس في الطحينة السائلة ويُرش بالسمسم المحمص أو البيكان لضيافة مبتكرة."
+            }
           }
         ],
         "storageSpecific": {
@@ -449,43 +854,97 @@
       {
         "id": "premium-khalas",
         "categoryKey": "dates",
-        "name": { "en": "Premium Khalas", "ar": "الخلاص الفاخر" },
+        "name": {
+          "en": "Premium Khalas",
+          "ar": "الخلاص الفاخر"
+        },
         "arabicSubtitle": "مختار بعناية فائقة ونكهة غنية",
-        "category": { "en": "Maknooz Dates", "ar": "تمر خلاص مكنوز" },
-        "tagline": { "en": "Carefully selected for uniform golden color and deep flavor.", "ar": "مفروز بعناية لضمان تجانس اللون الذهبي والنكهة الغنية." },
-        "badge": { "en": "Selected Grade", "ar": "درجة فاخرة" },
+        "category": {
+          "en": "Maknooz Dates",
+          "ar": "تمر خلاص مكنوز"
+        },
+        "tagline": {
+          "en": "Carefully selected for uniform golden color and deep flavor.",
+          "ar": "مفروز بعناية لضمان تجانس اللون الذهبي والنكهة الغنية."
+        },
+        "badge": {
+          "en": "Selected Grade",
+          "ar": "درجة فاخرة"
+        },
         "description": {
           "en": "Uniform in color, soft in texture, and richly balanced in natural sweetness. Selected diligently from our Shaqra harvest to offer consistently outstanding quality.",
           "ar": "حبات متجانسة في اللون، متوازنة الحلاوة، وطازجة الدبس. فُرزت بدقة متناهية لتكون الخيار المثالي للإهداء والضيافة الراقية."
         },
-        "image": "https://cdn.sanity.io/images/tokh7kkd/production/fc7e87ce6ddca267d3e02f90fc92582846f4eb27-1024x1024.jpg",
+        "image": "/images/IMG_9383.JPG.jpeg",
         "inSeason": true,
-        "bestPairedWith": { "en": "Cardamom Gahwa and artisanal cream", "ar": "قهوة الهيل والقشطة الطازجة" }
+        "bestPairedWith": {
+          "en": "Cardamom Gahwa and artisanal cream",
+          "ar": "قهوة الهيل والقشطة الطازجة"
+        },
+        "gallery": [
+          "/images/IMG_9383.JPG.jpeg",
+          "/images/IMG_9374.JPG.jpeg",
+          "/images/IMG_9384.JPG.jpeg",
+          "/images/IMG_9376.JPG.jpeg"
+        ]
       },
       {
         "id": "classic-khalas",
         "categoryKey": "dates",
-        "name": { "en": "Khalas", "ar": "الخلاص" },
+        "name": {
+          "en": "Khalas",
+          "ar": "الخلاص"
+        },
         "arabicSubtitle": "المذاق الأصيل لكل يوم",
-        "category": { "en": "Maknooz Dates", "ar": "تمر خلاص مكنوز" },
-        "tagline": { "en": "Everyday authentic taste from our palm groves.", "ar": "مذاق الخلاص النبيل لكل يوم وجلسة عائلية." },
-        "badge": { "en": "Everyday Authentic", "ar": "أصيل يومي" },
+        "category": {
+          "en": "Maknooz Dates",
+          "ar": "تمر خلاص مكنوز"
+        },
+        "tagline": {
+          "en": "Everyday authentic taste from our palm groves.",
+          "ar": "مذاق الخلاص النبيل لكل يوم وجلسة عائلية."
+        },
+        "badge": {
+          "en": "Everyday Authentic",
+          "ar": "أصيل يومي"
+        },
         "description": {
           "en": "The everyday quintessential taste of Najd. Packed naturally to keep its tender bite and honeyed core, ideal for daily family tables.",
           "ar": "طعم خلاص نجد الأصيل الذي لا تمل منه المائدة اليومية. مكنوز بأسلوب طبيعي يحفظ نضارته وطراوته."
         },
-        "image": "https://cdn.sanity.io/images/tokh7kkd/production/fc7e87ce6ddca267d3e02f90fc92582846f4eb27-1024x1024.jpg",
+        "image": "/images/IMG_9384.JPG.jpeg",
         "inSeason": true,
-        "bestPairedWith": { "en": "Daily Saudi coffee", "ar": "القهوة اليومية" }
+        "bestPairedWith": {
+          "en": "Daily Saudi coffee",
+          "ar": "القهوة اليومية"
+        },
+        "gallery": [
+          "/images/IMG_9384.JPG.jpeg",
+          "/images/IMG_9374.JPG.jpeg",
+          "/images/IMG_9383.JPG.jpeg",
+          "/images/IMG_9371.JPG.jpeg"
+        ]
       },
       {
         "id": "naimi-sheep",
         "categoryKey": "meat",
-        "name": { "en": "Naimi Sheep Meat", "ar": "ذبائح الخرفان النعيمي" },
+        "name": {
+          "en": "Naimi Sheep Meat",
+          "ar": "ذبائح الخرفان النعيمي"
+        },
         "arabicSubtitle": "تربية مزرعة شقراء على البرسيم الأخضر الطازج",
-        "category": { "en": "Livestock & Meat", "ar": "ذبائح ومواشي" },
-        "tagline": { "en": "Farm-raised on our own green alfalfa pastures in Shaqra.", "ar": "تربية خاصة في بيئة مزرعتنا بشقراء وتغذية طبيعية على البرسيم الأخضر." },
-        "badge": { "en": "100% Farm Raised", "ar": "إنتاج مزرعتنا" },
+        "category": {
+          "en": "Livestock & Meat",
+          "ar": "ذبائح ومواشي"
+        },
+        "tagline": {
+          "en": "Farm-raised on our own green alfalfa pastures in Shaqra.",
+          "ar": "تربية خاصة في بيئة مزرعتنا بشقراء وتغذية طبيعية على البرسيم الأخضر."
+        },
+        "badge": {
+          "en": "100% Farm Raised",
+          "ar": "إنتاج مزرعتنا"
+        },
         "description": {
           "en": "Authentic purebred Saudi Naimi sheep raised with utmost care in our peaceful farm environment in Shaqra. Fed exclusively on fresh green alfalfa (برسيم) grown in our own fields, resulting in supremely tender, sweet meat with clean aroma and zero undesirable odors.",
           "ar": "خرفان نعيمية سعودية أصيلة، نربيها في بيئة مزرعتنا الهادئة بشقراء وسط عناية بيطرية وصحية فائقة. تتغذى يومياً على البرسيم الأخضر الطازج الذي نزرعه بأنفسنا في حقولنا، مما يمنح اللحم طراوة استثنائية ونكهة طيبة ونظيفة تخلو تماماً من أي زفرة."
@@ -494,29 +953,89 @@
           "en": "We believe humane care and pure nutrition make all the difference. Our sheep graze peacefully, drink clean sweet water, and eat fresh green alfalfa harvested daily from our farm plots, with absolutely no synthetic growth boosters or commercial fattening additives.",
           "ar": "نؤمن بأن طيب اللحم يبدأ من طيب المرعى وراحة الحيوان. ترعى خرافنا بحرية، وتشرب من مياه الآبار العذبة، وتتغذى على محصول البرسيم اليومي الطازج دون أي مخصبات أو هرمونات اصطناعية."
         },
-        "image": "https://cdn.sanity.io/images/tokh7kkd/production/04d0efdff1f874bc074f7ea4cb7cfc2a05cf52eb-1024x1024.jpg",
-        "gallery": ["https://cdn.sanity.io/images/tokh7kkd/production/04d0efdff1f874bc074f7ea4cb7cfc2a05cf52eb-1024x1024.jpg", "https://cdn.sanity.io/images/tokh7kkd/production/52419a85726510eeef6164cb4ab5a8f1af464a40-1376x768.jpg"],
+        "image": "/images/IMG_9373.JPG.jpeg",
+        "gallery": [
+          "/images/IMG_9373.JPG.jpeg",
+          "/images/IMG_9367.JPG.jpeg",
+          "/images/IMG_9369.JPG.jpeg",
+          "/images/IMG_9379.JPG.jpeg",
+          "/images/IMG_9368.JPG.jpeg"
+        ],
         "inSeason": true,
         "highlights": [
-          { "en": "Fed on 100% farm-grown green alfalfa (برسيم)", "ar": "تغذية طبيعية على برسيم المزرعة الأخضر الطازج" },
-          { "en": "Raised in peaceful, spacious farm pens in Shaqra", "ar": "حظائر واسعة ونظيفة في بيئة شقراء الهادئة" },
-          { "en": "Butchered to order under certified hygienic standards", "ar": "ذبح حسب الطلب في مسالخ معتمدة ونظيفة" },
-          { "en": "Cut, vacuum-packed, and chilled directly to your kitchen", "ar": "تقطيع وتغليف محكم ونقل مبرد لباب بيتك" }
-        ],
-        "specs": [
-          { "label": { "en": "Breed", "ar": "السلالة" }, "value": { "en": "Purebred Saudi Naimi Sheep", "ar": "خروف نعيمي بلدي أصيل" } },
-          { "label": { "en": "Feed", "ar": "نوع العلف" }, "value": { "en": "Farm-grown green alfalfa (برسيم)", "ar": "برسيم أخضر طازج من حقول المزرعة" } },
-          { "label": { "en": "Location", "ar": "الموقع" }, "value": { "en": "Shaqra City, Saudi Arabia", "ar": "محافظة شقراء، المملكة العربية السعودية" } }
-        ],
-        "bestPairedWith": { "en": "Traditional Saudi Kabsa, Mandi, or Jareesh", "ar": "الكبسة النجدية، والمندي، والجريش الأصيل" },
-        "culinaryUses": [
           {
-            "title": { "en": "Saudi Feast Kabsa & Mandi", "ar": "كبسة الولائم والمندي" },
-            "description": { "en": "Tender meat slowly braised with aromatic spices and saffron rice, retaining succulent juices and sweet flavor.", "ar": "يُطهى اللحم ببطء مع بهارات الكبسة والزعفران والأرز البسمتي لينسدل ناعماً وغنياً بالنكهة." }
+            "en": "Fed on 100% farm-grown green alfalfa (برسيم)",
+            "ar": "تغذية طبيعية على برسيم المزرعة الأخضر الطازج"
           },
           {
-            "title": { "en": "Najdi Jareesh Broth", "ar": "مرقة الجريش النجدي العريق" },
-            "description": { "en": "Rich bone-in cuts simmered to create the velvety broth essential for classic Saudi Jareesh.", "ar": "قطع اللحم بالعظم المسلوقة ببطء لتمنح مرقاً دسماً ناصع البياض يفيض بنكهة الجريش النجدي الأصيل." }
+            "en": "Raised in peaceful, spacious farm pens in Shaqra",
+            "ar": "حظائر واسعة ونظيفة في بيئة شقراء الهادئة"
+          },
+          {
+            "en": "Butchered to order under certified hygienic standards",
+            "ar": "ذبح حسب الطلب في مسالخ معتمدة ونظيفة"
+          },
+          {
+            "en": "Cut, vacuum-packed, and chilled directly to your kitchen",
+            "ar": "تقطيع وتغليف محكم ونقل مبرد لباب بيتك"
+          }
+        ],
+        "specs": [
+          {
+            "label": {
+              "en": "Breed",
+              "ar": "السلالة"
+            },
+            "value": {
+              "en": "Purebred Saudi Naimi Sheep",
+              "ar": "خروف نعيمي بلدي أصيل"
+            }
+          },
+          {
+            "label": {
+              "en": "Feed",
+              "ar": "نوع العلف"
+            },
+            "value": {
+              "en": "Farm-grown green alfalfa (برسيم)",
+              "ar": "برسيم أخضر طازج من حقول المزرعة"
+            }
+          },
+          {
+            "label": {
+              "en": "Location",
+              "ar": "الموقع"
+            },
+            "value": {
+              "en": "Shaqra City, Saudi Arabia",
+              "ar": "محافظة شقراء، المملكة العربية السعودية"
+            }
+          }
+        ],
+        "bestPairedWith": {
+          "en": "Traditional Saudi Kabsa, Mandi, or Jareesh",
+          "ar": "الكبسة النجدية، والمندي، والجريش الأصيل"
+        },
+        "culinaryUses": [
+          {
+            "title": {
+              "en": "Saudi Feast Kabsa & Mandi",
+              "ar": "كبسة الولائم والمندي"
+            },
+            "description": {
+              "en": "Tender meat slowly braised with aromatic spices and saffron rice, retaining succulent juices and sweet flavor.",
+              "ar": "يُطهى اللحم ببطء مع بهارات الكبسة والزعفران والأرز البسمتي لينسدل ناعماً وغنياً بالنكهة."
+            }
+          },
+          {
+            "title": {
+              "en": "Najdi Jareesh Broth",
+              "ar": "مرقة الجريش النجدي العريق"
+            },
+            "description": {
+              "en": "Rich bone-in cuts simmered to create the velvety broth essential for classic Saudi Jareesh.",
+              "ar": "قطع اللحم بالعظم المسلوقة ببطء لتمنح مرقاً دسماً ناصع البياض يفيض بنكهة الجريش النجدي الأصيل."
+            }
           }
         ],
         "storageSpecific": {
@@ -527,11 +1046,23 @@
       {
         "id": "crushed-hot-pepper",
         "categoryKey": "pepper",
-        "name": { "en": "Crushed Hot Pepper", "ar": "فلفل حار مجروش" },
+        "name": {
+          "en": "Crushed Hot Pepper",
+          "ar": "فلفل حار مجروش"
+        },
         "arabicSubtitle": "من مزرعتنا إلى طبقك — فلفل شقراء الحار",
-        "category": { "en": "Artisan Seasoning", "ar": "توابل ومؤونة" },
-        "tagline": { "en": "From our farm to your plate.", "ar": "من مزرعتنا إلى طبقك" },
-        "badge": { "en": "Farm Harvest", "ar": "محصول المزرعة" },
+        "category": {
+          "en": "Artisan Seasoning",
+          "ar": "توابل ومؤونة"
+        },
+        "tagline": {
+          "en": "From our farm to your plate.",
+          "ar": "من مزرعتنا إلى طبقك"
+        },
+        "badge": {
+          "en": "Farm Harvest",
+          "ar": "محصول المزرعة"
+        },
         "description": {
           "en": "Grown in our Shaqra farm fields, sun-cured, and coarsely crushed with its aromatic seeds. A burst of vibrant red warmth that elevates every soup, stew, grill, and breakfast spread.",
           "ar": "زُرع في حقول وادي النوار بشقراء، وجُفف تحت أشعة الشمس وجُرش بعناية مع بذوره العطرية. يمنح أطباقك نفحة حارة دافئة ولوناً قاني الجمال لا مثيل له."
@@ -541,26 +1072,70 @@
           "ar": "تشتهر شقراء بجودة شمسها وتربتها التي تمنح الفلفل حرارة ممتعة ونكهة عطرية غنية بعيداً عن المرارة. نجمعه ونجففه يدوياً ليظل طازجاً فواحاً."
         },
         "image": "https://cdn.sanity.io/images/tokh7kkd/production/ff94dcf9c15858eb5b62b1bdfaa107bfa79f64c6-1024x1024.jpg",
-        "gallery": ["https://cdn.sanity.io/images/tokh7kkd/production/ff94dcf9c15858eb5b62b1bdfaa107bfa79f64c6-1024x1024.jpg"],
+        "gallery": [
+          "https://cdn.sanity.io/images/tokh7kkd/production/ff94dcf9c15858eb5b62b1bdfaa107bfa79f64c6-1024x1024.jpg"
+        ],
         "inSeason": true,
         "highlights": [
-          { "en": "100% Pure Shaqra crushed chili flakes", "ar": "رقائق فلفل شقراء النقية ١٠٠٪" },
-          { "en": "Zero artificial colorants, salt, or fillers", "ar": "خالٍ تماماً من الملونات أو الأملاح المضافة" },
-          { "en": "Sealed in food-grade glass jars with wooden lids", "ar": "معبأ في برطمانات زجاجية صحية محكمة الإغلاق" }
-        ],
-        "specs": [
-          { "label": { "en": "Origin", "ar": "المصدر" }, "value": { "en": "Shaqra Farm, Saudi Arabia", "ar": "مزرعة وادي النوار، شقراء" } },
-          { "label": { "en": "Heat Level", "ar": "درجة الحرارة" }, "value": { "en": "Medium to High Bold (طبيعي متوازن)", "ar": "حار متوازن وغني بالنكهة" } }
-        ],
-        "bestPairedWith": { "en": "Lentil soup, pizzas, foul mudammas, and Saudi Edamat", "ar": "شوربة العدس، البيتزا، الفول، والإيدامات السعودية" },
-        "culinaryUses": [
           {
-            "title": { "en": "Morning Foul & Eggs Topping", "ar": "فول الصباح والبيض المقلي" },
-            "description": { "en": "A generous pinch over hot foul mudammas with olive oil, cumin, and lemon.", "ar": "رشة سخية فوق طبق الفول الساخن مع زيت الزيتون والكمون والليمون." }
+            "en": "100% Pure Shaqra crushed chili flakes",
+            "ar": "رقائق فلفل شقراء النقية ١٠٠٪"
           },
           {
-            "title": { "en": "Finishing Touch for Soups & Stews", "ar": "لمسة أخيرة للشوربات والإيدامات" },
-            "description": { "en": "Stirred into simmering tomato kabsa or chicken stew for an inviting spicy depth.", "ar": "يُضاف في الدقائق الأخيرة للشوربات والإيدامات ليمنح مرقاً زاهياً حاراً." }
+            "en": "Zero artificial colorants, salt, or fillers",
+            "ar": "خالٍ تماماً من الملونات أو الأملاح المضافة"
+          },
+          {
+            "en": "Sealed in food-grade glass jars with wooden lids",
+            "ar": "معبأ في برطمانات زجاجية صحية محكمة الإغلاق"
+          }
+        ],
+        "specs": [
+          {
+            "label": {
+              "en": "Origin",
+              "ar": "المصدر"
+            },
+            "value": {
+              "en": "Shaqra Farm, Saudi Arabia",
+              "ar": "مزرعة وادي النوار، شقراء"
+            }
+          },
+          {
+            "label": {
+              "en": "Heat Level",
+              "ar": "درجة الحرارة"
+            },
+            "value": {
+              "en": "Medium to High Bold (طبيعي متوازن)",
+              "ar": "حار متوازن وغني بالنكهة"
+            }
+          }
+        ],
+        "bestPairedWith": {
+          "en": "Lentil soup, pizzas, foul mudammas, and Saudi Edamat",
+          "ar": "شوربة العدس، البيتزا، الفول، والإيدامات السعودية"
+        },
+        "culinaryUses": [
+          {
+            "title": {
+              "en": "Morning Foul & Eggs Topping",
+              "ar": "فول الصباح والبيض المقلي"
+            },
+            "description": {
+              "en": "A generous pinch over hot foul mudammas with olive oil, cumin, and lemon.",
+              "ar": "رشة سخية فوق طبق الفول الساخن مع زيت الزيتون والكمون والليمون."
+            }
+          },
+          {
+            "title": {
+              "en": "Finishing Touch for Soups & Stews",
+              "ar": "لمسة أخيرة للشوربات والإيدامات"
+            },
+            "description": {
+              "en": "Stirred into simmering tomato kabsa or chicken stew for an inviting spicy depth.",
+              "ar": "يُضاف في الدقائق الأخيرة للشوربات والإيدامات ليمنح مرقاً زاهياً حاراً."
+            }
           }
         ],
         "storageSpecific": {
@@ -571,68 +1146,147 @@
       {
         "id": "dried-tomato-qatfa",
         "categoryKey": "dried-tomatoes",
-        "name": { "en": "Qatfa — Dried Tomatoes", "ar": "قطفة — طماطم مجففة" },
+        "name": {
+          "en": "Qatfa — Dried Tomatoes",
+          "ar": "قطفة — طماطم مجففة"
+        },
         "arabicSubtitle": "شبت + إكليل الجبل (نكهة عشبية عطرية)",
-        "category": { "en": "Artisanal Dried Tomatoes", "ar": "طماطم مجففة فاخرة" },
-        "tagline": { "en": "Herbal, aromatic, and steeped in golden olive oil.", "ar": "نكهة عشبية فواحة بالشبت والروزماري وزيت الزيتون." },
-        "badge": { "en": "Herbal Specialty", "ar": "نكهة عشبية" },
+        "category": {
+          "en": "Artisanal Dried Tomatoes",
+          "ar": "طماطم مجففة فاخرة"
+        },
+        "tagline": {
+          "en": "Herbal, aromatic, and steeped in golden olive oil.",
+          "ar": "نكهة عشبية فواحة بالشبت والروزماري وزيت الزيتون."
+        },
+        "badge": {
+          "en": "Herbal Specialty",
+          "ar": "نكهة عشبية"
+        },
         "description": {
           "en": "Sun-concentrated ripe tomatoes steeped in virgin olive oil with fresh garden dill (شبت) and aromatic rosemary sprigs. Elegant, bright, and deeply herbal.",
           "ar": "طماطم مختارة ومجففة بعناية، مغمورة في زيت الزيتون البكر مع الشبت الأخضر وإكليل الجبل (الروزماري). تعطي لمسة عشبية منعشة ومذاقاً متناغماً يبهج الحواس."
         },
         "image": "https://cdn.sanity.io/images/tokh7kkd/production/3a5f8e54412cb3e94197930d8a955cf68898fc46-1200x896.jpg",
-        "gallery": ["https://cdn.sanity.io/images/tokh7kkd/production/3a5f8e54412cb3e94197930d8a955cf68898fc46-1200x896.jpg"],
+        "gallery": [
+          "https://cdn.sanity.io/images/tokh7kkd/production/3a5f8e54412cb3e94197930d8a955cf68898fc46-1200x896.jpg"
+        ],
         "inSeason": true,
         "highlights": [
-          { "en": "Naturally slow-dried to lock in umami", "ar": "تجفيف بطيء يحفظ الأومامي والحلاوة الطبيعية" },
-          { "en": "Submerged in pure cold-pressed extra virgin olive oil", "ar": "مغمورة بالكامل في زيت زيتون بكر ممتاز" },
-          { "en": "Infused with dill and rosemary sprigs", "ar": "متبلة بأغصان الشبت والروزماري الفواحة" }
+          {
+            "en": "Naturally slow-dried to lock in umami",
+            "ar": "تجفيف بطيء يحفظ الأومامي والحلاوة الطبيعية"
+          },
+          {
+            "en": "Submerged in pure cold-pressed extra virgin olive oil",
+            "ar": "مغمورة بالكامل في زيت زيتون بكر ممتاز"
+          },
+          {
+            "en": "Infused with dill and rosemary sprigs",
+            "ar": "متبلة بأغصان الشبت والروزماري الفواحة"
+          }
         ],
-        "bestPairedWith": { "en": "Burrata cheese, sourdough bread, and green salads", "ar": "جبن البوراتا، الخبز الريفي، والسلطات الخضراء" }
+        "bestPairedWith": {
+          "en": "Burrata cheese, sourdough bread, and green salads",
+          "ar": "جبن البوراتا، الخبز الريفي، والسلطات الخضراء"
+        }
       },
       {
         "id": "dried-tomato-signature",
         "categoryKey": "dried-tomatoes",
-        "name": { "en": "Signature — Dried Tomatoes", "ar": "المميز — طماطم مجففة" },
+        "name": {
+          "en": "Signature — Dried Tomatoes",
+          "ar": "المميز — طماطم مجففة"
+        },
         "arabicSubtitle": "بهارات وادي النوار الخاصة",
-        "category": { "en": "Artisanal Dried Tomatoes", "ar": "طماطم مجففة فاخرة" },
-        "tagline": { "en": "Our proprietary spice blend crafted exclusively in Shaqra.", "ar": "خلطة توابل وادي النوار الحصرية والثوم المشوي الفاخر." },
-        "badge": { "en": "Flagship Recipe", "ar": "الوصفة الحصرية" },
+        "category": {
+          "en": "Artisanal Dried Tomatoes",
+          "ar": "طماطم مجففة فاخرة"
+        },
+        "tagline": {
+          "en": "Our proprietary spice blend crafted exclusively in Shaqra.",
+          "ar": "خلطة توابل وادي النوار الحصرية والثوم المشوي الفاخر."
+        },
+        "badge": {
+          "en": "Flagship Recipe",
+          "ar": "الوصفة الحصرية"
+        },
         "description": {
           "en": "The Blossom Valley's proprietary recipe. Dried tomatoes marinated in golden olive oil, roasted garlic cloves, and our secret roasted spice blend. Deep, complex, and intensely savory.",
           "ar": "وصفة وادي النوار الخاصة والمبتكرة. طماطم مجففة متوجة بفصوص الثوم المشوي وخلطة توابل وادي النوار السرية المحمصة. عمق ونكهة غنية لا تقاوم."
         },
         "image": "https://cdn.sanity.io/images/tokh7kkd/production/3a5f8e54412cb3e94197930d8a955cf68898fc46-1200x896.jpg",
-        "gallery": ["https://cdn.sanity.io/images/tokh7kkd/production/3a5f8e54412cb3e94197930d8a955cf68898fc46-1200x896.jpg"],
+        "gallery": [
+          "https://cdn.sanity.io/images/tokh7kkd/production/3a5f8e54412cb3e94197930d8a955cf68898fc46-1200x896.jpg"
+        ],
         "inSeason": true,
         "highlights": [
-          { "en": "Proprietary Blossom Valley roasted spice blend", "ar": "بهارات وادي النوار الحصرية المحمصة بعناية" },
-          { "en": "Sweet roasted garlic and pure olive oil", "ar": "ثوم مشوي ناعم وزيت زيتون بكر صافٍ" },
-          { "en": "Ideal as kashna in Jareesh and Kabsa", "ar": "مثالية ككشنة فاخرة للجريش والكبسة والمكرونة" }
+          {
+            "en": "Proprietary Blossom Valley roasted spice blend",
+            "ar": "بهارات وادي النوار الحصرية المحمصة بعناية"
+          },
+          {
+            "en": "Sweet roasted garlic and pure olive oil",
+            "ar": "ثوم مشوي ناعم وزيت زيتون بكر صافٍ"
+          },
+          {
+            "en": "Ideal as kashna in Jareesh and Kabsa",
+            "ar": "مثالية ككشنة فاخرة للجريش والكبسة والمكرونة"
+          }
         ],
-        "bestPairedWith": { "en": "Jareesh, Kabsa kashna, and artisanal pasta", "ar": "كشنة الجريش، كبسة اللحم، والمكرونة الإيطالية" }
+        "bestPairedWith": {
+          "en": "Jareesh, Kabsa kashna, and artisanal pasta",
+          "ar": "كشنة الجريش، كبسة اللحم، والمكرونة الإيطالية"
+        }
       },
       {
         "id": "dried-tomato-lahab",
         "categoryKey": "dried-tomatoes",
-        "name": { "en": "Lahab — Dried Tomatoes", "ar": "لهب — طماطم مجففة" },
+        "name": {
+          "en": "Lahab — Dried Tomatoes",
+          "ar": "لهب — طماطم مجففة"
+        },
         "arabicSubtitle": "طماطم مجففة + فلفل شقراء الحار",
-        "category": { "en": "Artisanal Dried Tomatoes", "ar": "طماطم مجففة فاخرة" },
-        "tagline": { "en": "Bold heat meets sweet sun-dried tomatoes.", "ar": "حرارة فلفل شقراء تلتقي بحلاوة الطماطم المجففة المركزة." },
-        "badge": { "en": "Bold & Spicy", "ar": "حار وجريء" },
+        "category": {
+          "en": "Artisanal Dried Tomatoes",
+          "ar": "طماطم مجففة فاخرة"
+        },
+        "tagline": {
+          "en": "Bold heat meets sweet sun-dried tomatoes.",
+          "ar": "حرارة فلفل شقراء تلتقي بحلاوة الطماطم المجففة المركزة."
+        },
+        "badge": {
+          "en": "Bold & Spicy",
+          "ar": "حار وجريء"
+        },
         "description": {
           "en": "A daring creation combining sweet sun-dried tomatoes with our fiery Shaqra crushed hot pepper and olive oil. Perfect for spice lovers seeking bold, memorable depth.",
           "ar": "ابتكار جريء يجمع بين حلاوة الطماطم المجففة وحرارة فلفل شقراء الشهير، مغمورة في زيت الزيتون لتقدم لك تجربة استثنائية لعشاق الأطباق الحارة المتقنة."
         },
         "image": "https://cdn.sanity.io/images/tokh7kkd/production/ff94dcf9c15858eb5b62b1bdfaa107bfa79f64c6-1024x1024.jpg",
-        "gallery": ["https://cdn.sanity.io/images/tokh7kkd/production/ff94dcf9c15858eb5b62b1bdfaa107bfa79f64c6-1024x1024.jpg", "https://cdn.sanity.io/images/tokh7kkd/production/3a5f8e54412cb3e94197930d8a955cf68898fc46-1200x896.jpg"],
+        "gallery": [
+          "https://cdn.sanity.io/images/tokh7kkd/production/ff94dcf9c15858eb5b62b1bdfaa107bfa79f64c6-1024x1024.jpg",
+          "https://cdn.sanity.io/images/tokh7kkd/production/3a5f8e54412cb3e94197930d8a955cf68898fc46-1200x896.jpg"
+        ],
         "inSeason": true,
         "highlights": [
-          { "en": "Infused with genuine crushed Shaqra hot chili", "ar": "متبلة بفلفل شقراء الحار المجروش الحقيقي" },
-          { "en": "Bold fiery kick with rich umami sweetness", "ar": "حرارة ممتعة تتكامل مع حلاوة الطماطم المركزة" },
-          { "en": "Sensational for dips, flatbreads, and spicy stews", "ar": "رائعة للتغميسات والخبز المحمص والإيدامات الحارة" }
+          {
+            "en": "Infused with genuine crushed Shaqra hot chili",
+            "ar": "متبلة بفلفل شقراء الحار المجروش الحقيقي"
+          },
+          {
+            "en": "Bold fiery kick with rich umami sweetness",
+            "ar": "حرارة ممتعة تتكامل مع حلاوة الطماطم المركزة"
+          },
+          {
+            "en": "Sensational for dips, flatbreads, and spicy stews",
+            "ar": "رائعة للتغميسات والخبز المحمص والإيدامات الحارة"
+          }
         ],
-        "bestPairedWith": { "en": "Warm flatbread, halloumi cheese, and shakshuka", "ar": "الخبز الساخن، جبن الحلوم المشوي، وشكشوكة الصباح" }
+        "bestPairedWith": {
+          "en": "Warm flatbread, halloumi cheese, and shakshuka",
+          "ar": "الخبز الساخن، جبن الحلوم المشوي، وشكشوكة الصباح"
+        }
       }
     ]
   },
@@ -660,73 +1314,529 @@
     "items": [
       {
         "id": "salad",
-        "name": { "en": "Salads", "ar": "السلطات" },
+        "name": {
+          "en": "Salads",
+          "ar": "السلطات"
+        },
         "category": "classic",
         "iconName": "salad",
-        "description": { "en": "Tossed into green arugula, burrata, or quinoa bowls.", "ar": "إضافة رائعة لسلطات الجرجير، البوراتا، والكينوا." }
+        "description": {
+          "en": "Tossed into green arugula, burrata, or quinoa bowls.",
+          "ar": "إضافة رائعة لسلطات الجرجير، البوراتا، والكينوا."
+        }
       },
       {
         "id": "pasta",
-        "name": { "en": "Pasta", "ar": "المكرونة" },
+        "name": {
+          "en": "Pasta",
+          "ar": "المكرونة"
+        },
         "category": "classic",
         "iconName": "pasta",
-        "description": { "en": "Folded into warm fettuccine or penne with parmesan.", "ar": "تُخلط مع المكرونة الساخنة وزيت الزيتون وجبن البارميزان." }
+        "description": {
+          "en": "Folded into warm fettuccine or penne with parmesan.",
+          "ar": "تُخلط مع المكرونة الساخنة وزيت الزيتون وجبن البارميزان."
+        }
       },
       {
         "id": "pizza",
-        "name": { "en": "Pizza", "ar": "البيتزا" },
+        "name": {
+          "en": "Pizza",
+          "ar": "البيتزا"
+        },
         "category": "classic",
         "iconName": "pizza",
-        "description": { "en": "Topped on sourdough flatbreads and artisanal pies.", "ar": "فوق عجينة البيتزا الحرفية والمخبوزات لإعطاء نكهة كراميلية." }
+        "description": {
+          "en": "Topped on sourdough flatbreads and artisanal pies.",
+          "ar": "فوق عجينة البيتزا الحرفية والمخبوزات لإعطاء نكهة كراميلية."
+        }
       },
       {
         "id": "sandwich",
-        "name": { "en": "Sandwiches", "ar": "الساندويتشات" },
+        "name": {
+          "en": "Sandwiches",
+          "ar": "الساندويتشات"
+        },
         "category": "classic",
         "iconName": "sandwich",
-        "description": { "en": "Layered with grilled halloumi, turkey, or labneh.", "ar": "مع الحلوم المشوي، والديك الرومي، واللبنة الريفية." }
+        "description": {
+          "en": "Layered with grilled halloumi, turkey, or labneh.",
+          "ar": "مع الحلوم المشوي، والديك الرومي، واللبنة الريفية."
+        }
       },
       {
         "id": "appetizers",
-        "name": { "en": "Appetizers", "ar": "المقبلات" },
+        "name": {
+          "en": "Appetizers",
+          "ar": "المقبلات"
+        },
         "category": "classic",
         "iconName": "appetizers",
-        "description": { "en": "Bruschetta, antipasto platters, and savory canapés.", "ar": "فوق البروشيتا وأطباق المقبلات والمقرمشات الراقية." }
+        "description": {
+          "en": "Bruschetta, antipasto platters, and savory canapés.",
+          "ar": "فوق البروشيتا وأطباق المقبلات والمقرمشات الراقية."
+        }
       },
       {
         "id": "cheese",
-        "name": { "en": "Artisan Cheese", "ar": "الأجبان الفاخرة" },
+        "name": {
+          "en": "Artisan Cheese",
+          "ar": "الأجبان الفاخرة"
+        },
         "category": "classic",
         "iconName": "cheese",
-        "description": { "en": "Paired with goat cheese, feta, or creamy burrata.", "ar": "تتناغم ببراعة مع جبن الماعز، والفيتا، والبوراتا الطازجة." }
+        "description": {
+          "en": "Paired with goat cheese, feta, or creamy burrata.",
+          "ar": "تتناغم ببراعة مع جبن الماعز، والفيتا، والبوراتا الطازجة."
+        }
       },
       {
         "id": "bread",
-        "name": { "en": "Warm Bread", "ar": "الخبز الساخن" },
+        "name": {
+          "en": "Warm Bread",
+          "ar": "الخبز الساخن"
+        },
         "category": "classic",
         "iconName": "bread",
-        "description": { "en": "Served with warm focaccia, sourdough, or Tamees.", "ar": "مع الخبز الريفي المحمص، وخبز التميس الساخن، والفوكاتشيا." }
+        "description": {
+          "en": "Served with warm focaccia, sourdough, or Tamees.",
+          "ar": "مع الخبز الريفي المحمص، وخبز التميس الساخن، والفوكاتشيا."
+        }
       },
       {
         "id": "edamat",
-        "name": { "en": "Saudi Stews (الإيدامات)", "ar": "الإيدامات السعودية" },
+        "name": {
+          "en": "Saudi Stews (الإيدامات)",
+          "ar": "الإيدامات السعودية"
+        },
         "category": "saudi",
         "iconName": "pot",
-        "description": { "en": "Added during simmering for deep natural sweetness and umami in vegetable and meat stews.", "ar": "تُضاف مع تسبك الإيدام لتعطي قواماً غنياً ولوناً عميقاً وحلاوة طبيعية ترفع طعم الخضار واللحم." }
+        "description": {
+          "en": "Added during simmering for deep natural sweetness and umami in vegetable and meat stews.",
+          "ar": "تُضاف مع تسبك الإيدام لتعطي قواماً غنياً ولوناً عميقاً وحلاوة طبيعية ترفع طعم الخضار واللحم."
+        }
       },
       {
         "id": "dips",
-        "name": { "en": "Artisan Dips (التغميسات)", "ar": "التغميسات المبتكرة" },
+        "name": {
+          "en": "Artisan Dips (التغميسات)",
+          "ar": "التغميسات المبتكرة"
+        },
         "category": "saudi",
         "iconName": "dip",
-        "description": { "en": "Blended with labneh, feta, or garlic tahini for sensational dips.", "ar": "تُهرس مع اللبنة، أو جبنة الفيتا، أو الطحينة بالثوم لابتكار أروع تغميسة للمائدة والضيافة." }
+        "description": {
+          "en": "Blended with labneh, feta, or garlic tahini for sensational dips.",
+          "ar": "تُهرس مع اللبنة، أو جبنة الفيتا، أو الطحينة بالثوم لابتكار أروع تغميسة للمائدة والضيافة."
+        }
       },
       {
         "id": "kashna",
-        "name": { "en": "Kashna for Jareesh & Kabsa (كشنة الجريش والكبسة)", "ar": "كشنة الجريش والكبسة" },
+        "name": {
+          "en": "Kashna for Jareesh & Kabsa (كشنة الجريش والكبسة)",
+          "ar": "كشنة الجريش والكبسة"
+        },
         "category": "saudi",
         "iconName": "flame",
-        "description": { "en": "Fried lightly with onions, ghee, and dried black lemon as a luxurious topping for Najdi Jareesh and fragrant Kabsa.", "ar": "تُشوح مع البصل والسمن البري واللومي ككشنة فاخرة تتوج طبق الجريش النجدي والكبسة الشهية." }
+        "description": {
+          "en": "Fried lightly with onions, ghee, and dried black lemon as a luxurious topping for Najdi Jareesh and fragrant Kabsa.",
+          "ar": "تُشوح مع البصل والسمن البري واللومي ككشنة فاخرة تتوج طبق الجريش النجدي والكبسة الشهية."
+        }
+      }
+    ]
+  },
+  "recipesSection": {
+    "eyebrow": {
+      "en": "From Our Kitchen · 04",
+      "ar": "من مطبخنا · ٠٤"
+    },
+    "title": {
+      "en": "Culinary Recipes & Ways to Savour",
+      "ar": "وصفات الطهي وطرق التقديم"
+    },
+    "videoInstruction": {
+      "en": "Click any recipe to view steps & listen to audio guide",
+      "ar": "انقر على أي طريقة لعرض المقادير وطريقة التحضير أو الاستماع للشرح"
+    },
+    "journalTag": {
+      "en": "THE BLOSSOM VALLEY KITCHEN / 2026",
+      "ar": "مطبخ وادي النوار / ٢٠٢٦"
+    },
+    "items": [
+      {
+        "id": "recipe-01",
+        "number": "01",
+        "displayOrder": 1,
+        "title": {
+          "en": "Saudi Stews (Edamat)",
+          "ar": "الإيدامات السعودية الفاخرة"
+        },
+        "subtitle": {
+          "en": "Simmered into rich vegetable or meat stews for deep natural umami sweetness and radiant color.",
+          "ar": "تُضاف مع تسبك الإيدام لتعطي قواماً غنياً ولوناً عميقاً وحلاوة طبيعية ترفع طعم الخضار واللحم."
+        },
+        "image": "https://cdn.sanity.io/images/tokh7kkd/production/ce32bd1c5f991c740a40ad11105faede872c225f-1024x1024.jpg",
+        "prepTime": {
+          "en": "25 mins",
+          "ar": "٢٥ دقيقة"
+        },
+        "servings": {
+          "en": "4-6 persons",
+          "ar": "٤-٦ أشخاص"
+        },
+        "ingredients": [
+          {
+            "en": "3 tbsp Blossom Valley dried tomatoes (chopped)",
+            "ar": "٣ ملاعق كبيرة طماطم مجففة من وادي النوار (مقطعة)"
+          },
+          {
+            "en": "2 tbsp olive oil from the tomato jar",
+            "ar": "ملعقتان كبيرتان من زيت الزيتون من برطمان الطماطم"
+          },
+          {
+            "en": "1 medium onion (finely diced)",
+            "ar": "بصلة متوسطة مفرومة ناعماً"
+          },
+          {
+            "en": "2 cloves garlic (minced)",
+            "ar": "فصان ثوم مهروس"
+          },
+          {
+            "en": "Mixed seasonal vegetables (potatoes, zucchini, carrots)",
+            "ar": "خضار مشكلة طازجة (بطاطس، كوسة، جزر)"
+          },
+          {
+            "en": "1 tsp Saudi mixed Baharat spice",
+            "ar": "ملعقة صغيرة بهارات سعودية مشكلة"
+          }
+        ],
+        "steps": [
+          {
+            "en": "Heat olive oil from the jar in a heavy pot over medium heat and sauté onions until golden.",
+            "ar": "سخّن زيت الزيتون المأخوذ من برطمان الطماطم في قدر عميق على نار متوسطة وشوّح البصل حتى يكتسب لوناً ذهبياً."
+          },
+          {
+            "en": "Add minced garlic and Blossom Valley sun-dried tomatoes, stirring for 2 minutes to release fragrant aromas.",
+            "ar": "أضف الثوم وطماطم وادي النوار المجففة، وقلّب لمدة دقيقتين لتتحرر النكهات العطرية الزكية."
+          },
+          {
+            "en": "Add vegetables, broth, and spices. Simmer on low heat until tender and naturally thickened.",
+            "ar": "أضف الخضار والمرق والبهارات، واترك الإيدام يتسبك على نار هادئة حتى ينضج وتتكاثف الصلصة بنكهة مركزة."
+          }
+        ],
+        "chefTip": {
+          "en": "The infused olive oil from our jar contains natural herbs that enrich the stew without artificial bouillon cubes.",
+          "ar": "زيت الزيتون المشبع بالأعشاب الطبيعية في البرطمان يغنيك عن أي مكعبات نكهة مصنعة."
+        }
+      },
+      {
+        "id": "recipe-02",
+        "number": "02",
+        "displayOrder": 2,
+        "title": {
+          "en": "Artisan Dips & Spreads",
+          "ar": "التغميسات المبتكرة للضيافة"
+        },
+        "subtitle": {
+          "en": "Blended with creamy labneh, Greek feta, or tahini for sensational family and party dips.",
+          "ar": "تُخلط مع اللبنة، أو جبنة الفيتا، أو الطحينة بالثوم لابتكار أروع تغميسة للمائدة والضيافة."
+        },
+        "image": "https://cdn.sanity.io/images/tokh7kkd/production/aab6d4197ee893e7c320dd74881d7a41b6114744-1024x1024.jpg",
+        "prepTime": {
+          "en": "10 mins",
+          "ar": "١٠ دقائق"
+        },
+        "servings": {
+          "en": "4-6 persons",
+          "ar": "٤-٦ أشخاص"
+        },
+        "ingredients": [
+          {
+            "en": "1 cup strained labneh or creamy feta cheese",
+            "ar": "كوب لبنة بلدية متماسكة أو جبن فيتا كريمي"
+          },
+          {
+            "en": "4-5 Blossom Valley dried tomatoes",
+            "ar": "٤-٥ حبات طماطم مجففة من وادي النوار"
+          },
+          {
+            "en": "1 tbsp infused olive oil from jar",
+            "ar": "ملعقة كبيرة زيت زيتون متبل من البرطمان"
+          },
+          {
+            "en": "Pinch of Blossom Valley crushed hot pepper",
+            "ar": "رشة فلفل حار مجروش من وادي النوار"
+          },
+          {
+            "en": "Fresh mint leaves and warm bread for dipping",
+            "ar": "أوراق نعناع طازج وخبز محمص للتقديم"
+          }
+        ],
+        "steps": [
+          {
+            "en": "Finely chop Blossom Valley dried tomatoes with a drizzle of their jar olive oil.",
+            "ar": "افرم حبات الطماطم المجففة فرماً ناعماً مع قليل من زيت الزيتون المتبل من البرطمان."
+          },
+          {
+            "en": "Fold half the chopped tomatoes into the cold labneh or whipped feta until marbled.",
+            "ar": "امزج نصف كمية الطماطم المفرومة داخل اللبنة أو الفيتا بلطف حتى تتجانس النكهات."
+          },
+          {
+            "en": "Spread into a wide serving bowl, top with remaining tomatoes, a drizzle of jar oil, and a dash of hot pepper.",
+            "ar": "افرد المزيج في طبق التقديم وزينه ببقية الطماطم ورشة زيت زيتون وفلفل مجروش مع النعناع."
+          }
+        ],
+        "chefTip": {
+          "en": "Serve alongside warm sourdough flatbread or Saudi Tamees for the ultimate breakfast centerpiece.",
+          "ar": "قدّم التغميسة بجانب خبز التميس الساخن أو المقرمشات الحرفية لمائدة إفطار فاخرة."
+        }
+      },
+      {
+        "id": "recipe-03",
+        "number": "03",
+        "displayOrder": 3,
+        "title": {
+          "en": "Kashna for Jareesh & Kabsa",
+          "ar": "كشنة الجريش والكبسة النجدية"
+        },
+        "subtitle": {
+          "en": "Lightly sautéed with sweet onions, pure ghee, and dried black lemon as a luxurious aromatic crown.",
+          "ar": "تُشوح مع البصل والسمن البري واللومي ككشنة فاخرة تتوج طبق الجريش النجدي والكبسة الشهية."
+        },
+        "image": "https://cdn.sanity.io/images/tokh7kkd/production/4857e3ed1e05cffca5eca49573f137da8441a021-1024x1024.jpg",
+        "prepTime": {
+          "en": "15 mins",
+          "ar": "١٥ دقيقة"
+        },
+        "servings": {
+          "en": "6-8 persons",
+          "ar": "٦-٨ أشخاص"
+        },
+        "ingredients": [
+          {
+            "en": "4 tbsp Blossom Valley dried tomatoes (finely diced)",
+            "ar": "٤ ملاعق كبيرة طماطم مجففة من وادي النوار (مقطعة مكعبات صغيرة)"
+          },
+          {
+            "en": "2 large onions (finely chopped)",
+            "ar": "بصلتان كبيرتان مفرومتان ناعماً"
+          },
+          {
+            "en": "2 tbsp pure local ghee or olive oil",
+            "ar": "ملعقتان كبيرتان سمن بري أصيل أو زيت زيتون"
+          },
+          {
+            "en": "1 tsp ground black lemon (Loomi)",
+            "ar": "ملعقة صغيرة ليمون أسود (لومي) مطحون"
+          },
+          {
+            "en": "1/2 tsp Blossom Valley crushed hot chili",
+            "ar": "نصف ملعقة صغيرة فلفل شقراء الحار المجروش"
+          }
+        ],
+        "steps": [
+          {
+            "en": "Melt ghee in a wide skillet, add onions, and sauté slowly until caramelised and golden.",
+            "ar": "سخّن السمن البري في مقلاة واسعة، ثم أضف البصل وقلّبه على نار هادئة حتى يتكرمل ويكتسب لوناً عنبرياً."
+          },
+          {
+            "en": "Add Blossom Valley dried tomatoes and crushed chili; stir gently for 3 minutes over low flame.",
+            "ar": "أضف مكعبات طماطم وادي النوار المجففة والفلفل المجروش، وحرّك بهدوء لمدة ٣ دقائق على نار خفيفة."
+          },
+          {
+            "en": "Stir in ground black lemon, remove from heat, and spoon generously over steaming Jareesh or Kabsa rice.",
+            "ar": "أضف اللومي المطحون وارفع المقلاة عن النار، ثم وزّع الكشنة الفاخرة فوق طبق الجريش أو الكبسة الساخن."
+          }
+        ],
+        "chefTip": {
+          "en": "The concentrated umami and gentle tang of dried tomatoes balance the rich butteriness of Najdi Jareesh.",
+          "ar": "حموضة الطماطم الطبيعية المركزة تكسر دسامة الجريش والسمن وتمنح الطبق توازناً استثنائياً."
+        }
+      },
+      {
+        "id": "recipe-04",
+        "number": "04",
+        "displayOrder": 4,
+        "title": {
+          "en": "Salads & Fresh Burrata",
+          "ar": "السلطات وجبن البوراتا الطازج"
+        },
+        "subtitle": {
+          "en": "Tossed with peppery baby arugula, creamy burrata, or quinoa bowls with infused olive oil dressing.",
+          "ar": "تُخلط مع أوراق الجرجير، وجبنة البوراتا الطازجة، أو الكينوا مع قطرات من زيت التتبيلة."
+        },
+        "image": "https://cdn.sanity.io/images/tokh7kkd/production/3db7c9046d9ade796a1b9ad0292a572b4dda5142-1024x1024.jpg",
+        "prepTime": {
+          "en": "8 mins",
+          "ar": "٨ دقائق"
+        },
+        "servings": {
+          "en": "2-4 persons",
+          "ar": "٢-٤ أشخاص"
+        },
+        "ingredients": [
+          {
+            "en": "1 fresh burrata or buffalo mozzarella ball",
+            "ar": "كرة جبنة بوراتا طازجة أو موزاريلا بافلو"
+          },
+          {
+            "en": "6 pieces Blossom Valley sun-dried tomatoes",
+            "ar": "٦ قطع طماطم مجففة من وادي النوار"
+          },
+          {
+            "en": "2 cups wild baby arugula leaves",
+            "ar": "كوبان أوراق جرجير بري طازج"
+          },
+          {
+            "en": "2 tbsp balsamic reduction or pomegranate molasses",
+            "ar": "ملعقتان دبس رمان أو بلسميك مركز"
+          },
+          {
+            "en": "2 tbsp herb olive oil from the jar",
+            "ar": "ملعقتان كبيرتان من زيت الأعشاب من برطمان الطماطم"
+          }
+        ],
+        "steps": [
+          {
+            "en": "Arrange fresh arugula leaves across a chilled serving platter as a lush base.",
+            "ar": "وزّع أوراق الجرجير البري الطازج في طبق التقديم كقاعدة خضراء نضرة."
+          },
+          {
+            "en": "Place the whole burrata ball in the center and tear it open slightly to reveal the creamy stracciatella.",
+            "ar": "ضع كرة البوراتا في المنتصف وافتحها بخفة لإبراز قلبها الكريمي الطازج."
+          },
+          {
+            "en": "Scatter Blossom Valley dried tomatoes around and drizzle with jar herb oil and pomegranate molasses.",
+            "ar": "وزّع شرائح طماطم وادي النوار حول الجبن ورش الزيت المتبل مع خيوط دبس الرمان الفاخر."
+          }
+        ],
+        "chefTip": {
+          "en": "No extra salt is needed; the natural concentration of the dried tomatoes seasons the mild burrata perfectly.",
+          "ar": "لا داعي لإضافة الملح؛ طماطم وادي النوار بتركيزها الطبيعي تتبل البوراتا بدقة متناهية."
+        }
+      },
+      {
+        "id": "recipe-05",
+        "number": "05",
+        "displayOrder": 5,
+        "title": {
+          "en": "Pasta & Sourdough Pizza",
+          "ar": "المكرونة والبيتزا الحرفية"
+        },
+        "subtitle": {
+          "en": "Folded into warm fettuccine or penne with parmesan, or scattered over artisanal sourdough crusts.",
+          "ar": "تُقلب مع المكرونة الساخنة وزيت الزيتون، أو فوق فطائر البيتزا والفوكاتشيا لإعطاء نكهة كراميلية."
+        },
+        "image": "https://cdn.sanity.io/images/tokh7kkd/production/784402429e52d14872bb0c643440ca8615694934-1024x1024.jpg",
+        "prepTime": {
+          "en": "20 mins",
+          "ar": "٢٠ دقيقة"
+        },
+        "servings": {
+          "en": "3-4 persons",
+          "ar": "٣-٤ أشخاص"
+        },
+        "ingredients": [
+          {
+            "en": "300g artisanal pasta (fettuccine or penne)",
+            "ar": "٣٠٠ غرام مكرونة إيطالية (فيتوتشيني أو بيني)"
+          },
+          {
+            "en": "1/2 cup Blossom Valley dried tomatoes (sliced)",
+            "ar": "نصف كوب طماطم مجففة من وادي النوار (مقطعة شرائح)"
+          },
+          {
+            "en": "3 tbsp infused olive oil from jar",
+            "ar": "٣ ملاعق كبيرة زيت زيتون متبل من البرطمان"
+          },
+          {
+            "en": "3 cloves garlic (sliced thin)",
+            "ar": "٣ فصوص ثوم مقطعة شرائح رفيعة"
+          },
+          {
+            "en": "1/2 cup fresh grated Parmesan Reggiano",
+            "ar": "نصف كوب جبن بارميزان طازج مبشور"
+          }
+        ],
+        "steps": [
+          {
+            "en": "Boil pasta in well-salted water until al dente; reserve 1/2 cup pasta cooking water.",
+            "ar": "اسلق المكرونة في ماء مملح حتى تنضج مع احتفاظها بالقوام (ألدينتي)، واحتفظ بنصف كوب من ماء السلق."
+          },
+          {
+            "en": "In a wide skillet, gently warm garlic slices in jar olive oil over low heat until fragrant.",
+            "ar": "في مقلاة واسعة، سخّن شرائح الثوم في زيت الزيتون المأخوذ من برطمان الطماطم على نار هادئة."
+          },
+          {
+            "en": "Toss in pasta, dried tomatoes, pasta water, and parmesan. Stir vigorously until a silky sauce coats every strand.",
+            "ar": "أضف المكرونة وشرائح الطماطم وماء السلق والبارميزان، وقلّب بحركة دائرية سريعة حتى تتكون صلصة حريرية لامعة."
+          }
+        ],
+        "chefTip": {
+          "en": "For sourdough pizza, add the dried tomatoes after baking or during the last 2 minutes so they don't over-caramelize.",
+          "ar": "في البيتزا، أضف الطماطم المجففة في الدقيقتين الأخيرتين من الخبز للحفاظ على طراوتها ونكهتها الزيتية."
+        }
+      },
+      {
+        "id": "recipe-06",
+        "number": "06",
+        "displayOrder": 6,
+        "title": {
+          "en": "Sandwiches, Cheese & Bread",
+          "ar": "الساندويتشات والأجبان والخبز الساخن"
+        },
+        "subtitle": {
+          "en": "Layered with grilled halloumi, roasted turkey, artisan cheeses, and warm crusty artisan bread.",
+          "ar": "مع الحلوم المشوي، والديك الرومي، وأطباق المقبلات والخبز المحمص الساخن لجلسات شاي مميزة."
+        },
+        "image": "https://cdn.sanity.io/images/tokh7kkd/production/295d34646afca9dfbee9e805f8769052b71b66d3-1024x1024.jpg",
+        "prepTime": {
+          "en": "7 mins",
+          "ar": "٧ دقائق"
+        },
+        "servings": {
+          "en": "2 persons",
+          "ar": "شخصان"
+        },
+        "ingredients": [
+          {
+            "en": "4 slices sourdough or rustic baguette",
+            "ar": "٤ شرائح خبز ريفي أو ساوردو محمص"
+          },
+          {
+            "en": "4 thick slices halloumi cheese (pan-seared)",
+            "ar": "٤ شرائح سميكة جبن حلوم مشوي ذهبي"
+          },
+          {
+            "en": "4 pieces Blossom Valley dried tomatoes",
+            "ar": "٤ قطع طماطم مجففة من وادي النوار"
+          },
+          {
+            "en": "Fresh basil or za'atar leaves",
+            "ar": "أوراق ريحان أو زعتر بري طازج"
+          },
+          {
+            "en": "1 tbsp olive oil from jar for brushing",
+            "ar": "ملعقة كبيرة زيت زيتون متبل من البرطمان لدهن الخبز"
+          }
+        ],
+        "steps": [
+          {
+            "en": "Brush crusty bread with infused olive oil from the jar and grill until crunchy.",
+            "ar": "ادهن شرائح الخبز بزيت الزيتون العطري من البرطمان وحمصها في المقلاة حتى تقرمش."
+          },
+          {
+            "en": "Pan-sear halloumi slices until golden-brown on both sides.",
+            "ar": "اشوِ شرائح الحلوم في مقلاة جافة حتى تكتسب لوناً ذهبياً شهياً من الجهتين."
+          },
+          {
+            "en": "Layer warm halloumi onto bread, crown with Blossom Valley dried tomatoes, and garnish with fresh basil.",
+            "ar": "ضع الحلوم المشوي فوق الخبز، وتوّجه بشرائح طماطم وادي النوار وأوراق الريحان الطازجة."
+          }
+        ],
+        "chefTip": {
+          "en": "The slight salinity of grilled halloumi matches wonderfully with the gentle sweet acidity of our slow-dried tomatoes.",
+          "ar": "ملوحة جبن الحلوم المشوي تتناغم ببراعة فائقة مع الحلاوة الحمضية الخفيفة لطماطم وادي النوار."
+        }
       }
     ]
   },

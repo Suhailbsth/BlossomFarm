@@ -81,6 +81,28 @@ export interface RecipeItem {
   videoUrl?: string;
   videoFileUrl?: string;
   displayOrder?: number;
+  prepTime?: BilingualText;
+  servings?: BilingualText;
+  ingredients?: BilingualText[];
+  steps?: BilingualText[];
+  chefTip?: BilingualText;
+  audioUrl?: string;
+}
+
+export interface NaimiSectionContent {
+  eyebrow: BilingualText;
+  title: BilingualText;
+  subtitle: BilingualText;
+  description: BilingualText;
+  badge: BilingualText;
+  imageUrl: string;
+  images?: string[];
+  gallery?: string[];
+  videoUrl?: string;
+  videoFileUrl?: string;
+  highlights: BilingualText[];
+  specs: { label: BilingualText; value: BilingualText }[];
+  ctaWhatsApp: BilingualText;
 }
 
 export interface RecipesSection {
@@ -143,7 +165,13 @@ export interface SiteContent {
     ctaWhatsApp: BilingualText;
     statsPill: BilingualText;
     heroImageUrl?: string;
+    heroImages?: string[];
+    videoUrl?: string;
+    videoFileUrl?: string;
+    posterImageUrl?: string;
+    whatsAppNumber?: string;
   };
+  naimiSection?: NaimiSectionContent;
   about: {
     eyebrow: BilingualText;
     title: BilingualText;
@@ -151,6 +179,8 @@ export interface SiteContent {
     quoteAuthor: BilingualText;
     storyParagraphs: BilingualText[];
     imageUrl?: string;
+    images?: string[];
+    gallery?: string[];
     videoPlaceholder: {
       title: BilingualText;
       subtitle: BilingualText;

@@ -91,26 +91,27 @@ export default function Footer({ content, whatsAppNumber }: FooterProps) {
   const socialLinks = content?.footer?.socialLinks || [];
 
   return (
-    <footer className="bg-ink px-6 sm:px-10 lg:px-16 2xl:px-20 py-16 text-white border-t border-white/10">
-      <div className="mx-auto flex max-w-[1440px] flex-col items-start justify-between gap-10 sm:flex-row sm:items-end">
-        {/* Left Side: Brand Name & Closing Tagline */}
-        <div className="max-w-xl">
-          <p className="font-display text-3xl font-semibold text-white tracking-tight">
+    <footer className="bg-footer-bg px-6 sm:px-10 lg:px-16 2xl:px-20 pt-16 pb-10 text-white border-t border-white/10">
+      {/* Main Footer Grid: Brand + Nav + CTA */}
+      <div className="mx-auto grid max-w-[1440px] gap-12 sm:grid-cols-[1fr_auto] lg:grid-cols-[1fr_auto_auto] lg:items-start">
+        {/* Left: Brand Name & Closing Tagline */}
+        <div className="max-w-sm">
+          <p className="font-display text-2xl sm:text-3xl font-semibold text-white tracking-tight">
             {isAr ? 'وادي النوار' : 'The Blossom Valley'}
           </p>
-          <p className="mt-3 text-sm sm:text-base text-white/90 font-medium leading-relaxed">
+          <p className="mt-3 text-sm text-white/75 leading-relaxed">
             {closingTagline}
           </p>
 
           {/* Location / Google Maps */}
-          <div className="mt-3 flex items-center gap-2 text-xs text-white/70">
-            <MapPin size={14} className="text-harvest-gold shrink-0" />
+          <div className="mt-4 flex items-center gap-2 text-xs text-white/60">
+            <MapPin size={13} className="text-primary shrink-0" />
             {content?.footer?.googleMapsUrl ? (
               <a
                 href={content.footer.googleMapsUrl}
                 target="_blank"
                 rel="noreferrer"
-                className="hover:text-harvest-gold transition-colors underline-offset-2 hover:underline"
+                className="hover:text-emerald-400 transition-colors underline-offset-2 hover:underline"
               >
                 {locationText}
               </a>
@@ -121,7 +122,7 @@ export default function Footer({ content, whatsAppNumber }: FooterProps) {
 
           {/* Social Links */}
           {socialLinks.length > 0 && (
-            <div className="mt-5 flex items-center gap-3">
+            <div className="mt-5 flex items-center gap-2.5">
               {socialLinks.map((item, idx) => (
                 <a
                   key={idx}
@@ -129,7 +130,7 @@ export default function Footer({ content, whatsAppNumber }: FooterProps) {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={item.platform}
-                  className="size-9 rounded-full bg-white/10 hover:bg-harvest-gold hover:text-ink flex items-center justify-center transition-all hover:scale-110"
+                  className="size-8 rounded-full bg-white/10 hover:bg-primary hover:text-white flex items-center justify-center transition-all"
                 >
                   <SocialIcon platform={item.platform} />
                 </a>
@@ -138,22 +139,45 @@ export default function Footer({ content, whatsAppNumber }: FooterProps) {
           )}
         </div>
 
-        {/* Right Side: Harvest-Gold Pill WhatsApp CTA matching reference */}
-        <div className="flex flex-col items-start sm:items-end gap-3 shrink-0">
+        {/* Center: Quick Navigation */}
+        <nav className="hidden lg:flex flex-col gap-2.5 text-xs font-medium text-white/60">
+          <p className="text-[10px] font-bold uppercase tracking-widest text-white/30 mb-1">
+            {isAr ? 'روابط سريعة' : 'Quick links'}
+          </p>
+          {[
+            { href: '#livestock', ar: 'خرفان النعيمي', en: 'Naimi Sheep' },
+            { href: '#farm', ar: 'عن المزرعة', en: 'Our Farm' },
+            { href: '#varieties', ar: 'المنتجات', en: 'Products' },
+            { href: '#storage', ar: 'إرشادات الحفظ', en: 'Storage Tips' },
+            { href: '#recipes', ar: 'الوصفات', en: 'Recipes' },
+          ].map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="hover:text-emerald-400 transition-colors"
+            >
+              {isAr ? link.ar : link.en}
+            </a>
+          ))}
+        </nav>
+
+        {/* Right: WhatsApp CTA */}
+        <div className="flex flex-col items-start lg:items-end gap-3 shrink-0">
           <a
             href={whatsAppLink}
             target="_blank"
             rel="noreferrer"
-            className="h-12 rounded-full bg-harvest-gold px-6 text-ink shadow-none hover:bg-harvest-gold/90 font-bold inline-flex items-center gap-2.5 transition-transform hover:scale-105 shrink-0"
+            className="btn-primary h-12 px-6 font-bold shrink-0 text-sm"
           >
-            <MessageCircle size={18} className="fill-current text-ink" />
+            <MessageCircle size={18} />
             <span>{isAr ? 'تواصل معنا' : 'Chat with us'}</span>
+            <span className="text-sm font-bold transition-transform rtl:rotate-180">→</span>
           </a>
         </div>
       </div>
 
       {/* Bottom Bar: Copyright & Commercial License */}
-      <div className="mx-auto max-w-[1440px] mt-12 pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/50">
+      <div className="mx-auto max-w-[1440px] mt-12 pt-6 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-white/40">
         <p>{copyrightText}</p>
         {content?.footer?.commercialRegistration && (
           <p className="font-mono">

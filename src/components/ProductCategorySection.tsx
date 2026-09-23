@@ -106,7 +106,7 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
       <Link
         key={prod?.id || `${cat.id}-${prodIndex}`}
         href={linkHref}
-        className="group block border border-border p-6 sm:p-8 transition-colors hover:border-primary bg-background"
+        className="group block card-standard p-6 sm:p-8 transition-all hover:border-primary hover:shadow-md"
       >
         <div className="flex items-center justify-between mb-4">
           <span className="editorial-kicker text-primary font-bold">
@@ -119,7 +119,7 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
         </div>
 
         {imgSrc && (
-          <div className="relative aspect-[16/9] w-full overflow-hidden bg-paper mb-5">
+          <div className="relative aspect-[16/10] w-full overflow-hidden bg-paper mb-5 rounded-xl border border-border/40">
             <Image
               src={imgSrc}
               alt={title}
@@ -143,7 +143,7 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
   };
 
   return (
-    <section id="varieties" className="scroll-mt-20 px-6 sm:px-10 lg:px-16 2xl:px-20 py-20 sm:py-28">
+    <section id="varieties" className="scroll-mt-24 px-6 sm:px-10 lg:px-16 2xl:px-20 py-16 sm:py-24">
       <Reveal className="mx-auto max-w-[1440px]">
         {/* Header matching reference site */}
         <div className="grid gap-8 border-b border-border pb-10 md:grid-cols-2 md:items-end">
@@ -278,7 +278,7 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                       </p>
                     )}
 
-                    <div className={`gap-0 border-y border-border ${colsClass}`}>
+                    <div className={`gap-0 border-y border-border/50 ${colsClass}`}>
                       {displayProducts.map((prod, pIdx) => {
                         const swatches = ['swatch-2', 'swatch-1', 'swatch-3', 'swatch-4'];
                         const swatchClass = swatches[pIdx % swatches.length];
@@ -288,11 +288,11 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                           <Link
                             key={prod.id}
                             href={`/products/${prod.id}`}
-                            className="group flex items-center justify-between border-b border-border py-6 last:border-b-0 sm:border-b-0 sm:border-e sm:px-6 sm:first:ps-0 sm:last:border-e-0 transition-colors hover:bg-paper/40"
+                            className="group flex items-center justify-between border-b border-border/50 py-6 last:border-b-0 sm:border-b-0 sm:border-e sm:border-border/50 sm:px-6 sm:first:ps-0 sm:last:border-e-0 transition-colors hover:bg-paper/40"
                           >
                             <div className="flex items-center gap-4">
                               {prod.image ? (
-                                <div className="relative size-11 shrink-0 overflow-hidden rounded-full border border-border shadow-xs bg-paper">
+                                <div className="relative size-11 shrink-0 overflow-hidden rounded-full border border-border/50 shadow-2xs bg-paper">
                                   <Image
                                     src={prod.image}
                                     alt={t(prod.name)}
@@ -302,7 +302,7 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                                   />
                                 </div>
                               ) : (
-                                <span className={`size-10 shrink-0 rounded-full ${swatchClass} flex items-center justify-center text-xs font-bold shadow-xs`}>
+                                <span className={`size-10 shrink-0 rounded-full ${swatchClass} flex items-center justify-center text-xs font-bold shadow-2xs`}>
                                   {iconSymbol}
                                 </span>
                               )}
@@ -335,7 +335,7 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
               const colsClass = getGridColsClass(cat.gridColumns, displayProducts.length);
 
               return (
-                <div key={cat.id} className="pt-4 border-t border-border">
+                <div key={cat.id} className="pt-4 border-t border-border/50">
                   <div className="flex items-center justify-between mb-4">
                     <span className="editorial-kicker text-primary font-bold">
                       {isAr ? `${stepNumAr}. ${t(cat.title)}` : `${stepNum} · ${t(cat.title)}`}
@@ -359,10 +359,10 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                         <Link
                           key={prod.id}
                           href={`/products/${prod.id}`}
-                          className="group block border border-border p-5 transition-colors hover:border-primary bg-background relative"
+                          className="group block card-standard p-5 transition-all hover:border-primary hover:shadow-md relative"
                         >
                           {prod.image ? (
-                            <div className="relative aspect-[4/3] w-full overflow-hidden bg-paper mb-4">
+                            <div className="relative aspect-[4/3] w-full overflow-hidden bg-paper mb-4 rounded-xl border border-border/40">
                               <Image
                                 src={prod.image}
                                 alt={t(prod.name)}
@@ -371,13 +371,13 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                               />
                               {prod.badge && (
-                                <div className="absolute top-3 start-3 px-3 py-1 rounded-full bg-black/60 backdrop-blur-xs text-[#D8B878] text-[11px] font-bold">
+                                <div className="absolute top-3 start-3 px-3 py-1 rounded-full bg-black/60 backdrop-blur-xs text-white text-[11px] font-bold border border-white/20">
                                   {t(prod.badge)}
                                 </div>
                               )}
                             </div>
                           ) : (
-                            <div className="aspect-[4/3] w-full bg-paper mb-4 flex items-center justify-center text-2xl border border-border">
+                            <div className="aspect-[4/3] w-full bg-paper mb-4 flex items-center justify-center text-2xl border border-border/50 rounded-xl">
                               {iconSymbol}
                             </div>
                           )}
@@ -405,7 +405,7 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
 
                   {/* Seasonal / Special Flavors Callout (if present on category) */}
                   {cat.seasonalFlavors && cat.seasonalFlavors.length > 0 && (
-                    <div className="mt-8 p-5 bg-paper border border-border">
+                    <div className="mt-8 p-6 bg-paper/60 border border-border/60 rounded-2xl">
                       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-3">
                         <span className="text-xs font-bold uppercase tracking-wider text-primary">
                           {isAr ? 'نكهات موسمية خاصة (حسب الموسم):' : 'Seasonal & Special Flavors (Rotating):'}
@@ -418,7 +418,7 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                         {cat.seasonalFlavors.map((flavor, fIdx) => (
                           <span
                             key={fIdx}
-                            className="px-3 py-1 bg-background border border-border rounded-full text-foreground/85"
+                            className="px-3.5 py-1.5 bg-card border border-border/60 rounded-full text-foreground/90"
                           >
                             {t(flavor)}
                           </span>

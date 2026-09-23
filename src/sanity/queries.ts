@@ -132,11 +132,18 @@ export const productBySlugQuery = `*[_type == "product" && slug.current == $slug
   "galleryUrls": gallery[].asset->url
 }`;
 
-// 5. Query homepage sections (Hero, About, Storage, Recipes, Products Section)
+// 5. Query homepage sections (Hero, Naimi, About, Storage, Recipes, Products Section)
 export const homeSectionsQuery = `{
   "hero": *[_type == "heroSection"][0]{
     ...,
-    "heroImageUrl": heroImage.asset->url
+    "heroImageUrl": heroImage.asset->url,
+    "videoFileUrl": videoFile.asset->url,
+    "posterImageUrl": posterImage.asset->url
+  },
+  "naimi": *[_type == "naimiSection"][0]{
+    ...,
+    "imageUrl": image.asset->url,
+    "videoFileUrl": videoFile.asset->url
   },
   "about": *[_type == "aboutSection"][0]{
     ...,
@@ -152,9 +159,16 @@ export const homeSectionsQuery = `{
     title,
     subtitle,
     displayOrder,
+    prepTime,
+    servings,
+    ingredients,
+    steps,
+    chefTip,
+    audioUrl,
     videoUrl,
     "imageUrl": image.asset->url,
-    "videoFileUrl": videoFile.asset->url
+    "videoFileUrl": videoFile.asset->url,
+    "audioFileUrl": audioFile.asset->url
   }
 }`;
 
@@ -231,6 +245,21 @@ export interface SanityHeroSection {
   ctaDiscover?: BilingualText;
   harvestBadge?: BilingualText;
   heroImageUrl?: string;
+  videoFileUrl?: string;
+  videoUrl?: string;
+  posterImageUrl?: string;
+}
+
+export interface SanityNaimiSection {
+  eyebrow?: BilingualText;
+  title?: BilingualText;
+  subtitle?: BilingualText;
+  description?: BilingualText;
+  badge?: BilingualText;
+  imageUrl?: string;
+  videoFileUrl?: string;
+  videoUrl?: string;
+  ctaWhatsApp?: BilingualText;
 }
 
 export interface SanityAboutSection {
@@ -280,10 +309,18 @@ export interface SanityRecipeItem {
   videoFileUrl?: string;
   videoUrl?: string;
   displayOrder?: number;
+  prepTime?: BilingualText;
+  servings?: BilingualText;
+  ingredients?: BilingualText[];
+  steps?: BilingualText[];
+  chefTip?: BilingualText;
+  audioUrl?: string;
+  audioFileUrl?: string;
 }
 
 export interface SanityHomeSections {
   hero?: SanityHeroSection;
+  naimi?: SanityNaimiSection;
   about?: SanityAboutSection;
   productsSection?: SanityProductsSectionHeader;
   recipesSection?: SanityRecipesSectionHeader;
