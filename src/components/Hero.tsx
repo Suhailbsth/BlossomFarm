@@ -325,13 +325,13 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
               type="button"
               onClick={goToPrev}
               aria-label={isAr ? 'الصورة السابقة' : 'Previous slide'}
-              className="grid size-7 cursor-pointer place-items-center rounded-full text-white/80 hover:bg-white/15 hover:text-white transition-all"
+              className="grid size-9 cursor-pointer place-items-center rounded-full text-white/80 hover:bg-white/15 hover:text-white transition-all"
             >
-              {isRTL ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
+              {isRTL ? <ChevronRight size={18} /> : <ChevronLeft size={18} />}
             </button>
 
             {/* Slide indicator dots */}
-            <div className="flex items-center gap-1.5 px-1" role="tablist">
+            <div className="flex items-center gap-1.5 px-1 py-1" role="tablist">
               {heroSlides.map((_, idx) => (
                 <button
                   key={idx}
@@ -343,7 +343,7 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
                   className={`transition-all duration-300 rounded-full cursor-pointer ${
                     idx === currentSlide
                       ? 'w-6 h-1.5 bg-emerald-400 shadow-xs'
-                      : 'w-1.5 h-1.5 bg-white/40 hover:bg-white/80'
+                      : 'w-2 h-2 bg-white/40 hover:bg-white/80'
                   }`}
                 />
               ))}
@@ -354,9 +354,9 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
               type="button"
               onClick={goToNext}
               aria-label={isAr ? 'الصورة التالية' : 'Next slide'}
-              className="grid size-7 cursor-pointer place-items-center rounded-full text-white/80 hover:bg-white/15 hover:text-white transition-all"
+              className="grid size-9 cursor-pointer place-items-center rounded-full text-white/80 hover:bg-white/15 hover:text-white transition-all"
             >
-              {isRTL ? <ChevronLeft size={16} /> : <ChevronRight size={16} />}
+              {isRTL ? <ChevronLeft size={18} /> : <ChevronRight size={18} />}
             </button>
 
             {/* Pause / Play Toggle Button */}
@@ -369,9 +369,9 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
                   ? isAr ? 'إيقاف العرض التلقائي' : 'Pause slideshow'
                   : isAr ? 'تشغيل العرض التلقائي' : 'Play slideshow'
               }
-              className="grid size-7 cursor-pointer place-items-center rounded-full text-white/80 hover:bg-white/15 hover:text-white transition-all"
+              className="grid size-9 cursor-pointer place-items-center rounded-full text-white/80 hover:bg-white/15 hover:text-white transition-all"
             >
-              {isPlaying ? <Pause size={12} /> : <Play size={12} className="translate-x-px" />}
+              {isPlaying ? <Pause size={14} /> : <Play size={14} className="translate-x-px" />}
             </button>
           </div>
         </div>

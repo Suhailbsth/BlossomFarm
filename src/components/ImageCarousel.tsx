@@ -262,9 +262,9 @@ export default function ImageCarousel({
                 goToPrev();
               }}
               aria-label="Previous image"
-              className="pointer-events-auto size-9 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-xs flex items-center justify-center transition-all opacity-80 hover:opacity-100 cursor-pointer shadow-sm border border-white/20 active:scale-95"
+              className="pointer-events-auto size-11 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-xs flex items-center justify-center transition-all opacity-85 hover:opacity-100 cursor-pointer shadow-sm border border-white/20 active:scale-95"
             >
-              <ChevronLeft size={18} className="translate-x-[-0.5px]" />
+              <ChevronLeft size={20} className="translate-x-[-0.5px]" />
             </button>
             <button
               type="button"
@@ -273,9 +273,9 @@ export default function ImageCarousel({
                 goToNext();
               }}
               aria-label="Next image"
-              className="pointer-events-auto size-9 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-xs flex items-center justify-center transition-all opacity-80 hover:opacity-100 cursor-pointer shadow-sm border border-white/20 active:scale-95"
+              className="pointer-events-auto size-11 rounded-full bg-black/40 hover:bg-black/70 text-white backdrop-blur-xs flex items-center justify-center transition-all opacity-85 hover:opacity-100 cursor-pointer shadow-sm border border-white/20 active:scale-95"
             >
-              <ChevronRight size={18} className="translate-x-[0.5px]" />
+              <ChevronRight size={20} className="translate-x-[0.5px]" />
             </button>
           </div>
         )}
@@ -283,7 +283,7 @@ export default function ImageCarousel({
         {/* Dot Indicators */}
         {showDots && totalSlides > 1 && (
           <div
-            className="absolute bottom-3 inset-x-0 z-30 flex items-center justify-center gap-1.5 pointer-events-auto"
+            className="absolute bottom-3 inset-x-0 z-30 flex items-center justify-center gap-1 pointer-events-auto"
             role="tablist"
             aria-label="Slide indicators"
           >
@@ -298,12 +298,16 @@ export default function ImageCarousel({
                   e.stopPropagation();
                   goToSlide(idx);
                 }}
-                className={`transition-all duration-300 rounded-full cursor-pointer ${
-                  idx === currentIndex
-                    ? 'w-6 h-1.5 bg-white shadow-xs'
-                    : 'w-1.5 h-1.5 bg-white/50 hover:bg-white/80'
-                }`}
-              />
+                className="p-1.5 cursor-pointer flex items-center justify-center"
+              >
+                <span
+                  className={`block transition-all duration-300 rounded-full ${
+                    idx === currentIndex
+                      ? 'w-6 h-1.5 bg-white shadow-xs'
+                      : 'w-1.5 h-1.5 bg-white/50 hover:bg-white/80'
+                  }`}
+                />
+              </button>
             ))}
           </div>
         )}

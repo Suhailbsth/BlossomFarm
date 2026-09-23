@@ -1,13 +1,35 @@
 import type { Metadata, Viewport } from "next";
+import { Figtree, Outfit, Noto_Kufi_Arabic } from "next/font/google";
 import "./globals.css";
 import { LanguageProvider } from "@/context/LanguageContext";
+
+const figtree = Figtree({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  display: "swap",
+  variable: "--font-figtree",
+});
+
+const outfit = Outfit({
+  subsets: ["latin"],
+  weight: ["500", "600", "700"],
+  display: "swap",
+  variable: "--font-outfit",
+});
+
+const notoKufiArabic = Noto_Kufi_Arabic({
+  subsets: ["arabic"],
+  weight: ["400", "600", "700"],
+  display: "swap",
+  variable: "--font-noto-kufi",
+});
 
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
   maximumScale: 5,
   viewportFit: "cover",
-  themeColor: "#8E2800",
+  themeColor: "#1B7A42",
 };
 
 export const metadata: Metadata = {
@@ -58,15 +80,12 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="ar" dir="rtl" className="scroll-smooth" suppressHydrationWarning>
-      <head>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;700&family=Outfit:wght@500;600;700&family=Noto+Kufi+Arabic:wght@400;600;700&display=swap"
-        />
-      </head>
+    <html
+      lang="ar"
+      dir="rtl"
+      className={`${figtree.variable} ${outfit.variable} ${notoKufiArabic.variable} scroll-smooth`}
+      suppressHydrationWarning
+    >
       <body className="min-h-screen bg-background text-foreground font-body" suppressHydrationWarning>
         <LanguageProvider>
           {children}

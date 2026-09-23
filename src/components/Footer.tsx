@@ -130,7 +130,7 @@ export default function Footer({ content, whatsAppNumber }: FooterProps) {
                   target="_blank"
                   rel="noreferrer"
                   aria-label={item.platform}
-                  className="size-8 rounded-full bg-white/10 hover:bg-primary hover:text-white flex items-center justify-center transition-all"
+                  className="size-11 rounded-full bg-white/10 hover:bg-primary hover:text-white flex items-center justify-center transition-all cursor-pointer"
                 >
                   <SocialIcon platform={item.platform} />
                 </a>

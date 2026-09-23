@@ -83,7 +83,7 @@ export default function Header({ content, whatsAppNumber }: HeaderProps) {
             type="button"
             onClick={toggleLanguage}
             aria-label="Switch language"
-            className="rounded-full border border-foreground bg-transparent px-3.5 py-1.5 text-xs font-semibold shadow-none transition-colors hover:bg-muted cursor-pointer min-h-[36px] flex items-center justify-center"
+            className="rounded-full border border-foreground bg-transparent px-4 py-2 text-xs font-semibold shadow-none transition-colors hover:bg-muted cursor-pointer min-h-[44px] min-w-[44px] flex items-center justify-center"
           >
             {isRTL ? 'EN' : 'عربي'}
           </button>
@@ -92,11 +92,11 @@ export default function Header({ content, whatsAppNumber }: HeaderProps) {
           <button
             type="button"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className="md:hidden grid size-9 place-items-center rounded-full border border-border text-foreground hover:bg-muted transition-colors cursor-pointer"
+            className="md:hidden grid size-11 place-items-center rounded-full border border-border text-foreground hover:bg-muted transition-colors cursor-pointer"
             aria-label={mobileMenuOpen ? 'Close navigation menu' : 'Open navigation menu'}
             aria-expanded={mobileMenuOpen}
           >
-            {mobileMenuOpen ? <X size={18} /> : <Menu size={18} />}
+            {mobileMenuOpen ? <X size={20} /> : <Menu size={20} />}
           </button>
         </div>
       </div>
