@@ -95,9 +95,11 @@
   .font-display {
     font-family: var(--font-outfit), Outfit, sans-serif;
   }
+
   .font-body {
     font-family: var(--font-figtree), Figtree, sans-serif;
   }
+
   .font-arabic {
     font-family: var(--font-noto-kufi), "Noto Kufi Arabic", sans-serif;
   }
@@ -109,6 +111,7 @@
     font-size: 0.68rem;
     font-weight: 700;
   }
+
   [dir="rtl"] .editorial-kicker,
   .font-arabic .editorial-kicker {
     letter-spacing: 0 !important;
@@ -122,6 +125,7 @@
     font-weight: 700;
     line-height: 1;
   }
+
   [dir="rtl"] .editorial-title,
   .font-arabic .editorial-title {
     font-family: var(--font-arabic), sans-serif;
@@ -150,6 +154,7 @@
     transition: opacity 0.5s cubic-bezier(0.16, 1, 0.3, 1), transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
     transform: translateY(10px);
   }
+
   .reveal.is-visible {
     opacity: 1;
     transform: translateY(0);
@@ -171,11 +176,13 @@
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
     cursor: pointer;
   }
+
   .btn-primary:hover {
     background-color: var(--primary-hover);
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(27, 122, 66, 0.2);
   }
+
   .btn-primary:active {
     transform: scale(0.97);
   }
@@ -192,6 +199,7 @@
     transition: all 0.2s ease;
     cursor: pointer;
   }
+
   .btn-secondary:hover {
     color: var(--primary-hover);
   }
@@ -205,40 +213,116 @@
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
     transition: all 0.25s ease;
   }
+
   .card-standard:hover {
     border-color: var(--primary);
     box-shadow: 0 8px 20px rgba(0, 74, 68, 0.08);
   }
 
-  /* Color helpers */
-  .bg-background { background-color: var(--background); }
-  .bg-paper { background-color: var(--paper); }
-  .bg-ink { background-color: var(--ink); }
-  .bg-harvest-gold { background-color: var(--primary); }
-  .bg-primary { background-color: var(--primary); }
-  .bg-primary-hover { background-color: var(--primary-hover); }
-  .bg-primary-light { background-color: var(--primary-light); }
-  .bg-dark-band { background-color: var(--dark-band); }
-  .bg-footer-bg { background-color: var(--footer-bg); }
-  .bg-card { background-color: var(--card); }
-  .bg-muted { background-color: var(--muted); }
+  /* Color helper */
+  .bg-background {
+    background-color: var(--background);
+  }
 
-  .text-foreground { color: var(--foreground); }
-  .text-ink { color: var(--ink); }
-  .text-primary { color: var(--primary); }
-  .text-primary-foreground { color: var(--primary-foreground); }
-  .text-dark-band-foreground { color: var(--dark-band-foreground); }
-  .text-harvest-gold { color: var(--primary); }
-  .text-muted-foreground { color: var(--muted-foreground); }
+  .bg-paper {
+    background-color: var(--paper);
+  }
 
-  .border-border { border-color: var(--border); }
-  .border-primary { border-color: var(--primary); }
-  .border-foreground { border-color: var(--foreground); }
+  .bg-ink {
+    background-color: var(--ink);
+  }
 
-  .swatch-1 { background-color: #005A52; color: #F6EDE2; }
-  .swatch-2 { background-color: #00433D; color: #F6EDE2; }
-  .swatch-3 { background-color: #08332E; color: #F6EDE2; }
-  .swatch-4 { background-color: #05201C; color: #F6EDE2; }
+  .bg-harvest-gold {
+    background-color: var(--primary);
+  }
+
+  .bg-primary {
+    background-color: var(--primary);
+  }
+
+  .bg-primary-hover {
+    background-color: var(--primary-hover);
+  }
+
+  .bg-primary-light {
+    background-color: var(--primary-light);
+  }
+
+  .bg-dark-band {
+    background-color: var(--dark-band);
+  }
+
+  .bg-footer-bg {
+    background-color: var(--footer-bg);
+  }
+
+  .bg-card {
+    background-color: var(--card);
+  }
+
+  .bg-muted {
+    background-color: var(--muted);
+  }
+
+  .text-foreground {
+    color: var(--foreground);
+  }
+
+  .text-ink {
+    color: var(--ink);
+  }
+
+  .text-primary {
+    color: var(--primary);
+  }
+
+  .text-primary-foreground {
+    color: var(--primary-foreground);
+  }
+
+  .text-dark-band-foreground {
+    color: var(--dark-band-foreground);
+  }
+
+  .text-harvest-gold {
+    color: var(--primary);
+  }
+
+  .text-muted-foreground {
+    color: var(--muted-foreground);
+  }
+
+  .border-border {
+    border-color: var(--border);
+  }
+
+  .border-primary {
+    border-color: var(--primary);
+  }
+
+  .border-foreground {
+    border-color: var(--foreground);
+  }
+
+  .swatch-1 {
+    background-color: #005A52;
+    color: #F6EDE2;
+  }
+
+  .swatch-2 {
+    background-color: #00433D;
+    color: #F6EDE2;
+  }
+
+  .swatch-3 {
+    background-color: #08332E;
+    color: #F6EDE2;
+  }
+
+  .swatch-4 {
+    background-color: #05201C;
+    color: #F6EDE2;
+  }
 
   /* ── Cinematic Hero ──────────────────────────────────────────────── */
 
@@ -266,9 +350,17 @@
 
   /* Scroll-hint bounce */
   @keyframes hero-bounce {
-    0%, 100% { transform: translateY(0); }
-    50%       { transform: translateY(5px); }
+
+    0%,
+    100% {
+      transform: translateY(0);
+    }
+
+    50% {
+      transform: translateY(5px);
+    }
   }
+
   .hero-bounce {
     animation: hero-bounce 1.8s ease-in-out infinite;
   }
@@ -278,13 +370,16 @@
     .hero-bounce {
       animation: none;
     }
+
     /* Video will be hidden via React state, but belt-and-suspenders */
     .hero-cinematic video {
       display: none !important;
     }
+
     .hero-cinematic img {
       opacity: 1 !important;
     }
+
     /* Disable all transitions */
     .hero-cinematic * {
       transition: none !important;
