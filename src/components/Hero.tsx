@@ -163,7 +163,7 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
       onTouchStart={handleTouchStart}
       onTouchMove={handleTouchMove}
       onTouchEnd={handleTouchEnd}
-      className="hero-cinematic relative w-full overflow-hidden select-none"
+      className="hero-cinematic relative w-full overflow-hidden select-none flex flex-col"
       aria-roledescription="carousel"
       aria-label={isAr ? 'عرض صور مزرعة وادي النوار' : 'The Blossom Valley farm slideshow'}
     >
@@ -204,7 +204,7 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
       />
 
       {/* ── 3. CONTENT LAYER ────────────────────────────────────────── */}
-      <div className="hero-cinematic-inner relative z-20 flex flex-col justify-between px-5 sm:px-10 lg:px-16 2xl:px-20 py-8 sm:py-12 lg:py-16">
+      <div className="hero-cinematic-inner relative z-20 flex-1 flex flex-col justify-between px-5 sm:px-10 lg:px-16 2xl:px-20 py-8 sm:py-12 lg:py-16 w-full">
 
         {/* Top content block: kicker + headline + description + CTA */}
         <div className={`max-w-2xl ${isRTL ? 'text-right' : 'text-left'}`}>
