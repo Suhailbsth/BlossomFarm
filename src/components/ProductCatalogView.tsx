@@ -41,11 +41,6 @@ export default function ProductCatalogView({ content }: ProductCatalogViewProps)
       ];
     }
     return [
-      { key: 'all', label: { en: 'All Products', ar: 'جميع المنتجات' } },
-      { key: 'dates', label: { en: 'Khalas Dates', ar: 'تمر الخلاص' } },
-      { key: 'meat', label: { en: 'Naimi Sheep', ar: 'الخرفان النعيمي' } },
-      { key: 'pepper', label: { en: 'Hot Pepper', ar: 'فلفل حار مجروش' } },
-      { key: 'dried-tomatoes', label: { en: 'Dried Tomatoes', ar: 'طماطم مجففة' } },
     ];
   }, [dynamicCats]);
 
@@ -113,22 +108,20 @@ export default function ProductCatalogView({ content }: ProductCatalogViewProps)
             <button
               type="button"
               onClick={() => setLanguage('en')}
-              className={`px-2.5 py-1 rounded-full transition-all ${
-                language === 'en'
+              className={`px-2.5 py-1 rounded-full transition-all ${language === 'en'
                   ? 'bg-primary text-white shadow-xs'
                   : 'text-muted-foreground hover:text-primary'
-              }`}
+                }`}
             >
               EN
             </button>
             <button
               type="button"
               onClick={() => setLanguage('ar')}
-              className={`px-2.5 py-1 rounded-full transition-all font-arabic ${
-                language === 'ar'
+              className={`px-2.5 py-1 rounded-full transition-all font-arabic ${language === 'ar'
                   ? 'bg-primary text-white shadow-xs'
                   : 'text-muted-foreground hover:text-primary'
-              }`}
+                }`}
             >
               العربية
             </button>
@@ -162,11 +155,10 @@ export default function ProductCatalogView({ content }: ProductCatalogViewProps)
                 key={cat.key}
                 type="button"
                 onClick={() => setSelectedCategory(cat.key)}
-                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold font-arabic transition-all cursor-pointer ${
-                  selectedCategory === cat.key
+                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold font-arabic transition-all cursor-pointer ${selectedCategory === cat.key
                     ? 'bg-[#1B3B2B] text-white shadow-sm'
                     : 'bg-white border border-[#E8DFD1] text-[#4E5E52] hover:bg-[#FAF7F2]'
-                }`}
+                  }`}
               >
                 {t(cat.label)}
               </button>

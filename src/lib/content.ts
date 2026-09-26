@@ -1,5 +1,4 @@
 ﻿import { SiteContent, ProductItem, DynamicCategoryItem, ValuePillar, StorageStep, HeroSlide } from '@/types/content';
-import staticContent from '@/data/content.json';
 import {
   getSanitySiteSettings,
   getSanityCategories,
@@ -9,18 +8,129 @@ import {
 } from './sanity';
 import { SanityProduct, SanityCategory } from '@/sanity/queries';
 
-const fallbackContent: SiteContent = staticContent as unknown as SiteContent;
+// 1. Remove: import staticContent from '@/data/content.json';
+// 2. Remove: const fallbackContent = ...
+
+function createEmptySiteContent(): SiteContent {
+  return {
+    brand: {
+      name: { ar: '', en: '' },
+      tagline: { ar: '', en: '' },
+      closingTagline: { ar: '', en: '' },
+      badge: { ar: '', en: '' },
+      locationShort: { ar: '', en: '' },
+    },
+    navigation: {
+      about: { ar: 'عن المزرعة', en: 'Our farm' },
+      products: { ar: 'المنتجات', en: 'Products' },
+      dates: { ar: 'تمور', en: 'Dates' },
+      meat: { ar: 'مواشي النعيمي', en: 'Naimi Sheep' },
+      pepper: { ar: 'فلفل شقراء', en: 'Shaqra Pepper' },
+      driedTomatoes: { ar: 'طماطم مجففة', en: 'Dried Tomatoes' },
+      howToUse: { ar: 'طرق الاستخدام', en: 'Recipes' },
+      storage: { ar: 'إرشادات الحفظ', en: 'Storage' },
+      contact: { ar: 'تواصل معنا', en: 'Contact' },
+    },
+    hero: {
+      welcomeBadge: { ar: '', en: '' },
+      heading: { ar: '', en: '' },
+      subheading: { ar: '', en: '' },
+      description: { ar: '', en: '' },
+      ctaProducts: { ar: '', en: '' },
+      ctaWhatsApp: { ar: '', en: '' },
+      ctaSecondaryText: { ar: '', en: '' },
+      statsPill: { ar: '', en: '' },
+      heroImages: [],
+      slides: [],
+    },
+    naimiSection: {
+      eyebrow: { ar: '', en: '' },
+      title: { ar: '', en: '' },
+      subtitle: { ar: '', en: '' },
+      description: { ar: '', en: '' },
+      badge: { ar: '', en: '' },
+      imageUrl: '',
+      images: [],
+      gallery: [],
+      ctaWhatsApp: { ar: '', en: '' },
+      ctaSecondaryText: { ar: '', en: '' },
+    },
+    about: {
+      eyebrow: { ar: '', en: '' },
+      title: { ar: '', en: '' },
+      quote: { ar: '', en: '' },
+      storyParagraphs: [],
+      imageUrl: '',
+      images: [],
+      gallery: [],
+      videoPlaceholder: {
+        title: { ar: '', en: '' },
+        subtitle: { ar: '', en: '' },
+        poster: '',
+        tag: { ar: '', en: '' },
+        note: { ar: '', en: '' },
+      },
+      pillars: [],
+      stats: [],
+    },
+    productsSection: {
+      eyebrow: { ar: '', en: '' },
+      title: { ar: '', en: '' },
+      description: { ar: '', en: '' },
+      catalogCta: { ar: '', en: '' },
+      dynamicCategories: [],
+      categories: {} as any,
+      allProducts: [],
+    },
+    recipesSection: {
+      eyebrow: { ar: '', en: '' },
+      title: { ar: '', en: '' },
+      items: [],
+    },
+    howToUseSection: {
+      eyebrow: { ar: '', en: '' },
+      title: { ar: '', en: '' },
+      description: { ar: '', en: '' },
+      classicSectionTitle: { ar: '', en: '' },
+      saudiSectionTitle: { ar: '', en: '' },
+      items: [],
+    },
+    storagePracticeSection: {
+      eyebrow: { ar: '', en: '' },
+      title: { ar: '', en: '' },
+      subtitle: { ar: '', en: '' },
+      bannerNote: { ar: '', en: '' },
+      items: [],
+    },
+    footer: {
+      badge: { ar: '', en: '' },
+      closingTagline: { ar: '', en: '' },
+      closingTaglineMeaning: { ar: '', en: '' },
+      whatsAppPrompt: { ar: '', en: '' },
+      whatsAppBtn: { ar: '', en: '' },
+      whatsAppNumber: '',
+      whatsAppPrefillEn: '',
+      whatsAppPrefillAr: '',
+      locationTitle: { ar: '', en: '' },
+      locationAddress: { ar: '', en: '' },
+      googleMapsUrl: '',
+      sharePrompt: { ar: '', en: '' },
+      rights: { ar: '', en: '' },
+      copyrightText: { ar: '', en: '' },
+      socialLinks: [],
+    },
+  };
+}
 
 /**
  * Maps a Sanity product record into the standard ProductItem interface.
  */
 function mapSanityProduct(sp: SanityProduct, categoryTitle?: { ar: string; en: string }): ProductItem {
-  const fallbackProd = (fallbackContent.productsSection?.allProducts || []).find((p) => p.id === sp.slug);
 
-  const imgUrl = sp.imageUrl || fallbackProd?.image || '';
+  const imgUrl = sp.imageUrl || '';
   const gallery = sp.galleryUrls && sp.galleryUrls.length > 0
     ? sp.galleryUrls
-    : (fallbackProd?.gallery && fallbackProd.gallery.length > 0 ? fallbackProd.gallery : (imgUrl ? [imgUrl] : []));
+    : (imgUrl ? [imgUrl] : []);
 
   return {
     id: sp.slug,
@@ -47,8 +157,7 @@ function mapSanityProduct(sp: SanityProduct, categoryTitle?: { ar: string; en: s
  * Retrieves the full site content, merging Sanity CMS data over static fallback content.
  */
 export async function getSiteContent(): Promise<SiteContent> {
-  // Deep clone fallback content to prevent accidental mutation
-  const content: SiteContent = JSON.parse(JSON.stringify(fallbackContent));
+  const content = createEmptySiteContent();
 
   try {
     const [sanitySettings, sanityCategories, sanityProducts, sanityHome] = await Promise.all([
@@ -115,9 +224,8 @@ export async function getSiteContent(): Promise<SiteContent> {
       if (h.welcomeBadge) content.hero.welcomeBadge = h.welcomeBadge;
       if (h.heading) content.hero.heading = h.heading;
       if (h.subheading) content.hero.description = h.subheading;
-      if (h.ctaDiscoverText || h.ctaDiscover) {
-        content.hero.ctaProducts = (h.ctaDiscoverText || h.ctaDiscover)!;
-      }
+      if (h.ctaWhatsApp) content.hero.ctaWhatsApp = h.ctaWhatsApp;
+      if (h.ctaSecondaryText) (content.hero as any).ctaSecondaryText = h.ctaSecondaryText;
       if (h.harvestBadge) content.hero.statsPill = h.harvestBadge;
       if (h.heroImageUrl) content.hero.heroImageUrl = h.heroImageUrl;
 
@@ -223,25 +331,23 @@ export async function getSiteContent(): Promise<SiteContent> {
         title: rSec?.title || content.recipesSection?.title || { ar: 'طرق الاستخدام والتقديم', en: 'Ways to savour' },
         videoInstruction: rSec?.videoInstruction || content.recipesSection?.videoInstruction,
         journalTag: rSec?.journalTag || content.recipesSection?.journalTag,
-        items: sanityHome.recipes.map((r, idx) => {
-          const fb = defaultItems.find((d) => d.id === r._id || d.number === r.number) || defaultItems[idx];
-          return {
-            id: r._id || fb?.id || `recipe-${idx + 1}`,
-            number: r.number || fb?.number || (idx + 1 < 10 ? `0${idx + 1}` : `${idx + 1}`),
-            title: r.title || fb?.title || { ar: '', en: '' },
-            subtitle: r.subtitle || fb?.subtitle || { ar: '', en: '' },
-            image: r.imageUrl || fb?.image || '',
-            videoFileUrl: r.videoFileUrl || fb?.videoFileUrl,
-            videoUrl: r.videoUrl || fb?.videoUrl,
-            displayOrder: r.displayOrder || idx + 1,
-            prepTime: r.prepTime || fb?.prepTime,
-            servings: r.servings || fb?.servings,
-            ingredients: r.ingredients && r.ingredients.length > 0 ? r.ingredients : fb?.ingredients,
-            steps: r.steps && r.steps.length > 0 ? r.steps : fb?.steps,
-            chefTip: r.chefTip || fb?.chefTip,
-            audioUrl: r.audioFileUrl || r.audioUrl || fb?.audioUrl,
-          };
-        }),
+        items: (sanityHome?.recipes || []).map((r, idx) => ({
+          id: r._id || `recipe-${idx + 1}`,
+          number: r.number || `${idx + 1}`,
+          title: r.title || { ar: '', en: '' },
+          subtitle: r.subtitle || { ar: '', en: '' },
+          image: r.imageUrl || '',
+          videoFileUrl: r.videoFileUrl,
+          videoUrl: r.videoUrl,
+          displayOrder: r.displayOrder || idx + 1,
+          prepTime: r.prepTime,
+          servings: r.servings,
+          ingredients: r.ingredients || [],
+          steps: r.steps || [],
+          chefTip: r.chefTip,
+          audioUrl: r.audioFileUrl || r.audioUrl,
+        })),
+
       };
     }
 
@@ -257,7 +363,7 @@ export async function getSiteContent(): Promise<SiteContent> {
           title: cat.name || cat.title,
           badge: cat.badge,
           description: cat.shortDescription || cat.description,
-          image: cat.imageUrl || (fallbackContent.productsSection?.categories as Record<string, { image?: string }>)?.[cat.slug]?.image,
+          image: cat.imageUrl,
           icon: cat.icon,
           showOnHome: cat.showOnHome !== false,
           homeOrder: cat.displayOrder || cat.homeOrder || 1,

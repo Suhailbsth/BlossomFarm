@@ -14,8 +14,6 @@ export const siteSettingsQuery = `*[_type == "siteSettings"][0]{
   whatsAppDefaultMessage,
   whatsAppDefaultMessageAr,
   whatsAppDefaultMessageEn,
-  contactPhone,
-  contactEmail,
   farmLocation,
   googleMapsUrl,
   seoTitle,
@@ -60,10 +58,7 @@ export const categoriesWithProductsQuery = `*[_type == "category"] | order(coale
     inSeason,
     isFeaturedOnHome,
     displayOrder,
-    tasteNotes,
-    highlights,
     specs,
-    bestPairedWith,
     storageSpecific,
     "imageUrl": image.asset->url,
     "galleryUrls": gallery[].asset->url
@@ -82,10 +77,7 @@ export const categoriesWithProductsQuery = `*[_type == "category"] | order(coale
     inSeason,
     isFeaturedOnHome,
     displayOrder,
-    tasteNotes,
-    highlights,
     specs,
-    bestPairedWith,
     storageSpecific,
     "imageUrl": image.asset->url,
     "galleryUrls": gallery[].asset->url
@@ -107,11 +99,8 @@ export const allProductsQuery = `*[_type == "product"] | order(displayOrder asc,
   inSeason,
   isFeaturedOnHome,
   displayOrder,
-  tasteNotes,
-  highlights,
-  specs,
-  bestPairedWith,
-  storageSpecific,
+    specs,
+    storageSpecific,
   "imageUrl": image.asset->url,
   "galleryUrls": gallery[].asset->url
 }`;
@@ -131,11 +120,8 @@ export const productBySlugQuery = `*[_type == "product" && slug.current == $slug
   inSeason,
   isFeaturedOnHome,
   displayOrder,
-  tasteNotes,
-  highlights,
-  specs,
-  bestPairedWith,
-  storageSpecific,
+    specs,
+    storageSpecific,
   "imageUrl": image.asset->url,
   "galleryUrls": gallery[].asset->url
 }`;
@@ -146,8 +132,8 @@ export const homeSectionsQuery = `{
     welcomeBadge,
     heading,
     subheading,
-    ctaDiscoverText,
-    ctaDiscover,
+    ctaWhatsApp,
+    ctaSecondaryText,
     harvestBadge,
     "slides": slides[]{
       "imageUrl": image.asset->url,
@@ -302,8 +288,8 @@ export interface SanityHeroSection {
   welcomeBadge?: BilingualText;
   heading?: BilingualText;
   subheading?: BilingualText;
-  ctaDiscoverText?: BilingualText;
-  ctaDiscover?: BilingualText;
+  ctaWhatsApp?: BilingualText;
+  ctaSecondaryText?: BilingualText;
   harvestBadge?: BilingualText;
   slides?: SanityHeroSlide[];
   heroImageUrl?: string;

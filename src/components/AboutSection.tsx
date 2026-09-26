@@ -13,21 +13,14 @@ interface AboutSectionProps {
 }
 
 export default function AboutSection({ content }: AboutSectionProps) {
-  const { language, isRTL, t } = useLanguage();
+  const { language, t } = useLanguage();
   const [isVideoModalOpen, setIsVideoModalOpen] = useState(false);
   const videoRef = React.useRef<HTMLVideoElement>(null);
   const isAr = language === 'ar';
 
   const aboutImages = (content?.about?.images && content.about.images.length > 0)
     ? content.about.images
-    : [
-        content?.about?.imageUrl || '/images/IMG_9378.JPG.jpeg',
-        '/images/IMG_9370.JPG.jpeg',
-        '/images/IMG_9371.JPG.jpeg',
-        '/images/IMG_9372.JPG.jpeg',
-        '/images/IMG_9376.JPG.jpeg',
-        '/images/farm/farm-sand-dunes-wide.jpg',
-      ];
+    : (content?.about?.imageUrl ? [content.about.imageUrl] : []);
 
   const handleCloseModal = () => {
     if (videoRef.current) {
@@ -51,23 +44,15 @@ export default function AboutSection({ content }: AboutSectionProps) {
     };
   }, [isVideoModalOpen]);
 
-  const pillars = [
-    {
-      icon: Compass,
-      title: isAr ? 'محافظة شقراء' : 'Shaqra Terroir',
-      desc: isAr ? 'أرض نجد الأصيلة وشمسها الدافئة' : 'Pure soil, generous sunlight',
-    },
-    {
-      icon: Sprout,
-      title: isAr ? 'عناية متكاملة' : 'End-to-End Care',
-      desc: isAr ? 'من البذرة والتربية حتى مائدتك' : 'From seedling & herd to table',
-    },
-    {
-      icon: ShieldCheck,
-      title: isAr ? 'جودة نقية' : 'Natural Purity',
-      desc: isAr ? 'برسيم أخضر ورعاية فائقة' : 'Farm-grown feed & high standards',
-    },
-  ];
+  const iconList = [Compass, Sprout, ShieldCheck];
+  const dynamicPillars = content?.about?.pillars;
+  const pillars = (dynamicPillars && dynamicPillars.length > 0)
+    ? dynamicPillars.map((p, idx) => ({
+        icon: iconList[idx % iconList.length],
+        title: t(p.title),
+        desc: t(p.description),
+      }))
+    : [];
 
   return (
     <section id="farm" className="scroll-mt-24 bg-paper px-6 sm:px-10 lg:px-16 2xl:px-20 py-16 sm:py-24 transition-colors">
@@ -102,26 +87,30 @@ export default function AboutSection({ content }: AboutSectionProps) {
               : 'Located in Shaqra city, a peaceful farm environment where every stage — from farming and raising animals, to preparing and delivering products — is carefully managed with unwavering focus on quality and attention to small details.'}
           </p>
 
-          {/* 3 Core Values / Pillars */}
-          <div className="mt-8 grid grid-cols-3 gap-3 sm:gap-4 border-t border-border/50 pt-6">
-            {pillars.map((item, idx) => {
-              const Icon = item.icon;
-              return (
-                <div key={idx} className="space-y-1">
-                  <Icon size={16} className="text-primary mb-1.5 stroke-[1.75]" />
-                  <h3 className="font-display text-xs sm:text-sm font-semibold text-ink leading-tight">
-                    {item.title}
-                  </h3>
-                  <p className="text-[11px] sm:text-xs text-muted-foreground leading-tight hidden sm:block">
-                    {item.desc}
-                  </p>
-                </div>
-              );
-            })}
-          </div>
+          {/* Core Values / Pillars from Sanity CMS */}
+          {pillars.length > 0 && (
+            <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4 border-t border-border/50 pt-6">
+              {pillars.map((item, idx) => {
+                const Icon = item.icon;
+                return (
+                  <div key={idx} className="space-y-1">
+                    <Icon size={16} className="text-primary mb-1.5 stroke-[1.75]" />
+                    <h3 className="font-display text-xs sm:text-sm font-semibold text-ink leading-tight">
+                      {item.title}
+                    </h3>
+                    {item.desc && (
+                      <p className="text-[11px] sm:text-xs text-muted-foreground leading-tight hidden sm:block">
+                        {item.desc}
+                      </p>
+                    )}
+                  </div>
+                );
+              })}
+            </div>
+          )}
         </div>
 
-        {/* Right Column: Clean, Sunlit Reference Farm Photo Carousel with Discreet Video Pill */}
+        {/* Right Column: Photo Carousel with Video Trigger Pill */}
         <div className="relative w-full overflow-hidden bg-background rounded-2xl border border-border/50 shadow-xs">
           <ImageCarousel
             images={aboutImages}
@@ -133,7 +122,7 @@ export default function AboutSection({ content }: AboutSectionProps) {
             priority
             ariaLabel={isAr ? 'معرض صور وادي النوار في شقراء' : 'Wadi Nawar farm landscape gallery'}
           >
-            {/* Discreet, elegant video trigger pill */}
+            {/* Discreet video trigger pill */}
             <div className="absolute bottom-4 start-4 z-30 pointer-events-auto">
               <button
                 type="button"
@@ -186,7 +175,7 @@ export default function AboutSection({ content }: AboutSectionProps) {
                   controls
                   autoPlay
                   playsInline
-                  poster={content?.about?.imageUrl || '/images/farm/farm-sand-dunes-wide.jpg'}
+                  poster={content?.about?.imageUrl || ''}
                   className="h-full w-full object-contain"
                 >
                   {content?.about?.videoFileUrl && (
@@ -199,12 +188,14 @@ export default function AboutSection({ content }: AboutSectionProps) {
                 </video>
               ) : (
                 <div className="relative h-full w-full">
-                  <Image
-                    src={content?.about?.imageUrl || '/images/farm/farm-sand-dunes-wide.jpg'}
-                    alt={isAr ? 'وادي النوار' : 'The Blossom Valley'}
-                    fill
-                    className="object-cover opacity-60"
-                  />
+                  {content?.about?.imageUrl ? (
+                    <Image
+                      src={content.about.imageUrl}
+                      alt={isAr ? 'وادي النوار' : 'The Blossom Valley'}
+                      fill
+                      className="object-cover opacity-60"
+                    />
+                  ) : null}
                   <div className="absolute inset-0 flex flex-col items-center justify-center p-6 text-center bg-ink/40 backdrop-blur-[2px]">
                     <span className="bg-background/95 px-4 py-2 text-xs font-bold text-primary rounded-full border border-border shadow-sm mb-2">
                       {isAr ? 'فيلم المزرعة الترويجي قيد التحديث' : 'Farm Promotional Film Coming Soon'}

@@ -52,7 +52,7 @@ export default function HowToUseSection({ content }: HowToUseSectionProps) {
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-
+  console.log(content?.recipesSection)
   const dishes: CulinaryDish[] = (content?.recipesSection?.items || []).map((item, idx) => ({
     id: item.id || `recipe-${idx + 1}`,
     num: item.number || (idx + 1 < 10 ? `0${idx + 1}` : `${idx + 1}`),
@@ -127,15 +127,15 @@ export default function HowToUseSection({ content }: HowToUseSectionProps) {
               {content?.recipesSection?.eyebrow
                 ? t(content.recipesSection.eyebrow)
                 : isAr
-                ? 'من مطبخنا · ٠٤'
-                : 'From our kitchen · 04'}
+                  ? 'من مطبخنا · ٠٤'
+                  : 'From our kitchen · 04'}
             </p>
             <h2 className="editorial-title">
               {content?.recipesSection?.title
                 ? t(content.recipesSection.title)
                 : isAr
-                ? 'وصفات الطهي وطرق التقديم'
-                : 'Ways to savour'}
+                  ? 'وصفات الطهي وطرق التقديم'
+                  : 'Ways to savour'}
             </h2>
           </div>
 
@@ -145,8 +145,8 @@ export default function HowToUseSection({ content }: HowToUseSectionProps) {
               {content?.recipesSection?.videoInstruction
                 ? t(content.recipesSection.videoInstruction)
                 : isAr
-                ? 'انقر على أي وصفة للاطلاع على المقادير أو الاستماع للتسجيل'
-                : 'Click any dish to view text steps or audio'}
+                  ? 'انقر على أي وصفة للاطلاع على المقادير أو الاستماع للتسجيل'
+                  : 'Click any dish to view text steps or audio'}
             </span>
             <span className="hidden text-xs font-bold text-muted-foreground lg:block">
               {content?.recipesSection?.journalTag
@@ -271,11 +271,10 @@ export default function HowToUseSection({ content }: HowToUseSectionProps) {
               <button
                 type="button"
                 onClick={() => setModalTab('recipe')}
-                className={`pb-2.5 px-3 text-xs sm:text-sm font-bold transition-all border-b-2 cursor-pointer flex items-center gap-2 ${
-                  modalTab === 'recipe'
+                className={`pb-2.5 px-3 text-xs sm:text-sm font-bold transition-all border-b-2 cursor-pointer flex items-center gap-2 ${modalTab === 'recipe'
                     ? 'border-primary text-primary'
                     : 'border-transparent text-muted-foreground hover:text-ink'
-                }`}
+                  }`}
               >
                 <FileText size={15} />
                 <span>{isAr ? 'المقادير وطريقة التحضير' : 'Recipe & Ingredients'}</span>
@@ -284,11 +283,10 @@ export default function HowToUseSection({ content }: HowToUseSectionProps) {
               <button
                 type="button"
                 onClick={() => setModalTab('video')}
-                className={`pb-2.5 px-3 text-xs sm:text-sm font-bold transition-all border-b-2 cursor-pointer flex items-center gap-2 ${
-                  modalTab === 'video'
+                className={`pb-2.5 px-3 text-xs sm:text-sm font-bold transition-all border-b-2 cursor-pointer flex items-center gap-2 ${modalTab === 'video'
                     ? 'border-primary text-primary'
                     : 'border-transparent text-muted-foreground hover:text-ink'
-                }`}
+                  }`}
               >
                 <Video size={15} />
                 <span>{isAr ? 'المقطع المرئي' : 'Video Clip'}</span>

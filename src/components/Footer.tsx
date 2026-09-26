@@ -1,6 +1,4 @@
-'use client';
-
-import React from 'react';
+﻿'use client';
 import { useLanguage } from '@/context/LanguageContext';
 import { SiteContent } from '@/types/content';
 import { MessageCircle, MapPin } from 'lucide-react';
@@ -63,10 +61,10 @@ export default function Footer({ content, whatsAppNumber }: FooterProps) {
     content?.footer?.whatsAppPrefillAr && isAr
       ? content.footer.whatsAppPrefillAr
       : content?.footer?.whatsAppPrefillEn && !isAr
-      ? content.footer.whatsAppPrefillEn
-      : isAr
-      ? 'مرحباً وادي النوار! أود الاستفسار عن حجز وطلب منتجات المزرعة.'
-      : 'Hello The Blossom Valley! I would like to inquire about ordering your farm harvest products.';
+        ? content.footer.whatsAppPrefillEn
+        : isAr
+          ? 'مرحباً وادي النوار! أود الاستفسار عن حجز وطلب منتجات المزرعة.'
+          : 'Hello The Blossom Valley! I would like to inquire about ordering your farm harvest products.';
 
   const activeNumber = whatsAppNumber || content?.footer?.whatsAppNumber;
   const whatsAppLink = buildWhatsAppLink(defaultMsg, activeNumber);
@@ -74,20 +72,18 @@ export default function Footer({ content, whatsAppNumber }: FooterProps) {
   const closingTagline = content?.footer?.closingTagline
     ? t(content.footer.closingTagline)
     : isAr
-    ? 'وادي النوار – بلوسوم فالي / من أرضنا… إلى مائدتكم'
-    : 'The Blossom Valley — From our land… to your table.';
+      ? 'وادي النوار – بلوسوم فالي / من أرضنا… إلى مائدتكم'
+      : 'The Blossom Valley — From our land… to your table.';
 
   const locationText = content?.footer?.locationAddress
     ? t(content.footer.locationAddress)
-    : isAr
-    ? 'محافظة شقراء، المملكة العربية السعودية'
-    : 'Shaqra City, Saudi Arabia';
+    : "";
 
   const copyrightText = content?.footer?.copyrightText
     ? t(content.footer.copyrightText)
     : isAr
-    ? 'جميع الحقوق محفوظة © 2026 مزارع وادي النوار'
-    : 'All rights reserved © 2026 The Blossom Valley Farms';
+      ? 'جميع الحقوق محفوظة © 2026 مزارع وادي النوار'
+      : 'All rights reserved © 2026 The Blossom Valley Farms';
 
   const socialLinks = content?.footer?.socialLinks || [];
 
@@ -103,7 +99,7 @@ export default function Footer({ content, whatsAppNumber }: FooterProps) {
             </div>
             <div>
               <p className="font-arabic text-xl sm:text-2xl font-bold text-white tracking-tight leading-none">
-                وادي النوار
+                {content?.brand?.name ? t(content.brand.name) : (isAr ? 'وادي النوار' : 'The Blossom Valley')}
               </p>
               <p className="font-display text-xs font-semibold text-[#F8EBDB]/80 tracking-wide mt-1">
                 The Blossom&apos;s valley • Farm &amp; Resort

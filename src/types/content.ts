@@ -105,6 +105,7 @@ export interface NaimiSectionContent {
   highlights?: BilingualText[];
   specs?: { label: BilingualText; value: BilingualText }[];
   ctaWhatsApp: BilingualText;
+  ctaSecondaryText: BilingualText;
 }
 
 export interface RecipesSection {
@@ -175,6 +176,7 @@ export interface SiteContent {
     description: BilingualText;
     ctaProducts: BilingualText;
     ctaWhatsApp: BilingualText;
+    ctaSecondaryText: BilingualText;
     statsPill: BilingualText;
     heroImageUrl?: string;
     heroImages?: string[];

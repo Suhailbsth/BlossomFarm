@@ -22,9 +22,7 @@ export async function generateMetadata(): Promise<Metadata> {
     sanitySettings?.metaDescription?.en ||
     "Naturally vibrant products, grown with care in Wadi Al-Nawar, Shaqra. Khalas Dates, Naimi Sheep Meat, Crushed Hot Pepper, and Artisanal Dried Tomatoes.";
 
-  const shareImageUrl =
-    sanitySettings?.ogImageUrl ||
-    '/images/farm/farm-sand-dunes-wide.jpg';
+  const shareImageUrl = sanitySettings?.ogImageUrl || '';
 
   return {
     title,

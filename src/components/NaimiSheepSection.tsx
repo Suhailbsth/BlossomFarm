@@ -32,13 +32,7 @@ export default function NaimiSheepSection({ content, whatsAppNumber }: NaimiShee
   const sheepImages =
     (naimiData?.images && naimiData.images.length > 0)
       ? naimiData.images
-      : [
-          naimiData?.imageUrl || '/images/IMG_9373.JPG.jpeg',
-          '/images/IMG_9367.JPG.jpeg',
-          '/images/IMG_9369.JPG.jpeg',
-          '/images/IMG_9379.JPG.jpeg',
-          '/images/IMG_9368.JPG.jpeg',
-        ];
+      : (naimiData?.imageUrl ? [naimiData.imageUrl] : []);
 
   const sheepImage = sheepImages[0];
 

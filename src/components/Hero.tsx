@@ -21,39 +21,16 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
   const { language, isRTL, t } = useLanguage();
   const isAr = language === 'ar';
 
-  // Slides definition with high quality photos from /images/
-  const heroSlides = [
-    {
-      src: '/images/IMG_9378.JPG.jpeg',
-      alt: isAr ? 'مشهد جوي شامل لمزرعة وادي النوار في شقراء' : 'Aerial panoramic overview of The Blossom Valley farm in Shaqra',
-      caption: isAr ? 'إطلالة شاملة على واحة ومزارع وادي النوار بشقراء' : 'Shaqra Farmstead • Panoramic Aerial Vista',
-    },
-    {
-      src: '/images/IMG_9373.JPG.jpeg',
-      alt: isAr ? 'قطيع خرفان النعيمي في مرعى النخيل بأشعة الشمس' : 'Naimi sheep herd in the sunlit palm grove',
-      caption: isAr ? 'خرفان النعيمي الأصيلة بين ظلال النخيل' : 'Purebred Naimi Sheep in the Palm Pastures',
-    },
-    {
-      src: '/images/IMG_9371.JPG.jpeg',
-      alt: isAr ? 'برج شقراء التراثي وسط واحة النخيل الشاسعة' : 'Historic Shaqra watchtower overlooking the date palm oasis',
-      caption: isAr ? 'برج المراقبة التراثي وواحة النخيل العريقة' : 'Shaqra Heritage Oasis & Historic Watchtower',
-    },
-    {
-      src: '/images/IMG_9370.JPG.jpeg',
-      alt: isAr ? 'حقول البرسيم الأخضر ومحاصيل الري المحوري' : 'Lush green circular pivot irrigation fields in Shaqra',
-      caption: isAr ? 'حقول البرسيم الأخضر الطازج والمحاصيل النضرة' : '100% Farm-Grown Green Alfalfa Crops',
-    },
-    {
-      src: '/images/IMG_9374.JPG.jpeg',
-      alt: isAr ? 'جني وخراف تمور الخلاص من النخيل الباسق' : 'Traditional date palm harvesting by farm climbers',
-      caption: isAr ? 'جني تمور خلاص شقراء الفاخرة بعناية يدوية' : 'Artisanal Khalas Date Palm Harvesting',
-    },
-    {
-      src: '/images/farm/farm-sand-dunes-wide.jpg',
-      alt: isAr ? 'كثبان شقراء الذهبية وشمس نجد الدافئة' : 'Golden dunes and warm Shaqra horizon',
-      caption: isAr ? 'رمال شقراء الذهبية وبيئة نجد الهادئة' : 'Shaqra Desert Terroir & Warm Sun',
-    },
-  ];
+  // Slides strictly from Sanity CMS (zero hardcoded defaults)
+  const heroSlides = (content?.hero?.slides && content.hero.slides.length > 0)
+    ? content.hero.slides.map((s, idx) => ({
+      src: s.src,
+      alt: s.alt || (isAr ? `صورة العرض ${idx + 1}` : `Slide ${idx + 1}`),
+      caption: s.captionBilingual
+        ? (isAr ? s.captionBilingual.ar : s.captionBilingual.en)
+        : (s.caption || ''),
+    }))
+    : [];
 
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
@@ -152,7 +129,7 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
     ? `https://wa.me/${whatsAppNumber.replace(/\D/g, '')}?text=${encodeURIComponent(whatsAppMsg)}`
     : `https://wa.me/?text=${encodeURIComponent(whatsAppMsg)}`;
 
-  const activeSlide = heroSlides[currentSlide];
+  const activeSlide = heroSlides[currentSlide] || heroSlides[0] || null;
 
   return (
     <section
@@ -276,7 +253,7 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
             >
               <MessageCircle size={18} />
               <span>
-                {content?.hero?.ctaWhatsApp
+                {content?.hero?.ctaWhatsApp && t(content.hero.ctaWhatsApp)
                   ? t(content.hero.ctaWhatsApp)
                   : isAr
                     ? 'طلب وتواصل عبر واتساب'
@@ -290,9 +267,16 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
               href="#livestock"
               className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white transition-all hover:bg-white/15 border border-white/25 hover:border-white/40"
             >
-              <span>{isAr ? 'خرفان النعيمي' : 'Naimi Sheep'}</span>
+              <span>
+                {content?.hero?.ctaSecondaryText && t(content.hero.ctaSecondaryText)
+                  ? t(content.hero.ctaSecondaryText)
+                  : isAr
+                    ? 'خرفان النعيمي'
+                    : 'Naimi Sheep'}
+              </span>
               <ArrowDown size={14} className="opacity-80" />
             </a>
+
           </div>
         </div>
 
@@ -324,11 +308,10 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
                     className="group py-2.5 cursor-pointer focus:outline-hidden"
                   >
                     <div
-                      className={`h-[2px] rounded-full transition-all duration-300 ${
-                        idx === currentSlide
-                          ? 'w-7 sm:w-9 bg-white'
-                          : 'w-2.5 sm:w-3 bg-white/30 group-hover:bg-white/60'
-                      }`}
+                      className={`h-[2px] rounded-full transition-all duration-300 ${idx === currentSlide
+                        ? 'w-7 sm:w-9 bg-white'
+                        : 'w-2.5 sm:w-3 bg-white/30 group-hover:bg-white/60'
+                        }`}
                     />
                   </button>
                 ))}
