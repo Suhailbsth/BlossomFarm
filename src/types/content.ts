@@ -1,4 +1,4 @@
-export type Language = 'en' | 'ar';
+﻿export type Language = 'en' | 'ar';
 
 export interface BilingualText {
   en: string;
@@ -15,6 +15,7 @@ export interface CulinaryIdea {
 export interface ProductVarietyItem {
   id: string;
   name: BilingualText;
+  subtitle?: BilingualText;
   arabicSubtitle?: string;
   badge?: BilingualText;
   description: BilingualText;
@@ -26,6 +27,7 @@ export interface ProductItem {
   id: string; // Dynamic slug used in /products/[slug]
   categoryKey: 'dates' | 'meat' | 'pepper' | 'dried-tomatoes' | string;
   name: BilingualText;
+  subtitle?: BilingualText;
   arabicSubtitle?: string;
   category: BilingualText;
   tagline?: BilingualText;
@@ -53,8 +55,8 @@ export interface ValuePillar {
   id: string;
   title: BilingualText;
   description: BilingualText;
-  iconName: 'leaf' | 'droplet' | 'sun' | 'heart' | 'sparkles' | 'shieldCheck';
-  highlight: BilingualText;
+  iconName?: 'leaf' | 'droplet' | 'sun' | 'heart' | 'sparkles' | 'shieldCheck' | string;
+  highlight?: BilingualText;
 }
 
 export interface FarmStat {
@@ -100,8 +102,8 @@ export interface NaimiSectionContent {
   gallery?: string[];
   videoUrl?: string;
   videoFileUrl?: string;
-  highlights: BilingualText[];
-  specs: { label: BilingualText; value: BilingualText }[];
+  highlights?: BilingualText[];
+  specs?: { label: BilingualText; value: BilingualText }[];
   ctaWhatsApp: BilingualText;
 }
 
@@ -117,7 +119,7 @@ export interface StorageStep {
   stepNumber: number;
   title: BilingualText;
   description: BilingualText;
-  iconName: 'snowflake' | 'droplets' | 'spoon' | 'shieldAlert' | 'clock';
+  iconName?: 'snowflake' | 'droplets' | 'spoon' | 'shieldAlert' | 'clock' | string;
 }
 
 export interface DynamicCategoryItem {
@@ -127,6 +129,7 @@ export interface DynamicCategoryItem {
   badge?: BilingualText;
   description?: BilingualText;
   image?: string;
+  icon?: string;
   showOnHome: boolean;
   homeOrder?: number;
   displayMode?: 'editorial' | 'swatches' | 'grid' | string;
@@ -137,6 +140,13 @@ export interface DynamicCategoryItem {
   seasonalFlavors?: BilingualText[];
 }
 
+export interface HeroSlide {
+  src: string;
+  alt: string;
+  caption: string;
+  captionBilingual?: BilingualText;
+}
+
 export interface SiteContent {
   brand: {
     name: BilingualText;
@@ -144,6 +154,8 @@ export interface SiteContent {
     closingTagline: BilingualText;
     badge: BilingualText;
     locationShort: BilingualText;
+    siteLogoUrl?: string;
+    siteFaviconUrl?: string;
   };
   navigation: {
     about: BilingualText;
@@ -166,6 +178,7 @@ export interface SiteContent {
     statsPill: BilingualText;
     heroImageUrl?: string;
     heroImages?: string[];
+    slides?: HeroSlide[];
     videoUrl?: string;
     videoFileUrl?: string;
     posterImageUrl?: string;
@@ -176,7 +189,7 @@ export interface SiteContent {
     eyebrow: BilingualText;
     title: BilingualText;
     quote: BilingualText;
-    quoteAuthor: BilingualText;
+    quoteAuthor?: BilingualText;
     storyParagraphs: BilingualText[];
     imageUrl?: string;
     images?: string[];
@@ -190,9 +203,9 @@ export interface SiteContent {
     };
     videoFileUrl?: string;
     videoUrl?: string;
-    pillarsTitle: BilingualText;
+    pillarsTitle?: BilingualText;
     pillars: ValuePillar[];
-    stats: FarmStat[];
+    stats?: FarmStat[];
   };
   productsSection: {
     eyebrow: BilingualText;
@@ -266,6 +279,7 @@ export interface SiteContent {
     whatsAppNumber: string;
     whatsAppPrefillEn: string;
     whatsAppPrefillAr: string;
+    whatsAppFloatingButtonText?: BilingualText;
     locationTitle: BilingualText;
     locationAddress: BilingualText;
     googleMapsUrl: string;

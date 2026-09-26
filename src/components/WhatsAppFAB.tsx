@@ -1,4 +1,4 @@
-'use client';
+﻿'use client';
 
 import React, { useState, useEffect } from 'react';
 import { useLanguage } from '@/context/LanguageContext';
@@ -12,7 +12,7 @@ interface WhatsAppFABProps {
 }
 
 export default function WhatsAppFAB({ content, whatsAppNumber }: WhatsAppFABProps) {
-  const { language, isRTL } = useLanguage();
+  const { language, isRTL, t } = useLanguage();
   const [scrolledPastHero, setScrolledPastHero] = useState(false);
   const [footerInView, setFooterInView] = useState(false);
   const isAr = language === 'ar';
@@ -44,14 +44,21 @@ export default function WhatsAppFAB({ content, whatsAppNumber }: WhatsAppFABProp
     };
   }, []);
 
-  const prefill = isAr
-    ? 'السلام عليكم وادي النوار، أود الاستفسار عن المنتجات وحجز طلب.'
-    : 'Hello The Blossom Valley, I would like to inquire about ordering.';
+  const defaultPrefillAr = content?.footer?.whatsAppPrefillAr || 'السلام عليكم وادي النوار، أود الاستفسار عن المنتجات وحجز طلب.';
+  const defaultPrefillEn = content?.footer?.whatsAppPrefillEn || 'Hello The Blossom Valley, I would like to inquire about ordering.';
+  const prefill = isAr ? defaultPrefillAr : defaultPrefillEn;
 
   const activeNumber = whatsAppNumber || content?.footer?.whatsAppNumber;
   const whatsAppLink = buildWhatsAppLink(prefill, activeNumber);
 
   const isVisible = scrolledPastHero && !footerInView;
+
+  // Dynamic Floating WhatsApp Pill Text from Sanity CMS
+  const buttonText = content?.footer?.whatsAppFloatingButtonText
+    ? t(content.footer.whatsAppFloatingButtonText)
+    : isAr
+    ? 'طلب واستفسار'
+    : 'Quick Order';
 
   return (
     <div
@@ -74,7 +81,7 @@ export default function WhatsAppFAB({ content, whatsAppNumber }: WhatsAppFABProp
       >
         <MessageCircle size={18} className="shrink-0" />
         <span className="hidden xs:inline sm:inline">
-          {isAr ? 'طلب واستفسار' : 'Quick Order'}
+          {buttonText}
         </span>
         <span className="text-xs font-bold transition-transform rtl:rotate-180">→</span>
       </a>

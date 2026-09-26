@@ -1,4 +1,4 @@
-import { SiteContent, ProductItem, DynamicCategoryItem } from '@/types/content';
+﻿import { SiteContent, ProductItem, DynamicCategoryItem, ValuePillar, StorageStep, HeroSlide } from '@/types/content';
 import staticContent from '@/data/content.json';
 import {
   getSanitySiteSettings,
@@ -26,12 +26,11 @@ function mapSanityProduct(sp: SanityProduct, categoryTitle?: { ar: string; en: s
     id: sp.slug,
     categoryKey: sp.categorySlug || 'dates',
     name: sp.name,
-    arabicSubtitle: sp.arabicSubtitle,
+    subtitle: sp.subtitle,
+    arabicSubtitle: sp.arabicSubtitle || (typeof sp.subtitle === 'object' ? sp.subtitle.ar : undefined),
     category: categoryTitle || { ar: 'منتجات المزرعة', en: 'Farm Harvest' },
     tagline: sp.tagline,
     badge: sp.badge,
-    icon: sp.icon || '✦',
-    accentColor: sp.accentColor || 'gold',
     description: sp.description || { ar: '', en: '' },
     story: sp.story,
     image: imgUrl,
@@ -59,28 +58,45 @@ export async function getSiteContent(): Promise<SiteContent> {
       getSanityHomeSections(),
     ]);
 
-    // 1. Site Settings & WhatsApp
+    // 1. Site Settings & Branding
     if (sanitySettings) {
+      if (sanitySettings.brandName) {
+        content.brand.name = sanitySettings.brandName;
+      }
+      if (sanitySettings.brandTagline) {
+        content.brand.tagline = sanitySettings.brandTagline;
+        content.brand.closingTagline = sanitySettings.brandTagline;
+        content.footer.closingTagline = sanitySettings.brandTagline;
+      } else if (sanitySettings.brandClosingTagline) {
+        content.footer.closingTagline = sanitySettings.brandClosingTagline;
+      }
+
+      if (sanitySettings.siteLogoUrl) {
+        content.brand.siteLogoUrl = sanitySettings.siteLogoUrl;
+      }
+      if (sanitySettings.siteFaviconUrl) {
+        content.brand.siteFaviconUrl = sanitySettings.siteFaviconUrl;
+      }
+
       if (sanitySettings.whatsAppNumber) {
         content.footer.whatsAppNumber = sanitySettings.whatsAppNumber;
       }
-      if (sanitySettings.whatsAppDefaultMessageAr) {
-        content.footer.whatsAppPrefillAr = sanitySettings.whatsAppDefaultMessageAr;
+      if (sanitySettings.whatsAppFloatingButtonText) {
+        content.footer.whatsAppFloatingButtonText = sanitySettings.whatsAppFloatingButtonText;
       }
-      if (sanitySettings.whatsAppDefaultMessageEn) {
-        content.footer.whatsAppPrefillEn = sanitySettings.whatsAppDefaultMessageEn;
-      }
+
+      const defaultMsgAr = sanitySettings.whatsAppDefaultMessage?.ar || sanitySettings.whatsAppDefaultMessageAr;
+      const defaultMsgEn = sanitySettings.whatsAppDefaultMessage?.en || sanitySettings.whatsAppDefaultMessageEn;
+      if (defaultMsgAr) content.footer.whatsAppPrefillAr = defaultMsgAr;
+      if (defaultMsgEn) content.footer.whatsAppPrefillEn = defaultMsgEn;
+
       if (sanitySettings.farmLocation) {
-        content.footer.locationAddress = {
-          ar: sanitySettings.farmLocation,
-          en: sanitySettings.farmLocation,
-        };
+        content.footer.locationAddress = typeof sanitySettings.farmLocation === 'string'
+          ? { ar: sanitySettings.farmLocation, en: sanitySettings.farmLocation }
+          : sanitySettings.farmLocation;
       }
       if (sanitySettings.googleMapsUrl) {
         content.footer.googleMapsUrl = sanitySettings.googleMapsUrl;
-      }
-      if (sanitySettings.brandClosingTagline) {
-        content.footer.closingTagline = sanitySettings.brandClosingTagline;
       }
       if (sanitySettings.commercialRegistration) {
         content.footer.commercialRegistration = sanitySettings.commercialRegistration;
@@ -99,12 +115,27 @@ export async function getSiteContent(): Promise<SiteContent> {
       if (h.welcomeBadge) content.hero.welcomeBadge = h.welcomeBadge;
       if (h.heading) content.hero.heading = h.heading;
       if (h.subheading) content.hero.description = h.subheading;
-      if (h.ctaDiscover) content.hero.ctaProducts = h.ctaDiscover;
+      if (h.ctaDiscoverText || h.ctaDiscover) {
+        content.hero.ctaProducts = (h.ctaDiscoverText || h.ctaDiscover)!;
+      }
       if (h.harvestBadge) content.hero.statsPill = h.harvestBadge;
       if (h.heroImageUrl) content.hero.heroImageUrl = h.heroImageUrl;
-      if (h.videoFileUrl) content.hero.videoFileUrl = h.videoFileUrl;
-      if (h.videoUrl) content.hero.videoUrl = h.videoUrl;
-      if (h.posterImageUrl) content.hero.posterImageUrl = h.posterImageUrl;
+
+      // Slideshow photos
+      if (h.slides && h.slides.length > 0) {
+        const validSlides: HeroSlide[] = h.slides
+          .filter((s) => Boolean(s.imageUrl))
+          .map((s, idx) => ({
+            src: s.imageUrl!,
+            alt: s.altText?.ar || s.altText?.en || s.caption?.ar || s.caption?.en || `Wadi Al-Nawar Slide ${idx + 1}`,
+            caption: s.caption?.ar || s.caption?.en || '',
+            captionBilingual: s.caption,
+          }));
+
+        if (validSlides.length > 0) {
+          content.hero.slides = validSlides;
+        }
+      }
     }
 
     // 2.5 Naimi Sheep Pastures Section
@@ -117,9 +148,12 @@ export async function getSiteContent(): Promise<SiteContent> {
         if (n.description) content.naimiSection.description = n.description;
         if (n.badge) content.naimiSection.badge = n.badge;
         if (n.imageUrl) content.naimiSection.imageUrl = n.imageUrl;
-        if (n.videoFileUrl) content.naimiSection.videoFileUrl = n.videoFileUrl;
-        if (n.videoUrl) content.naimiSection.videoUrl = n.videoUrl;
-        if (n.ctaWhatsApp) content.naimiSection.ctaWhatsApp = n.ctaWhatsApp;
+        if (n.images && n.images.length > 0) {
+          content.naimiSection.images = n.images;
+        }
+        if (n.ctaWhatsAppText || n.ctaWhatsApp) {
+          content.naimiSection.ctaWhatsApp = (n.ctaWhatsAppText || n.ctaWhatsApp)!;
+        }
       }
     }
 
@@ -130,11 +164,11 @@ export async function getSiteContent(): Promise<SiteContent> {
       if (a.title) content.about.title = a.title;
       if (a.quote) content.about.quote = a.quote;
       if (a.imageUrl) content.about.imageUrl = a.imageUrl;
+      if (a.images && a.images.length > 0) {
+        content.about.images = a.images;
+      }
       if (a.storyParagraphs && a.storyParagraphs.length > 0) {
         content.about.storyParagraphs = a.storyParagraphs;
-      }
-      if (a.videoSubtitle) {
-        content.about.videoPlaceholder.subtitle = a.videoSubtitle;
       }
       if (a.videoFileUrl) {
         content.about.videoFileUrl = a.videoFileUrl;
@@ -143,7 +177,7 @@ export async function getSiteContent(): Promise<SiteContent> {
         content.about.videoUrl = a.videoUrl;
       }
       if (a.pillars && a.pillars.length > 0) {
-        content.about.pillars = a.pillars.map((p, idx) => ({
+        content.about.pillars = a.pillars.map((p, idx): ValuePillar => ({
           id: `pillar-${idx}`,
           title: p.title,
           description: p.desc,
@@ -159,7 +193,9 @@ export async function getSiteContent(): Promise<SiteContent> {
       if (ps.eyebrow) content.productsSection.eyebrow = ps.eyebrow;
       if (ps.title) content.productsSection.title = ps.title;
       if (ps.description) content.productsSection.description = ps.description;
-      if (ps.catalogCta) content.productsSection.catalogCta = ps.catalogCta;
+      if (ps.catalogCtaText || ps.catalogCta) {
+        content.productsSection.catalogCta = (ps.catalogCtaText || ps.catalogCta)!;
+      }
     }
 
     // 5. Storage Tips
@@ -168,8 +204,8 @@ export async function getSiteContent(): Promise<SiteContent> {
       if (st.eyebrow) content.storagePracticeSection.eyebrow = st.eyebrow;
       if (st.title) content.storagePracticeSection.title = st.title;
       if (st.description) content.storagePracticeSection.subtitle = st.description;
-      if (st.items && st.items.length > 0) {
-        content.storagePracticeSection.items = st.items.map((item, idx) => ({
+      if (st.steps && st.steps.length > 0) {
+        content.storagePracticeSection.items = st.steps.map((item, idx): StorageStep => ({
           stepNumber: parseInt(item.stepNumber || `${idx + 1}`, 10) || idx + 1,
           title: item.title || { ar: '', en: '' },
           description: item.desc || { ar: '', en: '' },
@@ -209,7 +245,7 @@ export async function getSiteContent(): Promise<SiteContent> {
       };
     }
 
-    // 5. Dynamic Categories & Products
+    // 7. Dynamic Categories & Products
     if (sanityCategories && sanityCategories.length > 0) {
       const dynamicCats: DynamicCategoryItem[] = sanityCategories.map((cat) => {
         const catFeatured = (cat.featuredProducts || []).map((p) => mapSanityProduct(p, cat.title));
@@ -218,31 +254,24 @@ export async function getSiteContent(): Promise<SiteContent> {
         return {
           id: cat.slug,
           slug: cat.slug,
-          title: cat.title,
+          title: cat.name || cat.title,
           badge: cat.badge,
-          description: cat.description,
+          description: cat.shortDescription || cat.description,
           image: cat.imageUrl || (fallbackContent.productsSection?.categories as Record<string, { image?: string }>)?.[cat.slug]?.image,
+          icon: cat.icon,
           showOnHome: cat.showOnHome !== false,
-          homeOrder: cat.homeOrder || 1,
-          displayMode: cat.displayMode || (
-            cat.homeLayoutStyle === 'editorialCard' || cat.slug === 'meat' || cat.slug === 'pepper'
-              ? 'editorial'
-              : cat.homeLayoutStyle === 'flavorCards' || cat.slug === 'dried-tomatoes'
-              ? 'grid'
-              : 'swatches'
-          ),
-          gridColumns: cat.gridColumns || 'auto',
-          homeLayoutStyle: cat.homeLayoutStyle,
-          featuredProducts: catFeatured,
+          homeOrder: cat.displayOrder || cat.homeOrder || 1,
+          displayMode: cat.slug === 'meat' || cat.slug === 'pepper' ? 'editorial' : 'swatches',
+          gridColumns: 'auto',
+          featuredProducts: catFeatured.length > 0 ? catFeatured : catAll,
           allCategoryProducts: catAll,
-          seasonalFlavors: cat.seasonalFlavors,
         };
       });
 
       content.productsSection.dynamicCategories = dynamicCats;
     }
 
-    // 6. Set Sanity products as allProducts (Single Source of Truth)
+    // 8. Set Sanity products as allProducts
     if (sanityProducts && sanityProducts.length > 0) {
       content.productsSection.allProducts = sanityProducts.map((p) => mapSanityProduct(p));
     }
@@ -257,7 +286,6 @@ export async function getSiteContent(): Promise<SiteContent> {
  * Retrieves a single product by its URL slug.
  */
 export async function getProductBySlug(slug: string): Promise<ProductItem | null> {
-  // 1. Try Sanity directly for the most up-to-date document
   try {
     const sp = await getSanityProductBySlug(slug);
     if (sp) {
@@ -267,7 +295,6 @@ export async function getProductBySlug(slug: string): Promise<ProductItem | null
     // Continue to content fallback
   }
 
-  // 2. Check full merged content
   const content = await getSiteContent();
   return content.productsSection.allProducts.find((item) => item.id === slug) || null;
 }

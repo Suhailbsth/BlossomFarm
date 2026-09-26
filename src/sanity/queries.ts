@@ -1,48 +1,59 @@
-import { BilingualText } from '@/types/content';
+﻿import { BilingualText } from '@/types/content';
 
 /**
  * GROQ Queries for Sanity CMS
  */
 
-// 1. Query site settings
+// 1. Query site settings & branding
 export const siteSettingsQuery = `*[_type == "siteSettings"][0]{
   _id,
-  title,
+  brandName,
+  brandTagline,
+  whatsAppFloatingButtonText,
   whatsAppNumber,
+  whatsAppDefaultMessage,
   whatsAppDefaultMessageAr,
   whatsAppDefaultMessageEn,
+  contactPhone,
+  contactEmail,
   farmLocation,
   googleMapsUrl,
+  seoTitle,
+  seoDescription,
+  "siteLogoUrl": siteLogo.asset->url,
+  "siteFaviconUrl": siteFavicon.asset->url,
   "ogImageUrl": ogImage.asset->url,
-  metaDescription,
-  brandClosingTagline,
   commercialRegistration,
   copyrightText,
-  socialLinks
+  socialLinks,
+  // Legacy fallbacks
+  title,
+  brandClosingTagline,
+  metaDescription
 }`;
 
-// 2. Query categories with both their featured example products and all child products
-export const categoriesWithProductsQuery = `*[_type == "category"] | order(homeOrder asc, _createdAt asc) {
+// 2. Query categories with their child products
+export const categoriesWithProductsQuery = `*[_type == "category"] | order(coalesce(displayOrder, homeOrder) asc, _createdAt asc) {
   _id,
-  title,
+  "name": coalesce(name, title),
+  "title": coalesce(name, title),
   "slug": slug.current,
   badge,
-  description,
-  showOnHome,
-  homeOrder,
-  displayMode,
-  gridColumns,
-  seasonalFlavors,
+  "description": coalesce(shortDescription, description),
+  "shortDescription": coalesce(shortDescription, description),
+  "showOnHome": coalesce(showOnHome, true),
+  "displayOrder": coalesce(displayOrder, homeOrder, 1),
+  "homeOrder": coalesce(displayOrder, homeOrder, 1),
+  icon,
   "imageUrl": image.asset->url,
   "featuredProducts": featuredProducts[]-> {
     _id,
     name,
     "slug": slug.current,
     "categorySlug": category->slug.current,
+    subtitle,
     arabicSubtitle,
     badge,
-    icon,
-    accentColor,
     tagline,
     description,
     story,
@@ -62,10 +73,9 @@ export const categoriesWithProductsQuery = `*[_type == "category"] | order(homeO
     name,
     "slug": slug.current,
     "categorySlug": category->slug.current,
+    subtitle,
     arabicSubtitle,
     badge,
-    icon,
-    accentColor,
     tagline,
     description,
     story,
@@ -88,10 +98,9 @@ export const allProductsQuery = `*[_type == "product"] | order(displayOrder asc,
   name,
   "slug": slug.current,
   "categorySlug": category->slug.current,
+  subtitle,
   arabicSubtitle,
   badge,
-  icon,
-  accentColor,
   tagline,
   description,
   story,
@@ -113,10 +122,9 @@ export const productBySlugQuery = `*[_type == "product" && slug.current == $slug
   name,
   "slug": slug.current,
   "categorySlug": category->slug.current,
+  subtitle,
   arabicSubtitle,
   badge,
-  icon,
-  accentColor,
   tagline,
   description,
   story,
@@ -135,24 +143,60 @@ export const productBySlugQuery = `*[_type == "product" && slug.current == $slug
 // 5. Query homepage sections (Hero, Naimi, About, Storage, Recipes, Products Section)
 export const homeSectionsQuery = `{
   "hero": *[_type == "heroSection"][0]{
-    ...,
-    "heroImageUrl": heroImage.asset->url,
-    "videoFileUrl": videoFile.asset->url,
-    "posterImageUrl": posterImage.asset->url
+    welcomeBadge,
+    heading,
+    subheading,
+    ctaDiscoverText,
+    ctaDiscover,
+    harvestBadge,
+    "slides": slides[]{
+      "imageUrl": image.asset->url,
+      caption,
+      altText
+    },
+    "heroImageUrl": heroImage.asset->url
   },
   "naimi": *[_type == "naimiSection"][0]{
-    ...,
-    "imageUrl": image.asset->url,
-    "videoFileUrl": videoFile.asset->url
+    eyebrow,
+    title,
+    subtitle,
+    description,
+    badge,
+    ctaWhatsAppText,
+    ctaWhatsApp,
+    "images": images[].asset->url,
+    "imageUrl": image.asset->url
   },
   "about": *[_type == "aboutSection"][0]{
-    ...,
+    eyebrow,
+    title,
+    quote,
+    storyParagraphs,
     "imageUrl": image.asset->url,
-    "videoFileUrl": videoFile.asset->url
+    "images": images[].asset->url,
+    "videoFileUrl": videoFile.asset->url,
+    videoUrl,
+    pillars
   },
-  "productsSection": *[_type == "productsSection"][0],
-  "recipesSection": *[_type == "recipesSection"][0],
-  "storage": *[_type == "storageTips"][0],
+  "productsSection": *[_type == "productsSection"][0]{
+    eyebrow,
+    title,
+    description,
+    catalogCtaText,
+    catalogCta
+  },
+  "recipesSection": *[_type == "recipesSection"][0]{
+    eyebrow,
+    title,
+    videoInstruction,
+    journalTag
+  },
+  "storage": *[_type == "storageTips"][0]{
+    eyebrow,
+    title,
+    description,
+    "steps": coalesce(steps, items)
+  },
   "recipes": *[_type == "recipeItem"] | order(displayOrder asc) {
     _id,
     number,
@@ -172,9 +216,9 @@ export const homeSectionsQuery = `{
   }
 }`;
 
-/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+/* ─────────────────────────────────────────────────────────────
    TypeScript Interfaces for Sanity Data
-   ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+   ───────────────────────────────────────────────────────────── */
 
 export interface SanitySocialLink {
   platform: 'instagram' | 'x' | 'snapchat' | 'tiktok' | 'youtube' | string;
@@ -183,18 +227,29 @@ export interface SanitySocialLink {
 
 export interface SanitySiteSettings {
   _id?: string;
-  title?: string;
+  brandName?: BilingualText;
+  brandTagline?: BilingualText;
+  siteLogoUrl?: string;
+  siteFaviconUrl?: string;
+  whatsAppFloatingButtonText?: BilingualText;
   whatsAppNumber?: string;
+  whatsAppDefaultMessage?: BilingualText;
   whatsAppDefaultMessageAr?: string;
   whatsAppDefaultMessageEn?: string;
-  farmLocation?: string;
+  contactPhone?: string;
+  contactEmail?: string;
+  farmLocation?: BilingualText | string;
   googleMapsUrl?: string;
+  seoTitle?: BilingualText;
+  seoDescription?: BilingualText;
   ogImageUrl?: string;
-  metaDescription?: BilingualText;
-  brandClosingTagline?: BilingualText;
   commercialRegistration?: string;
   copyrightText?: BilingualText;
   socialLinks?: SanitySocialLink[];
+  // Legacy
+  title?: string;
+  brandClosingTagline?: BilingualText;
+  metaDescription?: BilingualText;
 }
 
 export interface SanityProduct {
@@ -202,10 +257,9 @@ export interface SanityProduct {
   name: BilingualText;
   slug: string;
   categorySlug?: string;
+  subtitle?: BilingualText;
   arabicSubtitle?: string;
   badge?: BilingualText;
-  icon?: string;
-  accentColor?: string;
   tagline?: BilingualText;
   description?: BilingualText;
   story?: BilingualText;
@@ -223,31 +277,36 @@ export interface SanityProduct {
 
 export interface SanityCategory {
   _id: string;
+  name?: BilingualText;
   title: BilingualText;
   slug: string;
   badge?: BilingualText;
   description?: BilingualText;
+  shortDescription?: BilingualText;
   showOnHome?: boolean;
+  displayOrder?: number;
   homeOrder?: number;
-  displayMode?: 'editorial' | 'swatches' | 'grid' | string;
-  gridColumns?: 'auto' | '1' | '2' | '3' | '4' | string;
-  homeLayoutStyle?: string;
+  icon?: string;
   imageUrl?: string;
-  seasonalFlavors?: BilingualText[];
   featuredProducts?: SanityProduct[];
   products?: SanityProduct[];
+}
+
+export interface SanityHeroSlide {
+  imageUrl?: string;
+  caption?: BilingualText;
+  altText?: BilingualText;
 }
 
 export interface SanityHeroSection {
   welcomeBadge?: BilingualText;
   heading?: BilingualText;
   subheading?: BilingualText;
+  ctaDiscoverText?: BilingualText;
   ctaDiscover?: BilingualText;
   harvestBadge?: BilingualText;
+  slides?: SanityHeroSlide[];
   heroImageUrl?: string;
-  videoFileUrl?: string;
-  videoUrl?: string;
-  posterImageUrl?: string;
 }
 
 export interface SanityNaimiSection {
@@ -256,9 +315,9 @@ export interface SanityNaimiSection {
   subtitle?: BilingualText;
   description?: BilingualText;
   badge?: BilingualText;
+  images?: string[];
   imageUrl?: string;
-  videoFileUrl?: string;
-  videoUrl?: string;
+  ctaWhatsAppText?: BilingualText;
   ctaWhatsApp?: BilingualText;
 }
 
@@ -267,9 +326,8 @@ export interface SanityAboutSection {
   title?: BilingualText;
   quote?: BilingualText;
   storyParagraphs?: BilingualText[];
-  videoBadge?: BilingualText;
-  videoSubtitle?: BilingualText;
   imageUrl?: string;
+  images?: string[];
   videoFileUrl?: string;
   videoUrl?: string;
   pillars?: { title: BilingualText; desc: BilingualText }[];
@@ -279,6 +337,7 @@ export interface SanityProductsSectionHeader {
   eyebrow?: BilingualText;
   title?: BilingualText;
   description?: BilingualText;
+  catalogCtaText?: BilingualText;
   catalogCta?: BilingualText;
 }
 
@@ -289,15 +348,17 @@ export interface SanityRecipesSectionHeader {
   journalTag?: BilingualText;
 }
 
+export interface SanityStorageStep {
+  stepNumber?: string;
+  title?: BilingualText;
+  desc?: BilingualText;
+}
+
 export interface SanityStorageTips {
   eyebrow?: BilingualText;
   title?: BilingualText;
   description?: BilingualText;
-  items?: {
-    stepNumber?: string;
-    title?: BilingualText;
-    desc?: BilingualText;
-  }[];
+  steps?: SanityStorageStep[];
 }
 
 export interface SanityRecipeItem {
