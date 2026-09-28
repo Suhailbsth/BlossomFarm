@@ -16,24 +16,24 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
   const { language, t } = useLanguage();
   const isAr = language === 'ar';
 
+  // Helper to extract display products for a category (respecting isFeaturedOnHome toggle)
+  const getCategoryProducts = (cat: DynamicCategoryItem): ProductItem[] => {
+    const list =
+      cat.featuredProducts && cat.featuredProducts.length > 0
+        ? cat.featuredProducts
+        : cat.allCategoryProducts && cat.allCategoryProducts.length > 0
+        ? cat.allCategoryProducts
+        : [];
+    return list.filter((p) => p.isFeaturedOnHome !== false);
+  };
+
   const dynamicCategories = content?.productsSection?.dynamicCategories;
   const hasDynamicCategories = dynamicCategories && dynamicCategories.length > 0;
   const homeCategories = hasDynamicCategories
     ? dynamicCategories
-        .filter((c) => c.showOnHome !== false)
+        .filter((c) => c.showOnHome !== false && getCategoryProducts(c).length > 0)
         .sort((a, b) => (a.homeOrder || 1) - (b.homeOrder || 1))
     : [];
-
-  // Helper to extract display products for a category
-  const getCategoryProducts = (cat: DynamicCategoryItem): ProductItem[] => {
-    if (cat.featuredProducts && cat.featuredProducts.length > 0) {
-      return cat.featuredProducts;
-    }
-    if (cat.allCategoryProducts && cat.allCategoryProducts.length > 0) {
-      return cat.allCategoryProducts;
-    }
-    return [];
-  };
 
   // Helper to calculate responsive grid column classes
   const getGridColsClass = (requestedCols: string | undefined, count: number): string => {

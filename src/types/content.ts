@@ -1,4 +1,4 @@
-﻿export type Language = 'en' | 'ar';
+export type Language = 'en' | 'ar';
 
 export interface BilingualText {
   en: string;
@@ -39,6 +39,7 @@ export interface ProductItem {
   image: string;
   gallery?: string[];
   inSeason: boolean;
+  isFeaturedOnHome?: boolean;
   highlights?: BilingualText[];
   specs?: {
     label: BilingualText;

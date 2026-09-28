@@ -146,6 +146,7 @@ function mapSanityProduct(sp: SanityProduct, categoryTitle?: { ar: string; en: s
     image: imgUrl,
     gallery,
     inSeason: sp.inSeason !== false,
+    isFeaturedOnHome: sp.isFeaturedOnHome !== false,
     highlights: sp.highlights,
     specs: sp.specs,
     bestPairedWith: sp.bestPairedWith,
@@ -356,6 +357,9 @@ export async function getSiteContent(): Promise<SiteContent> {
       const dynamicCats: DynamicCategoryItem[] = sanityCategories.map((cat) => {
         const catFeatured = (cat.featuredProducts || []).map((p) => mapSanityProduct(p, cat.title));
         const catAll = (cat.products || []).map((p) => mapSanityProduct(p, cat.title));
+        const homeFeatured = (catFeatured.length > 0 ? catFeatured : catAll).filter(
+          (p) => p.isFeaturedOnHome !== false
+        );
 
         return {
           id: cat.slug,
@@ -368,13 +372,14 @@ export async function getSiteContent(): Promise<SiteContent> {
           showOnHome: cat.showOnHome !== false,
           homeOrder: cat.displayOrder || cat.homeOrder || 1,
           displayMode:
-            cat.slug === 'meat' || cat.slug === 'pepper'
+            cat.displayMode ||
+            (cat.slug === 'meat' || cat.slug === 'pepper'
               ? 'editorial'
               : cat.slug === 'dates'
               ? 'swatches'
-              : 'grid',
-          gridColumns: 'auto',
-          featuredProducts: catFeatured.length > 0 ? catFeatured : catAll,
+              : 'grid'),
+          gridColumns: cat.gridColumns || 'auto',
+          featuredProducts: homeFeatured,
           allCategoryProducts: catAll,
         };
       });

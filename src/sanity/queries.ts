@@ -1,4 +1,4 @@
-﻿import { BilingualText } from '@/types/content';
+import { BilingualText } from '@/types/content';
 
 /**
  * GROQ Queries for Sanity CMS
@@ -43,6 +43,8 @@ export const categoriesWithProductsQuery = `*[_type == "category"] | order(coale
   "displayOrder": coalesce(displayOrder, homeOrder, 1),
   "homeOrder": coalesce(displayOrder, homeOrder, 1),
   icon,
+  displayMode,
+  gridColumns,
   "imageUrl": image.asset->url,
   "featuredProducts": featuredProducts[]-> {
     _id,
@@ -272,6 +274,8 @@ export interface SanityCategory {
   showOnHome?: boolean;
   displayOrder?: number;
   homeOrder?: number;
+  displayMode?: string;
+  gridColumns?: string;
   icon?: string;
   imageUrl?: string;
   featuredProducts?: SanityProduct[];
