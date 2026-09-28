@@ -1,4 +1,4 @@
-﻿import { SiteContent, ProductItem, DynamicCategoryItem, ValuePillar, StorageStep, HeroSlide } from '@/types/content';
+import { SiteContent, ProductItem, DynamicCategoryItem, ValuePillar, StorageStep, HeroSlide } from '@/types/content';
 import {
   getSanitySiteSettings,
   getSanityCategories,
@@ -137,7 +137,7 @@ function mapSanityProduct(sp: SanityProduct, categoryTitle?: { ar: string; en: s
     categoryKey: sp.categorySlug || 'dates',
     name: sp.name,
     subtitle: sp.subtitle,
-    arabicSubtitle: sp.arabicSubtitle || (typeof sp.subtitle === 'object' ? sp.subtitle.ar : undefined),
+    arabicSubtitle: sp.arabicSubtitle || (sp.subtitle && typeof sp.subtitle === 'object' ? sp.subtitle.ar : undefined),
     category: categoryTitle || { ar: 'منتجات المزرعة', en: 'Farm Harvest' },
     tagline: sp.tagline,
     badge: sp.badge,
@@ -367,7 +367,12 @@ export async function getSiteContent(): Promise<SiteContent> {
           icon: cat.icon,
           showOnHome: cat.showOnHome !== false,
           homeOrder: cat.displayOrder || cat.homeOrder || 1,
-          displayMode: cat.slug === 'meat' || cat.slug === 'pepper' ? 'editorial' : 'swatches',
+          displayMode:
+            cat.slug === 'meat' || cat.slug === 'pepper'
+              ? 'editorial'
+              : cat.slug === 'dates'
+              ? 'swatches'
+              : 'grid',
           gridColumns: 'auto',
           featuredProducts: catFeatured.length > 0 ? catFeatured : catAll,
           allCategoryProducts: catAll,
