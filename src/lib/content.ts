@@ -32,7 +32,6 @@ function createEmptySiteContent(): SiteContent {
       contact: { ar: 'تواصل معنا', en: 'Contact' },
     },
     hero: {
-      welcomeBadge: { ar: '', en: '' },
       heading: { ar: '', en: '' },
       subheading: { ar: '', en: '' },
       description: { ar: '', en: '' },
@@ -222,7 +221,6 @@ export async function getSiteContent(): Promise<SiteContent> {
     // 2. Hero Section
     if (sanityHome?.hero) {
       const h = sanityHome.hero;
-      if (h.welcomeBadge) content.hero.welcomeBadge = h.welcomeBadge;
       if (h.heading) content.hero.heading = h.heading;
       if (h.subheading) content.hero.description = h.subheading;
       if (h.ctaWhatsApp) content.hero.ctaWhatsApp = h.ctaWhatsApp;

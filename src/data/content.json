@@ -60,10 +60,6 @@
     }
   },
   "hero": {
-    "welcomeBadge": {
-      "en": "Shaqra Desert Oasis • Agricultural Heritage",
-      "ar": "واحة شقراء الزراعية • أرض الخير والنماء"
-    },
     "heading": {
       "en": "The Blossom Valley",
       "ar": "وادي النوار"

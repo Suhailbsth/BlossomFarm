@@ -122,7 +122,7 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
     '';
 
   const whatsAppMsg = isAr
-    ? 'السلام عليكم وادي النوار، أرغب في الاستفسار عن الطلب والحجز.'
+    ? 'أرغب في الاستفسار عن الطلب والحجز.'
     : 'Hello The Blossom Valley, I would like to inquire about ordering farm products.';
 
   const whatsAppHref = whatsAppNumber
@@ -142,7 +142,7 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
       onTouchEnd={handleTouchEnd}
       className="hero-cinematic relative w-full overflow-hidden select-none flex flex-col"
       aria-roledescription="carousel"
-      aria-label={isAr ? 'عرض صور مزرعة وادي النوار' : 'The Blossom Valley farm slideshow'}
+      aria-label={isAr ? 'عرض صور المزرعة' : 'The Blossom Valley farm slideshow'}
     >
       {/* ── 1. SLIDESHOW IMAGES LAYER ─────────────────────────────────── */}
       <div className="absolute inset-0 z-0">
@@ -191,14 +191,6 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
             <span className="shrink-0 size-4 rounded-full bg-[#005A52] p-0.5 grid place-items-center border border-[#0A6860]">
               <EmblemIcon theme="cream" className="w-full h-full" />
             </span>
-            <span className="font-semibold text-white/90">
-              {content?.hero?.welcomeBadge
-                ? t(content.hero.welcomeBadge)
-                : isAr
-                  ? 'واحة شقراء الزراعية • أرض الخير والنماء'
-                  : 'Shaqra Desert Oasis · Agricultural Heritage'}
-            </span>
-            <span className="text-white/40">·</span>
             <span className="text-emerald-400 font-bold">
               {content?.hero?.statsPill
                 ? t(content.hero.statsPill)
@@ -321,11 +313,6 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
             {/* Slide Title */}
             <p className="text-sm sm:text-base font-medium leading-snug text-white/95 tracking-wide line-clamp-2 sm:line-clamp-none">
               {activeSlide.caption}
-            </p>
-            <p className="mt-0.5 text-xs text-white/60">
-              {isAr
-                ? 'محافظة شقراء، المملكة العربية السعودية'
-                : 'Shaqra City, Riyadh Province, Saudi Arabia'}
             </p>
           </div>
 

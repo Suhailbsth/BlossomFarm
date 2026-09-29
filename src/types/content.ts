@@ -171,7 +171,6 @@ export interface SiteContent {
     contact: BilingualText;
   };
   hero: {
-    welcomeBadge: BilingualText;
     heading: BilingualText;
     subheading: BilingualText;
     description: BilingualText;
