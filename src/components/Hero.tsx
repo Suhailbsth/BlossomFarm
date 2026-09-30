@@ -150,7 +150,7 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
           const isActive = index === currentSlide;
           return (
             <div
-              key={slide.src}
+              key={`${slide.src}-${index}`}
               className={`absolute inset-0 h-full w-full transition-opacity duration-1000 ease-in-out ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
                 }`}
               aria-hidden={!isActive}
@@ -160,9 +160,9 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
                 alt={slide.alt}
                 fill
                 priority={index === 0}
-                quality={90}
+                quality={80}
                 sizes="100vw"
-                className={`object-cover object-center transition-transform duration-7000 ease-out ${isActive && isPlaying && !prefersReducedMotion ? 'scale-105' : 'scale-100'
+                className={`object-cover object-center transform-gpu will-change-transform transition-transform duration-7000 ease-out ${isActive && isPlaying && !prefersReducedMotion ? 'scale-105' : 'scale-100'
                   }`}
               />
             </div>
@@ -276,66 +276,70 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
         <div className="flex-1 min-h-[3rem]" aria-hidden="true" />
 
         {/* ── BOTTOM BAR: Editorial Caption & Architectural Controls ── */}
-        <div className="mt-auto flex flex-col sm:flex-row sm:items-end justify-between gap-4 pt-4 sm:pt-6">
-          {/* Left: Slide Index + Hairline Pagination + Caption */}
-          <div className="text-white drop-shadow-md max-w-xl">
-            {/* Minimalist Index & Hairline Segments */}
-            <div className="flex items-center gap-3 mb-2">
-              <span className="font-mono text-xs tracking-widest text-white/90 font-medium">
-                {String(currentSlide + 1).padStart(2, '0')}
-                <span className="text-white/40 mx-1">/</span>
-                {String(totalSlides).padStart(2, '0')}
-              </span>
+        {totalSlides > 0 && activeSlide && (
+          <div className="mt-auto flex flex-col sm:flex-row sm:items-end justify-between gap-4 pt-4 sm:pt-6">
+            {/* Left: Slide Index + Hairline Pagination + Caption */}
+            <div className="text-white drop-shadow-md max-w-xl">
+              {/* Minimalist Index & Hairline Segments */}
+              <div className="flex items-center gap-3 mb-2">
+                <span className="font-mono text-xs tracking-widest text-white/90 font-medium">
+                  {String(currentSlide + 1).padStart(2, '0')}
+                  <span className="text-white/40 mx-1">/</span>
+                  {String(totalSlides).padStart(2, '0')}
+                </span>
 
-              {/* 2px architectural hairline dashes */}
-              <div className="flex items-center gap-1.5" role="tablist">
-                {heroSlides.map((_, idx) => (
-                  <button
-                    key={idx}
-                    type="button"
-                    role="tab"
-                    aria-selected={idx === currentSlide}
-                    aria-label={`Slide ${idx + 1}`}
-                    onClick={() => goToSlide(idx)}
-                    className="group py-2.5 cursor-pointer focus:outline-hidden"
-                  >
-                    <div
-                      className={`h-[2px] rounded-full transition-all duration-300 ${idx === currentSlide
-                        ? 'w-7 sm:w-9 bg-white'
-                        : 'w-2.5 sm:w-3 bg-white/30 group-hover:bg-white/60'
-                        }`}
-                    />
-                  </button>
-                ))}
+                {/* 2px architectural hairline dashes */}
+                <div className="flex items-center gap-1.5" role="tablist">
+                  {heroSlides.map((_, idx) => (
+                    <button
+                      key={idx}
+                      type="button"
+                      role="tab"
+                      aria-selected={idx === currentSlide}
+                      aria-label={`Slide ${idx + 1}`}
+                      onClick={() => goToSlide(idx)}
+                      className="group py-2.5 cursor-pointer focus:outline-hidden"
+                    >
+                      <div
+                        className={`h-[2px] rounded-full transition-all duration-300 ${idx === currentSlide
+                          ? 'w-7 sm:w-9 bg-white'
+                          : 'w-2.5 sm:w-3 bg-white/30 group-hover:bg-white/60'
+                          }`}
+                      />
+                    </button>
+                  ))}
+                </div>
               </div>
+
+              {/* Slide Title */}
+              {activeSlide.caption && (
+                <p className="text-sm sm:text-base font-medium leading-snug text-white/95 tracking-wide line-clamp-2 sm:line-clamp-none">
+                  {activeSlide.caption}
+                </p>
+              )}
             </div>
 
-            {/* Slide Title */}
-            <p className="text-sm sm:text-base font-medium leading-snug text-white/95 tracking-wide line-clamp-2 sm:line-clamp-none">
-              {activeSlide.caption}
-            </p>
+            {/* Right: Tactile Twin Navigation Buttons (Side-by-side in corner for effortless thumb reach) */}
+            <div className="flex items-center gap-2 self-end shrink-0">
+              <button
+                type="button"
+                onClick={goToPrev}
+                aria-label={isAr ? 'الصورة السابقة' : 'Previous slide'}
+                className="size-11 sm:size-12 cursor-pointer flex items-center justify-center rounded-full bg-black/35 hover:bg-black/55 text-white/90 hover:text-white backdrop-blur-md border border-white/15 hover:border-white/35 active:scale-95 transition-all duration-200 shadow-lg"
+              >
+                {isRTL ? <ArrowRight size={18} /> : <ArrowLeft size={18} />}
+              </button>
+              <button
+                type="button"
+                onClick={goToNext}
+                aria-label={isAr ? 'الصورة التالية' : 'Next slide'}
+                className="size-11 sm:size-12 cursor-pointer flex items-center justify-center rounded-full bg-black/35 hover:bg-black/55 text-white/90 hover:text-white backdrop-blur-md border border-white/15 hover:border-white/35 active:scale-95 transition-all duration-200 shadow-lg"
+              >
+                {isRTL ? <ArrowLeft size={18} /> : <ArrowRight size={18} />}
+              </button>
+            </div>
           </div>
-
-          {/* Right: Tactile Twin Navigation Buttons (Side-by-side in corner for effortless thumb reach) */}
-          <div className="flex items-center gap-2 self-end shrink-0">
-            <button
-              type="button"
-              onClick={goToPrev}
-              aria-label={isAr ? 'الصورة السابقة' : 'Previous slide'}
-              className="size-11 sm:size-12 cursor-pointer flex items-center justify-center rounded-full bg-black/35 hover:bg-black/55 text-white/90 hover:text-white backdrop-blur-md border border-white/15 hover:border-white/35 active:scale-95 transition-all duration-200 shadow-lg"
-            >
-              {isRTL ? <ArrowRight size={18} /> : <ArrowLeft size={18} />}
-            </button>
-            <button
-              type="button"
-              onClick={goToNext}
-              aria-label={isAr ? 'الصورة التالية' : 'Next slide'}
-              className="size-11 sm:size-12 cursor-pointer flex items-center justify-center rounded-full bg-black/35 hover:bg-black/55 text-white/90 hover:text-white backdrop-blur-md border border-white/15 hover:border-white/35 active:scale-95 transition-all duration-200 shadow-lg"
-            >
-              {isRTL ? <ArrowLeft size={18} /> : <ArrowRight size={18} />}
-            </button>
-          </div>
-        </div>
+        )}
       </div>
     </section>
   );

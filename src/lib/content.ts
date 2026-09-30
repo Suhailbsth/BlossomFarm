@@ -355,7 +355,15 @@ export async function getSiteContent(): Promise<SiteContent> {
       const dynamicCats: DynamicCategoryItem[] = sanityCategories.map((cat) => {
         const catFeatured = (cat.featuredProducts || []).map((p) => mapSanityProduct(p, cat.title));
         const catAll = (cat.products || []).map((p) => mapSanityProduct(p, cat.title));
-        const homeFeatured = (catFeatured.length > 0 ? catFeatured : catAll).filter(
+
+        // Merge products from direct category references (catAll) and legacy featuredProducts
+        const prodsMap = new Map<string, ProductItem>();
+        catAll.forEach((p) => prodsMap.set(p.id, p));
+        catFeatured.forEach((p) => {
+          if (!prodsMap.has(p.id)) prodsMap.set(p.id, p);
+        });
+        const combinedCategoryProducts = Array.from(prodsMap.values());
+        const homeFeatured = combinedCategoryProducts.filter(
           (p) => p.isFeaturedOnHome !== false
         );
 
@@ -378,7 +386,7 @@ export async function getSiteContent(): Promise<SiteContent> {
               : 'grid'),
           gridColumns: cat.gridColumns || 'auto',
           featuredProducts: homeFeatured,
-          allCategoryProducts: catAll,
+          allCategoryProducts: combinedCategoryProducts,
         };
       });
 

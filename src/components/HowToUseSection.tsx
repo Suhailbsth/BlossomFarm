@@ -52,7 +52,7 @@ export default function HowToUseSection({ content }: HowToUseSectionProps) {
   const [isPlayingAudio, setIsPlayingAudio] = useState(false);
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
-  console.log(content?.recipesSection)
+
   const dishes: CulinaryDish[] = (content?.recipesSection?.items || []).map((item, idx) => ({
     id: item.id || `recipe-${idx + 1}`,
     num: item.number || (idx + 1 < 10 ? `0${idx + 1}` : `${idx + 1}`),
@@ -272,8 +272,8 @@ export default function HowToUseSection({ content }: HowToUseSectionProps) {
                 type="button"
                 onClick={() => setModalTab('recipe')}
                 className={`pb-2.5 px-3 text-xs sm:text-sm font-bold transition-all border-b-2 cursor-pointer flex items-center gap-2 ${modalTab === 'recipe'
-                    ? 'border-primary text-primary'
-                    : 'border-transparent text-muted-foreground hover:text-ink'
+                  ? 'border-primary text-primary'
+                  : 'border-transparent text-muted-foreground hover:text-ink'
                   }`}
               >
                 <FileText size={15} />
@@ -284,8 +284,8 @@ export default function HowToUseSection({ content }: HowToUseSectionProps) {
                 type="button"
                 onClick={() => setModalTab('video')}
                 className={`pb-2.5 px-3 text-xs sm:text-sm font-bold transition-all border-b-2 cursor-pointer flex items-center gap-2 ${modalTab === 'video'
-                    ? 'border-primary text-primary'
-                    : 'border-transparent text-muted-foreground hover:text-ink'
+                  ? 'border-primary text-primary'
+                  : 'border-transparent text-muted-foreground hover:text-ink'
                   }`}
               >
                 <Video size={15} />
