@@ -7,14 +7,16 @@ import { SiteContent } from '@/types/content';
 import {
   ArrowLeft,
   ArrowRight,
+  MessageCircle,
 } from 'lucide-react';
+import { buildWhatsAppLink } from '@/lib/whatsapp';
 
 interface HeroProps {
   content?: SiteContent;
   whatsAppNumber?: string;
 }
 
-export default function Hero({ content }: HeroProps) {
+export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProps) {
   const { language, isRTL } = useLanguage();
   const isAr = language === 'ar';
 
@@ -111,8 +113,22 @@ export default function Hero({ content }: HeroProps) {
     touchEndXRef.current = null;
   };
 
+  // WhatsApp CTA helpers
+  const whatsAppNum =
+    propWhatsApp ||
+    content?.footer?.whatsAppNumber ||
+    content?.hero?.whatsAppNumber ||
+    '';
 
+  const whatsAppMsg = isAr
+    ? (content?.footer?.whatsAppPrefillAr || 'السلام عليكم وادي النوار، أرغب في الاستفسار عن الطلب والحجز.')
+    : (content?.footer?.whatsAppPrefillEn || 'Hello The Blossom Valley, I would like to inquire about ordering farm products.');
 
+  const whatsAppHref = buildWhatsAppLink(whatsAppMsg, whatsAppNum);
+
+  const whatsAppBtnText = isAr
+    ? (content?.hero?.ctaWhatsApp?.ar || 'تواصل عبر واتساب')
+    : (content?.hero?.ctaWhatsApp?.en || 'Chat on WhatsApp');
 
   const activeSlide = heroSlides[currentSlide] || heroSlides[0] || null;
 
@@ -227,6 +243,20 @@ export default function Hero({ content }: HeroProps) {
               ? (content?.hero?.productsList?.ar || 'تمور الخلاص • فلفل شقراء • منتجات زراعية موسمية • طماطم مجففة • لحوم نعيمي بلدي')
               : (content?.hero?.productsList?.en || 'Khalas Dates • Shaqra Peppers • Seasonal Farm Produce • Sun-Dried Tomatoes • Local Naimi Livestock')}
           </p>
+
+          {/* WhatsApp CTA Button */}
+          <div className="mt-5 sm:mt-6 flex items-center">
+            <a
+              href={whatsAppHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary gap-2.5 font-bold shadow-lg shadow-black/25 text-xs sm:text-sm px-5 py-2.5 rounded-full inline-flex items-center"
+            >
+              <MessageCircle size={18} />
+              <span>{whatsAppBtnText}</span>
+              <span className="text-sm font-bold transition-transform rtl:rotate-180">→</span>
+            </a>
+          </div>
         </div>
 
         {/* Spacer — fills the middle of the viewport */}
