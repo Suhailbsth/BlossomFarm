@@ -42,12 +42,8 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Home() {
-  const [sanitySettings, content] = await Promise.all([
-    getSanitySiteSettings(),
-    getSiteContent(),
-  ]);
-
-  const whatsAppNumber = sanitySettings?.whatsAppNumber || content?.footer?.whatsAppNumber;
+  const content = await getSiteContent();
+  const whatsAppNumber = content?.footer?.whatsAppNumber || '';
 
   return (
     <main className="min-h-screen bg-background text-foreground selection:bg-primary selection:text-white">

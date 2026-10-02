@@ -18,12 +18,10 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
 
   // Helper to extract display products for a category (respecting isFeaturedOnHome toggle)
   const getCategoryProducts = (cat: DynamicCategoryItem): ProductItem[] => {
-    const list =
-      cat.featuredProducts && cat.featuredProducts.length > 0
-        ? cat.featuredProducts
-        : cat.allCategoryProducts && cat.allCategoryProducts.length > 0
-        ? cat.allCategoryProducts
-        : [];
+    const prodsMap = new Map<string, ProductItem>();
+    (cat.featuredProducts || []).forEach((p) => prodsMap.set(p.id, p));
+    (cat.allCategoryProducts || []).forEach((p) => prodsMap.set(p.id, p));
+    const list = Array.from(prodsMap.values());
     return list.filter((p) => p.isFeaturedOnHome !== false);
   };
 

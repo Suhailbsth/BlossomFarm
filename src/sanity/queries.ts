@@ -132,7 +132,6 @@ export const productBySlugQuery = `*[_type == "product" && slug.current == $slug
 // 5. Query homepage sections (Hero, Naimi, About, Storage, Recipes, Products Section)
 export const homeSectionsQuery = `{
   "hero": *[_type == "heroSection"][0]{
-    welcomeBadge,
     heading,
     subheading,
     productsList,
@@ -292,7 +291,6 @@ export interface SanityHeroSlide {
 }
 
 export interface SanityHeroSection {
-  welcomeBadge?: BilingualText;
   heading?: BilingualText;
   subheading?: BilingualText;
   productsList?: BilingualText;
