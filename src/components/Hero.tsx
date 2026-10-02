@@ -188,11 +188,11 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
         <div className={`max-w-2xl ${isRTL ? 'text-right' : 'text-left'}`}>
 
           {/* Bilingual Bold Headline */}
-          <div className="flex flex-col gap-1 sm:gap-2">
+          <div className="flex flex-col gap-2 sm:gap-3.5">
             {isAr ? (
               <>
                 <h1
-                  className="font-arabic font-extrabold text-white tracking-tight leading-[1.05] drop-shadow-md"
+                  className="font-arabic font-extrabold text-white tracking-tight leading-[1.18] sm:leading-[1.22] drop-shadow-md pb-1 sm:pb-1.5"
                   style={{
                     fontSize: 'clamp(2.75rem, 8vw, 6.2rem)',
                   }}
@@ -200,7 +200,7 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
                   {content?.hero?.heading?.ar || 'وادي النوار'}
                 </h1>
                 <p
-                  className="font-display font-extrabold text-white/95 uppercase tracking-wider leading-tight drop-shadow-sm"
+                  className="font-display font-extrabold text-white/95 uppercase tracking-wider leading-tight drop-shadow-sm mt-1 sm:mt-2"
                   style={{
                     fontSize: 'clamp(1.15rem, 3.2vw, 2.35rem)',
                   }}
@@ -211,7 +211,7 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
             ) : (
               <>
                 <h1
-                  className="font-display font-extrabold text-white uppercase tracking-wider leading-[1.05] drop-shadow-md"
+                  className="font-display font-extrabold text-white uppercase tracking-wider leading-[1.08] drop-shadow-md pb-1"
                   style={{
                     fontSize: 'clamp(2.4rem, 7vw, 5.5rem)',
                   }}
@@ -219,7 +219,7 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
                   {content?.hero?.heading?.en || 'The BLOSSOM Valley'}
                 </h1>
                 <p
-                  className="font-arabic font-extrabold text-white/95 leading-tight drop-shadow-sm"
+                  className="font-arabic font-extrabold text-white/95 leading-tight drop-shadow-sm mt-1 sm:mt-2"
                   style={{
                     fontSize: 'clamp(1.35rem, 3.8vw, 2.8rem)',
                   }}
