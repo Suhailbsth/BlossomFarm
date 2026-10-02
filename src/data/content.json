@@ -19,6 +19,10 @@
     "locationShort": {
       "en": "Shaqra City, Saudi Arabia",
       "ar": "محافظة شقراء، المملكة العربية السعودية"
+    },
+    "headerSubtitle": {
+      "en": "Farm & Resort · Shaqra",
+      "ar": "مزرعة ومنتجع · شقراء"
     }
   },
   "navigation": {
@@ -65,16 +69,20 @@
       "ar": "واحة شقراء الزراعية • أرض الخير والنماء"
     },
     "heading": {
-      "en": "The Blossom Valley",
+      "en": "The BLOSSOM Valley",
       "ar": "وادي النوار"
     },
     "subheading": {
-      "en": "Saudi soil, warm sun, and authentic farm produce cultivated with mindful craftsmanship in Shaqra.",
-      "ar": "أرض سعودية طيبة، شمس كريمة، ومنتجات حُظيت بعناية فائقة في محافظة شقراء."
+      "en": "From the warm sands of our homeland, from Shaqra Governorate; Wadi Al-Nawar Farm brings you its fresh produce daily.",
+      "ar": "من أرض الوطن ورماله الدافئة، من محافظة شقراء؛ مزرعة وادي النوار تقدم لكم منتجاتها الطازجة يومياً."
     },
     "description": {
-      "en": "From date palm groves and pristine livestock pastures to artisanal sun-dried provisions, every stage is cared for with uncompromising dedication.",
-      "ar": "من واحات النخيل ومراعي الماشية إلى خيرات المؤونة الحرفية، ندير كل مرحلة بشغف وإتقان متناهٍ."
+      "en": "From the warm sands of our homeland, from Shaqra Governorate; Wadi Al-Nawar Farm brings you its fresh produce daily.",
+      "ar": "من أرض الوطن ورماله الدافئة، من محافظة شقراء؛ مزرعة وادي النوار تقدم لكم منتجاتها الطازجة يومياً."
+    },
+    "productsList": {
+      "en": "Khalas Dates • Shaqra Peppers • Seasonal Farm Produce • Sun-Dried Tomatoes • Local Naimi Livestock",
+      "ar": "تمور الخلاص • فلفل شقراء • منتجات زراعية موسمية • طماطم مجففة • لحوم نعيمي بلدي"
     },
     "ctaProducts": {
       "en": "Explore Our Harvest",

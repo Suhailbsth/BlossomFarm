@@ -7,18 +7,15 @@ import { SiteContent } from '@/types/content';
 import {
   ArrowLeft,
   ArrowRight,
-  ArrowDown,
-  MessageCircle,
 } from 'lucide-react';
-import { EmblemIcon } from './BrandLogo';
 
 interface HeroProps {
   content?: SiteContent;
   whatsAppNumber?: string;
 }
 
-export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProps) {
-  const { language, isRTL, t } = useLanguage();
+export default function Hero({ content }: HeroProps) {
+  const { language, isRTL } = useLanguage();
   const isAr = language === 'ar';
 
   // Slides strictly from Sanity CMS (zero hardcoded defaults)
@@ -114,20 +111,7 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
     touchEndXRef.current = null;
   };
 
-  // 5. WhatsApp helpers
-  const whatsAppNumber =
-    propWhatsApp ||
-    content?.footer?.whatsAppNumber ||
-    content?.hero?.whatsAppNumber ||
-    '';
 
-  const whatsAppMsg = isAr
-    ? 'السلام عليكم وادي النوار، أرغب في الاستفسار عن الطلب والحجز.'
-    : 'Hello The Blossom Valley, I would like to inquire about ordering farm products.';
-
-  const whatsAppHref = whatsAppNumber
-    ? `https://wa.me/${whatsAppNumber.replace(/\D/g, '')}?text=${encodeURIComponent(whatsAppMsg)}`
-    : `https://wa.me/?text=${encodeURIComponent(whatsAppMsg)}`;
 
   const activeSlide = heroSlides[currentSlide] || heroSlides[0] || null;
 
@@ -150,7 +134,7 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
           const isActive = index === currentSlide;
           return (
             <div
-              key={slide.src}
+              key={`${slide.src}-${index}`}
               className={`absolute inset-0 h-full w-full transition-opacity duration-1000 ease-in-out ${isActive ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
                 }`}
               aria-hidden={!isActive}
@@ -183,101 +167,65 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
       {/* ── 3. CONTENT LAYER ────────────────────────────────────────── */}
       <div className="hero-cinematic-inner relative z-20 flex-1 flex flex-col justify-between px-5 sm:px-10 lg:px-16 2xl:px-20 py-8 sm:py-12 lg:py-16 w-full">
 
-        {/* Top content block: kicker + headline + description + CTA */}
+        {/* Top content block: headline + description + products list */}
         <div className={`max-w-2xl ${isRTL ? 'text-right' : 'text-left'}`}>
 
-          {/* Kicker / eyebrow badge */}
-          <div className="inline-flex items-center gap-2 rounded-full bg-black/40 backdrop-blur-md px-3.5 py-1 text-xs border border-white/15 mb-3">
-            <span className="shrink-0 size-4 rounded-full bg-[#005A52] p-0.5 grid place-items-center border border-[#0A6860]">
-              <EmblemIcon theme="cream" className="w-full h-full" />
-            </span>
-            <span className="font-semibold text-white/90">
-              {content?.hero?.welcomeBadge
-                ? t(content.hero.welcomeBadge)
-                : isAr
-                  ? 'واحة شقراء الزراعية • أرض الخير والنماء'
-                  : 'Shaqra Desert Oasis · Agricultural Heritage'}
-            </span>
-            <span className="text-white/40">·</span>
-            <span className="text-emerald-400 font-bold">
-              {content?.hero?.statsPill
-                ? t(content.hero.statsPill)
-                : isAr
-                  ? 'موسم ٢٠٢٦'
-                  : 'Harvest 2026'}
-            </span>
+          {/* Bilingual Bold Headline */}
+          <div className="flex flex-col gap-1 sm:gap-2">
+            {isAr ? (
+              <>
+                <h1
+                  className="font-arabic font-extrabold text-white tracking-tight leading-[1.05] drop-shadow-md"
+                  style={{
+                    fontSize: 'clamp(2.75rem, 8vw, 6.2rem)',
+                  }}
+                >
+                  {content?.hero?.heading?.ar || 'وادي النوار'}
+                </h1>
+                <p
+                  className="font-display font-extrabold text-white/95 uppercase tracking-wider leading-tight drop-shadow-sm"
+                  style={{
+                    fontSize: 'clamp(1.15rem, 3.2vw, 2.35rem)',
+                  }}
+                >
+                  {content?.hero?.heading?.en || 'The BLOSSOM Valley'}
+                </p>
+              </>
+            ) : (
+              <>
+                <h1
+                  className="font-display font-extrabold text-white uppercase tracking-wider leading-[1.05] drop-shadow-md"
+                  style={{
+                    fontSize: 'clamp(2.4rem, 7vw, 5.5rem)',
+                  }}
+                >
+                  {content?.hero?.heading?.en || 'The BLOSSOM Valley'}
+                </h1>
+                <p
+                  className="font-arabic font-extrabold text-white/95 leading-tight drop-shadow-sm"
+                  style={{
+                    fontSize: 'clamp(1.35rem, 3.8vw, 2.8rem)',
+                  }}
+                >
+                  {content?.hero?.heading?.ar || 'وادي النوار'}
+                </p>
+              </>
+            )}
           </div>
 
-          {/* H1 Headline */}
-          <h1
-            className={`mt-2 leading-[0.97] text-white drop-shadow-sm ${isRTL ? 'font-arabic' : 'font-display'
-              }`}
-            style={{
-              fontSize: 'clamp(2.6rem, 8vw, 6.5rem)',
-              fontWeight: isRTL ? 800 : 700,
-            }}
-          >
-            {content?.hero?.heading
-              ? t(content.hero.heading)
-              : isAr
-                ? 'وادي النوار'
-                : 'The Blossom Valley'}
-          </h1>
-
-          {/* Subheading / Tagline */}
-          <p className="mt-4 font-display text-lg sm:text-xl font-medium text-white/90 leading-snug drop-shadow-xs max-w-xl">
-            {content?.hero?.subheading
-              ? t(content.hero.subheading)
-              : isAr
-                ? 'أرض سعودية طيبة، شمس كريمة، ومنتجات حُظيت بعناية فائقة في محافظة شقراء.'
-                : 'Saudi soil, warm sun, and authentic farm produce cultivated with mindful craftsmanship in Shaqra.'}
+          {/* Full Unabbreviated Description */}
+          <p className="mt-4 sm:mt-5 text-base sm:text-lg md:text-xl font-medium text-white/90 leading-relaxed max-w-xl drop-shadow-xs">
+            {isAr
+              ? (content?.hero?.description?.ar || content?.hero?.subheading?.ar || 'من أرض الوطن ورماله الدافئة، من محافظة شقراء؛ مزرعة وادي النوار تقدم لكم منتجاتها الطازجة يومياً.')
+              : (content?.hero?.description?.en || content?.hero?.subheading?.en || 'From the warm sands of our homeland, from Shaqra Governorate; Wadi Al-Nawar Farm brings you its fresh produce daily.')}
           </p>
 
-          {/* Body Description */}
-          <p className="mt-3 text-sm sm:text-base text-white/75 leading-relaxed max-w-lg drop-shadow-xs">
-            {content?.hero?.description
-              ? t(content.hero.description)
-              : isAr
-                ? 'من واحات النخيل ومراعي الماشية إلى خيرات المؤونة الحرفية، ندير كل مرحلة بشغف وإتقان متناهٍ.'
-                : 'From date palm groves and pristine livestock pastures to artisanal provisions, every stage is cared for with uncompromising dedication.'}
+          {/* Full Products Line */}
+          <p className="mt-3 sm:mt-4 text-xs sm:text-sm md:text-base font-semibold text-emerald-200/95 leading-relaxed max-w-xl drop-shadow-xs">
+            {isAr
+              ? (content?.hero?.productsList?.ar || 'تمور الخلاص • فلفل شقراء • منتجات زراعية موسمية • طماطم مجففة • لحوم نعيمي بلدي')
+              : (content?.hero?.productsList?.en || 'Khalas Dates • Shaqra Peppers • Seasonal Farm Produce • Sun-Dried Tomatoes • Local Naimi Livestock')}
           </p>
-
-          {/* Action Buttons */}
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            {/* Primary CTA */}
-            <a
-              href={whatsAppHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary gap-2.5 font-bold shadow-lg shadow-black/25"
-            >
-              <MessageCircle size={18} />
-              <span>
-                {content?.hero?.ctaWhatsApp && t(content.hero.ctaWhatsApp)
-                  ? t(content.hero.ctaWhatsApp)
-                  : isAr
-                    ? 'طلب وتواصل عبر واتساب'
-                    : 'Inquire & Order on WhatsApp'}
-              </span>
-              <span className="text-sm font-bold transition-transform rtl:rotate-180">→</span>
-            </a>
-
-            {/* Secondary: scroll link */}
-            <a
-              href="#livestock"
-              className="inline-flex items-center gap-2 rounded-full px-5 py-3 text-sm font-semibold text-white transition-all hover:bg-white/15 border border-white/25 hover:border-white/40"
-            >
-              <span>
-                {content?.hero?.ctaSecondaryText && t(content.hero.ctaSecondaryText)
-                  ? t(content.hero.ctaSecondaryText)
-                  : isAr
-                    ? 'خرفان النعيمي'
-                    : 'Naimi Sheep'}
-              </span>
-              <ArrowDown size={14} className="opacity-80" />
-            </a>
-
-          </div>
         </div>
 
         {/* Spacer — fills the middle of the viewport */}

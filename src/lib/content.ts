@@ -173,6 +173,9 @@ export async function getSiteContent(): Promise<SiteContent> {
       if (sanitySettings.brandName) {
         content.brand.name = sanitySettings.brandName;
       }
+      if (sanitySettings.headerSubtitle) {
+        content.brand.headerSubtitle = sanitySettings.headerSubtitle;
+      }
       if (sanitySettings.brandTagline) {
         content.brand.tagline = sanitySettings.brandTagline;
         content.brand.closingTagline = sanitySettings.brandTagline;
@@ -201,9 +204,10 @@ export async function getSiteContent(): Promise<SiteContent> {
       if (defaultMsgEn) content.footer.whatsAppPrefillEn = defaultMsgEn;
 
       if (sanitySettings.farmLocation) {
-        content.footer.locationAddress = typeof sanitySettings.farmLocation === 'string'
+        const loc = typeof sanitySettings.farmLocation === 'string'
           ? { ar: sanitySettings.farmLocation, en: sanitySettings.farmLocation }
           : sanitySettings.farmLocation;
+        content.footer.locationAddress = loc;
       }
       if (sanitySettings.googleMapsUrl) {
         content.footer.googleMapsUrl = sanitySettings.googleMapsUrl;
@@ -224,7 +228,11 @@ export async function getSiteContent(): Promise<SiteContent> {
       const h = sanityHome.hero;
       if (h.welcomeBadge) content.hero.welcomeBadge = h.welcomeBadge;
       if (h.heading) content.hero.heading = h.heading;
-      if (h.subheading) content.hero.description = h.subheading;
+      if (h.subheading) {
+        content.hero.subheading = h.subheading;
+        content.hero.description = h.subheading;
+      }
+      if (h.productsList) content.hero.productsList = h.productsList;
       if (h.ctaWhatsApp) content.hero.ctaWhatsApp = h.ctaWhatsApp;
       if (h.ctaSecondaryText) (content.hero as any).ctaSecondaryText = h.ctaSecondaryText;
       if (h.harvestBadge) content.hero.statsPill = h.harvestBadge;

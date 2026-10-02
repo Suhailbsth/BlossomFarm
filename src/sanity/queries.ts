@@ -8,6 +8,7 @@ import { BilingualText } from '@/types/content';
 export const siteSettingsQuery = `*[_type == "siteSettings"][0]{
   _id,
   brandName,
+  headerSubtitle,
   brandTagline,
   whatsAppFloatingButtonText,
   whatsAppNumber,
@@ -134,6 +135,7 @@ export const homeSectionsQuery = `{
     welcomeBadge,
     heading,
     subheading,
+    productsList,
     ctaWhatsApp,
     ctaSecondaryText,
     harvestBadge,
@@ -216,6 +218,7 @@ export interface SanitySocialLink {
 export interface SanitySiteSettings {
   _id?: string;
   brandName?: BilingualText;
+  headerSubtitle?: BilingualText;
   brandTagline?: BilingualText;
   siteLogoUrl?: string;
   siteFaviconUrl?: string;
@@ -292,6 +295,7 @@ export interface SanityHeroSection {
   welcomeBadge?: BilingualText;
   heading?: BilingualText;
   subheading?: BilingualText;
+  productsList?: BilingualText;
   ctaWhatsApp?: BilingualText;
   ctaSecondaryText?: BilingualText;
   harvestBadge?: BilingualText;

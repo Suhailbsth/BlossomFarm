@@ -156,6 +156,7 @@ export interface SiteContent {
     closingTagline: BilingualText;
     badge: BilingualText;
     locationShort: BilingualText;
+    headerSubtitle?: BilingualText;
     siteLogoUrl?: string;
     siteFaviconUrl?: string;
   };
@@ -179,6 +180,7 @@ export interface SiteContent {
     ctaWhatsApp: BilingualText;
     ctaSecondaryText: BilingualText;
     statsPill: BilingualText;
+    productsList?: BilingualText;
     heroImageUrl?: string;
     heroImages?: string[];
     slides?: HeroSlide[];
