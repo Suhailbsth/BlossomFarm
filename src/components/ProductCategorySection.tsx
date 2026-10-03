@@ -29,8 +29,8 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
   const hasDynamicCategories = dynamicCategories && dynamicCategories.length > 0;
   const homeCategories = hasDynamicCategories
     ? dynamicCategories
-        .filter((c) => c.showOnHome !== false && getCategoryProducts(c).length > 0)
-        .sort((a, b) => (a.homeOrder || 1) - (b.homeOrder || 1))
+      .filter((c) => c.showOnHome !== false && getCategoryProducts(c).length > 0)
+      .sort((a, b) => (a.homeOrder || 1) - (b.homeOrder || 1))
     : [];
 
   // Helper to calculate responsive grid column classes
@@ -91,7 +91,8 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
     cat: DynamicCategoryItem,
     prod: ProductItem | undefined,
     catIndex: number,
-    prodIndex: number = 0
+    prodIndex: number = 0,
+    options?: { hideKicker?: boolean }
   ) => {
     const title = prod ? t(prod.name) : t(cat.title);
     const desc = prod ? t(prod.description) : (cat.description ? t(cat.description) : '');
@@ -99,6 +100,17 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
     const linkHref = prod ? `/products/${prod.id}` : '/products';
     const stepNum = catIndex < 9 ? `0${catIndex + 1}` : `${catIndex + 1}`;
     const stepNumAr = ['٠١', '٠٢', '٠٣', '٠٤', '٠٥', '٠٦', '٠٧', '٠٨', '٠٩', '١٠'][catIndex] || `${catIndex + 1}`;
+
+    const catProds = getCategoryProducts(cat);
+    const isSingleProduct = catProds.length <= 1;
+    const isSameName = Boolean(
+      prod &&
+      ((prod.name?.ar && cat.title?.ar && prod.name.ar.trim() === cat.title.ar.trim()) ||
+        (prod.name?.en && cat.title?.en && prod.name.en.trim().toLowerCase() === cat.title.en.trim().toLowerCase()) ||
+        (t(prod.name).trim().toLowerCase() === t(cat.title).trim().toLowerCase()))
+    );
+    const hideDuplicateProductName = isSingleProduct && isSameName;
+    const subtitleText = isAr ? prod?.arabicSubtitle : (prod?.subtitle ? t(prod.subtitle) : '');
 
     return (
       <Link
@@ -108,7 +120,9 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
       >
         <div className="flex items-center justify-between mb-4">
           <span className="editorial-kicker text-primary font-bold">
-            {isAr ? `${stepNumAr}. ${t(cat.title)}` : `${stepNum} · ${t(cat.title)}`}
+            {options?.hideKicker
+              ? (cat.badge ? t(cat.badge) : '')
+              : (isAr ? `${stepNumAr}. ${t(cat.title)}` : `${stepNum} · ${t(cat.title)}`)}
           </span>
           <ArrowUpRight
             size={18}
@@ -128,9 +142,16 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
           </div>
         )}
 
-        <h3 className="font-display text-xl font-semibold sm:text-2xl group-hover:text-primary transition-colors">
-          {title}
-        </h3>
+        {!hideDuplicateProductName ? (
+          <h3 className="font-display text-xl font-semibold sm:text-2xl group-hover:text-primary transition-colors">
+            {title}
+          </h3>
+        ) : subtitleText ? (
+          <h3 className="font-display text-lg font-semibold sm:text-xl text-ink group-hover:text-primary transition-colors">
+            {subtitleText}
+          </h3>
+        ) : null}
+
         {desc && (
           <p className="editorial-copy mt-2 text-sm line-clamp-3">
             {desc}
@@ -150,15 +171,15 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
               {content?.productsSection?.eyebrow
                 ? t(content.productsSection.eyebrow)
                 : isAr
-                ? 'قطفناها للتو · ٠٢'
-                : 'Freshly picked · 02'}
+                  ? 'قطفناها للتو · ٠٢'
+                  : 'Freshly picked · 02'}
             </p>
             <h2 className="editorial-title">
               {content?.productsSection?.title
                 ? t(content.productsSection.title)
                 : isAr
-                ? 'محاصيلنا، بطعم الكمال.'
-                : 'The harvest, perfected.'}
+                  ? 'محاصيلنا، بطعم الكمال.'
+                  : 'The harvest, perfected.'}
             </h2>
           </div>
           <div className="md:justify-self-end flex flex-col items-start md:items-end gap-3">
@@ -166,8 +187,8 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
               {content?.productsSection?.description
                 ? t(content.productsSection.description)
                 : isAr
-                ? 'طبيعية، غنية بالنكهة، ومزروعة بعناية في محافظة شقراء.'
-                : 'Naturally vibrant. Full of flavour. Grown close to home in Shaqra.'}
+                  ? 'طبيعية، غنية بالنكهة، ومزروعة بعناية في محافظة شقراء.'
+                  : 'Naturally vibrant. Full of flavour. Grown close to home in Shaqra.'}
             </p>
             <Link
               href="/products"
@@ -177,8 +198,8 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                 {content?.productsSection?.catalogCta
                   ? t(content.productsSection.catalogCta)
                   : isAr
-                  ? 'عرض كامل قائمة المنتجات'
-                  : 'Browse full pantry catalog'}
+                    ? 'عرض كامل قائمة المنتجات'
+                    : 'Browse full pantry catalog'}
               </span>
               <span className="text-sm">→</span>
             </Link>
@@ -218,8 +239,8 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                 (cat.homeLayoutStyle === 'editorialCard'
                   ? 'editorial'
                   : cat.homeLayoutStyle === 'flavorCards' || cat.homeLayoutStyle === 'productGrid'
-                  ? 'grid'
-                  : 'swatches');
+                    ? 'grid'
+                    : 'swatches');
 
               // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
               // Mode A: Editorial Showcase Cards
@@ -246,7 +267,7 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
 
                     <div className={`gap-6 ${colsClass}`}>
                       {displayProducts.map((prod, pIdx) =>
-                        renderEditorialCard(cat, prod, catIndex, pIdx)
+                        renderEditorialCard(cat, prod, catIndex, pIdx, { hideKicker: displayProducts.length <= 1 })
                       )}
                     </div>
                   </div>
@@ -308,9 +329,13 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                                 <h3 className="font-display text-lg font-semibold group-hover:text-primary transition-colors">
                                   {t(prod.name)}
                                 </h3>
-                                {prod.arabicSubtitle && (
+                                {isAr ? prod.arabicSubtitle && (
                                   <p className="text-xs text-muted-foreground mt-0.5">
                                     {prod.arabicSubtitle}
+                                  </p>
+                                ) : prod.subtitle && (
+                                  <p className="text-xs text-muted-foreground mt-0.5">
+                                    {t(prod.subtitle)}
                                   </p>
                                 )}
                               </div>
@@ -352,6 +377,14 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                   <div className={`gap-6 ${colsClass}`}>
                     {displayProducts.map((prod, pIdx) => {
                       const iconSymbol = prod.icon || '✦';
+                      const isSingleCatProd = displayProducts.length <= 1;
+                      const isSameGridName = Boolean(
+                        (prod.name?.ar && cat.title?.ar && prod.name.ar.trim() === cat.title.ar.trim()) ||
+                        (prod.name?.en && cat.title?.en && prod.name.en.trim().toLowerCase() === cat.title.en.trim().toLowerCase()) ||
+                        (t(prod.name).trim().toLowerCase() === t(cat.title).trim().toLowerCase())
+                      );
+                      const hideGridProdName = isSingleCatProd && isSameGridName;
+                      const gridSubtitle = isAr ? prod.arabicSubtitle : (prod.subtitle ? t(prod.subtitle) : '');
 
                       return (
                         <Link
@@ -382,12 +415,18 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
 
                           <div className="flex items-center justify-between gap-2">
                             <div>
-                              <h4 className="font-display text-lg font-semibold group-hover:text-primary transition-colors">
-                                {t(prod.name)}
-                              </h4>
-                              {prod.arabicSubtitle && (
+                              {!hideGridProdName ? (
+                                <h4 className="font-display text-lg font-semibold group-hover:text-primary transition-colors">
+                                  {t(prod.name)}
+                                </h4>
+                              ) : gridSubtitle ? (
+                                <h4 className="font-display text-base font-semibold group-hover:text-primary transition-colors">
+                                  {gridSubtitle}
+                                </h4>
+                              ) : null}
+                              {!hideGridProdName && gridSubtitle && (
                                 <p className="text-xs text-muted-foreground mt-1">
-                                  {prod.arabicSubtitle}
+                                  {gridSubtitle}
                                 </p>
                               )}
                             </div>
@@ -432,7 +471,7 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
           <div className="py-20 text-center text-sm text-muted-foreground bg-paper/30 border border-dashed border-border mt-12 rounded-lg">
             {isAr
               ? 'لا توجد أقسام مفعلة للعرض في الصفحة الرئيسية حالياً. يمكنك تفعيل الأقسام وإضافة المنتجات عبر Sanity Studio.'
-              : 'No categories currently enabled for the homepage. Enable categories and add products via Sanity Studio.'}
+              : 'No categories available'}
           </div>
         )}
       </Reveal>

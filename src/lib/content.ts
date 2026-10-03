@@ -53,6 +53,8 @@ function createEmptySiteContent(): SiteContent {
       gallery: [],
       ctaWhatsApp: { ar: '', en: '' },
       ctaSecondaryText: { ar: '', en: '' },
+      videoUrl: '',
+      videoFileUrl: '',
     },
     about: {
       eyebrow: { ar: '', en: '' },
@@ -266,6 +268,8 @@ export async function getSiteContent(): Promise<SiteContent> {
         if (n.images && n.images.length > 0) {
           content.naimiSection.images = n.images;
         }
+        if (n.videoFileUrl) content.naimiSection.videoFileUrl = n.videoFileUrl;
+        if (n.videoUrl) content.naimiSection.videoUrl = n.videoUrl;
         if (n.ctaWhatsAppText || n.ctaWhatsApp) {
           content.naimiSection.ctaWhatsApp = (n.ctaWhatsAppText || n.ctaWhatsApp)!;
         }

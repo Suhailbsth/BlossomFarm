@@ -154,7 +154,9 @@ export const homeSectionsQuery = `{
     ctaWhatsAppText,
     ctaWhatsApp,
     "images": images[].asset->url,
-    "imageUrl": image.asset->url
+    "imageUrl": image.asset->url,
+    "videoFileUrl": videoFile.asset->url,
+    videoUrl
   },
   "about": *[_type == "aboutSection"][0]{
     eyebrow,
@@ -309,6 +311,8 @@ export interface SanityNaimiSection {
   badge?: BilingualText;
   images?: string[];
   imageUrl?: string;
+  videoFileUrl?: string;
+  videoUrl?: string;
   ctaWhatsAppText?: BilingualText;
   ctaWhatsApp?: BilingualText;
 }

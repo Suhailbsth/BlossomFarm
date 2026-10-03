@@ -36,11 +36,7 @@ export default function NaimiSheepSection({ content, whatsAppNumber }: NaimiShee
 
   const sheepImage = sheepImages[0];
 
-  const sheepVideoSrc =
-    naimiData?.videoFileUrl ||
-    naimiData?.videoUrl ||
-    content?.about?.videoFileUrl ||
-    content?.about?.videoUrl;
+  const sheepVideoSrc = naimiData?.videoFileUrl || naimiData?.videoUrl;
 
   const handleCloseModal = () => {
     if (videoRef.current) {
