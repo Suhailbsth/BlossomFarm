@@ -28,17 +28,9 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
 
   const dynamicCategories = content?.productsSection?.dynamicCategories;
   const hasDynamicCategories = dynamicCategories && dynamicCategories.length > 0;
-  // [C5]: Lambs already have their own dedicated section above; exclude from products list so Pepper is ٠٢ and Tomatoes is ٠٣
-  const EXCLUDE_MEAT_FROM_PRODUCTS_LIST = true;
-
   const homeCategories = hasDynamicCategories
     ? dynamicCategories
-      .filter((c) => {
-        if (EXCLUDE_MEAT_FROM_PRODUCTS_LIST && (c.slug === 'meat' || c.id === 'meat' || c.id === 'category-meat')) {
-          return false;
-        }
-        return c.showOnHome !== false && getCategoryProducts(c).length > 0;
-      })
+      .filter((c) => c.showOnHome !== false && getCategoryProducts(c).length > 0)
       .sort((a, b) => (a.homeOrder || 1) - (b.homeOrder || 1))
     : [];
 
@@ -141,7 +133,7 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
           <span className="editorial-kicker text-primary font-bold">
             {options?.hideKicker
               ? (cat.badge ? t(cat.badge) : '')
-              : (isAr ? `${stepNumAr}. ${isPepper ? 'فلفل شقراء' : t(cat.title)}` : `${stepNum} · ${isPepper ? 'Shaqra Pepper' : t(cat.title)}`)}
+              : (isAr ? `${stepNumAr}. ${t(cat.title)}` : `${stepNum} · ${t(cat.title)}`)}
           </span>
           <Link href={linkHref} aria-label={title}>
             <ArrowUpRight
@@ -167,30 +159,38 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
           <div>
             <Link href={linkHref} className="block">
               <h3 className="font-display text-xl font-bold sm:text-2xl group-hover:text-primary transition-colors text-ink">
-                {isAr ? 'فلفل شقراء' : 'Shaqra Pepper'}
+                {title || (isAr ? 'فلفل شقراء' : 'Shaqra Pepper')}
               </h3>
             </Link>
-            <p className="font-display text-sm sm:text-base font-semibold text-primary mt-1">
-              {isAr ? 'نكهة محلية بطابع أصيل' : 'Local flavor with an authentic touch'}
-            </p>
+            {(subtitleText || (isAr ? 'نكهة محلية بطابع أصيل' : 'Local flavor with an authentic touch')) && (
+              <p className="font-display text-sm sm:text-base font-semibold text-primary mt-1">
+                {subtitleText || (isAr ? 'نكهة محلية بطابع أصيل' : 'Local flavor with an authentic touch')}
+              </p>
+            )}
 
-            {/* C8: Full 3 short paragraphs without truncation */}
-            <div className="space-y-2 mt-3.5 editorial-copy text-sm sm:text-base text-muted-foreground leading-relaxed">
-              <p>
-                {isAr
-                  ? 'فلفل حار من شقراء، مجفف ومجروش ليمنح الأطباق حرارة واضحة ونكهة مميزة.'
-                  : 'Sun-dried Shaqra hot pepper coarsely crushed to give dishes vibrant heat and distinctive character.'}
-              </p>
-              <p className="font-medium text-ink">
-                {isAr
-                  ? 'قليل منه… يصنع فرقاً كبيراً في الطبق.'
-                  : 'A little bit… makes a big difference in the dish.'}
-              </p>
-              <p>
-                {isAr
-                  ? 'مناسب للإيدامات، والبيض، والشوربات، والكبسة، والتتبيلات.'
-                  : 'Ideal for Saudi stews, eggs, soups, kabsa, and marinades.'}
-              </p>
+            {/* C8: Full description from CMS without truncation, formatted with whitespace-pre-line */}
+            <div className="mt-3.5 editorial-copy text-sm sm:text-base text-muted-foreground leading-relaxed whitespace-pre-line">
+              {desc ? (
+                desc
+              ) : (
+                <div className="space-y-2">
+                  <p>
+                    {isAr
+                      ? 'فلفل حار من شقراء، مجفف ومجروش ليمنح الأطباق حرارة واضحة ونكهة مميزة.'
+                      : 'Sun-dried Shaqra hot pepper coarsely crushed to give dishes vibrant heat and distinctive character.'}
+                  </p>
+                  <p className="font-medium text-ink">
+                    {isAr
+                      ? 'قليل منه… يصنع فرقاً كبيراً في الطبق.'
+                      : 'A little bit… makes a big difference in the dish.'}
+                  </p>
+                  <p>
+                    {isAr
+                      ? 'مناسب للإيدامات، والبيض، والشوربات، والكبسة، والتتبيلات.'
+                      : 'Ideal for Saudi stews, eggs, soups, kabsa, and marinades.'}
+                  </p>
+                </div>
+              )}
             </div>
 
             {/* C8: [اطلب الآن] Button opening WhatsApp */}
@@ -359,10 +359,8 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                 const colsClass = getGridColsClass(cat.gridColumns, displayProducts.length);
                 const isDatesCategory = cat.slug === 'dates' || cat.id === 'category-dates' || cat.id === 'dates';
 
-                // C7: Group title "بلح" -> "التمور المتوفرة"
-                const categoryGroupTitle = isDatesCategory
-                  ? (isAr ? 'التمور المتوفرة' : 'Available Dates')
-                  : t(cat.title);
+                // Dates category title directly from CMS
+                const categoryGroupTitle = t(cat.title) || (isAr ? 'التمور المتوفرة' : 'Available Dates');
 
                 const datesWhatsAppPrefill = isAr
                   ? 'أرغب في طلب تمور الخلاص'
@@ -543,13 +541,13 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                 content?.footer?.whatsAppNumber || '+966500000000'
               );
 
-              // Helper for C9 flavor title: "Arabic | ENGLISH"
+              // Helper for C9 flavor title: derives from CMS product names
               const getFlavorTitle = (prod: ProductItem): string => {
-                if (!isTomatoesCategory) return t(prod.name);
-                if (prod.id === 'dried-tomato-qatfa') return isAr ? 'قطفة | QATFA' : 'QATFA | قطفة';
-                if (prod.id === 'dried-tomato-lahab') return isAr ? 'لهب | LAHAB' : 'LAHAB | لهب';
-                if (prod.id === 'dried-tomato-signature') return isAr ? 'المميز | SIGNATURE' : 'SIGNATURE | المميز';
-                if (prod.name?.ar && prod.name?.en) return `${prod.name.ar} | ${prod.name.en.toUpperCase()}`;
+                if (isTomatoesCategory && prod.name?.ar && prod.name?.en) {
+                  return isAr
+                    ? `${prod.name.ar} | ${prod.name.en.toUpperCase()}`
+                    : `${prod.name.en.toUpperCase()} | ${prod.name.ar}`;
+                }
                 return t(prod.name);
               };
 
@@ -559,8 +557,8 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                     <span className="editorial-kicker text-primary font-bold">
                       {isAr ? `${stepNumAr}. ${t(cat.title)}` : `${stepNum} · ${t(cat.title)}`}
                     </span>
-                    {/* C9: Remove label "المنتج المميز والأكثر تفصيلاً" */}
-                    {cat.badge && !isTomatoesCategory && (
+                    {/* Badge directly from CMS */}
+                    {cat.badge && (
                       <span className="text-xs text-muted-foreground">{t(cat.badge)}</span>
                     )}
                   </div>
@@ -607,9 +605,9 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                       const iconSymbol = prod.icon || '✦';
                       const flavorHeading = getFlavorTitle(prod);
 
-                      // Descriptions from CMS with Appendix A7 defaults for tomatoes
+                      // Descriptions from CMS, with Appendix A7 fallback only if CMS description is empty
                       let flavorDesc = t(prod.description);
-                      if (isTomatoesCategory) {
+                      if (!flavorDesc && isTomatoesCategory) {
                         if (prod.id === 'dried-tomato-qatfa') {
                           flavorDesc = isAr
                             ? 'نكهة عشبية عطرية تجمع الطماطم المجففة مع الشبت وإكليل الجبل. رائعة مع الأومليت، الأجبان، الساندويتشات والسلطات.'

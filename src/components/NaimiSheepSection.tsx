@@ -108,28 +108,38 @@ export default function NaimiSheepSection({ content, whatsAppNumber }: NaimiShee
               : 'Authentic Saudi Naimi Sheep'}
           </h2>
 
-          {/* 2. New Text Block (Appendix A1): Sub-heading + 3 Paragraphs */}
+          {/* 2. Text Block (Appendix A1): Sub-heading + Description from CMS with fallback */}
           <div className="mt-6 max-w-3xl space-y-4">
             <h3 className="font-display text-lg sm:text-xl font-semibold text-ink leading-snug">
-              {isAr ? 'تربية المزرعة… وعناية يومية' : 'Farm-raised… with daily mindful care'}
+              {naimiData?.subtitle
+                ? t(naimiData.subtitle)
+                : isAr
+                ? 'تربية المزرعة… وعناية يومية'
+                : 'Farm-raised… with daily mindful care'}
             </h3>
 
-            <div className="space-y-3 editorial-copy text-muted-foreground leading-relaxed text-sm sm:text-base">
-              <p>
-                {isAr
-                  ? 'تُربّى خرفان النعيمي في مزرعتنا بشقراء، ونتابع تغذيتها ورعايتها بشكل يومي ومباشر.'
-                  : 'Our Naimi sheep are raised on our Shaqra farmstead, where we supervise their nutrition and wellbeing daily and directly.'}
-              </p>
-              <p>
-                {isAr
-                  ? 'تتغذى على البرسيم الأخضر المزروع في حقول المزرعة، مع الشعير والتمر ضمن نظامها الغذائي، إلى جانب اهتمام مستمر بنظافة الحظائر وجودة الرعاية.'
-                  : 'They feed on fresh green alfalfa grown right on our farm plots, alongside barley and farm dates, complemented by dedicated pen hygiene and high veterinary standards.'}
-              </p>
-              <p>
-                {isAr
-                  ? 'لأن جودة المنتج الذي يصل إلى مائدتكم تبدأ من هذه التفاصيل الصغيرة والمهمة.'
-                  : 'Because the purity of the meat arriving at your dining table begins with these vital, thoughtful details.'}
-              </p>
+            <div className="editorial-copy text-muted-foreground leading-relaxed text-sm sm:text-base whitespace-pre-line">
+              {naimiData?.description ? (
+                t(naimiData.description)
+              ) : (
+                <div className="space-y-3">
+                  <p>
+                    {isAr
+                      ? 'تُربّى خرفان النعيمي في مزرعتنا بشقراء، ونتابع تغذيتها ورعايتها بشكل يومي ومباشر.'
+                      : 'Our Naimi sheep are raised on our Shaqra farmstead, where we supervise their nutrition and wellbeing daily and directly.'}
+                  </p>
+                  <p>
+                    {isAr
+                      ? 'تتغذى على البرسيم الأخضر المزروع في حقول المزرعة، مع الشعير والتمر ضمن نظامها الغذائي، إلى جانب اهتمام مستمر بنظافة الحظائر وجودة الرعاية.'
+                      : 'They feed on fresh green alfalfa grown right on our farm plots, alongside barley and farm dates, complemented by dedicated pen hygiene and high veterinary standards.'}
+                  </p>
+                  <p>
+                    {isAr
+                      ? 'لأن جودة المنتج الذي يصل إلى مائدتكم تبدأ من هذه التفاصيل الصغيرة والمهمة.'
+                      : 'Because the purity of the meat arriving at your dining table begins with these vital, thoughtful details.'}
+                  </p>
+                </div>
+              )}
             </div>
           </div>
         </div>
@@ -220,7 +230,9 @@ export default function NaimiSheepSection({ content, whatsAppNumber }: NaimiShee
               >
                 <MessageCircle size={18} />
                 <span>
-                  {isAr
+                  {naimiData?.ctaWhatsApp
+                    ? t(naimiData.ctaWhatsApp)
+                    : isAr
                     ? 'حجز وتفصيل ذبيحة نعيمي عبر الواتساب'
                     : 'Reserve Naimi Sheep on WhatsApp'}
                 </span>
