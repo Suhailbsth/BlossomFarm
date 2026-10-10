@@ -359,14 +359,14 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                 const colsClass = getGridColsClass(cat.gridColumns, displayProducts.length);
                 const isDatesCategory = cat.slug === 'dates' || cat.id === 'category-dates' || cat.id === 'dates';
 
-                // Dates category title directly from CMS
-                const categoryGroupTitle = t(cat.title) || (isAr ? 'التمور المتوفرة' : 'Available Dates');
+                // Category title directly from CMS
+                const categoryGroupTitle = t(cat.title);
 
-                const datesWhatsAppPrefill = isAr
-                  ? 'أرغب في طلب تمور الخلاص'
-                  : 'I would like to order Khalas dates';
-                const datesWhatsAppHref = buildWhatsAppLink(
-                  datesWhatsAppPrefill,
+                const categoryWhatsAppPrefill = isAr
+                  ? `أرغب في طلب ${t(cat.title) || 'التمور'}`
+                  : `I would like to order ${t(cat.title) || 'dates'}`;
+                const categoryWhatsAppHref = buildWhatsAppLink(
+                  categoryWhatsAppPrefill,
                   content?.footer?.whatsAppNumber || '+966500000000'
                 );
 
@@ -381,62 +381,62 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                       )}
                     </div>
 
-                    {/* C7: New intro block replacing the old description paragraph */}
-                    {isDatesCategory ? (
-                      <div className="mb-8 p-6 sm:p-8 bg-paper/60 rounded-2xl border border-border/50 max-w-3xl space-y-6">
-                        {/* Part 1: تمور الخلاص */}
-                        <div className="space-y-3">
-                          <h3 className="font-display text-lg sm:text-xl font-bold text-ink">
-                            {isAr ? 'تمور الخلاص' : 'Khalas Dates'}
-                          </h3>
-                          <p className="editorial-copy text-sm sm:text-base text-muted-foreground leading-relaxed">
-                            {isAr
-                              ? 'من نخيل مزرعتنا في شقراء، نقطف تمور الخلاص في موسمها، ونعتني بها حتى تصل إلى مائدتكم بالجودة التي تليق بها.'
-                              : 'From our palm trees in Shaqra, we harvest Khalas dates in their prime season, caring for them until they arrive at your table with true distinction.'}
-                          </p>
-                          <blockquote className="font-display font-semibold text-primary italic text-base sm:text-lg">
-                            {isAr ? '"من النخلة… إليك."' : '"From the palm tree… to you."'}
-                          </blockquote>
-                          <div className="pt-1">
-                            <a
-                              href={datesWhatsAppHref}
-                              target="_blank"
-                              rel="noopener noreferrer"
-                              className="btn-primary gap-2 font-bold text-xs sm:text-sm px-5 py-2.5 rounded-full inline-flex items-center"
-                            >
-                              <MessageCircle size={16} />
-                              <span>{isAr ? 'اطلب الآن' : 'Order Now'}</span>
-                              <span className="text-sm font-bold transition-transform rtl:rotate-180">→</span>
-                            </a>
+                    {/* Category Intro Block: Prioritizes CMS Description */}
+                    {(cat.description || isDatesCategory) && (
+                      <div className="mb-8 p-6 sm:p-8 bg-paper/60 rounded-2xl border border-border/50 max-w-3xl space-y-5">
+                        {cat.description ? (
+                          <div className="editorial-copy text-sm sm:text-base text-muted-foreground leading-relaxed whitespace-pre-line">
+                            {t(cat.description)}
                           </div>
-                        </div>
+                        ) : (
+                          /* Fallback template if description is not yet entered in CMS */
+                          <div className="space-y-6">
+                            <div className="space-y-3">
+                              <h3 className="font-display text-lg sm:text-xl font-bold text-ink">
+                                {isAr ? 'تمور الخلاص' : 'Khalas Dates'}
+                              </h3>
+                              <p className="editorial-copy text-sm sm:text-base text-muted-foreground leading-relaxed">
+                                {isAr
+                                  ? 'من نخيل مزرعتنا في شقراء، نقطف تمور الخلاص في موسمها، ونعتني بها حتى تصل إلى مائدتكم بالجودة التي تليق بها.'
+                                  : 'From our palm trees in Shaqra, we harvest Khalas dates in their prime season, caring for them until they arrive at your table with true distinction.'}
+                              </p>
+                              <blockquote className="font-display font-semibold text-primary italic text-base sm:text-lg">
+                                {isAr ? '"من النخلة… إليك."' : '"From the palm tree… to you."'}
+                              </blockquote>
+                            </div>
+                            <hr className="border-border/60" />
+                            <div className="space-y-2">
+                              <h3 className="font-display text-lg sm:text-xl font-bold text-ink">
+                                {isAr ? 'مكنوز وادي النوار' : 'Maknooz Wadi Al-Nawwar'}
+                              </h3>
+                              <p className="editorial-copy text-sm sm:text-base text-muted-foreground leading-relaxed">
+                                {isAr
+                                  ? 'تمر خلاص مختار بعناية، مُجهّز ومحفوظ بطريقة تحافظ على طعمه دائماً.'
+                                  : 'Hand-selected Khalas dates, cured and preserved to sustain their quintessential taste.'}
+                              </p>
+                              <p className="editorial-copy text-sm sm:text-base text-muted-foreground leading-relaxed">
+                                {isAr
+                                  ? 'منتج سعودي من حصاد مزرعتنا، مناسب للضيافة، والتقديم مع القهوة، والهدايا.'
+                                  : 'An authentic Saudi harvest from our farm, ideal for noble hospitality, serving with coffee, and heartfelt gifting.'}
+                              </p>
+                            </div>
+                          </div>
+                        )}
 
-                        {/* Thin Divider */}
-                        <hr className="border-border/60" />
-
-                        {/* Part 2: مكنوز وادي النوار */}
-                        <div className="space-y-2">
-                          <h3 className="font-display text-lg sm:text-xl font-bold text-ink">
-                            {isAr ? 'مكنوز وادي النوار' : 'Maknooz Wadi Al-Nawwar'}
-                          </h3>
-                          <p className="editorial-copy text-sm sm:text-base text-muted-foreground leading-relaxed">
-                            {isAr
-                              ? 'تمر خلاص مختار بعناية، مُجهّز ومحفوظ بطريقة تحافظ على طعمه دائماً.'
-                              : 'Hand-selected Khalas dates, cured and preserved to sustain their quintessential taste.'}
-                          </p>
-                          <p className="editorial-copy text-sm sm:text-base text-muted-foreground leading-relaxed">
-                            {isAr
-                              ? 'منتج سعودي من حصاد مزرعتنا، مناسب للضيافة، والتقديم مع القهوة، والهدايا.'
-                              : 'An authentic Saudi harvest from our farm, ideal for noble hospitality, serving with coffee, and heartfelt gifting.'}
-                          </p>
+                        {/* WhatsApp Order Button for the Category */}
+                        <div className="pt-2">
+                          <a
+                            href={categoryWhatsAppHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="btn-primary gap-2 font-bold text-xs sm:text-sm px-5 py-2.5 rounded-full inline-flex items-center"
+                          >
+                            <MessageCircle size={16} />
+                            <span>{isAr ? 'اطلب الآن' : 'Order Now'}</span>
+                            <span className="text-sm font-bold transition-transform rtl:rotate-180">→</span>
+                          </a>
                         </div>
                       </div>
-                    ) : (
-                      cat.description && (
-                        <p className="text-sm text-muted-foreground max-w-2xl mb-6">
-                          {t(cat.description)}
-                        </p>
-                      )
                     )}
 
                     <div className={`gap-0 border-y border-border/50 ${colsClass}`}>
@@ -445,14 +445,28 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                         const swatchClass = swatches[pIdx % swatches.length];
                         const iconSymbol = prod.icon || '✦';
 
-                        // C6: Royal Khalas real photos check
+                        // Product image from CMS with fallback
                         const isRoyalKhalas = prod.id === 'royal-khalas';
-                        const thumbSrc = isRoyalKhalas ? '/images/royal-khalas-1.jpg' : prod.image;
+                        const thumbSrc = prod.image || (isRoyalKhalas ? '/images/royal-khalas-1.jpg' : '');
 
-                        // A3: Royal Khalas subtitle
-                        const subtitleText = isRoyalKhalas
-                          ? (isAr ? 'حبة فاخرة، حجم كبير ومذاق غني' : (prod.subtitle ? t(prod.subtitle) : 'Handpicked Jumbo Reserve, Rich Flavor'))
-                          : (isAr ? (prod.arabicSubtitle || (prod.subtitle ? t(prod.subtitle) : '')) : (prod.subtitle ? t(prod.subtitle) : ''));
+                        // Subtitle from CMS with fallback
+                        const cmsSubtitle = isAr
+                          ? (prod.arabicSubtitle || (prod.subtitle ? t(prod.subtitle) : ''))
+                          : (prod.subtitle ? t(prod.subtitle) : '');
+                        const subtitleText = cmsSubtitle || (isRoyalKhalas
+                          ? (isAr ? 'حبة فاخرة، حجم كبير ومذاق غني' : 'Handpicked Jumbo Reserve, Rich Flavor')
+                          : '');
+
+                        // Gallery photos from CMS (prod.gallery) with fallback
+                        const galleryPhotos = (prod.gallery && prod.gallery.length > 0)
+                          ? prod.gallery
+                          : (isRoyalKhalas
+                            ? [
+                                '/images/royal-khalas-1.jpg',
+                                '/images/royal-khalas-2.jpg',
+                                '/images/royal-khalas-3.jpg',
+                              ]
+                            : []);
 
                         return (
                           <div
@@ -496,22 +510,18 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                               />
                             </Link>
 
-                            {/* C6: Small 3 real photos gallery row under Royal Khalas text */}
-                            {isRoyalKhalas && (
+                            {/* Gallery photos row: loaded from CMS prod.gallery */}
+                            {galleryPhotos.length > 0 && (
                               <div className="mt-4 pt-2 border-t border-border/40">
                                 <div className="flex items-center gap-2.5 overflow-x-auto pb-1 max-w-full">
-                                  {[
-                                    '/images/royal-khalas-1.jpg',
-                                    '/images/royal-khalas-2.jpg',
-                                    '/images/royal-khalas-3.jpg',
-                                  ].map((photoUrl, photoIdx) => (
+                                  {galleryPhotos.map((photoUrl, photoIdx) => (
                                     <div
                                       key={photoIdx}
                                       className="relative size-16 sm:size-20 shrink-0 overflow-hidden rounded-xl border border-border/60 bg-paper shadow-2xs"
                                     >
                                       <Image
                                         src={photoUrl}
-                                        alt={isAr ? `الخلاص الملكي صورة ${photoIdx + 1}` : `Royal Khalas photo ${photoIdx + 1}`}
+                                        alt={`${t(prod.name)} ${photoIdx + 1}`}
                                         fill
                                         sizes="(max-width: 640px) 64px, 80px"
                                         className="object-cover hover:scale-105 transition-transform"
