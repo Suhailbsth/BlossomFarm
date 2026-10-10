@@ -532,9 +532,26 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
               }
 
               // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+              // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
               // Mode C: Artisanal Product Grid (e.g. Tomatoes, Jars, Multi-products)
               // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
               const colsClass = getGridColsClass(cat.gridColumns, displayProducts.length);
+              const isTomatoesCategory = cat.slug === 'dried-tomatoes' || cat.id === 'category-dried-tomatoes' || cat.id === 'dried-tomatoes';
+
+              const tomatoesWhatsAppHref = buildWhatsAppLink(
+                isAr ? 'أرغب في طلب طماطم وادي النوار المجففة' : 'I would like to order Wadi Al-Nawwar dried tomatoes',
+                content?.footer?.whatsAppNumber || '+966500000000'
+              );
+
+              // Helper for C9 flavor title: "Arabic | ENGLISH"
+              const getFlavorTitle = (prod: ProductItem): string => {
+                if (!isTomatoesCategory) return t(prod.name);
+                if (prod.id === 'dried-tomato-qatfa') return isAr ? 'قطفة | QATFA' : 'QATFA | قطفة';
+                if (prod.id === 'dried-tomato-lahab') return isAr ? 'لهب | LAHAB' : 'LAHAB | لهب';
+                if (prod.id === 'dried-tomato-signature') return isAr ? 'المميز | SIGNATURE' : 'SIGNATURE | المميز';
+                if (prod.name?.ar && prod.name?.en) return `${prod.name.ar} | ${prod.name.en.toUpperCase()}`;
+                return t(prod.name);
+              };
 
               return (
                 <div key={cat.id} className="pt-4 border-t border-border/50">
@@ -542,28 +559,71 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                     <span className="editorial-kicker text-primary font-bold">
                       {isAr ? `${stepNumAr}. ${t(cat.title)}` : `${stepNum} · ${t(cat.title)}`}
                     </span>
-                    {cat.badge && (
+                    {/* C9: Remove label "المنتج المميز والأكثر تفصيلاً" */}
+                    {cat.badge && !isTomatoesCategory && (
                       <span className="text-xs text-muted-foreground">{t(cat.badge)}</span>
                     )}
                   </div>
 
-                  {cat.description && (
-                    <p className="text-sm text-muted-foreground max-w-2xl mb-6">
-                      {t(cat.description)}
-                    </p>
+                  {/* C9: Dried Tomatoes Intro block (Appendix A6) */}
+                  {isTomatoesCategory ? (
+                    <div className="mb-8 max-w-3xl space-y-3">
+                      <h3 className="font-display text-xl sm:text-2xl font-bold text-ink">
+                        {isAr ? 'طماطم وادي النوار المجففة' : 'Wadi Al-Nawwar Sun-Dried Tomatoes'}
+                      </h3>
+                      <p className="font-display text-sm sm:text-base font-semibold text-primary">
+                        {isAr
+                          ? 'ليست مجرد طماطم مجففة… بل نكهات لها شخصيتها'
+                          : 'Not just dried tomatoes… but distinct, flavorful personalities'}
+                      </p>
+                      <div className="space-y-2 editorial-copy text-sm sm:text-base text-muted-foreground leading-relaxed pt-1">
+                        <p>
+                          {isAr
+                            ? 'شرائح طماطم مجففة، ننسقها مع إضافات مختارة ونحفظها بزيت الزيتون لنقدم مجموعة من النكهات، لكل واحدة منها طابع واستخدام مختلف.'
+                            : 'Sun-concentrated ripe tomato slices paired with select herbs and submerged in extra virgin olive oil to deliver a collection of rich flavors.'}
+                        </p>
+                        <p>
+                          {isAr
+                            ? 'من الفطور إلى المقبلات، ومن السلطات إلى الأطباق الرئيسية…'
+                            : 'From breakfast toasts to salads, pasta, and main dishes…'}
+                        </p>
+                        <p className="font-semibold text-ink">
+                          {isAr
+                            ? 'برطمان واحد يفتح لك أكثر من فكرة'
+                            : 'One jar opens endless culinary possibilities'}
+                        </p>
+                      </div>
+                    </div>
+                  ) : (
+                    cat.description && (
+                      <p className="text-sm text-muted-foreground max-w-2xl mb-6">
+                        {t(cat.description)}
+                      </p>
+                    )
                   )}
 
                   <div className={`gap-6 ${colsClass}`}>
-                    {displayProducts.map((prod, pIdx) => {
+                    {displayProducts.map((prod) => {
                       const iconSymbol = prod.icon || '✦';
-                      const isSingleCatProd = displayProducts.length <= 1;
-                      const isSameGridName = Boolean(
-                        (prod.name?.ar && cat.title?.ar && prod.name.ar.trim() === cat.title.ar.trim()) ||
-                        (prod.name?.en && cat.title?.en && prod.name.en.trim().toLowerCase() === cat.title.en.trim().toLowerCase()) ||
-                        (t(prod.name).trim().toLowerCase() === t(cat.title).trim().toLowerCase())
-                      );
-                      const hideGridProdName = isSingleCatProd && isSameGridName;
-                      const gridSubtitle = isAr ? prod.arabicSubtitle : (prod.subtitle ? t(prod.subtitle) : '');
+                      const flavorHeading = getFlavorTitle(prod);
+
+                      // Descriptions from CMS with Appendix A7 defaults for tomatoes
+                      let flavorDesc = t(prod.description);
+                      if (isTomatoesCategory) {
+                        if (prod.id === 'dried-tomato-qatfa') {
+                          flavorDesc = isAr
+                            ? 'نكهة عشبية عطرية تجمع الطماطم المجففة مع الشبت وإكليل الجبل. رائعة مع الأومليت، الأجبان، الساندويتشات والسلطات.'
+                            : 'Aromatic herbal flavor pairing sun-dried tomatoes with fresh garden dill and rosemary.';
+                        } else if (prod.id === 'dried-tomato-lahab') {
+                          flavorDesc = isAr
+                            ? 'للذين يحبون النكهة الحارة. طماطم مجففة مع فلفل شقراء الحار، تضيف حرارة ونكهة للأطباق. رائعة مع الشكشوكة، البيض، البيتزا والمكرونة.'
+                            : 'For spicy lovers: sun-dried tomatoes infused with fiery Shaqra crushed chili flakes.';
+                        } else if (prod.id === 'dried-tomato-signature') {
+                          flavorDesc = isAr
+                            ? 'خلطة وادي النوار الخاصة. طماطم مجففة بتوليفة من البهارات المختارة لنكهة أغنى ومختلفة.'
+                            : "Wadi Al-Nawwar's proprietary reserve blend: marinated in roasted spices and golden garlic.";
+                        }
+                      }
 
                       return (
                         <Link
@@ -575,7 +635,7 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                             <div className="relative aspect-[4/3] w-full overflow-hidden bg-paper mb-4 rounded-xl border border-border/40">
                               <Image
                                 src={prod.image}
-                                alt={t(prod.name)}
+                                alt={flavorHeading}
                                 fill
                                 className="object-cover transition duration-500 group-hover:scale-105"
                                 sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
@@ -592,32 +652,50 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                             </div>
                           )}
 
-                          <div className="flex items-center justify-between gap-2">
+                          <div className="flex items-start justify-between gap-2">
                             <div>
-                              {!hideGridProdName ? (
-                                <h4 className="font-display text-lg font-semibold group-hover:text-primary transition-colors">
-                                  {t(prod.name)}
-                                </h4>
-                              ) : gridSubtitle ? (
-                                <h4 className="font-display text-base font-semibold group-hover:text-primary transition-colors">
-                                  {gridSubtitle}
-                                </h4>
-                              ) : null}
-                              {!hideGridProdName && gridSubtitle && (
-                                <p className="text-xs text-muted-foreground mt-1">
-                                  {gridSubtitle}
+                              <h4 className="font-display text-lg font-bold group-hover:text-primary transition-colors text-ink">
+                                {flavorHeading}
+                              </h4>
+                              {flavorDesc && (
+                                <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed line-clamp-3">
+                                  {flavorDesc}
                                 </p>
                               )}
                             </div>
                             <ArrowUpRight
                               size={16}
-                              className="text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0"
+                              className="text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0 mt-1"
                             />
                           </div>
                         </Link>
                       );
                     })}
                   </div>
+
+                  {/* C9: Two buttons at the end of the tomatoes section */}
+                  {isTomatoesCategory && (
+                    <div className="mt-10 pt-6 border-t border-border/50 flex flex-wrap items-center gap-4">
+                      <Link
+                        href="/products"
+                        className="btn-secondary px-6 py-2.5 text-xs sm:text-sm font-bold rounded-full inline-flex items-center gap-2 border border-border hover:border-primary transition-all"
+                      >
+                        <span>{isAr ? 'اكتشف التشكيلة' : 'Discover the Full Range'}</span>
+                        <span className="text-sm font-bold transition-transform rtl:rotate-180">→</span>
+                      </Link>
+
+                      <a
+                        href={tomatoesWhatsAppHref}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="btn-primary px-6 py-2.5 text-xs sm:text-sm font-bold rounded-full inline-flex items-center gap-2 shadow-xs"
+                      >
+                        <MessageCircle size={17} />
+                        <span>{isAr ? 'اطلب عبر واتساب' : 'Order via WhatsApp'}</span>
+                        <span className="text-sm font-bold transition-transform rtl:rotate-180">→</span>
+                      </a>
+                    </div>
+                  )}
 
                   {/* Seasonal / Special Flavors Callout (if present on category) */}
                   {cat.seasonalFlavors && cat.seasonalFlavors.length > 0 && (
