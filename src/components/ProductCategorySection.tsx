@@ -121,26 +121,38 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
     const hideDuplicateProductName = isSingleProduct && isSameName;
     const subtitleText = isAr ? prod?.arabicSubtitle : (prod?.subtitle ? t(prod.subtitle) : '');
 
+    const isPepper =
+      cat.slug === 'pepper' ||
+      cat.id === 'pepper' ||
+      cat.id === 'category-pepper' ||
+      prod?.id === 'crushed-hot-pepper';
+
+    const pepperWhatsAppHref = buildWhatsAppLink(
+      isAr ? 'أرغب في طلب فلفل شقراء' : 'I would like to order Shaqra hot pepper',
+      content?.footer?.whatsAppNumber || '+966500000000'
+    );
+
     return (
-      <Link
+      <div
         key={prod?.id || `${cat.id}-${prodIndex}`}
-        href={linkHref}
         className="group block card-standard p-6 sm:p-8 transition-all hover:border-primary hover:shadow-md"
       >
         <div className="flex items-center justify-between mb-4">
           <span className="editorial-kicker text-primary font-bold">
             {options?.hideKicker
               ? (cat.badge ? t(cat.badge) : '')
-              : (isAr ? `${stepNumAr}. ${t(cat.title)}` : `${stepNum} · ${t(cat.title)}`)}
+              : (isAr ? `${stepNumAr}. ${isPepper ? 'فلفل شقراء' : t(cat.title)}` : `${stepNum} · ${isPepper ? 'Shaqra Pepper' : t(cat.title)}`)}
           </span>
-          <ArrowUpRight
-            size={18}
-            className="text-muted-foreground transition-all group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
-          />
+          <Link href={linkHref} aria-label={title}>
+            <ArrowUpRight
+              size={18}
+              className="text-muted-foreground transition-all group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            />
+          </Link>
         </div>
 
         {imgSrc && (
-          <div className="relative aspect-[16/10] w-full overflow-hidden bg-paper mb-5 rounded-xl border border-border/40">
+          <Link href={linkHref} className="block relative aspect-[16/10] w-full overflow-hidden bg-paper mb-5 rounded-xl border border-border/40">
             <Image
               src={imgSrc}
               alt={title}
@@ -148,25 +160,82 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
               className="object-cover transition duration-700 group-hover:scale-105"
               sizes="(max-width: 768px) 100vw, 50vw"
             />
+          </Link>
+        )}
+
+        {isPepper ? (
+          <div>
+            <Link href={linkHref} className="block">
+              <h3 className="font-display text-xl font-bold sm:text-2xl group-hover:text-primary transition-colors text-ink">
+                {isAr ? 'فلفل شقراء' : 'Shaqra Pepper'}
+              </h3>
+            </Link>
+            <p className="font-display text-sm sm:text-base font-semibold text-primary mt-1">
+              {isAr ? 'نكهة محلية بطابع أصيل' : 'Local flavor with an authentic touch'}
+            </p>
+
+            {/* C8: Full 3 short paragraphs without truncation */}
+            <div className="space-y-2 mt-3.5 editorial-copy text-sm sm:text-base text-muted-foreground leading-relaxed">
+              <p>
+                {isAr
+                  ? 'فلفل حار من شقراء، مجفف ومجروش ليمنح الأطباق حرارة واضحة ونكهة مميزة.'
+                  : 'Sun-dried Shaqra hot pepper coarsely crushed to give dishes vibrant heat and distinctive character.'}
+              </p>
+              <p className="font-medium text-ink">
+                {isAr
+                  ? 'قليل منه… يصنع فرقاً كبيراً في الطبق.'
+                  : 'A little bit… makes a big difference in the dish.'}
+              </p>
+              <p>
+                {isAr
+                  ? 'مناسب للإيدامات، والبيض، والشوربات، والكبسة، والتتبيلات.'
+                  : 'Ideal for Saudi stews, eggs, soups, kabsa, and marinades.'}
+              </p>
+            </div>
+
+            {/* C8: [اطلب الآن] Button opening WhatsApp */}
+            <div className="mt-5 pt-2 flex items-center gap-3 flex-wrap">
+              <a
+                href={pepperWhatsAppHref}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-primary gap-2 font-bold text-xs sm:text-sm px-5 py-2.5 rounded-full inline-flex items-center shadow-xs"
+              >
+                <MessageCircle size={16} />
+                <span>{isAr ? 'اطلب الآن' : 'Order Now'}</span>
+                <span className="text-sm font-bold transition-transform rtl:rotate-180">→</span>
+              </a>
+              <Link
+                href={linkHref}
+                className="text-xs font-semibold text-muted-foreground hover:text-primary transition-colors inline-flex items-center gap-1 py-2"
+              >
+                <span>{isAr ? 'تفاصيل المنتج' : 'Product Details'}</span>
+                <span className="text-xs transition-transform rtl:rotate-180">→</span>
+              </Link>
+            </div>
+          </div>
+        ) : (
+          <div>
+            <Link href={linkHref} className="block">
+              {!hideDuplicateProductName ? (
+                <h3 className="font-display text-xl font-semibold sm:text-2xl group-hover:text-primary transition-colors">
+                  {title}
+                </h3>
+              ) : subtitleText ? (
+                <h3 className="font-display text-lg font-semibold sm:text-xl text-ink group-hover:text-primary transition-colors">
+                  {subtitleText}
+                </h3>
+              ) : null}
+            </Link>
+
+            {desc && (
+              <p className="editorial-copy mt-2 text-sm line-clamp-3">
+                {desc}
+              </p>
+            )}
           </div>
         )}
-
-        {!hideDuplicateProductName ? (
-          <h3 className="font-display text-xl font-semibold sm:text-2xl group-hover:text-primary transition-colors">
-            {title}
-          </h3>
-        ) : subtitleText ? (
-          <h3 className="font-display text-lg font-semibold sm:text-xl text-ink group-hover:text-primary transition-colors">
-            {subtitleText}
-          </h3>
-        ) : null}
-
-        {desc && (
-          <p className="editorial-copy mt-2 text-sm line-clamp-3">
-            {desc}
-          </p>
-        )}
-      </Link>
+      </div>
     );
   };
 
