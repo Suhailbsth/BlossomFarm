@@ -187,51 +187,15 @@ export default function Hero({ content, whatsAppNumber: propWhatsApp }: HeroProp
         {/* Top content block: headline + description + products list */}
         <div className={`max-w-2xl ${isRTL ? 'text-right' : 'text-left'}`}>
 
-          {/* Bilingual Bold Headline */}
-          <div className="flex flex-col gap-2 sm:gap-3.5">
-            {isAr ? (
-              <>
-                <h1
-                  className="font-arabic font-extrabold text-white tracking-tight leading-[1.18] sm:leading-[1.22] drop-shadow-md pb-1 sm:pb-1.5"
-                  style={{
-                    fontSize: 'clamp(2.75rem, 8vw, 6.2rem)',
-                  }}
-                >
-                  {content?.hero?.heading?.ar || 'وادي النوار'}
-                </h1>
-                <p
-                  className="font-display font-extrabold text-white/95 uppercase tracking-wider leading-tight drop-shadow-sm mt-1 sm:mt-2"
-                  style={{
-                    fontSize: 'clamp(1.15rem, 3.2vw, 2.35rem)',
-                  }}
-                >
-                  {content?.hero?.heading?.en || 'The BLOSSOM Valley'}
-                </p>
-              </>
-            ) : (
-              <>
-                <h1
-                  className="font-display font-extrabold text-white uppercase tracking-wider leading-[1.08] drop-shadow-md pb-1"
-                  style={{
-                    fontSize: 'clamp(2.4rem, 7vw, 5.5rem)',
-                  }}
-                >
-                  {content?.hero?.heading?.en || 'The BLOSSOM Valley'}
-                </h1>
-                <p
-                  className="font-arabic font-extrabold text-white/95 leading-tight drop-shadow-sm mt-1 sm:mt-2"
-                  style={{
-                    fontSize: 'clamp(1.35rem, 3.8vw, 2.8rem)',
-                  }}
-                >
-                  {content?.hero?.heading?.ar || 'وادي النوار'}
-                </p>
-              </>
-            )}
-          </div>
+          {/* Accessible H1 for SEO / screen readers (large visual title removed as brand is displayed in header) */}
+          <h1 className="sr-only">
+            {isAr
+              ? (content?.hero?.heading?.ar || content?.brand?.name?.ar || 'وادي النوار')
+              : (content?.hero?.heading?.en || content?.brand?.name?.en || 'The Blossom Valley')}
+          </h1>
 
           {/* Full Unabbreviated Description */}
-          <p className="mt-4 sm:mt-5 text-base sm:text-lg md:text-xl font-medium text-white/90 leading-relaxed max-w-xl drop-shadow-xs">
+          <p className="text-base sm:text-lg md:text-xl font-medium text-white/90 leading-relaxed max-w-xl drop-shadow-xs">
             {isAr
               ? (content?.hero?.description?.ar || content?.hero?.subheading?.ar || 'من أرض الوطن ورماله الدافئة، من محافظة شقراء؛ مزرعة وادي النوار تقدم لكم منتجاتها الطازجة يومياً.')
               : (content?.hero?.description?.en || content?.hero?.subheading?.en || 'From the warm sands of our homeland, from Shaqra Governorate; Wadi Al-Nawar Farm brings you its fresh produce daily.')}
