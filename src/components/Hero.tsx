@@ -14,14 +14,11 @@ import { buildWhatsAppLink } from '@/lib/whatsapp';
 interface HeroProps {
   content?: SiteContent;
   whatsAppNumber?: string;
-  /** [ASSUMPTION C2]: Easy toggle for client confirmation ('bottom' | 'middle' | 'none') */
-  whatsAppPosition?: 'bottom' | 'middle' | 'none';
 }
 
 export default function Hero({
   content,
   whatsAppNumber: propWhatsApp,
-  whatsAppPosition = 'bottom',
 }: HeroProps) {
   const { language, isRTL } = useLanguage();
   const isAr = language === 'ar';
@@ -213,22 +210,6 @@ export default function Hero({
               ? (content?.hero?.productsList?.ar || 'تمور الخلاص • فلفل شقراء • منتجات زراعية موسمية • طماطم مجففة • لحوم نعيمي بلدي')
               : (content?.hero?.productsList?.en || 'Khalas Dates • Shaqra Peppers • Seasonal Farm Produce • Sun-Dried Tomatoes • Local Naimi Livestock')}
           </p>
-
-          {/* [ASSUMPTION C2]: WhatsApp CTA Button (removed from middle by default) */}
-          {whatsAppPosition === 'middle' && (
-            <div className="mt-5 sm:mt-6 flex items-center">
-              <a
-                href={whatsAppHref}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="btn-primary gap-2.5 font-bold shadow-lg shadow-black/25 text-xs sm:text-sm px-5 py-2.5 rounded-full inline-flex items-center"
-              >
-                <MessageCircle size={18} />
-                <span>{whatsAppBtnText}</span>
-                <span className="text-sm font-bold transition-transform rtl:rotate-180">→</span>
-              </a>
-            </div>
-          )}
         </div>
 
         {/* Spacer — fills the middle of the viewport */}
@@ -300,21 +281,19 @@ export default function Hero({
           </div>
         )}
 
-        {/* ── [ASSUMPTION C2] Bottom WhatsApp CTA at the end of the hero page ── */}
-        {whatsAppPosition === 'bottom' && (
-          <div className="mt-4 sm:mt-5 pt-3 border-t border-white/10 flex items-center justify-start">
-            <a
-              href={whatsAppHref}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="btn-primary gap-2.5 font-bold shadow-lg shadow-black/25 text-xs sm:text-sm px-5 py-2.5 rounded-full inline-flex items-center"
-            >
-              <MessageCircle size={18} />
-              <span>{whatsAppBtnText}</span>
-              <span className="text-sm font-bold transition-transform rtl:rotate-180">→</span>
-            </a>
-          </div>
-        )}
+        {/* ── WhatsApp CTA Button: Always at the bottom of the hero section ── */}
+        <div className="mt-4 sm:mt-5 pt-3 border-t border-white/10 flex items-center justify-start">
+          <a
+            href={whatsAppHref}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn-primary gap-2.5 font-bold shadow-lg shadow-black/25 text-xs sm:text-sm px-5 py-2.5 rounded-full inline-flex items-center"
+          >
+            <MessageCircle size={18} />
+            <span>{whatsAppBtnText}</span>
+            <span className="text-sm font-bold transition-transform rtl:rotate-180">→</span>
+          </a>
+        </div>
       </div>
     </section>
   );
