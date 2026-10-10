@@ -445,19 +445,8 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                         const swatchClass = swatches[pIdx % swatches.length];
                         const iconSymbol = prod.icon || '✦';
 
-                        // Product image from CMS with fallback
-                        const isRoyalKhalas = prod.id === 'royal-khalas';
-                        const thumbSrc = prod.image || (isRoyalKhalas ? '/images/royal-khalas-1.jpg' : '');
-
-                        // Subtitle from CMS with fallback
-                        const cmsSubtitle = isAr
-                          ? (prod.arabicSubtitle || (prod.subtitle ? t(prod.subtitle) : ''))
-                          : (prod.subtitle ? t(prod.subtitle) : '');
-                        const subtitleText = cmsSubtitle || (isRoyalKhalas
-                          ? (isAr ? 'حبة فاخرة، حجم كبير ومذاق غني' : 'Handpicked Jumbo Reserve, Rich Flavor')
-                          : '');
-
                         // Gallery photos from CMS (prod.gallery) with fallback
+                        const isRoyalKhalas = prod.id === 'royal-khalas';
                         const galleryPhotos = (prod.gallery && prod.gallery.length > 0)
                           ? prod.gallery
                           : (isRoyalKhalas
@@ -467,6 +456,17 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                                 '/images/royal-khalas-3.jpg',
                               ]
                             : []);
+
+                        // Thumbnail uses first gallery photo or main product image
+                        const thumbSrc = (galleryPhotos.length > 0 ? galleryPhotos[0] : prod.image) || (isRoyalKhalas ? '/images/royal-khalas-1.jpg' : '');
+
+                        // Subtitle from CMS with fallback
+                        const cmsSubtitle = isAr
+                          ? (prod.arabicSubtitle || (prod.subtitle ? t(prod.subtitle) : ''))
+                          : (prod.subtitle ? t(prod.subtitle) : '');
+                        const subtitleText = cmsSubtitle || (isRoyalKhalas
+                          ? (isAr ? 'حبة فاخرة، حجم كبير ومذاق غني' : 'Handpicked Jumbo Reserve, Rich Flavor')
+                          : '');
 
                         return (
                           <div
@@ -584,22 +584,28 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                           ? 'ليست مجرد طماطم مجففة… بل نكهات لها شخصيتها'
                           : 'Not just dried tomatoes… but distinct, flavorful personalities'}
                       </p>
-                      <div className="space-y-2 editorial-copy text-sm sm:text-base text-muted-foreground leading-relaxed pt-1">
-                        <p>
-                          {isAr
-                            ? 'شرائح طماطم مجففة، ننسقها مع إضافات مختارة ونحفظها بزيت الزيتون لنقدم مجموعة من النكهات، لكل واحدة منها طابع واستخدام مختلف.'
-                            : 'Sun-concentrated ripe tomato slices paired with select herbs and submerged in extra virgin olive oil to deliver a collection of rich flavors.'}
-                        </p>
-                        <p>
-                          {isAr
-                            ? 'من الفطور إلى المقبلات، ومن السلطات إلى الأطباق الرئيسية…'
-                            : 'From breakfast toasts to salads, pasta, and main dishes…'}
-                        </p>
-                        <p className="font-semibold text-ink">
-                          {isAr
-                            ? 'برطمان واحد يفتح لك أكثر من فكرة'
-                            : 'One jar opens endless culinary possibilities'}
-                        </p>
+                      <div className="editorial-copy text-sm sm:text-base text-muted-foreground leading-relaxed pt-1 whitespace-pre-line">
+                        {cat.description ? (
+                          t(cat.description)
+                        ) : (
+                          <div className="space-y-2">
+                            <p>
+                              {isAr
+                                ? 'شرائح طماطم مجففة، ننسقها مع إضافات مختارة ونحفظها بزيت الزيتون لنقدم مجموعة من النكهات، لكل واحدة منها طابع واستخدام مختلف.'
+                                : 'Sun-concentrated ripe tomato slices paired with select herbs and submerged in extra virgin olive oil to deliver a collection of rich flavors.'}
+                            </p>
+                            <p>
+                              {isAr
+                                ? 'من الفطور إلى المقبلات، ومن السلطات إلى الأطباق الرئيسية…'
+                                : 'From breakfast toasts to salads, pasta, and main dishes…'}
+                            </p>
+                            <p className="font-semibold text-ink">
+                              {isAr
+                                ? 'برطمان واحد يفتح لك أكثر من فكرة'
+                                : 'One jar opens endless culinary possibilities'}
+                            </p>
+                          </div>
+                        )}
                       </div>
                     </div>
                   ) : (

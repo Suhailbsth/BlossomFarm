@@ -258,7 +258,7 @@ export default function NaimiSheepSection({ content, whatsAppNumber }: NaimiShee
               {isAr ? 'نوع التغذية' : 'Dietary Feed'}
             </span>
             <span className="font-display text-xs sm:text-sm font-semibold text-primary mt-1 block">
-              {isAr ? 'برسيم، شعير وتمر المزرعة' : 'Alfalfa, Barley & Farm Dates'}
+              {naimiData?.badge ? t(naimiData.badge) : (isAr ? 'برسيم، شعير وتمر المزرعة' : 'Alfalfa, Barley & Farm Dates')}
             </span>
           </div>
 

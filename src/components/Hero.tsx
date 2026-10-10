@@ -16,6 +16,12 @@ interface HeroProps {
   whatsAppNumber?: string;
 }
 
+/**
+ * [Position Constant]: Easily toggle or inspect the Hero WhatsApp CTA location.
+ * Set to 'bottom' to display at the bottom of the hero, or 'none' to omit.
+ */
+export const HERO_WHATSAPP_CTA_POSITION = 'bottom' as const;
+
 export default function Hero({
   content,
   whatsAppNumber: propWhatsApp,
@@ -281,19 +287,21 @@ export default function Hero({
           </div>
         )}
 
-        {/* ── WhatsApp CTA Button: Always at the bottom of the hero section ── */}
-        <div className="mt-4 sm:mt-5 pt-3 border-t border-white/10 flex items-center justify-start">
-          <a
-            href={whatsAppHref}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="btn-primary gap-2.5 font-bold shadow-lg shadow-black/25 text-xs sm:text-sm px-5 py-2.5 rounded-full inline-flex items-center"
-          >
-            <MessageCircle size={18} />
-            <span>{whatsAppBtnText}</span>
-            <span className="text-sm font-bold transition-transform rtl:rotate-180">→</span>
-          </a>
-        </div>
+        {/* ── WhatsApp CTA Button: Controlled by HERO_WHATSAPP_CTA_POSITION constant ── */}
+        {HERO_WHATSAPP_CTA_POSITION === 'bottom' && (
+          <div className="mt-4 sm:mt-5 pt-3 border-t border-white/10 flex items-center justify-start">
+            <a
+              href={whatsAppHref}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="btn-primary gap-2.5 font-bold shadow-lg shadow-black/25 text-xs sm:text-sm px-5 py-2.5 rounded-full inline-flex items-center"
+            >
+              <MessageCircle size={18} />
+              <span>{whatsAppBtnText}</span>
+              <span className="text-sm font-bold transition-transform rtl:rotate-180">→</span>
+            </a>
+          </div>
+        )}
       </div>
     </section>
   );
