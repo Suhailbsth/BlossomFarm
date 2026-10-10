@@ -36,8 +36,8 @@ export default function NaimiSheepSection({ content, whatsAppNumber }: NaimiShee
       ? naimiData.images
       : (naimiData?.imageUrl ? [naimiData.imageUrl] : []);
 
-  const sheepImage = sheepImages[0] || 'https://cdn.sanity.io/images/tokh7kkd/production/ff7049e43e90815fb40eb8fa9bbd84bac832377e-1072x1920.jpg';
-  const sheepVideoSrc = naimiData?.videoFileUrl || naimiData?.videoUrl || 'https://cdn.sanity.io/files/tokh7kkd/production/04f3cb5777210a2031f735866d12927c56e8c256.mp4';
+  const sheepImage = sheepImages[0] || '';
+  const sheepVideoSrc = naimiData?.videoFileUrl || naimiData?.videoUrl || '';
 
   // Detect prefers-reduced-motion
   useEffect(() => {
@@ -158,7 +158,7 @@ export default function NaimiSheepSection({ content, whatsAppNumber }: NaimiShee
                 loop
                 muted
                 playsInline
-                poster={sheepImage}
+                poster={sheepImage || undefined}
                 preload="metadata"
                 className="h-full w-full object-cover"
                 aria-label={isAr ? 'فيديو خرفان النعيمي في المرعى' : 'Naimi sheep pasture video'}
@@ -166,7 +166,7 @@ export default function NaimiSheepSection({ content, whatsAppNumber }: NaimiShee
                 <source src={sheepVideoSrc} type="video/mp4" />
                 {isAr ? 'متصفحك لا يدعم تشغيل الفيديو.' : 'Your browser does not support HTML5 video.'}
               </video>
-            ) : (
+            ) : sheepImage ? (
               <div className="relative h-full w-full">
                 <Image
                   src={sheepImage}
@@ -175,6 +175,10 @@ export default function NaimiSheepSection({ content, whatsAppNumber }: NaimiShee
                   className="object-cover"
                   sizes="(max-width: 1024px) 100vw, 55vw"
                 />
+              </div>
+            ) : (
+              <div className="flex h-full w-full items-center justify-center bg-paper/60 text-muted-foreground text-sm font-semibold">
+                <span>{isAr ? 'خرفان النعيمي' : 'Naimi Sheep'}</span>
               </div>
             )}
 
