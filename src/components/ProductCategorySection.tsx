@@ -6,7 +6,8 @@ import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 import { SiteContent, DynamicCategoryItem, ProductItem } from '@/types/content';
 import Reveal from './Reveal';
-import { ArrowUpRight } from 'lucide-react';
+import { ArrowUpRight, MessageCircle } from 'lucide-react';
+import { buildWhatsAppLink } from '@/lib/whatsapp';
 
 interface ProductCategorySectionProps {
   content?: SiteContent;
@@ -287,22 +288,88 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
               // ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
               if (mode === 'swatches') {
                 const colsClass = getGridColsClass(cat.gridColumns, displayProducts.length);
+                const isDatesCategory = cat.slug === 'dates' || cat.id === 'category-dates' || cat.id === 'dates';
+
+                // C7: Group title "بلح" -> "التمور المتوفرة"
+                const categoryGroupTitle = isDatesCategory
+                  ? (isAr ? 'التمور المتوفرة' : 'Available Dates')
+                  : t(cat.title);
+
+                const datesWhatsAppPrefill = isAr
+                  ? 'أرغب في طلب تمور الخلاص'
+                  : 'I would like to order Khalas dates';
+                const datesWhatsAppHref = buildWhatsAppLink(
+                  datesWhatsAppPrefill,
+                  content?.footer?.whatsAppNumber || '+966500000000'
+                );
 
                 return (
                   <div key={cat.id}>
                     <div className="flex items-center justify-between mb-4">
                       <span className="editorial-kicker text-primary font-bold">
-                        {isAr ? `${stepNumAr}. ${t(cat.title)}` : `${stepNum} · ${t(cat.title)}`}
+                        {isAr ? `${stepNumAr}. ${categoryGroupTitle}` : `${stepNum} · ${categoryGroupTitle}`}
                       </span>
                       {cat.badge && (
                         <span className="text-xs text-muted-foreground">{t(cat.badge)}</span>
                       )}
                     </div>
 
-                    {cat.description && (
-                      <p className="text-sm text-muted-foreground max-w-2xl mb-6">
-                        {t(cat.description)}
-                      </p>
+                    {/* C7: New intro block replacing the old description paragraph */}
+                    {isDatesCategory ? (
+                      <div className="mb-8 p-6 sm:p-8 bg-paper/60 rounded-2xl border border-border/50 max-w-3xl space-y-6">
+                        {/* Part 1: تمور الخلاص */}
+                        <div className="space-y-3">
+                          <h3 className="font-display text-lg sm:text-xl font-bold text-ink">
+                            {isAr ? 'تمور الخلاص' : 'Khalas Dates'}
+                          </h3>
+                          <p className="editorial-copy text-sm sm:text-base text-muted-foreground leading-relaxed">
+                            {isAr
+                              ? 'من نخيل مزرعتنا في شقراء، نقطف تمور الخلاص في موسمها، ونعتني بها حتى تصل إلى مائدتكم بالجودة التي تليق بها.'
+                              : 'From our palm trees in Shaqra, we harvest Khalas dates in their prime season, caring for them until they arrive at your table with true distinction.'}
+                          </p>
+                          <blockquote className="font-display font-semibold text-primary italic text-base sm:text-lg">
+                            {isAr ? '"من النخلة… إليك."' : '"From the palm tree… to you."'}
+                          </blockquote>
+                          <div className="pt-1">
+                            <a
+                              href={datesWhatsAppHref}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              className="btn-primary gap-2 font-bold text-xs sm:text-sm px-5 py-2.5 rounded-full inline-flex items-center"
+                            >
+                              <MessageCircle size={16} />
+                              <span>{isAr ? 'اطلب الآن' : 'Order Now'}</span>
+                              <span className="text-sm font-bold transition-transform rtl:rotate-180">→</span>
+                            </a>
+                          </div>
+                        </div>
+
+                        {/* Thin Divider */}
+                        <hr className="border-border/60" />
+
+                        {/* Part 2: مكنوز وادي النوار */}
+                        <div className="space-y-2">
+                          <h3 className="font-display text-lg sm:text-xl font-bold text-ink">
+                            {isAr ? 'مكنوز وادي النوار' : 'Maknooz Wadi Al-Nawwar'}
+                          </h3>
+                          <p className="editorial-copy text-sm sm:text-base text-muted-foreground leading-relaxed">
+                            {isAr
+                              ? 'تمر خلاص مختار بعناية، مُجهّز ومحفوظ بطريقة تحافظ على طعمه دائماً.'
+                              : 'Hand-selected Khalas dates, cured and preserved to sustain their quintessential taste.'}
+                          </p>
+                          <p className="editorial-copy text-sm sm:text-base text-muted-foreground leading-relaxed">
+                            {isAr
+                              ? 'منتج سعودي من حصاد مزرعتنا، مناسب للضيافة، والتقديم مع القهوة، والهدايا.'
+                              : 'An authentic Saudi harvest from our farm, ideal for noble hospitality, serving with coffee, and heartfelt gifting.'}
+                          </p>
+                        </div>
+                      </div>
+                    ) : (
+                      cat.description && (
+                        <p className="text-sm text-muted-foreground max-w-2xl mb-6">
+                          {t(cat.description)}
+                        </p>
+                      )
                     )}
 
                     <div className={`gap-0 border-y border-border/50 ${colsClass}`}>
@@ -311,48 +378,83 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                         const swatchClass = swatches[pIdx % swatches.length];
                         const iconSymbol = prod.icon || '✦';
 
+                        // C6: Royal Khalas real photos check
+                        const isRoyalKhalas = prod.id === 'royal-khalas';
+                        const thumbSrc = isRoyalKhalas ? '/images/royal-khalas-1.jpg' : prod.image;
+
+                        // A3: Royal Khalas subtitle
+                        const subtitleText = isRoyalKhalas
+                          ? (isAr ? 'حبة فاخرة، حجم كبير ومذاق غني' : (prod.subtitle ? t(prod.subtitle) : 'Handpicked Jumbo Reserve, Rich Flavor'))
+                          : (isAr ? (prod.arabicSubtitle || (prod.subtitle ? t(prod.subtitle) : '')) : (prod.subtitle ? t(prod.subtitle) : ''));
+
                         return (
-                          <Link
+                          <div
                             key={prod.id}
-                            href={`/products/${prod.id}`}
-                            className="group flex items-center justify-between border-b border-border/50 py-6 last:border-b-0 sm:border-b-0 sm:border-e sm:border-border/50 sm:px-6 sm:first:ps-0 sm:last:border-e-0 transition-colors hover:bg-paper/40"
+                            className="border-b border-border/50 py-6 last:border-b-0 sm:border-b-0 sm:border-e sm:border-border/50 sm:px-6 sm:first:ps-0 sm:last:border-e-0 transition-colors hover:bg-paper/40 flex flex-col justify-between"
                           >
-                            <div className="flex items-center gap-4">
-                              {prod.image ? (
-                                <div className="relative size-11 shrink-0 overflow-hidden rounded-full border border-border/50 shadow-2xs bg-paper">
-                                  <Image
-                                    src={prod.image}
-                                    alt={t(prod.name)}
-                                    fill
-                                    className="object-cover group-hover:scale-105 transition-transform"
-                                    sizes="44px"
-                                  />
-                                </div>
-                              ) : (
-                                <span className={`size-10 shrink-0 rounded-full ${swatchClass} flex items-center justify-center text-xs font-bold shadow-2xs`}>
-                                  {iconSymbol}
-                                </span>
-                              )}
-                              <div>
-                                <h3 className="font-display text-lg font-semibold group-hover:text-primary transition-colors">
-                                  {t(prod.name)}
-                                </h3>
-                                {isAr ? prod.arabicSubtitle && (
-                                  <p className="text-xs text-muted-foreground mt-0.5">
-                                    {prod.arabicSubtitle}
-                                  </p>
-                                ) : prod.subtitle && (
-                                  <p className="text-xs text-muted-foreground mt-0.5">
-                                    {t(prod.subtitle)}
-                                  </p>
+                            <Link
+                              href={`/products/${prod.id}`}
+                              className="group flex items-start justify-between gap-4"
+                            >
+                              <div className="flex items-start gap-4">
+                                {thumbSrc ? (
+                                  <div className="relative size-12 shrink-0 overflow-hidden rounded-full border border-border/50 shadow-2xs bg-paper mt-0.5">
+                                    <Image
+                                      src={thumbSrc}
+                                      alt={t(prod.name)}
+                                      fill
+                                      className="object-cover group-hover:scale-105 transition-transform"
+                                      sizes="48px"
+                                    />
+                                  </div>
+                                ) : (
+                                  <span className={`size-12 shrink-0 rounded-full ${swatchClass} flex items-center justify-center text-xs font-bold shadow-2xs mt-0.5`}>
+                                    {iconSymbol}
+                                  </span>
                                 )}
+                                <div>
+                                  <h3 className="font-display text-lg font-semibold group-hover:text-primary transition-colors">
+                                    {t(prod.name)}
+                                  </h3>
+                                  {subtitleText && (
+                                    <p className="text-xs text-muted-foreground mt-0.5 leading-snug">
+                                      {subtitleText}
+                                    </p>
+                                  )}
+                                </div>
                               </div>
-                            </div>
-                            <ArrowUpRight
-                              size={16}
-                              className="text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all opacity-60 group-hover:opacity-100"
-                            />
-                          </Link>
+                              <ArrowUpRight
+                                size={16}
+                                className="text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all opacity-60 group-hover:opacity-100 shrink-0 mt-1"
+                              />
+                            </Link>
+
+                            {/* C6: Small 3 real photos gallery row under Royal Khalas text */}
+                            {isRoyalKhalas && (
+                              <div className="mt-4 pt-2 border-t border-border/40">
+                                <div className="flex items-center gap-2.5 overflow-x-auto pb-1 max-w-full">
+                                  {[
+                                    '/images/royal-khalas-1.jpg',
+                                    '/images/royal-khalas-2.jpg',
+                                    '/images/royal-khalas-3.jpg',
+                                  ].map((photoUrl, photoIdx) => (
+                                    <div
+                                      key={photoIdx}
+                                      className="relative size-16 sm:size-20 shrink-0 overflow-hidden rounded-xl border border-border/60 bg-paper shadow-2xs"
+                                    >
+                                      <Image
+                                        src={photoUrl}
+                                        alt={isAr ? `الخلاص الملكي صورة ${photoIdx + 1}` : `Royal Khalas photo ${photoIdx + 1}`}
+                                        fill
+                                        sizes="(max-width: 640px) 64px, 80px"
+                                        className="object-cover hover:scale-105 transition-transform"
+                                      />
+                                    </div>
+                                  ))}
+                                </div>
+                              </div>
+                            )}
+                          </div>
                         );
                       })}
                     </div>
