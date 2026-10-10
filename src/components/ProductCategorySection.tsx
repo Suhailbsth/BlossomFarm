@@ -27,9 +27,17 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
 
   const dynamicCategories = content?.productsSection?.dynamicCategories;
   const hasDynamicCategories = dynamicCategories && dynamicCategories.length > 0;
+  // [C5]: Lambs already have their own dedicated section above; exclude from products list so Pepper is ٠٢ and Tomatoes is ٠٣
+  const EXCLUDE_MEAT_FROM_PRODUCTS_LIST = true;
+
   const homeCategories = hasDynamicCategories
     ? dynamicCategories
-      .filter((c) => c.showOnHome !== false && getCategoryProducts(c).length > 0)
+      .filter((c) => {
+        if (EXCLUDE_MEAT_FROM_PRODUCTS_LIST && (c.slug === 'meat' || c.id === 'meat' || c.id === 'category-meat')) {
+          return false;
+        }
+        return c.showOnHome !== false && getCategoryProducts(c).length > 0;
+      })
       .sort((a, b) => (a.homeOrder || 1) - (b.homeOrder || 1))
     : [];
 
