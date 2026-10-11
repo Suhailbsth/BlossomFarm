@@ -23,12 +23,19 @@ export interface BrandLogoProps {
   size?: number | string;
   className?: string;
   showSubtitle?: boolean;
+  /**
+   * Optional custom logo image URL from Sanity CMS (siteSettings.siteLogo)
+   */
+  logoUrl?: string;
+  brandName?: string;
+  brandSubtitle?: string;
 }
 
 /**
  * Enhanced Official Logo of The Blossom Valley (وادي النوار)
  * Features the signature stylized desert date palm, agricultural furrow field,
  * flowing contour horizon arch, and official Arabic + English calligraphy lockup.
+ * Supports custom uploaded logo from Sanity CMS with fallback to the SVG emblem.
  */
 export default function BrandLogo({
   variant = 'horizontal',
@@ -36,6 +43,9 @@ export default function BrandLogo({
   size,
   className = '',
   showSubtitle = true,
+  logoUrl,
+  brandName = 'وادي النوار',
+  brandSubtitle,
 }: BrandLogoProps) {
   // If rendering the full official badge lockup
   if (variant === 'full') {
@@ -44,18 +54,29 @@ export default function BrandLogo({
         className={`relative inline-flex flex-col items-center justify-center rounded-2xl bg-[#005A52] p-5 shadow-lg border border-[#0A6860] text-center select-none ${className}`}
         style={{ width: size || 'auto' }}
       >
-        {/* Emblem SVG */}
-        <EmblemIcon theme="cream" className="size-20 sm:size-24 mb-3" />
+        {/* Emblem SVG or CMS Logo */}
+        {logoUrl ? (
+          <div className="relative size-20 sm:size-24 mb-3 overflow-hidden">
+            <Image
+              src={logoUrl}
+              alt={brandName}
+              fill
+              className="object-contain"
+            />
+          </div>
+        ) : (
+          <EmblemIcon theme="cream" className="size-20 sm:size-24 mb-3" />
+        )}
 
         {/* Official Arabic Calligraphy */}
         <span className="font-arabic text-2xl sm:text-3xl font-bold tracking-normal text-[#F6EDE2] drop-shadow-xs">
-          وادي الـــــــــــنوار
+          {brandName}
         </span>
 
         {/* English Brand & Resort Title */}
         <div className="mt-2 text-center">
           <span className="block font-display text-sm sm:text-base font-bold text-[#F6EDE2] tracking-wide">
-            The Blossom&apos;s valley
+            {brandSubtitle || "The Blossom's valley"}
           </span>
           {showSubtitle && (
             <span className="block text-[10px] sm:text-[11px] font-semibold tracking-[0.22em] uppercase text-[#F6EDE2]/80 mt-0.5">
@@ -74,7 +95,17 @@ export default function BrandLogo({
         className={`relative inline-grid place-items-center select-none ${className}`}
         style={{ width: size, height: size }}
       >
-        <EmblemIcon theme={theme} className="w-full h-full" />
+        {logoUrl ? (
+          <Image
+            src={logoUrl}
+            alt={brandName}
+            width={40}
+            height={40}
+            className="object-contain w-full h-full"
+          />
+        ) : (
+          <EmblemIcon theme={theme} className="w-full h-full" />
+        )}
       </div>
     );
   }
@@ -83,19 +114,29 @@ export default function BrandLogo({
   return (
     <div className={`inline-flex items-center gap-2.5 sm:gap-3 select-none ${className}`}>
       {/* Emblem Badge Icon */}
-      <div className="shrink-0 size-9 sm:size-10 rounded-xl bg-[#005A52] p-1.5 grid place-items-center shadow-xs border border-[#0A6860]">
-        <EmblemIcon theme="cream" className="w-full h-full" />
+      <div className="shrink-0 size-9 sm:size-10 rounded-xl bg-[#005A52] p-1.5 grid place-items-center shadow-xs border border-[#0A6860] overflow-hidden relative">
+        {logoUrl ? (
+          <Image
+            src={logoUrl}
+            alt={brandName}
+            width={40}
+            height={40}
+            className="object-contain w-full h-full"
+          />
+        ) : (
+          <EmblemIcon theme="cream" className="w-full h-full" />
+        )}
       </div>
 
       {/* Typography Lockup */}
       <div className="flex flex-col">
         <div className="flex items-baseline gap-1.5">
           <span className="font-arabic font-bold text-base sm:text-lg leading-none text-current">
-            وادي النوار
+            {brandName}
           </span>
           <span className="text-[10px] text-primary/70 font-display">·</span>
           <span className="font-display font-semibold text-xs sm:text-sm leading-none text-current opacity-90 hidden sm:inline">
-            The Blossom&apos;s Valley
+            {brandSubtitle || "The Blossom's Valley"}
           </span>
         </div>
         {showSubtitle && (

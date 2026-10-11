@@ -67,8 +67,18 @@ export default function ProductDetailsView({
             className="flex items-center gap-2.5 group hover:opacity-90 transition-opacity"
             aria-label={isAr ? 'وادي النوار - الصفحة الرئيسية' : "The Blossom's Valley Home"}
           >
-            <div className="shrink-0 size-8 sm:size-9 rounded-xl bg-[#005A52] p-1.5 grid place-items-center shadow-xs border border-[#0A6860]">
-              <EmblemIcon theme="cream" className="w-full h-full" />
+            <div className="shrink-0 size-8 sm:size-9 rounded-xl bg-[#005A52] p-1.5 grid place-items-center shadow-xs border border-[#0A6860] overflow-hidden relative">
+              {content?.brand?.siteLogoUrl ? (
+                <Image
+                  src={content.brand.siteLogoUrl}
+                  alt={isRTL ? 'وادي النوار' : "The Blossom's Valley"}
+                  width={36}
+                  height={36}
+                  className="object-contain w-full h-full"
+                />
+              ) : (
+                <EmblemIcon theme="cream" className="w-full h-full" />
+              )}
             </div>
             <div className="flex flex-col">
               <span className="font-arabic font-bold text-base sm:text-lg leading-tight text-primary">

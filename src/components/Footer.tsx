@@ -1,4 +1,5 @@
-﻿'use client';
+'use client';
+import Image from 'next/image';
 import { useLanguage } from '@/context/LanguageContext';
 import { SiteContent } from '@/types/content';
 import { MessageCircle, MapPin } from 'lucide-react';
@@ -94,8 +95,18 @@ export default function Footer({ content, whatsAppNumber }: FooterProps) {
         {/* Left: Brand Emblem Badge + Brand Name & Closing Tagline */}
         <div className="max-w-sm">
           <div className="flex items-center gap-3 mb-4">
-            <div className="size-12 rounded-2xl bg-[#005A52] p-2 grid place-items-center shadow-md border border-[#0A6860] shrink-0">
-              <EmblemIcon theme="cream" className="w-full h-full" />
+            <div className="size-12 rounded-2xl bg-[#005A52] p-2 grid place-items-center shadow-md border border-[#0A6860] shrink-0 overflow-hidden relative">
+              {content?.brand?.siteLogoUrl ? (
+                <Image
+                  src={content.brand.siteLogoUrl}
+                  alt={content?.brand?.name ? t(content.brand.name) : 'Logo'}
+                  width={48}
+                  height={48}
+                  className="object-contain w-full h-full"
+                />
+              ) : (
+                <EmblemIcon theme="cream" className="w-full h-full" />
+              )}
             </div>
             <div>
               <p className="font-arabic text-xl sm:text-2xl font-bold text-white tracking-tight leading-none">
