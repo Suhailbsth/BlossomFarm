@@ -457,8 +457,8 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                               ]
                             : []);
 
-                        // Thumbnail uses first gallery photo or main product image
-                        const thumbSrc = (galleryPhotos.length > 0 ? galleryPhotos[0] : prod.image) || (isRoyalKhalas ? '/images/royal-khalas-1.jpg' : '');
+                        // Thumbnail uses main product image first, then first gallery photo as fallback
+                        const thumbSrc = prod.image || (galleryPhotos.length > 0 ? galleryPhotos[0] : '') || (isRoyalKhalas ? '/images/royal-khalas-1.jpg' : '');
 
                         // Subtitle from CMS with fallback
                         const cmsSubtitle = isAr

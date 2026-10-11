@@ -27,9 +27,14 @@ export default function ProductDetailsView({
   const { language, toggleLanguage, isRTL, t } = useLanguage();
   const isAr = language === 'ar';
 
-  const galleryImages = product.gallery && product.gallery.length > 0
-    ? product.gallery
-    : [product.image];
+  // Include main photo first, followed by any additional gallery photos
+  const allImages = [
+    ...(product.image ? [product.image] : []),
+    ...(product.gallery ? product.gallery.filter((url) => url && url !== product.image) : []),
+  ];
+  const galleryImages = allImages.length > 0
+    ? allImages
+    : (product.image ? [product.image] : []);
 
   // Other products excluding current
   const otherProducts = allProducts.filter((item) => item.id !== product.id);
