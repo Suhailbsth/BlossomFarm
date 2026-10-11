@@ -131,7 +131,7 @@ function mapSanityProduct(sp: SanityProduct, categoryTitle?: { ar: string; en: s
   const imgUrl = sp.imageUrl || '';
   const gallery = sp.galleryUrls && sp.galleryUrls.length > 0
     ? sp.galleryUrls
-    : (imgUrl ? [imgUrl] : []);
+    : [];
 
   return {
     id: sp.slug,

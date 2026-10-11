@@ -445,12 +445,11 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                         const swatchClass = swatches[pIdx % swatches.length];
                         const iconSymbol = prod.icon || '✦';
 
-                        // Gallery photos directly from CMS (prod.gallery)
-                        const galleryPhotos = prod.gallery || [];
+                        // Gallery photos directly from CMS (prod.gallery) excluding duplicate main image
+                        const galleryPhotos = (prod.gallery || []).filter((url) => Boolean(url) && url !== prod.image);
 
                         // Thumbnail uses main product image first, then first gallery photo as fallback
                         const thumbSrc = prod.image || (galleryPhotos.length > 0 ? galleryPhotos[0] : '');
-
                         // Subtitle from CMS with fallback
                         const cmsSubtitle = isAr
                           ? (prod.arabicSubtitle || (prod.subtitle ? t(prod.subtitle) : ''))
