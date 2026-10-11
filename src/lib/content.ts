@@ -148,6 +148,7 @@ function mapSanityProduct(sp: SanityProduct, categoryTitle?: { ar: string; en: s
     gallery,
     inSeason: sp.inSeason !== false,
     isFeaturedOnHome: sp.isFeaturedOnHome !== false,
+    showGalleryOnHome: sp.showGalleryOnHome,
     highlights: sp.highlights,
     specs: sp.specs,
     bestPairedWith: sp.bestPairedWith,

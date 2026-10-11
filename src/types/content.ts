@@ -40,6 +40,7 @@ export interface ProductItem {
   gallery?: string[];
   inSeason: boolean;
   isFeaturedOnHome?: boolean;
+  showGalleryOnHome?: boolean;
   highlights?: BilingualText[];
   specs?: {
     label: BilingualText;

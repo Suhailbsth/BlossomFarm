@@ -456,6 +456,10 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                           : (prod.subtitle ? t(prod.subtitle) : '');
                         const subtitleText = cmsSubtitle;
 
+                        // Flag for showing gallery on homepage (controlled from Sanity CMS per product)
+                        const isRoyalKhalas = prod.id === 'royal-khalas';
+                        const shouldShowGallery = (prod.showGalleryOnHome !== undefined ? prod.showGalleryOnHome : isRoyalKhalas) && galleryPhotos.length > 0;
+
                         return (
                           <div
                             key={prod.id}
@@ -498,8 +502,8 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                               />
                             </Link>
 
-                            {/* Gallery photos row: loaded from CMS prod.gallery */}
-                            {galleryPhotos.length > 0 && (
+                            {/* Gallery photos row: controlled by showGalleryOnHome flag from Sanity CMS */}
+                            {shouldShowGallery && (
                               <div className="mt-4 pt-2 border-t border-border/40">
                                 <div className="flex items-center gap-2.5 overflow-x-auto pb-1 max-w-full">
                                   {galleryPhotos.map((photoUrl, photoIdx) => (

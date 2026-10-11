@@ -101,6 +101,7 @@ export const allProductsQuery = `*[_type == "product"] | order(displayOrder asc,
   story,
   inSeason,
   isFeaturedOnHome,
+  showGalleryOnHome,
   displayOrder,
     specs,
     storageSpecific,
@@ -122,6 +123,7 @@ export const productBySlugQuery = `*[_type == "product" && slug.current == $slug
   story,
   inSeason,
   isFeaturedOnHome,
+  showGalleryOnHome,
   displayOrder,
     specs,
     storageSpecific,
@@ -257,6 +259,7 @@ export interface SanityProduct {
   story?: BilingualText;
   inSeason?: boolean;
   isFeaturedOnHome?: boolean;
+  showGalleryOnHome?: boolean;
   displayOrder?: number;
   tasteNotes?: BilingualText[];
   highlights?: BilingualText[];
