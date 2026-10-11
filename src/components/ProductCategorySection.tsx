@@ -445,28 +445,17 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                         const swatchClass = swatches[pIdx % swatches.length];
                         const iconSymbol = prod.icon || '✦';
 
-                        // Gallery photos from CMS (prod.gallery) with fallback
-                        const isRoyalKhalas = prod.id === 'royal-khalas';
-                        const galleryPhotos = (prod.gallery && prod.gallery.length > 0)
-                          ? prod.gallery
-                          : (isRoyalKhalas
-                            ? [
-                                '/images/royal-khalas-1.jpg',
-                                '/images/royal-khalas-2.jpg',
-                                '/images/royal-khalas-3.jpg',
-                              ]
-                            : []);
+                        // Gallery photos directly from CMS (prod.gallery)
+                        const galleryPhotos = prod.gallery || [];
 
                         // Thumbnail uses main product image first, then first gallery photo as fallback
-                        const thumbSrc = prod.image || (galleryPhotos.length > 0 ? galleryPhotos[0] : '') || (isRoyalKhalas ? '/images/royal-khalas-1.jpg' : '');
+                        const thumbSrc = prod.image || (galleryPhotos.length > 0 ? galleryPhotos[0] : '');
 
                         // Subtitle from CMS with fallback
                         const cmsSubtitle = isAr
                           ? (prod.arabicSubtitle || (prod.subtitle ? t(prod.subtitle) : ''))
                           : (prod.subtitle ? t(prod.subtitle) : '');
-                        const subtitleText = cmsSubtitle || (isRoyalKhalas
-                          ? (isAr ? 'حبة فاخرة، حجم كبير ومذاق غني' : 'Handpicked Jumbo Reserve, Rich Flavor')
-                          : '');
+                        const subtitleText = cmsSubtitle;
 
                         return (
                           <div
