@@ -53,13 +53,13 @@ export default async function Home() {
       {/* 2. Hero Section (#top) — Assalamu Alaikum · Wadi Al-Nawar */}
       <Hero content={content} whatsAppNumber={whatsAppNumber} />
 
-      {/* 3. Section — Naimi Sheep Pastures (#livestock) — Directly after Hero */}
-      <NaimiSheepSection content={content} whatsAppNumber={whatsAppNumber} />
-
-      {/* 4. Section 1 — About (#farm) — Our home · 01 */}
+      {/* 3. Section 1 — About / Homeland (#farm) — Homeland */}
       <AboutSection content={content} />
 
-      {/* 4. Section 2 — Products (#varieties) — Freshly picked · 02 */}
+      {/* 4. Section — Naimi Sheep Pastures (#livestock) — Naimi lambs */}
+      <NaimiSheepSection content={content} whatsAppNumber={whatsAppNumber} />
+
+      {/* 5. Section 2 — Products (#varieties) — Freshly picked */}
       <ProductCategorySection content={content} />
 
       {/* 5. Section 4 — Best Storage Practice (#storage) — Field notes · 03 (Terracotta) */}

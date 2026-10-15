@@ -61,14 +61,14 @@ export default function Header({ content, whatsAppNumber: propWhatsApp }: Header
   // Dynamic Navigation Links from CMS / content
   const navLinks = [
     {
-      href: '#livestock',
-      labelAr: content?.navigation?.meat?.ar || 'مواشي النعيمي',
-      labelEn: content?.navigation?.meat?.en || 'Naimi Sheep',
-    },
-    {
       href: '#farm',
       labelAr: content?.navigation?.about?.ar || 'عن المزرعة',
       labelEn: content?.navigation?.about?.en || 'Our Farm',
+    },
+    {
+      href: '#livestock',
+      labelAr: content?.navigation?.meat?.ar || 'مواشي النعيمي',
+      labelEn: content?.navigation?.meat?.en || 'Naimi Sheep',
     },
     {
       href: '#varieties',
