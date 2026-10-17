@@ -240,7 +240,7 @@ export default function HowToUseSection({ content }: HowToUseSectionProps) {
                     <FileText size={12} />
                     {isAr ? 'المقادير وطريقة التحضير' : 'Full Recipe'}
                   </span>
-                  {dish.videoFileUrl && (
+                  {(dish.videoFileUrl || dish.videoUrl) && (
                     <>
                       <span className="text-border">·</span>
                       <span className="inline-flex items-center gap-1 text-primary font-bold">
