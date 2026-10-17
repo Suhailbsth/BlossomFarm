@@ -47,6 +47,8 @@ export default function BrandLogo({
   brandName = 'وادي النوار',
   brandSubtitle,
 }: BrandLogoProps) {
+  const resolvedBrandName = brandName || 'وادي النوار';
+
   // If rendering the full official badge lockup
   if (variant === 'full') {
     return (
@@ -70,7 +72,7 @@ export default function BrandLogo({
 
         {/* Official Arabic Calligraphy */}
         <span className="font-arabic text-2xl sm:text-3xl font-bold tracking-normal text-[#F6EDE2] drop-shadow-xs">
-          {brandName}
+          {resolvedBrandName}
         </span>
 
         {/* English Brand & Resort Title */}
@@ -98,7 +100,7 @@ export default function BrandLogo({
         {logoUrl ? (
           <Image
             src={logoUrl}
-            alt={brandName}
+            alt={resolvedBrandName}
             width={40}
             height={40}
             className="object-contain w-full h-full"
@@ -118,7 +120,7 @@ export default function BrandLogo({
         {logoUrl ? (
           <Image
             src={logoUrl}
-            alt={brandName}
+            alt={resolvedBrandName}
             width={40}
             height={40}
             className="object-contain w-full h-full"
@@ -132,7 +134,7 @@ export default function BrandLogo({
       <div className="flex flex-col">
         <div className="flex items-baseline gap-1.5">
           <span className="font-arabic font-bold text-base sm:text-lg leading-none text-current">
-            {brandName}
+            {resolvedBrandName}
           </span>
           <span className="text-[10px] text-primary/70 font-display">·</span>
           <span className="font-display font-semibold text-xs sm:text-sm leading-none text-current opacity-90 hidden sm:inline">

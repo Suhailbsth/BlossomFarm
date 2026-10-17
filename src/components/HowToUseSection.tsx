@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { useLanguage } from '@/context/LanguageContext';
 import { SiteContent, BilingualText } from '@/types/content';
 import Reveal from './Reveal';
@@ -19,7 +20,7 @@ import {
   FileText,
   Video,
   CheckCircle2,
-  ArrowUpRight
+  ArrowUpRight,
 } from 'lucide-react';
 import { buildWhatsAppLink } from '@/lib/whatsapp';
 
@@ -41,6 +42,12 @@ interface CulinaryDish {
   steps?: string[];
   chefTip?: string;
   audioUrl?: string;
+  linkedProduct?: {
+    _id: string;
+    name: BilingualText;
+    slug: string;
+    imageUrl?: string;
+  };
 }
 
 export default function HowToUseSection({ content }: HowToUseSectionProps) {
@@ -53,21 +60,24 @@ export default function HowToUseSection({ content }: HowToUseSectionProps) {
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
 
-  const dishes: CulinaryDish[] = (content?.recipesSection?.items || []).map((item, idx) => ({
-    id: item.id || `recipe-${idx + 1}`,
-    num: item.number || (idx + 1 < 10 ? `0${idx + 1}` : `${idx + 1}`),
-    title: t(item.title) || (isAr ? `طريقة ${item.number}` : `Way ${item.number}`),
-    subtitle: t(item.subtitle) || '',
-    image: item.image || '',
-    videoFileUrl: item.videoFileUrl,
-    videoUrl: item.videoUrl,
-    prepTime: item.prepTime ? t(item.prepTime) : undefined,
-    servings: item.servings ? t(item.servings) : undefined,
-    ingredients: item.ingredients?.map((ing: BilingualText) => t(ing)) || [],
-    steps: item.steps?.map((step: BilingualText) => t(step)) || [],
-    chefTip: item.chefTip ? t(item.chefTip) : undefined,
-    audioUrl: item.audioUrl,
-  }));
+  const dishes: CulinaryDish[] = (content?.recipesSection?.items || [])
+    .filter((item) => item.showOnHome !== false)
+    .map((item, idx) => ({
+      id: item.id || `recipe-${idx + 1}`,
+      num: item.number || (idx + 1 < 10 ? `0${idx + 1}` : `${idx + 1}`),
+      title: t(item.title) || (isAr ? `طريقة ${item.number}` : `Way ${item.number}`),
+      subtitle: t(item.intro || item.subtitle) || '',
+      image: item.image || '',
+      videoFileUrl: item.videoFileUrl,
+      videoUrl: item.videoUrl,
+      prepTime: item.prepTime ? t(item.prepTime) : undefined,
+      servings: item.servings ? t(item.servings) : undefined,
+      ingredients: item.ingredients?.map((ing: BilingualText) => t(ing)) || [],
+      steps: item.steps?.map((step: BilingualText) => t(step)) || [],
+      chefTip: item.chefTip ? t(item.chefTip) : undefined,
+      audioUrl: item.audioUrl,
+      linkedProduct: item.linkedProduct,
+    }));
 
   const handleOpenModal = (dish: CulinaryDish, tab: 'recipe' | 'video' = 'recipe') => {
     setActiveDish(dish);
@@ -127,8 +137,8 @@ export default function HowToUseSection({ content }: HowToUseSectionProps) {
               {content?.recipesSection?.eyebrow
                 ? t(content.recipesSection.eyebrow)
                 : isAr
-                  ? 'من مطبخنا · ٠٤'
-                  : 'From our kitchen · 04'}
+                  ? 'من مطبخنا'
+                  : 'From our kitchen'}
             </p>
             <h2 className="editorial-title">
               {content?.recipesSection?.title
@@ -212,19 +222,42 @@ export default function HowToUseSection({ content }: HowToUseSectionProps) {
                   <p className="mt-1.5 text-xs sm:text-sm text-muted-foreground leading-relaxed line-clamp-2">
                     {dish.subtitle}
                   </p>
+
+                  {dish.linkedProduct && (
+                    <div className="mt-2.5">
+                      <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-primary bg-primary/10 px-2.5 py-1 rounded-full border border-primary/20">
+                        <Sparkles size={11} className="text-primary shrink-0" />
+                        <span>{isAr ? 'محضّرة بـ:' : 'Made with:'}</span>
+                        <span className="font-bold">{t(dish.linkedProduct.name)}</span>
+                      </span>
+                    </div>
+                  )}
                 </div>
 
                 {/* Bottom interactive action pills */}
                 <div className="mt-3 flex flex-wrap items-center gap-2 pt-2 border-t border-border/50 text-[11px]">
                   <span className="inline-flex items-center gap-1 text-primary font-bold">
                     <FileText size={12} />
-                    {isAr ? 'خطوات التحضير' : 'Full Steps'}
+                    {isAr ? 'المقادير وطريقة التحضير' : 'Full Recipe'}
                   </span>
-                  <span className="text-border">·</span>
-                  <span className="inline-flex items-center gap-1 text-muted-foreground">
-                    <Volume2 size={12} />
-                    {isAr ? 'شرح صوتي' : 'Audio Guide'}
-                  </span>
+                  {dish.videoFileUrl && (
+                    <>
+                      <span className="text-border">·</span>
+                      <span className="inline-flex items-center gap-1 text-primary font-bold">
+                        <Video size={12} />
+                        {isAr ? 'فيديو مرئي' : 'Video Clip'}
+                      </span>
+                    </>
+                  )}
+                  {dish.audioUrl && (
+                    <>
+                      <span className="text-border">·</span>
+                      <span className="inline-flex items-center gap-1 text-muted-foreground">
+                        <Volume2 size={12} />
+                        {isAr ? 'شرح صوتي' : 'Audio Guide'}
+                      </span>
+                    </>
+                  )}
                 </div>
               </div>
             </article>
@@ -431,6 +464,40 @@ export default function HowToUseSection({ content }: HowToUseSectionProps) {
                       </p>
                     </div>
                   )}
+
+                  {/* Linked Product Card */}
+                  {activeDish.linkedProduct && (
+                    <div className="flex items-center justify-between gap-4 p-4 bg-paper rounded-xl border border-border/70 hover:border-primary/40 transition-colors">
+                      <div className="flex items-center gap-3 min-w-0">
+                        {activeDish.linkedProduct.imageUrl && (
+                          <div className="relative w-12 h-12 rounded-lg overflow-hidden border border-border/40 shrink-0 bg-background">
+                            <Image
+                              src={activeDish.linkedProduct.imageUrl}
+                              alt={t(activeDish.linkedProduct.name)}
+                              fill
+                              className="object-cover"
+                            />
+                          </div>
+                        )}
+                        <div className="min-w-0">
+                          <span className="text-[11px] font-bold text-primary block">
+                            {isAr ? 'المنتج المستخدم في هذه الوصفة' : 'Product used in this recipe'}
+                          </span>
+                          <span className="text-xs sm:text-sm font-bold text-ink truncate block">
+                            {t(activeDish.linkedProduct.name)}
+                          </span>
+                        </div>
+                      </div>
+                      <Link
+                        href={`/products/${activeDish.linkedProduct.slug}`}
+                        onClick={handleCloseModal}
+                        className="inline-flex items-center gap-1 px-3.5 py-1.5 rounded-full text-xs font-semibold bg-primary text-white hover:bg-primary/90 transition-colors shrink-0"
+                      >
+                        <span>{isAr ? 'عرض المنتج' : 'View product'}</span>
+                        <ArrowUpRight size={13} />
+                      </Link>
+                    </div>
+                  )}
                 </>
               ) : (
                 /* Video Player Box */
@@ -440,6 +507,7 @@ export default function HowToUseSection({ content }: HowToUseSectionProps) {
                       ref={videoRef}
                       controls
                       autoPlay
+                      muted
                       playsInline
                       poster={activeDish.image}
                       className="h-full w-full object-contain"

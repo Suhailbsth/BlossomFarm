@@ -34,8 +34,8 @@ export default function StorageTips({ content }: StorageTipsProps) {
           {content?.storagePracticeSection?.eyebrow
             ? t(content.storagePracticeSection.eyebrow)
             : isAr
-            ? 'ملاحظات الحقل · ٠٣'
-            : 'Field notes · 03'}
+            ? 'ملاحظات الحقل'
+            : 'Field notes'}
         </p>
 
         <h2 className="editorial-title max-w-2xl text-white">

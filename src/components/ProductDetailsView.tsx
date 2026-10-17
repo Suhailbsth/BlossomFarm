@@ -27,6 +27,16 @@ export default function ProductDetailsView({
   const { language, toggleLanguage, isRTL, t } = useLanguage();
   const isAr = language === 'ar';
 
+  const formattedTitle = t(product.name);
+
+  const localizedSub = product.subtitle
+    ? (typeof product.subtitle === 'object'
+        ? (isAr ? product.subtitle.ar : product.subtitle.en) || t(product.subtitle)
+        : product.subtitle)
+    : '';
+  const rawSub = localizedSub || (isAr ? product.arabicSubtitle : '') || '';
+  const subtitleText = rawSub.trim() !== formattedTitle.trim() ? rawSub.trim() : '';
+
   // Include main photo first, followed by any additional gallery photos
   const allImages = [
     ...(product.image ? [product.image] : []),
@@ -41,8 +51,8 @@ export default function ProductDetailsView({
 
   // WhatsApp prefilled message tailored to this specific product
   const whatsAppMessage = isAr
-    ? `مرحباً وادي النوار! أود الاستفسار عن توفر وحجز طلب (${product.name.ar} - ${product.name.en}).`
-    : `Hello The Blossom Valley! I would like to inquire about ordering (${product.name.en} / ${product.name.ar}).`;
+    ? `مرحباً وادي النوار! أود الاستفسار عن توفر وحجز طلب (${formattedTitle}).`
+    : `Hello The Blossom Valley! I would like to inquire about ordering (${formattedTitle}).`;
 
   const activeNumber = whatsAppNumber || content?.footer?.whatsAppNumber;
   const whatsAppLink = buildWhatsAppLink(whatsAppMessage, activeNumber);
@@ -119,7 +129,7 @@ export default function ProductDetailsView({
                 showThumbnails={true}
                 showDots={true}
                 showArrows={true}
-                ariaLabel={t(product.name)}
+                ariaLabel={formattedTitle}
               >
                 {product.badge && (
                   <div className="absolute bottom-4 end-4 z-30 pointer-events-none">
@@ -135,11 +145,11 @@ export default function ProductDetailsView({
           {/* Details Column */}
           <div>
             <p className="editorial-kicker">{t(product.category)}</p>
-            <h1 className="editorial-title text-ink">{t(product.name)}</h1>
+            <h1 className="editorial-title text-ink">{formattedTitle}</h1>
 
-            {product.arabicSubtitle && (
+            {subtitleText && (
               <p className="mt-2 text-sm text-primary font-semibold">
-                {product.arabicSubtitle}
+                {subtitleText}
               </p>
             )}
 

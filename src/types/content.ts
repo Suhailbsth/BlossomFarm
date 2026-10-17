@@ -81,16 +81,24 @@ export interface RecipeItem {
   number: string;
   title: BilingualText;
   subtitle: BilingualText;
+  intro?: BilingualText;
   image: string;
   videoUrl?: string;
   videoFileUrl?: string;
   displayOrder?: number;
+  showOnHome?: boolean;
   prepTime?: BilingualText;
   servings?: BilingualText;
   ingredients?: BilingualText[];
   steps?: BilingualText[];
   chefTip?: BilingualText;
   audioUrl?: string;
+  linkedProduct?: {
+    _id: string;
+    name: BilingualText;
+    slug: string;
+    imageUrl?: string;
+  };
 }
 
 export interface NaimiSectionContent {

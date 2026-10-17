@@ -49,8 +49,8 @@ export default function Header({ content, whatsAppNumber: propWhatsApp }: Header
 
   // Dynamic Brand Info from CMS / content
   const brandName = isRTL
-    ? (content?.brand?.name?.ar || 'وادي النوار')
-    : (content?.brand?.name?.en || 'The Blossom Valley');
+    ? (content?.brand?.name?.ar?.trim() || 'وادي النوار')
+    : (content?.brand?.name?.en?.trim() || 'The Blossom Valley');
 
   const brandSubtitle = isAr
     ? (content?.brand?.headerSubtitle?.ar || 'مزرعة ومنتجع · شقراء')

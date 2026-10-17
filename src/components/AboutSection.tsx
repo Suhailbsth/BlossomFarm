@@ -60,11 +60,7 @@ export default function AboutSection({ content }: AboutSectionProps) {
         {/* Left Column: Text, Narrative & Pillars */}
         <div>
           <p className="editorial-kicker">
-            {content?.about?.eyebrow
-              ? t(content.about.eyebrow)
-              : isAr
-              ? 'موطننا · ٠١'
-              : 'Our home · 01'}
+            {content?.about?.eyebrow ? t(content.about.eyebrow) : isAr ? 'موطننا' : 'Our home'}
           </p>
 
           <h2 className="editorial-title">

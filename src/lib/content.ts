@@ -339,26 +339,31 @@ export async function getSiteContent(): Promise<SiteContent> {
       const rSec = sanityHome.recipesSection;
       const defaultItems = content.recipesSection?.items || [];
       content.recipesSection = {
-        eyebrow: rSec?.eyebrow || content.recipesSection?.eyebrow || { ar: 'من مطبخنا · ٠٤', en: 'From our kitchen · 04' },
+        eyebrow: rSec?.eyebrow || content.recipesSection?.eyebrow || { ar: 'من مطبخنا', en: 'From our kitchen' },
         title: rSec?.title || content.recipesSection?.title || { ar: 'طرق الاستخدام والتقديم', en: 'Ways to savour' },
         videoInstruction: rSec?.videoInstruction || content.recipesSection?.videoInstruction,
         journalTag: rSec?.journalTag || content.recipesSection?.journalTag,
-        items: (sanityHome?.recipes || []).map((r, idx) => ({
-          id: r._id || `recipe-${idx + 1}`,
-          number: r.number || `${idx + 1}`,
-          title: r.title || { ar: '', en: '' },
-          subtitle: r.subtitle || { ar: '', en: '' },
-          image: r.imageUrl || '',
-          videoFileUrl: r.videoFileUrl,
-          videoUrl: r.videoUrl,
-          displayOrder: r.displayOrder || idx + 1,
-          prepTime: r.prepTime,
-          servings: r.servings,
-          ingredients: r.ingredients || [],
-          steps: r.steps || [],
-          chefTip: r.chefTip,
-          audioUrl: r.audioFileUrl || r.audioUrl,
-        })),
+        items: (sanityHome?.recipes || [])
+          .filter((r) => r.showOnHome !== false)
+          .map((r, idx) => ({
+            id: r._id || `recipe-${idx + 1}`,
+            number: r.number || `${idx + 1}`,
+            title: r.title || { ar: '', en: '' },
+            subtitle: r.intro || r.subtitle || { ar: '', en: '' },
+            intro: r.intro || r.subtitle,
+            image: r.imageUrl || '',
+            videoFileUrl: r.videoFileUrl,
+            videoUrl: r.videoUrl,
+            displayOrder: r.displayOrder || idx + 1,
+            showOnHome: r.showOnHome !== false,
+            prepTime: r.prepTime,
+            servings: r.servings,
+            ingredients: r.ingredients || [],
+            steps: r.steps || [],
+            chefTip: r.chefTip,
+            audioUrl: r.audioFileUrl || r.audioUrl,
+            linkedProduct: r.linkedProduct,
+          })),
 
       };
     }

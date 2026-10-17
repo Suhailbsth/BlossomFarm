@@ -190,11 +190,13 @@ export const homeSectionsQuery = `{
     description,
     "steps": coalesce(steps, items)
   },
-  "recipes": *[_type == "recipeItem"] | order(displayOrder asc) {
+  "recipes": *[_type == "recipeItem" && coalesce(showOnHome, true)] | order(coalesce(displayOrder, 1) asc, _createdAt asc) {
     _id,
     number,
     title,
     subtitle,
+    intro,
+    showOnHome,
     displayOrder,
     prepTime,
     servings,
@@ -205,7 +207,13 @@ export const homeSectionsQuery = `{
     videoUrl,
     "imageUrl": image.asset->url,
     "videoFileUrl": videoFile.asset->url,
-    "audioFileUrl": audioFile.asset->url
+    "audioFileUrl": audioFile.asset->url,
+    "linkedProduct": linkedProduct->{
+      _id,
+      name,
+      "slug": slug.current,
+      "imageUrl": image.asset->url
+    }
   }
 }`;
 
@@ -365,6 +373,8 @@ export interface SanityRecipeItem {
   number: string;
   title: BilingualText;
   subtitle?: BilingualText;
+  intro?: BilingualText;
+  showOnHome?: boolean;
   imageUrl?: string;
   videoFileUrl?: string;
   videoUrl?: string;
@@ -376,6 +386,12 @@ export interface SanityRecipeItem {
   chefTip?: BilingualText;
   audioUrl?: string;
   audioFileUrl?: string;
+  linkedProduct?: {
+    _id: string;
+    name: BilingualText;
+    slug: string;
+    imageUrl?: string;
+  };
 }
 
 export interface SanityHomeSections {

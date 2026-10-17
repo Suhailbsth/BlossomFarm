@@ -36,16 +36,18 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
 
   // Helper to calculate responsive grid column classes
   const getGridColsClass = (requestedCols: string | undefined, count: number): string => {
-    if (requestedCols === '1') return 'grid-cols-1';
-    if (requestedCols === '2') return 'grid sm:grid-cols-2';
-    if (requestedCols === '3') return 'grid sm:grid-cols-2 lg:grid-cols-3';
-    if (requestedCols === '4') return 'grid sm:grid-cols-2 lg:grid-cols-4';
+    if (requestedCols === '1') return 'grid grid-cols-1';
+    if (requestedCols === '2') return 'grid grid-cols-1 sm:grid-cols-2';
+    if (requestedCols === '3') return 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3';
+    if (requestedCols === '4') {
+      return 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4';
+    }
 
     // Auto density
-    if (count === 1) return 'grid-cols-1';
-    if (count === 2) return 'grid sm:grid-cols-2';
-    if (count === 3) return 'grid sm:grid-cols-2 lg:grid-cols-3';
-    return 'grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4';
+    if (count === 1) return 'grid grid-cols-1';
+    if (count === 2) return 'grid grid-cols-1 sm:grid-cols-2';
+    if (count === 3) return 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3';
+    return 'grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4';
   };
 
   // Group adjacent single-item editorial categories to render side-by-side (like Meat & Pepper)
@@ -111,7 +113,15 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
         (t(prod.name).trim().toLowerCase() === t(cat.title).trim().toLowerCase()))
     );
     const hideDuplicateProductName = isSingleProduct && isSameName;
-    const subtitleText = isAr ? prod?.arabicSubtitle : (prod?.subtitle ? t(prod.subtitle) : '');
+
+    // Subtitle from localized subtitle field, falling back to arabicSubtitle only if subtitle is empty
+    const localizedSub = prod?.subtitle
+      ? (typeof prod.subtitle === 'object'
+          ? (isAr ? prod.subtitle.ar : prod.subtitle.en) || t(prod.subtitle)
+          : prod.subtitle)
+      : '';
+    const rawSubtitle = localizedSub || (isAr ? prod?.arabicSubtitle : '') || '';
+    const subtitleText = rawSubtitle.trim() !== title.trim() ? rawSubtitle.trim() : '';
 
     const isPepper =
       cat.slug === 'pepper' ||
@@ -162,36 +172,18 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                 {title || (isAr ? 'فلفل شقراء' : 'Shaqra Pepper')}
               </h3>
             </Link>
-            {(subtitleText || (isAr ? 'نكهة محلية بطابع أصيل' : 'Local flavor with an authentic touch')) && (
+            {subtitleText && (
               <p className="font-display text-sm sm:text-base font-semibold text-primary mt-1">
-                {subtitleText || (isAr ? 'نكهة محلية بطابع أصيل' : 'Local flavor with an authentic touch')}
+                {subtitleText}
               </p>
             )}
 
-            {/* C8: Full description from CMS without truncation, formatted with whitespace-pre-line */}
-            <div className="mt-3.5 editorial-copy text-sm sm:text-base text-muted-foreground leading-relaxed whitespace-pre-line">
-              {desc ? (
-                desc
-              ) : (
-                <div className="space-y-2">
-                  <p>
-                    {isAr
-                      ? 'فلفل حار من شقراء، مجفف ومجروش ليمنح الأطباق حرارة واضحة ونكهة مميزة.'
-                      : 'Sun-dried Shaqra hot pepper coarsely crushed to give dishes vibrant heat and distinctive character.'}
-                  </p>
-                  <p className="font-medium text-ink">
-                    {isAr
-                      ? 'قليل منه… يصنع فرقاً كبيراً في الطبق.'
-                      : 'A little bit… makes a big difference in the dish.'}
-                  </p>
-                  <p>
-                    {isAr
-                      ? 'مناسب للإيدامات، والبيض، والشوربات، والكبسة، والتتبيلات.'
-                      : 'Ideal for Saudi stews, eggs, soups, kabsa, and marinades.'}
-                  </p>
-                </div>
-              )}
-            </div>
+            {/* Description from CMS; if empty don't render empty intro block */}
+            {desc && (
+              <div className="mt-3.5 editorial-copy text-sm sm:text-base text-muted-foreground leading-relaxed whitespace-pre-line">
+                {desc}
+              </div>
+            )}
 
             {/* C8: [اطلب الآن] Button opening WhatsApp */}
             <div className="mt-5 pt-2 flex items-center gap-3 flex-wrap">
@@ -245,13 +237,6 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
         {/* Header matching reference site */}
         <div className="grid gap-8 border-b border-border pb-10 md:grid-cols-2 md:items-end">
           <div>
-            <p className="editorial-kicker">
-              {content?.productsSection?.eyebrow
-                ? t(content.productsSection.eyebrow)
-                : isAr
-                  ? 'قطفناها للتو · ٠٢'
-                  : 'Freshly picked · 02'}
-            </p>
             <h2 className="editorial-title">
               {content?.productsSection?.title
                 ? t(content.productsSection.title)
@@ -481,9 +466,11 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                                     />
                                   </div>
                                 ) : (
-                                  <span className={`size-12 shrink-0 rounded-full ${swatchClass} flex items-center justify-center text-xs font-bold shadow-2xs mt-0.5`}>
+                                  <div
+                                    className={`size-12 shrink-0 rounded-full ${swatchClass} flex items-center justify-center text-sm font-semibold border border-border/50 shadow-2xs`}
+                                  >
                                     {iconSymbol}
-                                  </span>
+                                  </div>
                                 )}
                                 <div>
                                   <h3 className="font-display text-lg font-semibold group-hover:text-primary transition-colors">
@@ -544,15 +531,6 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
               );
 
               // Helper for C9 flavor title: derives from CMS product names
-              const getFlavorTitle = (prod: ProductItem): string => {
-                if (isTomatoesCategory && prod.name?.ar && prod.name?.en) {
-                  return isAr
-                    ? `${prod.name.ar} | ${prod.name.en.toUpperCase()}`
-                    : `${prod.name.en.toUpperCase()} | ${prod.name.ar}`;
-                }
-                return t(prod.name);
-              };
-
               return (
                 <div key={cat.id} className="pt-4 border-t border-border/50">
                   <div className="flex items-center justify-between mb-4">
@@ -565,7 +543,7 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                     )}
                   </div>
 
-                  {/* C9: Dried Tomatoes Intro block (Appendix A6) */}
+                  {/* Dried Tomatoes Intro block */}
                   {isTomatoesCategory ? (
                     <div className="mb-8 max-w-3xl space-y-3">
                       <h3 className="font-display text-xl sm:text-2xl font-bold text-ink">
@@ -611,68 +589,56 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                   <div className={`gap-6 ${colsClass}`}>
                     {displayProducts.map((prod) => {
                       const iconSymbol = prod.icon || '✦';
-                      const flavorHeading = getFlavorTitle(prod);
+                      // C5: Strictly one language per site. Never show 'ar | en' together, never auto-append '— Dried Tomatoes'
+                      const flavorHeading = t(prod.name);
 
-                      // Descriptions from CMS, with Appendix A7 fallback only if CMS description is empty
-                      let flavorDesc = t(prod.description);
-                      if (!flavorDesc && isTomatoesCategory) {
-                        if (prod.id === 'dried-tomato-qatfa') {
-                          flavorDesc = isAr
-                            ? 'نكهة عشبية عطرية تجمع الطماطم المجففة مع الشبت وإكليل الجبل. رائعة مع الأومليت، الأجبان، الساندويتشات والسلطات.'
-                            : 'Aromatic herbal flavor pairing sun-dried tomatoes with fresh garden dill and rosemary.';
-                        } else if (prod.id === 'dried-tomato-lahab') {
-                          flavorDesc = isAr
-                            ? 'للذين يحبون النكهة الحارة. طماطم مجففة مع فلفل شقراء الحار، تضيف حرارة ونكهة للأطباق. رائعة مع الشكشوكة، البيض، البيتزا والمكرونة.'
-                            : 'For spicy lovers: sun-dried tomatoes infused with fiery Shaqra crushed chili flakes.';
-                        } else if (prod.id === 'dried-tomato-signature') {
-                          flavorDesc = isAr
-                            ? 'خلطة وادي النوار الخاصة. طماطم مجففة بتوليفة من البهارات المختارة لنكهة أغنى ومختلفة.'
-                            : "Wadi Al-Nawwar's proprietary reserve blend: marinated in roasted spices and golden garlic.";
-                        }
-                      }
+                      // C7: Descriptions dynamically from CMS for all flavours
+                      const flavorDesc = t(prod.description) || (isAr ? prod.arabicSubtitle : '');
 
                       return (
                         <Link
                           key={prod.id}
                           href={`/products/${prod.id}`}
-                          className="group block card-standard p-5 transition-all hover:border-primary hover:shadow-md relative"
+                          className="group flex flex-col justify-between card-standard p-5 transition-all hover:border-primary hover:shadow-md relative h-full"
                         >
-                          {prod.image ? (
-                            <div className="relative aspect-[4/3] w-full overflow-hidden bg-paper mb-4 rounded-xl border border-border/40">
-                              <Image
-                                src={prod.image}
-                                alt={flavorHeading}
-                                fill
-                                className="object-cover transition duration-500 group-hover:scale-105"
-                                sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                              />
-                              {prod.badge && (
-                                <div className="absolute top-3 start-3 px-3 py-1 rounded-full bg-black/60 backdrop-blur-xs text-white text-[11px] font-bold border border-white/20">
-                                  {t(prod.badge)}
-                                </div>
-                              )}
-                            </div>
-                          ) : (
-                            <div className="aspect-[4/3] w-full bg-paper mb-4 flex items-center justify-center text-2xl border border-border/50 rounded-xl">
-                              {iconSymbol}
-                            </div>
-                          )}
+                          <div>
+                            {prod.image ? (
+                              <div className="relative aspect-[4/3] w-full overflow-hidden bg-paper mb-4 rounded-xl border border-border/40">
+                                <Image
+                                  src={prod.image}
+                                  alt={flavorHeading}
+                                  fill
+                                  className="object-cover transition duration-500 group-hover:scale-105"
+                                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                                />
+                                {prod.badge && (
+                                  <div className="absolute top-3 start-3 px-3 py-1 rounded-full bg-black/60 backdrop-blur-xs text-white text-[11px] font-bold border border-white/20">
+                                    {t(prod.badge)}
+                                  </div>
+                                )}
+                              </div>
+                            ) : (
+                              <div className="aspect-[4/3] w-full bg-paper mb-4 flex items-center justify-center text-2xl border border-border/50 rounded-xl">
+                                {iconSymbol}
+                              </div>
+                            )}
 
-                          <div className="flex items-start justify-between gap-2">
-                            <div>
-                              <h4 className="font-display text-lg font-bold group-hover:text-primary transition-colors text-ink">
-                                {flavorHeading}
-                              </h4>
-                              {flavorDesc && (
-                                <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed line-clamp-3">
-                                  {flavorDesc}
-                                </p>
-                              )}
+                            <div className="flex items-start justify-between gap-2">
+                              <div>
+                                <h4 className="font-display text-lg font-bold group-hover:text-primary transition-colors text-ink">
+                                  {flavorHeading}
+                                </h4>
+                                {flavorDesc && (
+                                  <p className="text-xs text-muted-foreground mt-1.5 leading-relaxed line-clamp-3">
+                                    {flavorDesc}
+                                  </p>
+                                )}
+                              </div>
+                              <ArrowUpRight
+                                size={16}
+                                className="text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0 mt-1"
+                              />
                             </div>
-                            <ArrowUpRight
-                              size={16}
-                              className="text-muted-foreground group-hover:text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-all shrink-0 mt-1"
-                            />
                           </div>
                         </Link>
                       );

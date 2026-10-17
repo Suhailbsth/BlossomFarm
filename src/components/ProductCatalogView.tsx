@@ -119,8 +119,8 @@ export default function ProductCatalogView({ content }: ProductCatalogViewProps)
               type="button"
               onClick={() => setLanguage('en')}
               className={`px-2.5 py-1 rounded-full transition-all ${language === 'en'
-                  ? 'bg-primary text-white shadow-xs'
-                  : 'text-muted-foreground hover:text-primary'
+                ? 'bg-primary text-white shadow-xs'
+                : 'text-muted-foreground hover:text-primary'
                 }`}
             >
               EN
@@ -129,8 +129,8 @@ export default function ProductCatalogView({ content }: ProductCatalogViewProps)
               type="button"
               onClick={() => setLanguage('ar')}
               className={`px-2.5 py-1 rounded-full transition-all font-arabic ${language === 'ar'
-                  ? 'bg-primary text-white shadow-xs'
-                  : 'text-muted-foreground hover:text-primary'
+                ? 'bg-primary text-white shadow-xs'
+                : 'text-muted-foreground hover:text-primary'
                 }`}
             >
               العربية
@@ -166,8 +166,8 @@ export default function ProductCatalogView({ content }: ProductCatalogViewProps)
                 type="button"
                 onClick={() => setSelectedCategory(cat.key)}
                 className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-bold font-arabic transition-all cursor-pointer ${selectedCategory === cat.key
-                    ? 'bg-[#1B3B2B] text-white shadow-sm'
-                    : 'bg-white border border-[#E8DFD1] text-[#4E5E52] hover:bg-[#FAF7F2]'
+                  ? 'bg-[#1B3B2B] text-white shadow-sm'
+                  : 'bg-white border border-[#E8DFD1] text-[#4E5E52] hover:bg-[#FAF7F2]'
                   }`}
               >
                 {t(cat.label)}
@@ -216,14 +216,29 @@ export default function ProductCatalogView({ content }: ProductCatalogViewProps)
                   <span className="text-[10px] font-bold text-[#C85A32] uppercase font-arabic block mb-1">
                     {t(product.category)}
                   </span>
-                  <h3 className="text-lg sm:text-xl font-bold text-[#1B3B2B] font-arabic group-hover:text-[#C85A32] transition-colors">
-                    {t(product.name)}
-                  </h3>
-                  {product.arabicSubtitle && (
-                    <p className="text-xs text-[#C85A32] font-arabic mt-0.5 mb-2 font-medium">
-                      {product.arabicSubtitle}
-                    </p>
-                  )}
+                  {(() => {
+                    const catalogTitle = t(product.name);
+                    const localizedSub = product.subtitle
+                      ? (typeof product.subtitle === 'object'
+                        ? (language === 'ar' ? product.subtitle.ar : product.subtitle.en) || t(product.subtitle)
+                        : product.subtitle)
+                      : '';
+                    const rawSub = localizedSub || (language === 'ar' ? product.arabicSubtitle : '') || '';
+                    const subText = rawSub.trim() !== catalogTitle.trim() ? rawSub.trim() : '';
+
+                    return (
+                      <>
+                        <h3 className="text-lg sm:text-xl font-bold text-[#1B3B2B] font-arabic group-hover:text-[#C85A32] transition-colors">
+                          {catalogTitle}
+                        </h3>
+                        {subText && (
+                          <p className="text-xs text-[#C85A32] font-arabic mt-0.5 mb-2 font-medium">
+                            {subText}
+                          </p>
+                        )}
+                      </>
+                    );
+                  })()}
                   <p className="text-xs sm:text-sm text-[#5C6E61] font-arabic leading-relaxed line-clamp-2">
                     {t(product.description)}
                   </p>

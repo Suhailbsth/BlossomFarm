@@ -93,11 +93,7 @@ export default function NaimiSheepSection({ content, whatsAppNumber }: NaimiShee
         {/* 1. Section Header: Eyebrow + Main Heading */}
         <div className="border-b border-border pb-8">
           <p className="editorial-kicker">
-            {naimiData?.eyebrow
-              ? t(naimiData.eyebrow)
-              : isAr
-              ? 'مراعي الماشية · ٠٢'
-              : 'Livestock Pastures · 02'}
+            {naimiData?.eyebrow ? t(naimiData.eyebrow) : isAr ? 'مراعي الماشية' : 'Livestock Pastures'}
           </p>
 
           <h2 className="editorial-title mt-3">
