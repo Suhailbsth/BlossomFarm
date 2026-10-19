@@ -313,24 +313,9 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
 
                 return (
                   <div key={cat.id} className="pt-2">
-                    {/* Header */}
-                    <div className="flex items-center justify-between mb-4">
-                      <span className="editorial-kicker text-primary font-bold">
-                        {isAr ? `${stepNumAr}. ${t(cat.title)}` : `${stepNum} · ${t(cat.title)}`}
-                      </span>
-                      {cat.badge && (
-                        <span className="text-xs text-muted-foreground">{t(cat.badge)}</span>
-                      )}
-                    </div>
-                    {cat.description && (
-                      <p className="text-sm text-muted-foreground max-w-2xl mb-6">
-                        {t(cat.description)}
-                      </p>
-                    )}
-
                     <div className={`gap-6 ${colsClass}`}>
                       {displayProducts.map((prod, pIdx) =>
-                        renderEditorialCard(cat, prod, catIndex, pIdx, { hideKicker: displayProducts.length <= 1 })
+                        renderEditorialCard(cat, prod, catIndex, pIdx)
                       )}
                     </div>
                   </div>
@@ -441,9 +426,8 @@ export default function ProductCategorySection({ content }: ProductCategorySecti
                           : (prod.subtitle ? t(prod.subtitle) : '');
                         const subtitleText = cmsSubtitle;
 
-                        // Flag for showing gallery on homepage (controlled from Sanity CMS per product)
-                        const isRoyalKhalas = prod.id === 'royal-khalas';
-                        const shouldShowGallery = (prod.showGalleryOnHome !== undefined ? prod.showGalleryOnHome : isRoyalKhalas) && galleryPhotos.length > 0;
+                        // Gallery shown only when explicitly enabled per-product in Sanity CMS
+                        const shouldShowGallery = prod.showGalleryOnHome === true && galleryPhotos.length > 0;
 
                         return (
                           <div

@@ -207,7 +207,7 @@ export default function ImageCarousel({
     <div className={`relative w-full ${className}`} aria-roledescription="carousel" aria-label={ariaLabel}>
       {/* Main Image Frame */}
       <div
-        className={`relative w-full overflow-hidden select-none ${aspectRatioClass} group`}
+        className={`relative w-full overflow-hidden select-none ${aspectRatioClass} ${className} group`}
         onMouseEnter={() => setIsPaused(true)}
         onMouseLeave={() => setIsPaused(false)}
         onTouchStart={handleTouchStart}

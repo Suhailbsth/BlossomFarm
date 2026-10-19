@@ -130,6 +130,7 @@ export default function ProductDetailsView({
                 showDots={true}
                 showArrows={true}
                 ariaLabel={formattedTitle}
+                className="rounded-xl overflow-hidden"
               >
                 {product.badge && (
                   <div className="absolute bottom-4 end-4 z-30 pointer-events-none">
@@ -179,7 +180,7 @@ export default function ProductDetailsView({
 
             {/* Storage Advice */}
             {product.storageSpecific && (
-              <div className="mt-6 p-4 bg-paper border border-border text-xs text-muted-foreground">
+              <div className="mt-6 p-4 bg-paper border border-border text-xs text-muted-foreground rounded-xl">
                 <span className="font-bold text-foreground block mb-1">
                   {isAr ? 'إرشادات الحفظ:' : 'Storage Guidance:'}
                 </span>
@@ -220,13 +221,14 @@ export default function ProductDetailsView({
                 <Link
                   key={item.id}
                   href={`/products/${item.id}`}
-                  className="group block border border-border p-5 bg-paper/30 transition-colors hover:border-primary"
+                  className="group block border border-border rounded-2xl p-5 bg-paper/30 transition-colors hover:border-primary overflow-hidden"
                 >
-                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-paper mb-4">
+                  <div className="relative aspect-[16/10] w-full overflow-hidden bg-paper mb-4 rounded-xl">
                     <Image
                       src={item.image}
                       alt={t(item.name)}
                       fill
+                      sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                       className="object-cover transition duration-500 group-hover:scale-105"
                     />
                   </div>
